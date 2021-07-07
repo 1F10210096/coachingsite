@@ -5,6 +5,7 @@ import { connectAuthEmulator, getAuth } from 'firebase/auth';
 
 let cachedAuth: Auth | undefined;
 
+
 export const createAuth = () => {
   if (cachedAuth !== undefined) return cachedAuth;
 

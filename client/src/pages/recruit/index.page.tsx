@@ -60,7 +60,6 @@ const Valorant = () => {
     ストイック: false,
     仲良くワイワイ: false,
     うまくなりたい人必見: false,
-
   });
 
   const [LessonTypes, setLessonTypes] = useState({
@@ -68,8 +67,6 @@ const Valorant = () => {
     ビデオで学ぼう: false,
     解説: false,
   });
-
-
 
   const handleCheckboxChange = (rank) => {
     if (Id === 1) {
@@ -91,7 +88,6 @@ const Valorant = () => {
       [myrank]: !prevMyRanks[myrank],
     }));
   };
-
 
   const handleTagCheckboxChange = (Tag) => {
     setTags((prevTags) => ({
@@ -135,7 +131,7 @@ const Valorant = () => {
       console.log(selectedRanksIndices);
       return selectedRanksIndices;
     } else if (Id === 2) {
-      console.log("wdas");
+      console.log('wdas');
       const selectedRanksIndices = Object.keys(apexRanks)
         .map((key, index) => ({ rank: key, index }))
         .filter((item) => apexRanks[item.rank])
@@ -149,7 +145,6 @@ const Valorant = () => {
     try {
       const rank = getSelectedRanksIndices(Id);
 
-
       const selectedMyRanksIndices = Object.keys(myranks)
         .map((key, index) => ({ rank: key, index }))
         .filter((item) => myranks[item.rank])
@@ -160,7 +155,7 @@ const Valorant = () => {
       const response = await apiClient.fetchRecruit.post({
         body: {
           Id,
-          ranks:  rank || [],
+          ranks: rank || [],
           subjectRank: selectedMyRanksIndices,
           tag: selectedTags,
           lessonTypes: selectedLessonTypes,
@@ -177,11 +172,11 @@ const Valorant = () => {
     fetchRecruitList();
   }, []);
 
-  const handleClick = (id) => {
-    router.push(`/recruitDetail/${id}`);
+  const handleClick = (id: string) => {
+    router.push(`../recruitDetail?id=${id}`);
   };
 
-  const getRankImage = (Id, rank) => {
+  const getRankImage = (Id: number, rank: number) => {
     let directory;
     if (Id === 1) {
       directory = 'valoRanks';
@@ -209,7 +204,6 @@ const Valorant = () => {
             onClick={() => setShowRankCheckboxes(!showRankCheckboxes)}
           >
             コーチのランク
-            
             <span className={styles.dropdownIcon} />
           </div>
           {showRankCheckboxes && (
@@ -274,7 +268,6 @@ const Valorant = () => {
             </div>
           )}
         </div>
-      
 
         <div className={styles.searchNameContainer2}>
           <div
@@ -307,7 +300,11 @@ const Valorant = () => {
 
       <div className={styles2.helpwanted}>
         {RecruitList.map((item) => (
-          <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>
+          <div
+            key={item.id}
+            className={styles2.container}
+            onClick={() => handleClick(item.id, item.gameId)}
+          >
             <p className={styles2.title}>{item.title}</p>
             <div className={styles2.rank}>
               <img

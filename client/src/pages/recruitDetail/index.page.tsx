@@ -3,16 +3,16 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
-import getRankImagePath from 'src/utils/gamePng';
+import getImagePath from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
-import { useLoading } from '../@hooks/useLoading';
 import styles from './index.module.css';
 
 const Login = () => {
-  const { addLoading, removeLoading } = useLoading();
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListModel>();
   const [user, setUser] = useState(null);
-
+  const router = useRouter();
+  const id = router.query.id;
+  console.log(id);
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -27,9 +27,6 @@ const Login = () => {
     return () => unsubscribe();
   }, []);
 
-  const router = useRouter();
-
-  const { id } = router.query;
   console.log(id);
   const idAsString = id as string;
 
@@ -52,6 +49,23 @@ const Login = () => {
     }
   }, [idAsString]); // idAsString に依存
 
+  const getRankImage = (gameId: number, rank: number) => {
+    let directory;
+    if (gameId === 1) {
+      directory = 'valoRanks';
+      console.log('valoRanks');
+    } else if (gameId === 2) {
+      directory = 'apexRanks';
+    } else if (gameId === 3) {
+      directory = 'lolRanks'; // Adding the lolRanks condition
+    }
+
+    console.log(rank);
+    console.log(directory);
+    const rankImage = getImagePath(gameId, rank);
+    return `/${directory}/${rankImage}`;
+  };
+
   return (
     <>
       <BasicHeader user={user} />
@@ -62,7 +76,7 @@ const Login = () => {
           {RecruitDetail?.gameId === 1 && (
             <img
               className={styles.rank}
-              src={`/valoRanks/${getRankImagePath(RecruitDetail?.rank)}`}
+              src={`/valoRanks/${getRankImage(RecruitDetail?.gameId, RecruitDetail?.rank)}`}
               alt={`Rank: ${RecruitDetail?.rank}`}
             />
           )}
@@ -73,7 +87,7 @@ const Login = () => {
               <div key={index}>
                 <img
                   className={styles.subjectRank}
-                  src={`/valoRanks/${getRankImagePath(rank)}`}
+                  src={`/valoRanks/${getRankImage(RecruitDetail?.gameId, rank)}`}
                   alt={`Rank: ${rank}`}
                 />
               </div>

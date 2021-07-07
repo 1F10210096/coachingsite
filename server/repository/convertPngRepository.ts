@@ -4,15 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 console.log('dwadadsas');
 dotenv.config();
-// AWS認証情報の設定
-AWS.config.update({
-  region: 'ap-northeast-1',
-  accessKeyId: 'AKIAXOGIPRCJI3B5OWGS',
-  secretAccessKey: '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',
-});
+
 
 function generateRandomFileName() {
-  return `${uuidv4()  }.jpg`; // UUIDの生成
+  return `${uuidv4()}.jpg`; // UUIDの生成
 }
 const s3 = new AWS.S3();
 

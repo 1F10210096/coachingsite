@@ -14,14 +14,11 @@ import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
-import styles from './index.module.css'; // スタイルシートは適宜調整してください
+import styles from './index.module.css';
 import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 const Register = () => {
   const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState();
   const [isSubmitted, setIsSubmitted] = useState(true);
   const handleRegister = async (event: { preventDefault: () => void }) => {

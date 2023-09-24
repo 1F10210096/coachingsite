@@ -27,6 +27,7 @@ export async function convertPngRepository(base64String) {
     Body: buffer, // ファイルオブジェクトを直接セット
     ContentType: contentType,
   };
+  console.log('fileName:', fileName);
 
   try {
     const response = await s3.upload(params).promise();

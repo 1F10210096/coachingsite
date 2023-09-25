@@ -9,6 +9,7 @@ import styles from './index.module.css';
 
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListModel>();
+  const [userDetail, setUserDetail] = useState();
   const [user, setUser] = useState(null);
   const router = useRouter();
   const id = router.query.id;
@@ -38,6 +39,16 @@ const Login = () => {
         },
       });
       setRecruitDetail(response.body);
+      console.log(response.body);
+      console.log(response.body.teacherId);
+      
+      const responseUser = await apiClient.fetachUserDetail.post({
+        body: {
+          userId: response.body.teacherId,
+        },
+      });
+      setUserDetail(responseUser.body);
+
       console.log(response.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
@@ -123,6 +134,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <div className={styles.profileContainer}>a</div>
     </>
   );
 };

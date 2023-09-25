@@ -1,11 +1,12 @@
 .container {
   position: relative;
-  top: 30px;
-  display: flex;
-  width: 60%;
-  height: 1500px;
-  margin: auto; /* マージンを自動に設定 */
-  background: #ddd;
+  top: 60px;
+  left: 350px;
+  display: inline-block; /* 追加 */
+  width: 750px;
+  height: auto; /* 適切な値に変更 */
+  margin: 0; /* マージンをリセット */
+  background: #f00;
   border-bottom: 1px solid #63b5e5;
 }
 
@@ -16,7 +17,7 @@
   width: 20%;
   height: auto;
   font-size: 22px; /* フォントサイズを16ピクセルに設定 */
-  background: #fff;
+  background: #fb3c3c;
 }
 
 .detailContent {
@@ -149,7 +150,7 @@
   position: relative;
   top: 560px;
   left: 110px;
-  flex-direction: column; 
+  flex-direction: column;
   width: 60%;
   font-size: 19px;
   background: rgb(255 255 255);
@@ -161,3 +162,14 @@
   left: 100px;
 }
 
+.profileContainer {
+  position: relative;
+  left: 400px;
+  top: -400px;
+  display: inline-block; 
+  flex-direction: column;
+  width: 300px;
+  height: 600px;
+  font-size: 19px;
+  background: rgb(231 15 15);
+}

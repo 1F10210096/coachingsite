@@ -1,8 +1,8 @@
 import type { UserSummaryModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 
-export const userListRepository = {
-  fetchinfo: async (): Promise<UserSummaryModel[] | null> => {
+export const userRepository = {
+  fetchListinfo: async (): Promise<UserSummaryModel[] | null> => {
     try {
       const users = await prismaClient.user.findMany({
         orderBy: {
@@ -24,6 +24,32 @@ export const userListRepository = {
       }));
 
       return userSummaries;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return null;
+    }
+  },
+  fetchDetailinfo: async (teacherId: string): Promise<UserSummaryModel | null> => {
+    try {
+      const user = await prismaClient.user.findUnique({
+        where: {
+          userId: teacherId,
+        },
+        select: {
+          name: true,
+          imageUrl: true,
+          myProfile: true,
+          rating: true,
+        },
+      });
+      const userSummary: UserSummaryModel = {
+        name: user.name,
+        imageUrl: user.imageUrl !== null ? user.imageUrl : '', // 明示的なnullチェック
+        myProfile: user.myProfile !== null ? user.myProfile : '',
+        rating: user.rating !== null ? user.rating : 0,
+      };
+
+      return userSummary;
     } catch (error) {
       console.error('Error fetching users:', error);
       return null;

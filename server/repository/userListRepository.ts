@@ -1,5 +1,6 @@
 import type { UserSummaryModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
+import assert from 'assert';
 
 export const userRepository = {
   fetchListinfo: async (): Promise<UserSummaryModel[] | null> => {
@@ -16,6 +17,7 @@ export const userRepository = {
           rating: true,
         },
       });
+      assert(users !== null, 'usersはnullです');
       const userSummaries: UserSummaryModel[] = users.map((user) => ({
         name: user.name,
         imageUrl: user.imageUrl !== null ? user.imageUrl : '', // 明示的なnullチェック

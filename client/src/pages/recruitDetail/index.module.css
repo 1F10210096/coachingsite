@@ -1,9 +1,16 @@
+.parent {
+  position: relative;
+  top: 70px;
+  right: 350px;
+  display: flex;
+  align-items: start;
+}
+
 .container {
   position: relative;
-  top: 60px;
-  left: 350px;
+  left: 300px;
   display: inline-block; /* 追加 */
-  width: 750px;
+  width: 670px;
   height: auto; /* 適切な値に変更 */
   margin: 0; /* マージンをリセット */
   background: #f00;
@@ -12,7 +19,6 @@
 
 .detail {
   position: relative;
-  top: 60px;
   right: 20%; /* 左端から30%の位置に配置 */
   width: 20%;
   height: auto;
@@ -22,18 +28,17 @@
 
 .detailContent {
   position: relative;
-  width: 90%;
-  height: 1400px;
-  margin: auto;
+  width: 100%;
+  height: auto;
   font-size: 22px;
   font-weight: 700;
   background: rgb(255 255 255);
+  border: 1px solid #cacaca; /* 枠線の太さとスタイルを追加 */
 }
 
 .title {
   position: relative;
-  top: 60px;
-  left: 20%; /* 左端から30%の位置に配置 */
+  left: 10px;
   width: 55%;
   height: 50px;
   font-size: 26px;
@@ -41,10 +46,18 @@
   background: #fff;
 }
 
+.titleContainer {
+  position: relative;
+  top: 40px;
+  right: 130px;
+  display: flex; /* フレックスボックスを有効にする */
+  align-items: center; /* 子要素を縦軸の中央に配置 */
+}
+
 .rank {
   position: relative;
-  top: -10px;
-  left: 650px; /* 左端から30%の位置に配置 */
+  top: -40px;
+  margin-left: 550px;
   width: 90px;
   height: auto;
   font-size: 22px;
@@ -53,54 +66,81 @@
 
 .subjectRankContainer {
   position: relative;
-  top: 30px;
-  left: 110px;
+  left: 60px;
   display: flex;
-  flex-direction: row;
-  align-items: center; /* 子要素を垂直方向の中央に配置 */
+  align-items: center;
+  justify-content: flex-start;
   width: 80%;
-  font-size: 19px;
+  height: auto;
+  margin-top: 140px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background: rgb(255 255 255);
 }
 
 .subjectRank {
   position: relative;
   top: 80px;
-  right: 60px;
+  display: flex;
+  align-items: center;
   width: 60px;
   height: auto;
   margin-left: 10px;
   font-size: 14px;
-  background: #fff;
+  background: rgb(255 255 255);
+}
+
+.subjectRankTitle {
+  position: relative;
+  width: 70%;
+  height: 20px;
+  font-size: 16px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  white-space: nowrap;
+  background: rgb(255 255 255);
 }
 
 .tagContainer {
   position: relative;
-  top: 180px;
-  left: 110px;
-  flex-direction: column; /* 子要素を垂直方向に配置 */
+  top: 70px;
+  left: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
-  font-size: 19px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background: rgb(255 255 255);
 }
 
 .tag {
   position: relative;
-  top: 20px;
+  top: 60px;
   left: 100px;
-  width: 70%; /* 親コンテナの幅に合わせる */
   margin-bottom: 10px; /* 下にマージンを追加 */
   font-size: 19px;
   background: rgb(255 255 255);
 }
 
+.tagImage {
+  width: 60px;
+  height: auto; /* 親コンテナの幅に合わせる */
+}
+
 .lessonTypeContainer {
   position: relative;
   top: 270px;
-  left: 110px;
-  flex-direction: column; /* 子要素を垂直方向に配置 */
+  left: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
-  font-size: 19px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background: rgb(255 255 255);
 }
 
@@ -116,11 +156,15 @@
 
 .sucheduleContainer {
   position: relative;
-  top: 360px;
-  left: 110px;
-  flex-direction: column; /* 子要素を垂直方向に配置 */
+  top: 370px;
+  left: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
-  font-size: 19px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background: rgb(255 255 255);
 }
 
@@ -132,11 +176,15 @@
 
 .notesContainer {
   position: relative;
-  top: 460px;
-  left: 110px;
-  flex-direction: column; /* 子要素を垂直方向に配置 */
+  top: 470px;
+  left: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
-  font-size: 19px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background: rgb(255 255 255);
 }
 
@@ -148,28 +196,220 @@
 
 .descriptionContainer {
   position: relative;
-  top: 560px;
-  left: 110px;
-  flex-direction: column;
-  width: 60%;
-  font-size: 19px;
+  left: 60px;
+  width: 80%;
+  height: auto;
+  margin-top: 160px;
+  font-size: 17px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  text-align: left;
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  background: rgb(255 255 255);
+}
+
+.descriptionTitle2 {
+  position: relative;
+  width: 70%;
+  height: 20px;
+  font-size: 16px;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  white-space: nowrap;
   background: rgb(255 255 255);
 }
 
 .description {
   position: relative;
   top: 20px;
-  left: 100px;
+  width: auto;
+  height: auto;
+  text-align: left; /* Aligns text to the left */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  background-color: #fff;
 }
 
 .profileContainer {
   position: relative;
-  left: 400px;
-  top: -400px;
-  display: inline-block; 
+  left: 350px;
+  display: inline-block;
   flex-direction: column;
   width: 300px;
-  height: 600px;
+  height: auto;
+  padding: 20px; /* Optional: adds space inside the container */
+  padding-bottom: 80px;
   font-size: 19px;
-  background: rgb(231 15 15);
+  background: rgb(255 255 255);
+  border: 1px solid #ccc; /* Optional: adds a border */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
+}
+
+.userImage {
+  position: relative;
+  top: 40px;
+  left: 80px;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.userImageDetail {
+  position: relative;
+  left: 80px;
+  width: 70px; /* Adjust the size as needed */
+  height: 70px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: flex-start; /* Aligns items to the start of the container horizontally */
+}
+
+.rate {
+  position: relative;
+  top: 40px;
+  left: 21px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 30px;
+  font-size: 30px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.rating {
+  position: relative;
+  top: 13px;
+  left: 200px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 25px;
+  color: #454444; /* 背景の灰色の星 */
+}
+
+.name {
+  position: relative;
+  top: 50px;
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Horizontally center the child elements */
+  width: 100%;
+  height: 50px;
+}
+
+.achievementsContainer {
+  position: relative;
+  top: 50px;
+  left: 20px;
+  width: 90%;
+  height: 250px;
+  background-color: #fff;
+}
+
+.achievements {
+  position: relative;
+  top: -20px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: 150px;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.achievementsTitle {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  background: rgb(255 255 255);
+}
+
+.descriptionDetailContainer {
+  position: relative;
+  top: 40px;
+  left: 20px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+.descriptionTitle {
+  position: relative;
+  top: -20px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.descriptions {
+  position: relative;
+  top: -10px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+}
+
+.gameImageContainer {
+  position: relative;
+  width: 90%;
+  height: 250px;
+  background-color: #fff;
+}
+
+.gameImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: rgb(54 54 54);
+  background-position: center;
+  background-size: cover; /* アスペクト比を保持しつつ、コンテナに合わせてサイズ調整 */
+  border: 3px solid rgb(224 224 224);
 }

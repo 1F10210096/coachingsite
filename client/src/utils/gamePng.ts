@@ -35,12 +35,11 @@ const lolImageMap = {
   9: 'challe.png',
 };
 
+
 const getImagePath = (Id: number, rank: number) => {
-  console.log(Id);
-  console.log(rank);
+
   let imageMap;
   if (Id === 1) {
-    console.log('valoImageMap');
     imageMap = valoImageMap;
   } else if (Id === 2) {
     imageMap = apexImageMap;

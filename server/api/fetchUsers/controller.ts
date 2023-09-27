@@ -1,4 +1,4 @@
-import { userUsecase } from '$/usecase/userListUsecase';
+import { userUsecase } from '$/usecase/userUsecase';
 import { defineController } from './$relay';
 
 export default defineController(() => ({

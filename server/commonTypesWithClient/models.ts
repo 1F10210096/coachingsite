@@ -78,4 +78,13 @@ export type UserSummaryModel = {
   rating: number; // ユーザーの評価
 };
 
+export type UserSummaryDetailModel = {
+  name: string; // ユーザーの名前
+  imageUrl: string; // ユーザーのイメージプロフィールのURL
+  myProfile: string; // ユーザーのひと言コメント
+  rating: number; // ユーザーの評価
+  Achievements: string; // ユーザーの実績
+  hitokoto: string; // ユーザーの一言
+};
+
 export type TaskModel = z.infer<typeof taskParser>;

@@ -36,16 +36,17 @@ model userGameRank {
 }
 
 model Student {
-  userId String   @id @unique
-  user   User     @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  userId String  @id @unique
+  user   User    @relation(fields: [userId], references: [userId]) // 必須の関連付け
   apply  apply[]
 }
 
 model Teacher {
-  userId      String       @id @unique
-  hitokoto    String
-  user        User         @relation(fields: [userId], references: [userId]) // 必須の関連付け
-  bosyuuLists BosyuuList[] // ここは常に配列型
+  userId       String       @id @unique
+  Achievements String
+  hitokoto     String
+  user         User         @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  bosyuuLists  BosyuuList[] // ここは常に配列型
 }
 
 model BosyuuList {

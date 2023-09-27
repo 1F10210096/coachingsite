@@ -1,4 +1,5 @@
-import type { UserSummaryModel } from '$/commonTypesWithClient/models';
+/* eslint-disable complexity */
+import type { UserSummaryDetailModel, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 
@@ -31,7 +32,7 @@ export const userRepository = {
       return null;
     }
   },
-  fetchDetailinfo: async (teacherId: string): Promise<UserSummaryModel | null> => {
+  fetchDetailinfo: async (teacherId: string): Promise<UserSummaryDetailModel | null> => {
     try {
       const user = await prismaClient.user.findUnique({
         where: {
@@ -42,13 +43,25 @@ export const userRepository = {
           imageUrl: true,
           myProfile: true,
           rating: true,
+          teacher: {
+            select: {
+              Achievements: true,
+              hitokoto: true,
+            },
+          },
         },
       });
-      const userSummary: UserSummaryModel = {
+      assert(user !== null, 'usersはnullです');
+
+      // You need to handle the possibility that the teacher data might be null
+      const userSummary: UserSummaryDetailModel = {
         name: user.name,
-        imageUrl: user.imageUrl !== null ? user.imageUrl : '', // 明示的なnullチェック
+        imageUrl: user.imageUrl !== null ? user.imageUrl : '',
         myProfile: user.myProfile !== null ? user.myProfile : '',
         rating: user.rating !== null ? user.rating : 0,
+        // Add teacher fields to the response
+        Achievements: user.teacher?.Achievements ?? '',
+        hitokoto: user.teacher?.hitokoto ?? '',
       };
 
       return userSummary;

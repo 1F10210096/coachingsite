@@ -108,7 +108,7 @@ const Login = () => {
             )}
 
             <p className={styles.tagContainer}>
-              タグ:
+              【タグ】
               {RecruitDetail?.tag.map((tag, index) => (
                 <div key={index} className={styles.tag}>
                   <img src={getTagImagePath(tag)} className={styles.tagImage} />
@@ -119,6 +119,14 @@ const Login = () => {
             <p className={styles.descriptionContainer}>
               <div className={styles.descriptionTitle2}>【募集詳細】</div>
               <div className={styles.description}>{RecruitDetail?.descriptionDetail}</div>
+            </p>
+            <p className={styles.lessonTypeContainer}>
+            【コーチング方法】
+              {RecruitDetail?.lessonType.map((lessonType, index) => (
+                <div key={index} className={styles.lessonType}>
+                  <span>・{lessonType}</span>
+                </div>
+              ))}
             </p>
             <p className={styles.subjectRankContainer}>
               <div className={styles.subjectRankTitle}>【コーチングの対象者】</div>
@@ -132,23 +140,16 @@ const Login = () => {
                 </div>
               ))}
             </p>
-
-            <p className={styles.lessonTypeContainer}>
-              コーチング方法:
-              {RecruitDetail?.lessonType.map((lessonType, index) => (
-                <div key={index} className={styles.lessonType}>
-                  <span>・{lessonType}</span>
-                </div>
-              ))}
-            </p>
-            <p className={styles.sucheduleContainer}>
-              スケジュール
-              <div className={styles.suchedule}>{RecruitDetail?.suchedule}</div>
-            </p>
             <p className={styles.notesContainer}>
-              注意事項
+              【注意事項】
               <div className={styles.notes}>{RecruitDetail?.notes}</div>
             </p>
+
+            <p className={styles.sucheduleContainer}>
+            【スケジュール】
+              <div className={styles.suchedule}>{RecruitDetail?.suchedule}</div>
+            </p>
+            <button className={styles.button}>応募する</button>
           </div>
         </div>
 

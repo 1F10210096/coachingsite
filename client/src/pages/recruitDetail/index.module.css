@@ -12,9 +12,11 @@
   display: inline-block; /* 追加 */
   width: 670px;
   height: auto; /* 適切な値に変更 */
+  padding-bottom: 80px;
   margin: 0; /* マージンをリセット */
-  background: #f00;
+  background: rgb(255 255 255);
   border-bottom: 1px solid #63b5e5;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
 }
 
 .detail {
@@ -30,6 +32,7 @@
   position: relative;
   width: 100%;
   height: auto;
+  padding-bottom: 80px;
   font-size: 22px;
   font-weight: 700;
   background: rgb(255 255 255);
@@ -57,9 +60,9 @@
 .rank {
   position: relative;
   top: -40px;
-  margin-left: 550px;
   width: 90px;
   height: auto;
+  margin-left: 550px;
   font-size: 22px;
   background: #fff;
 }
@@ -72,7 +75,7 @@
   justify-content: flex-start;
   width: 80%;
   height: auto;
-  margin-top: 140px;
+  margin-top: 100px;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -132,12 +135,12 @@
 
 .lessonTypeContainer {
   position: relative;
-  top: 270px;
   left: 60px;
-  display: flex;
   flex-direction: row;
   align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
+  height: auto;
+  margin-top: 100px;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -147,21 +150,18 @@
 .lessonType {
   position: relative;
   top: 20px;
-  left: 100px;
   width: 70%; /* 親コンテナの幅に合わせる */
-  margin-bottom: 10px; /* 下にマージンを追加 */
   font-size: 19px;
   background: rgb(255 255 255);
 }
 
 .sucheduleContainer {
   position: relative;
-  top: 370px;
   left: 60px;
-  display: flex;
   flex-direction: row;
   align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
+  margin-top: 1;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -171,17 +171,16 @@
 .suchedule {
   position: relative;
   top: 20px;
-  left: 100px;
 }
 
 .notesContainer {
   position: relative;
-  top: 470px;
   left: 60px;
-  display: flex;
   flex-direction: row;
   align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
+  height: auto;
+  margin-top: 150px;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -190,8 +189,8 @@
 
 .notes {
   position: relative;
-  top: 20px;
-  left: 100px;
+  top: 50px;
+  right: ;
 }
 
 .descriptionContainer {
@@ -412,4 +411,27 @@
   background-position: center;
   background-size: cover; /* アスペクト比を保持しつつ、コンテナに合わせてサイズ調整 */
   border: 3px solid rgb(224 224 224);
+}
+
+.button {
+  position: relative;
+  padding: 10px 20px; /* ボタンの内側の余白を設定 */
+  margin-top: 59px;
+  margin-left: 220px;
+  font-size: 16px; /* テキストのサイズを設定 */
+  font-weight: bold; /* テキストを太字に */
+  color: white; /* テキストの色を白に */
+  cursor: pointer; /* ホバー時にカーソルをポインターに */
+  background-color: #4caf50; /* ボタンの背景色を緑に */
+  border: none; /* 枠線を非表示に */
+  border-radius: 5px; /* 角を丸く */
+  transition: background-color 0.3s; /* 背景色の変化を滑らかに */
+}
+
+.button:hover {
+  background-color: #45a049; /* ホバー時の背景色を少し暗く */
+}
+
+.button:active {
+  background-color: #397d35; /* クリック時の背景色をもっと暗く */
 }

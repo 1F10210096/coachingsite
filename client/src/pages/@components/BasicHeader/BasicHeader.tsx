@@ -33,7 +33,7 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
               <Link href="/userProfile">
                 <button className={styles.profileButton}>プロフィール</button>
               </Link>
-              <Link href="/bosyuu">
+              <Link href="/bosyuuDescription">
                 <button className={styles.redButton}>募集</button>
               </Link>
               {/* その他のユーザー関連のオプション */}
@@ -74,3 +74,4 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
     </>
   );
 };
+

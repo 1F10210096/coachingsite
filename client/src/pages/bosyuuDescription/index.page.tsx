@@ -1,12 +1,15 @@
+/* eslint-disable max-lines */
 /* eslint-disable complexity */
-import { useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { apiClient } from 'src/utils/apiClient';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
   const [selectedGame, setSelectedGame] = useState('');
   const [selectedRanks, setSelectedRanks] = useState([]);
-
+  const [selectedMyRanks, setSelectedMyRanks] = useState([]);
   const games = {
     VALORANT: [
       'アイアン',
@@ -35,9 +38,32 @@ const YourComponent = () => {
 
   const stepTitles = ['ゲーム選択', 'ランク選択', '詳細情報', '注意事項'];
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        // ユーザーがログインしている場合、ユーザー情報をセット
+        console.log(firebaseUser);
+        setUser(firebaseUser.uid);
+      } else {
+        // ユーザーがログアウトしている場合
+        setUser(null);
+      }
+    });
+
+    // コンポーネントがアンマウントされる際に購読を解除
+    return () => unsubscribe();
+  }, []);
+
   const handleGameChange = (event) => {
     setSelectedGame(event.target.value);
     setSelectedRanks([]); // ゲームが変わったらランクの選択をリセット
+  };
+
+  const handleMyRankChange = (event) => {
+    setSelectedMyRanks(event.target.value); // ゲームが変わったらランクの選択をリセット
   };
 
   const handleRankChange = (rank) => {
@@ -49,6 +75,9 @@ const YourComponent = () => {
   const handleNextStep = () => {
     // 次のステップに進むためのロジック
     // 例えば、すべての選択が完了していることを確認するなど
+    console.log(selectedGame, selectedMyRanks, selectedRanks);
+    console.log(title, description, acheavement);
+    console.log(suchedule, notes, selectedTags);
     setStep(step + 1);
   };
 
@@ -60,6 +89,76 @@ const YourComponent = () => {
     setTitle(event.target.value); // 入力された値を state にセット
   };
 
+  const [description, setDescription] = useState(''); // React の state hook
+
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value); // 入力された値を state にセット
+  };
+
+  const [acheavement, setAcheavement] = useState(''); // React の state hook
+
+  const handleAcheavement = (event) => {
+    setAcheavement(event.target.value); // 入力された値を state にセット
+  };
+
+  const [notes, setNotes] = useState('');
+  const handleNotes = (event) => {
+    setNotes(event.target.value); // 入力された値を state にセット
+  };
+
+  const [suchedule, setSuchedule] = useState('');
+  const handleSuchedule = (event) => {
+    setSuchedule(event.target.value); // 入力された値を state にセット
+  };
+
+  const tags = ['タグ1', 'タグ2', 'タグ3', 'タグ4']; // 例としてのタグリスト
+
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const handleTagChange = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const coachData = {
+        user,
+        title,
+        selectedGame,
+        selectedMyRanks,
+        selectedRanks,
+        selectedTags,
+        acheavement,
+        description,
+        suchedule,
+        notes,
+        // その他必要なデータ
+      };
+      console.log(coachData);
+      const response = await apiClient.createBosyuu.post({
+        body: {
+          user,
+          title,
+          selectedGame,
+          selectedMyRanks,
+          selectedRanks,
+          selectedTags,
+          acheavement,
+          description,
+          suchedule,
+          notes,
+        },
+      });
+      // 成功時の処理（例：リダイレクト等）
+    } catch (error) {
+      console.error('エラー:', error);
+    }
+  };
 
   return (
     <>
@@ -110,21 +209,26 @@ const YourComponent = () => {
             <label className={styles.myRank}>自分のランクを選択してください</label>
             <select
               id="rank-select"
-              value={selectedRanks}
-              onChange={handleRankChange}
+              value={selectedMyRanks}
+              onChange={handleMyRankChange}
               className={styles.select2}
-              disabled={!selectedGame} // ゲームが選択されていない場合は無効化
+              disabled={!selectedGame}
             >
               <option value="">自分のランクを選択してください</option>
-              {selectedGame &&
+              {selectedGame && games.hasOwnProperty(selectedGame) ? (
                 games[selectedGame].map((rank) => (
                   <option key={rank} value={rank}>
                     {rank}
                   </option>
-                ))}
+                ))
+              ) : (
+                <option value="" disabled>
+                  利用可能なランクがありません
+                </option>
+              )}
             </select>
 
-            {selectedGame && (
+            {selectedGame && games[selectedGame] ? (
               <div>
                 <label htmlFor="rank-select" className={styles.subjectRank}>
                   対象ランクを選択してください
@@ -147,6 +251,8 @@ const YourComponent = () => {
                   ))}
                 </div>
               </div>
+            ) : (
+              <div>選択したゲームに対応するランクはありません。</div>
             )}
 
             <button onClick={handleNextStep} className={styles.next}>
@@ -161,25 +267,72 @@ const YourComponent = () => {
           <div className={styles.title}>募集タイトルを入力してください</div>
           <input
             type="text"
-            placeholder="タイトル"
+            placeholder="タイトルを入力してください"
             onChange={handleChange} // ユーザーの入力を処理する関数
             className={styles.input} // スタイリングのためのCSSクラス
           />
-          <button onClick={handleNextStep}>次へ</button>
+          <div className={styles.description}>募集内容を入力してください</div>
+          <input
+            type="text"
+            placeholder="募集内容を入力してください"
+            onChange={handleChangeDescription} // ユーザーの入力を処理する関数
+            className={styles.inputDescription} // スタイリングのためのCSSクラス
+          />
+          <div className={styles.acheavement}>実績を入力してください</div>
+          <input
+            type="text"
+            placeholder="実績を入力してください"
+            onChange={handleAcheavement} // ユーザーの入力を処理する関数
+            className={styles.inputAcheavement} // スタイリングのためのCSSクラス
+          />
+          <button onClick={handleNextStep} className={styles.next2}>
+            次へ
+          </button>
         </div>
       )}
 
       {step === 3 && (
-        <div>
-          {' '}
-          <button onClick={handleNextStep}>次へ</button>
+        <div className={styles.a}>
+          <div className={styles.title}>スケジュールを入力してください</div>
+          <input
+            type="text"
+            placeholder="スケジュールを入力してください"
+            onChange={handleSuchedule} // ユーザーの入力を処理する関数
+            className={styles.input} // スタイリングのためのCSSクラス
+          />
+          <div className={styles.notes}>注意事項を入力してください</div>
+          <input
+            type="text"
+            placeholder="注意事項を入力してください"
+            onChange={handleNotes} // ユーザーの入力を処理する関数
+            className={styles.inputNotes} // スタイリングのためのCSSクラス
+          />
+          <div className={styles.notes}>
+            タグを設定入力してください
+            {tags.map((tag) => (
+              <div key={tag} className={styles.tagItem}>
+                <input
+                  type="checkbox"
+                  id={tag}
+                  name={tag}
+                  checked={selectedTags.includes(tag)}
+                  onChange={() => handleTagChange(tag)}
+                  className={styles.pick}
+                />
+                <label htmlFor={tag}>{tag}</label>
+              </div>
+            ))}
+          </div>
+          <button onClick={handleNextStep} className={styles.next2}>
+            次へ
+          </button>
         </div>
       )}
 
       {step === 4 && (
         <div>
           {' '}
-          <button onClick={handleNextStep}>次へ</button>
+          <button onClick={handleSubmit}>登録</button>
         </div>
       )}
     </>

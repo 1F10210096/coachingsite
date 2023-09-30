@@ -3,9 +3,12 @@ import type { BosyuuList } from '@prisma/client';
 export type Methods = {
   post: {
     reqBody: {
-      userId: string;
+      user: string;
+      title:string;
       selectedGame: string;
+      selectedMyRanks: string;
       selectedRanks: string[]; // 配列としてランクを保持
+      selecte
       coachContent: string;
       suchedule: string;
       OneWord: string;

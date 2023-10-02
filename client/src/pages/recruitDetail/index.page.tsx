@@ -104,6 +104,40 @@ const Login = () => {
     return rating * 20;
   };
 
+  const sendRoom = async () => {
+    try {
+      const response = await apiClient.createRoom.post({
+        body: {
+          Id: RecruitDetail?.id,
+          teacherId: RecruitDetail?.teacherId,
+        },
+      });
+      setRecruitDetail(response.body);
+      console.log(response.body);
+      console.log(response.body.teacherId);
+
+      const responseUser = await apiClient.fetchUserDetail.post({
+        body: {
+          teacherId: response.body.teacherId,
+        },
+      });
+      console.log(responseUser.body);
+      setUserDetail(responseUser.body);
+
+      const responseReview = await apiClient.fetchReview.post({
+        body: {
+          Id: response.body.id,
+        },
+      });
+
+      setReviews(responseReview.body);
+      console.log(reviews);
+      console.log(responseReview.body);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
   return (
     <>
       <BasicHeader user={user} />
@@ -169,7 +203,9 @@ const Login = () => {
               【スケジュール】
               <div className={styles.suchedule}>{RecruitDetail?.suchedule}</div>
             </p>
-            <button className={styles.button}>応募する</button>
+            <button className={styles.button} onClick={sendRoom}>
+              応募する
+            </button>
           </div>
         </div>
         <div className={styles.profileContainer}>

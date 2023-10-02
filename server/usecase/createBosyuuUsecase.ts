@@ -3,18 +3,30 @@ import assert from 'assert';
 export const createBosyuuUsecase = {
   fetchinfo: async (
     user: string,
-    title:string,
-    selectedGame: string,
-    selectedMyRanks: string,
-    selectedRanks: string[],
-    selectedTags:string[],
+    title: string,
+    selectedGameIndex: number,
+    selectedMyRankIndex: number,
+    selectedRanksIndex: number[],
+    selectedTags: string[],
     achevement: string,
     description: string,
     notes: string,
-    suchedule: string,
+    suchedule: string
   ) => {
     console.log('usecaseにきてるよ');
-    const bosyuu = await createBosyuuRepository(user,title, selectedRanks,selectedGame,selectedMyRanks,selectedTags,achevement,description,suchedule,notes)
+    console.log('useAAAAAAAAAr', achevement);
+    const bosyuu = await createBosyuuRepository(
+      user,
+      title,
+      selectedGameIndex,
+      selectedMyRankIndex,
+      selectedRanksIndex,
+      selectedTags,
+      achevement,
+      description,
+      suchedule,
+      notes
+    );
     assert(bosyuu !== null, 'bosyuuはnullです');
     return bosyuu;
   },

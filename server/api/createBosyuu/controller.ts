@@ -2,8 +2,19 @@ import { createBosyuuUsecase } from '$/usecase/createBosyuuUsecase';
 import { defineController } from './$relay';
 
 export default defineController(() => ({
-  post: async ({body}) => ({
+  post: async ({ body }) => ({
     status: 201,
-    body: await createBosyuuUsecase.fetchinfo(body.user, body.title, body.selectedGame,body.selectedMyRanks,body.selectedRanks,body.selectedTags,body.achevement,body.description,body.suchedule,body.notes),
+    body: await createBosyuuUsecase.fetchinfo(
+      body.user,
+      body.title,
+      body. selectedGameIndex,
+      body.selectedMyRankIndex,
+      body.selectedRanksIndex,
+      body.selectedTags,
+      body.acheavement,
+      body.description,
+      body.suchedule,
+      body.notes
+    ),
   }),
 }));

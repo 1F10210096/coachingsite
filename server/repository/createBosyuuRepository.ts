@@ -5,34 +5,48 @@ import { prismaClient } from '$/service/prismaClient';
 export const createBosyuuRepository = async (
   user: string,
   title: string,
-  selectedGame: string,
-  selectedMyRanks: string,
-  selectedRanks: string[],
+  selectedGameIndex: number,
+  selectedMyRankIndex: number,
+  selectedRanksIndex: number[],
   selectedTags: string[],
-  achevement: string,
+  achievement: string,
   description: string,
   notes: string,
-  suchedule: string
+  schedule: string
 ): Promise<BosyuuListModel> => {
-  // 関連する教師とゲーム情報を取得
   console.log('repositoryにきてるよ');
-  // 新しいBosyuuListの作成
   console.log('user', user);
-  const newBosyuu = await prismaClient.bosyuuList.create({
-    data: {
-      user,
-      title,
-      selectedGame,
-      selectedMyRanks,
-      selectedRanks,
-      selectedTags,
-      suchedule,
-      achevement,
-      description,
-      notes,
-    },
-  });
-  console.log('newBosyuu', newBosyuu);
+  console.log('title', title);
+  console.log('selectedGame', selectedGameIndex);
+  console.log('selectedMyRanks', selectedMyRankIndex);
+  console.log('selectedRanks', selectedRanksIndex);
+  console.log('selectedTags', selectedTags);
+  console.log('achievement', achievement);
+  console.log('description', description);
+  console.log('notes', notes);
+  console.log('schedule', schedule);
 
-  return toBosyuuListModel(newBosyuu); // 適切な変換関数を使用
+  try {
+    const newBosyuu = await prismaClient.bosyuuList.create({
+      data: {
+        teacherId: user,
+        title,
+        gameId: selectedGameIndex,
+        rank: selectedMyRankIndex,
+        subjectRank: selectedRanksIndex,
+        tag: selectedTags,
+        myProfile: achievement,
+        description,
+        descriptionDetail: '',
+        suchedule: schedule, // Corrected the typo in 'schedule'
+        notes,
+      },
+    });
+
+    console.log('newBosyuu', newBosyuu);
+    return toBosyuuListModel(newBosyuu);
+  } catch (error) {
+    console.error('Error creating new Bosyuu', error);
+    throw error; // or handle the error as needed
+  }
 };

@@ -4,14 +4,15 @@ export type Methods = {
   post: {
     reqBody: {
       user: string;
-      title:string;
-      selectedGame: string;
-      selectedMyRanks: string;
-      selectedRanks: string[]; // 配列としてランクを保持
-      selecte
-      coachContent: string;
+      title: string;
+      selectedGameIndex: number;
+      selectedMyRankIndex: number;
+      selectedRanksIndex: number[]; // 配列としてランクを保持
+      selectedTags: string[]; // 配列としてタグを保持
+      acheavement: string;
+      description: string;
+      notes: string;
       suchedule: string;
-      OneWord: string;
     };
     resBody: BosyuuList;
   };

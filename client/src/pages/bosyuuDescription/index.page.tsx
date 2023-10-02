@@ -57,27 +57,62 @@ const YourComponent = () => {
     return () => unsubscribe();
   }, []);
 
+  const [selectedGameIndex, setSelectedGameIndex] = useState();
+  const [selectedMyRankIndex, setSelectedMyRankIndex] = useState([]);
   const handleGameChange = (event) => {
+    const gameName = event.target.value;
+    setSelectedGame(gameName);
+
+    // ゲームの名前からインデックスを見つける
+    const gameIndex = Object.keys(games).indexOf(gameName) + 1; // インデックスは0から始まるので、1を足す
     setSelectedGame(event.target.value);
-    setSelectedRanks([]); // ゲームが変わったらランクの選択をリセット
+    // インデックスを保存する
+    setSelectedGameIndex(gameIndex);
+
+    // ランクの選択をリセット
+    setSelectedRanks([]);
   };
 
   const handleMyRankChange = (event) => {
-    setSelectedMyRanks(event.target.value); // ゲームが変わったらランクの選択をリセット
+    const selectedRank = event.target.value;
+
+    // 現在選択されているゲームのランク配列を取得
+    const currentGameRanks = games[selectedGame];
+
+    // 選択されたランクのインデックスを見つける
+    const rankIndex = currentGameRanks.indexOf(selectedRank) + 1; // インデックスは0から始まるので、1を足す
+    setSelectedMyRanks(event.target.value);
+    // インデックスを保存する
+    setSelectedMyRankIndex(rankIndex);
   };
 
+  const [selectedRanksIndex, setSelectedRanksIndex] = useState([]);
+
   const handleRankChange = (rank) => {
+    const ranksArray = games[selectedGame];
+
+    // ランクの名前からインデックスを見つけます。
+    const rankIndex = ranksArray.indexOf(rank);
+
+    // 選択されたランクの名前に基づいて状態を更新します。
     setSelectedRanks((prevRanks) =>
       prevRanks.includes(rank) ? prevRanks.filter((r) => r !== rank) : [...prevRanks, rank]
+    );
+
+    // 選択されたランクのインデックスに基づいて別の状態を更新します。
+    setSelectedRanksIndex((prevRanksIndex) =>
+      prevRanksIndex.includes(rankIndex)
+        ? prevRanksIndex.filter((index) => index !== rankIndex)
+        : [...prevRanksIndex, rankIndex]
     );
   };
 
   const handleNextStep = () => {
     // 次のステップに進むためのロジック
     // 例えば、すべての選択が完了していることを確認するなど
-    console.log(selectedGame, selectedMyRanks, selectedRanks);
-    console.log(title, description, acheavement);
-    console.log(suchedule, notes, selectedTags);
+
+    console.log(acheavement);
+
     setStep(step + 1);
   };
 
@@ -125,12 +160,13 @@ const YourComponent = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(acheavement);
     try {
       const coachData = {
         user,
         title,
-        selectedGame,
-        selectedMyRanks,
+        selectedGameIndex,
+        selectedMyRankIndex,
         selectedRanks,
         selectedTags,
         acheavement,
@@ -140,13 +176,16 @@ const YourComponent = () => {
         // その他必要なデータ
       };
       console.log(coachData);
+      console.log(selectedMyRanks);
+      const unknownRanks = selectedMyRanks as unknown;
+      const unknownGame = unknownRanks as number;
       const response = await apiClient.createBosyuu.post({
         body: {
           user,
           title,
-          selectedGame,
-          selectedMyRanks,
-          selectedRanks,
+          selectedGameIndex,
+          selectedMyRankIndex,
+          selectedRanksIndex,
           selectedTags,
           acheavement,
           description,

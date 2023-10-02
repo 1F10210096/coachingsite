@@ -25,6 +25,7 @@ model User {
   game      userGameRank? // ユーザーと生徒は任意の関連付け
   student   Student? // ユーザーと生徒は任意の関連付け
   teacher   Teacher? // ユーザーと教師は任意の関連付け
+  Comment   Comment[]
 }
 
 model userGameRank {
@@ -39,6 +40,7 @@ model Student {
   userId String  @id @unique
   user   User    @relation(fields: [userId], references: [userId]) // 必須の関連付け
   apply  apply[]
+  Room   Room[]
 }
 
 model Teacher {
@@ -47,6 +49,7 @@ model Teacher {
   hitokoto     String
   user         User         @relation(fields: [userId], references: [userId]) // 必須の関連付け
   bosyuuLists  BosyuuList[] // ここは常に配列型
+  Room         Room[]
 }
 
 model BosyuuList {
@@ -68,6 +71,7 @@ model BosyuuList {
   teacher           Teacher  @relation(fields: [teacherId], references: [userId])
   game              GameList @relation(fields: [gameId], references: [id])
   apply             apply[]
+  rooms             Room[]
 }
 
 model apply {
@@ -78,6 +82,7 @@ model apply {
   review    String? // レビュー
   bosyuu    BosyuuList @relation(fields: [bosyuuId], references: [id])
   student   Student    @relation(fields: [studentId], references: [userId])
+  rooms     Room?
 }
 
 model GameList {
@@ -93,4 +98,31 @@ model GameRanksList {
   gameId Int
   rankId Int
   game   GameList @relation(fields: [gameId], references: [id])
+}
+
+model Room {
+  id            String   @id @unique @default(uuid())
+  bosyuuId      String // BosyuuListへのリンク
+  applyId       String   @unique
+  hostId        String // コーチのID (BosyuuListのteacherIdに対応)
+  participantId String // 応募者のID (applyのstudentIdに対応)
+  createdAt     DateTime @default(now())
+  status        String 
+  bosyuu      BosyuuList @relation(fields: [bosyuuId], references: [id])
+  apply       apply      @relation(fields: [applyId], references: [id])
+  host        Teacher    @relation(fields: [hostId], references: [userId])
+  participant Student    @relation(fields: [participantId], references: [userId])
+  Comment     Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid()) // コメントのユニークID
+  roomId    String // 関連するルームID
+  userId    String // コメント投稿者のユーザーID
+  content   String // コメントの内容
+  createdAt DateTime @default(now()) // コメント作成日時
+  updatedAt DateTime @updatedAt // コメント更新日時
+
+  room Room @relation(fields: [roomId], references: [id]) // ルームとの関連付け
+  user User @relation(fields: [userId], references: [userId]) // ユーザーとの関連付け
 }

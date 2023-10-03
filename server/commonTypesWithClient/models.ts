@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { taskIdParser } from '../service/idParsers';
+import exp from 'constants';
 
 export type UserModel = {
   userId: string;
@@ -111,5 +112,4 @@ export type BosyuuListFrontModel = {
   lessonType: string[];
   createdAt: Date;
   updatedAt: Date;
-  teacher: TeacherModel; // 教師との必須の関連付け
 };

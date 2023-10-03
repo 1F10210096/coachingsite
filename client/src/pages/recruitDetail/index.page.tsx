@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import type {
-  BosyuuListModel,
+  BosyuuListFrontModel,
   UserSummaryDetailModel,
   reviewModel,
 } from 'commonTypesWithClient/models';
@@ -14,7 +14,7 @@ import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 
 const Login = () => {
-  const [RecruitDetail, setRecruitDetail] = useState<BosyuuListModel>();
+  const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel>();
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
   const [reviews, setReviews] = useState<reviewModel[]>([]);
   const [user, setUser] = useState(null);
@@ -45,27 +45,12 @@ const Login = () => {
           Id: idAsString,
         },
       });
-      setRecruitDetail(response.body);
       console.log(response.body);
-      console.log(response.body.teacherId);
+      setRecruitDetail(response.body);
+      // setUserDetail(responseUser.body);
 
-      const responseUser = await apiClient.fetchUserDetail.post({
-        body: {
-          teacherId: response.body.teacherId,
-        },
-      });
-      console.log(responseUser.body);
-      setUserDetail(responseUser.body);
 
-      const responseReview = await apiClient.fetchReview.post({
-        body: {
-          Id: response.body.id,
-        },
-      });
-
-      setReviews(responseReview.body);
-      console.log(reviews);
-      console.log(responseReview.body);
+      // setReviews(responseReview.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }

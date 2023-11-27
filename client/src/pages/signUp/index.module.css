@@ -13,10 +13,11 @@
 
 .loginButton {
   position: relative;
-  top: 50px;;  
+  top: 30px;
+  left: 27px;
+  width: 550px;
   padding: 10px 15px;
   color: white;
-  width: 400px;
   cursor: pointer;
   background-color: #007bff;
   border: none;
@@ -59,9 +60,9 @@
 
 .searchmail {
   position: relative;
-  top: -50px;
-  left: 10%;
-  width: 600px;
+  top: -30px;
+  left: 5%;
+  width: 550px;
   height: 65px;
   padding: 10px;
   font-size: 16px;
@@ -75,17 +76,17 @@
 }
 
 .mail {
-  position: absolute;
-  top: 210px;
-  left: 35%;
-  font-size: 20px;
+  position: relative;
+  left: 55%;
+  top: -30px;
+  font-size: 17px;
   font-weight: bold;
   color: #000;
   transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .password {
-  position: absolute;
+  position: relative;
   top: 370px;
   left: 36%;
   font-size: 20px;

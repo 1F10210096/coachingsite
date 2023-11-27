@@ -1,81 +1,73 @@
-import type { TaskModel } from 'commonTypesWithClient/models';
-import { useAtom } from 'jotai';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { GameListModel } from 'commonTypesWithClient/models';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { Loading } from 'src/components/Loading/Loading';
 import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
-import { returnNull } from 'src/utils/returnNull';
-import { userAtom } from '../atoms/user';
 import styles from './index.module.css';
 
 const Home = () => {
-  const [user] = useAtom(userAtom);
-  const [tasks, setTasks] = useState<TaskModel[]>();
   const [label, setLabel] = useState('');
-  const inputLabel = (e: ChangeEvent<HTMLInputElement>) => {
-    setLabel(e.target.value);
+  const [userUUID, setUserUUID] = useState('');
+  const [gameList, setGamelist] = useState<GameListModel[]>([]);
+  const fetchGames = async () => {
+    try {
+      const response = await apiClient.fetchGames.post();
+      setGamelist(response.body);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
   };
-  const fetchTasks = async () => {
-    const tasks = await apiClient.tasks.$get().catch(returnNull);
+  useEffect(() => {
+    fetchGames();
+  }, []);
+  // Homeコンポーネント内
 
-    if (tasks !== null) setTasks(tasks);
-  };
-  const createTask = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!label) return;
-
-    await apiClient.tasks.post({ body: { label } }).catch(returnNull);
-    setLabel('');
-    await fetchTasks();
-  };
-  const toggleDone = async (task: TaskModel) => {
-    await apiClient.tasks
-      ._taskId(task.id)
-      .patch({ body: { done: !task.done } })
-      .catch(returnNull);
-    await fetchTasks();
-  };
-  const deleteTask = async (task: TaskModel) => {
-    await apiClient.tasks._taskId(task.id).delete().catch(returnNull);
-    await fetchTasks();
-  };
+  const [user, setUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    if (!user) return;
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        // ユーザーがログインしている場合、ユーザー情報をセット
+        console.log(firebaseUser);
+        setUserUUID(firebaseUser.uid);
+        setUser(firebaseUser);
+      } else {
+        // ユーザーがログアウトしている場合
+        setUser(null);
+      }
+    });
 
-    fetchTasks();
-  }, [user]);
+    // コンポーネントがアンマウントされる際に購読を解除
+    return () => unsubscribe();
+  }, []);
 
-  if (!tasks || !user) return <Loading visible />;
+
 
   return (
     <>
-      <BasicHeader user={user} />
-      <div className={styles.title} style={{ marginTop: '160px' }}>
-        Welcome to frourio!
+ <BasicHeader user={user} />
+      <div className={styles.container}>
+        <div className={styles.coachTitle}>人気のゲーム</div>
+        <div className={styles.gameList}>
+          {gameList.map((game) => (
+            <div key={game.id} className={styles.gameItem}>
+              <div
+                className={styles.gameIconContainer}
+                style={{ backgroundImage: `url(${game.icon})` }} // ここで画像を設定
+              />
+              <div className={styles.gameTitle}>{game.title}</div>
+            </div>
+          ))}
+        </div>
       </div>
-
-      <form style={{ textAlign: 'center', marginTop: '80px' }} onSubmit={createTask}>
-        <input value={label} type="text" onChange={inputLabel} />
-        <input type="submit" value="ADD" />
-      </form>
-      <ul className={styles.tasks}>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <label>
-              <input type="checkbox" checked={task.done} onChange={() => toggleDone(task)} />
-              <span>{task.label}</span>
-            </label>
-            <input
-              type="button"
-              value="DELETE"
-              className={styles.deleteBtn}
-              onClick={() => deleteTask(task)}
-            />
-          </li>
-        ))}
-      </ul>
+      <div className={styles.container}>
+        <div className={styles.coachTitle}>人気のコーチ</div>
+        <div className={styles.gameList}>
+          <div className={styles.container3}>a</div>
+        </div>
+      </div>
     </>
   );
 };

@@ -1,7 +1,148 @@
 .container {
-  height: 60px;
+  height: 110px;
   background: #fafafa;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #63b5e5;
+}
+
+.contheme {
+  position: absolute;
+  top: 70px;
+  left: 50%; /* 左端を画面の中央に設定 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 1200px;
+  height: 40px;
+  background: #fafafa;
+  border-bottom: 1px solid #63b5e5;
+  transform: translateX(-50%); /* 要素を左に半分移動して完全に中央揃えにする */
+}
+
+.button {
+  box-sizing: border-box;
+  display: flex; /* Flexbox を使用 */
+  align-items: center; /* テキストを垂直中央に揃える */
+  justify-content: center; /* テキストを水平中央に揃える */
+  height: 40px;
+  padding: 15px 29px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 30px; /* テキストの行の高さを設定 */
+  color: rgb(103 103 103);
+  cursor: pointer;
+  background: #fafafa;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #eae9e9; /* ホバー時の背景色を濃くする */
+}
+
+.contheme2 {
+  position: absolute;
+  top: 10px;
+  left: 1140px;
+  display: flex; /* Flexboxを適用 */
+  align-items: center; /* ボタンを垂直方向に中央揃え */
+  justify-content: flex-start; /* ボタンを左端に揃える */
+  width: 500px;
+  height: 50px;
+  margin: 0 auto; /* 左右のマージンを自動で計算して中央寄せにする */
+  background: #fafafa;
+}
+
+.kaninButton {
+  height: 35px;
+  padding: 1px 14px; /* ボタンの内側の余白を設定 */
+  margin: 0; /* ボタン間の余白をなくす */
+  font-size: 14px; /* テキストのサイズを設定 */
+  color: rgb(77 77 77); /* テキストの色を設定 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background: #fafafa;
+  border: none; /* 枠線を消去 */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.kaninButton:hover {
+  background-color: #e9e7e7; /* ホバー時の背景色を濃くする */
+}
+
+.loginButton {
+  height: 35px;
+  padding: 1px 12px; /* ボタンの内側の余白を設定 */
+  margin: 10px; /* ボタン間の余白をなくす */
+  font-size: 14px; /* テキストのサイズを設定 */
+  color: rgb(77 77 77); /* テキストの色を設定 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background: #fafafa;
+  border: none; /* 枠線を消去 */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.loginButton:hover {
+  background-color: #e9e7e7; /* ホバー時の背景色を濃くする */
+}
+
+.redButton {
+  position: relative;
+  top: -2px;
+  left: 50px;
+  width: 100px;
+  height: 40px;
+  padding: 12px 14px; /* ボタンの内側の余白 */
+  font-size: 13px; /* テキストのサイズ */
+  font-weight: bold;
+  color: white; /* テキストの色 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background-color: red; /* ボタンの背景色 */
+  border: none; /* 枠線なし */
+  border-radius: 6px; /* 端を丸くする */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.redButton:hover {
+  background-color: rgb(250 96 96); /* ホバー時の背景色を暗くする */
+}
+
+.searchContainer {
+  position: absolute;
+  top: -5px;
+  left: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.searchInput {
+  width: 400px;
+  height: 35px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.searchButton {
+  width: 40px;
+  height: 35px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  background: #d7d6d6 url('/images/megane.png') no-repeat right 8px center; /* 背景色と虫眼鏡アイコンを追加 */
+  background-size: 24px;
+  border: none;
+  border-radius: 0 4px 4px 0; /* 右側の角を丸くする */
+}
+
+.searchButton:hover {
+  background-color: #b1b1b1;
 }
 
 .main {
@@ -9,7 +150,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 960px;
-  height: 100%;
+  height: 10%;
   padding: 0 16px;
   margin: 0 auto;
 }

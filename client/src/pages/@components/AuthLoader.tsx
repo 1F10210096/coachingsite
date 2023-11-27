@@ -21,7 +21,6 @@ export const AuthLoader = () => {
           .getIdToken()
           .then((idToken) => apiClient.session.$post({ body: { idToken } }))
           .catch(returnNull);
-        await apiClient.me.$get().catch(returnNull).then(setUser);
       } else {
         await apiClient.session.$delete();
         setUser(null);
@@ -39,11 +38,8 @@ export const AuthLoader = () => {
     const redirectToHome = async () => {
       router.pathname === pagesPath.login.$url().pathname && (await router.push(pagesPath.$url()));
     };
-    const redirectToLogin = async () => {
-      router.pathname === pagesPath.$url().pathname && (await router.push(pagesPath.login.$url()));
-    };
 
-    user ? redirectToHome() : redirectToLogin();
+    user && redirectToHome();
   }, [router, isInitedAuth, user]);
 
   return <Loading visible={!isInitedAuth} />;

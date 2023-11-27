@@ -39,5 +39,10 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1502.0",
+    "firebase": "^10.6.0",
+    "firebase-admin": "^11.11.0"
   }
 }

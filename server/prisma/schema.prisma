@@ -14,3 +14,56 @@ model Task {
   done      Boolean
   createdAt DateTime
 }
+
+model User {
+  userId    String     @id @unique
+  name      String
+  myProfile String?
+  imageUrl  String?
+  createdAt DateTime   @default(now())
+  game      gameRank? // ユーザーと生徒は任意の関連付け
+  student   Student? // ユーザーと生徒は任意の関連付け
+  teacher   Teacher? // ユーザーと教師は任意の関連付け
+}
+
+model gameRank {
+  userId   String @id
+  gameName String
+  rank     String
+  user     User   @relation(fields: [userId], references: [userId])
+}
+
+model Student {
+  userId String @id @unique
+  user   User   @relation(fields: [userId], references: [userId]) // 必須の関連付け
+}
+
+model Teacher {
+  userId      String       @id @unique
+  hitokoto    String
+  user        User         @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  bosyuuLists BosyuuList[]
+}
+
+model BosyuuList {
+  id          String   @id @default(uuid())
+  gameId      String // この募集に対応するゲームのID
+  title       String // 募集のタイトル
+  rank        String[] // 募集のランク
+  subjectRank String[]
+  role        String[]
+  tag         String[]
+  description String // 募集の詳細説明
+  teacherId   String // この募集を出した教師のID
+  createdAt   DateTime @default(now()) // 募集の作成日時
+  updatedAt   DateTime @updatedAt // 募集の最終更新日時
+  teacher     Teacher  @relation(fields: [teacherId], references: [userId])
+  game        GameList @relation(fields: [gameId], references: [id])
+}
+
+model GameList {
+  id          String       @id
+  title       String // ゲームのタイトル
+  icon        String
+  bosyuuLists BosyuuList[] // GameListとBosyuuListの1対多のリレーション
+}

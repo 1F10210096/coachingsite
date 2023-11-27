@@ -1,0 +1,143 @@
+.modal {
+}
+
+.searchNameContainer2 {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchContainer {
+  position: relative;
+  top: 60px;
+  left: 250px;
+  width: 300px;
+  height: 600px;
+}
+
+.helpwanted {
+  position: relative;
+  top: -260px;
+  left: 400px;
+  width: 600px;
+  height: 600px;
+  background-color: rgb(241 241 241);
+}
+
+.searchNameContainer {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchNameContainer2 {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.rankContent {
+  /* ランクとチェックマークのスタイル */
+}
+
+.rankDropdown {
+  /* 既存のスタイル... */
+  position: relative;
+  padding-right: 20px; /* 矢印のスペースを確保する */
+  cursor: pointer;
+}
+
+.dropdownIcon {
+  /* 矢印マークのスタイリング */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-block;
+  padding: 3px; /* 矢印のサイズ */
+  border: solid black;
+  border-width: 0 2px 2px 0; /* 線の太さを調整 */
+  transition: transform 0.3s ease; /* アニメーション効果 */
+  transform: translateY(-50%) rotate(45deg); /* 下向き矢印 */
+}
+
+.rankDropdown.active .dropdownIcon {
+  transform: translateY(-50%) rotate(-135deg); /* 上向き矢印 */
+}
+
+.rankCheckboxes {
+  display: none; /* 初期状態では非表示 */
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px 30px; /* 上下のパディング */
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.rankDropdown.active + .rankCheckboxes {
+  display: flex; /* アクティブなときに表示 */
+}
+
+.rankCheckboxes label {
+  display: flex;
+  align-items: center;
+  margin-top: 5px; /* ラベル間の余白 */
+}
+
+/* チェックボックスのテキストサイズを設定 */
+.rankCheckboxes label span {
+  font-size: 17px; /* 例として14ピクセルに設定 */
+}
+
+/* チェックボックスのスタイリング */
+.rankCheckboxes input[type='checkbox'] {
+  margin-right: 30px; /* チェックボックスとテキストの間隔 */
+}
+
+.search {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-top: 20px;
+  padding-bottom: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを17pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  text-align: center; /* テキストを中央揃えにする */
+  background-color: #d6fbfc; /* 背景色を灰色に設定する */
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchContainer {
+  position: relative;
+  top: 60px;
+  left: 250px;
+  width: 300px;
+  height: 600px;
+}
+
+.container {
+  height: 80px;
+  background: #fafafa;
+  border-bottom: 1px solid #63b5e5;
+}

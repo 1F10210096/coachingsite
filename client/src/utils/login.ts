@@ -1,14 +1,102 @@
-import { GithubAuthProvider, signInWithPopup } from 'firebase/auth';
+import type { User } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import { createAuth } from 'src/utils/firebase';
-import { returnNull } from './returnNull';
 
-export const loginWithGitHub = async () => {
-  const ghProvider = new GithubAuthProvider();
-  ghProvider.addScope('read:user');
+// Import the functions you need from the SDKs you need
+import { getApps, initializeApp } from 'firebase/app';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  await signInWithPopup(createAuth(), ghProvider).catch(returnNull);
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { signOut } from 'firebase/auth';
+
+// Import the functions you need from the SDKs you need
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'AIzaSyAhj-kX80rgFqCUSYvInWu65ybpo17-YEs',
+  authDomain: 'coach-35eb6.firebaseapp.com',
+  projectId: 'coach-35eb6',
+  storageBucket: 'coach-35eb6.appspot.com',
+  messagingSenderId: '777298456996',
+  appId: '1:777298456996:web:cedb0108040243729d9131',
+  measurementId: 'G-95LTBT1JLB',
 };
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+console.log(auth);
 
 export const logout = async () => {
-  await createAuth().signOut();
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout failed:', error);
+  }
+};
+// メールとパスワードでログイン
+export const loginWithEmail = async (email, password) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    console.log(auth, email, password);
+    console.log('loginWithEmail');
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    // エラーハンドリング
+    console.log('e4545454rror');
+    throw error;
+  }
+};
+
+// emailとpasswordからユーザー登録
+export const createUser = async (email: string, password: string, displayName: string) => {
+  const userCredencial = await createUserWithEmailAndPassword(createAuth(), email, password);
+  // ユーザーの表示名を設定する
+  const user = createAuth().currentUser;
+  if (user) {
+    await updateProfile(user, { displayName });
+  }
+  const isNotVerified = !userCredencial.user.emailVerified;
+  if (isNotVerified) {
+    console.log('メールを送信しました');
+    await reSendVerifyMail(userCredencial.user);
+  }
+  return userCredencial;
+};
+
+//確認メール送信
+const reSendVerifyMail = async (user: User) => {
+  try {
+    await sendEmailVerification(user);
+    return;
+  } catch (error) {
+    switch ((error as { code: string }).code) {
+      case 'auth/too-many-requests':
+        // 1分以内は再送できずこのエラーになる.その時の処理.
+        break;
+      default:
+      // その他のメール送信失敗時の処理
+    }
+    return;
+  }
+};
+
+const handleLogout = async () => {
+  try {
+    const auth = getAuth();
+    await signOut(auth);
+    // ログアウト成功後の処理、例えばホームページにリダイレクトなど
+  } catch (error) {
+    console.error('ログアウトに失敗しました:', error);
+    // エラーハンドリング
+  }
 };

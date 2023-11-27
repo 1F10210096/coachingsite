@@ -17,6 +17,92 @@
   border-bottom: 1px solid #eee;
 }
 
+.container {
+  position: relative;
+  top: 30px;
+  width: 1600px;
+  margin: 20px auto 0;
+  background-color: rgb(255 255 255);
+}
+
+.gameTitle {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center; /* テキストを中央に配置 */
+}
+
+.coachTitle {
+  position: relative;
+  right: 500px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(103 103 103);
+  text-align: center;
+}
+
+.coach {
+  position: relative;
+  height: 150px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgb(255 255 255);
+}
+
 .deleteBtn {
   float: right;
+}
+
+.gameList {
+  display: flex; /* Flexboxを使用して要素を横に並べる */
+  gap: 60px; /* 要素間の間隔 */
+  justify-content: center; /* 中央寄せ */
+  margin-top: 40px;
+}
+
+.gameItem {
+  display: flex; /* Flexboxを使用して */
+  flex-direction: column; /* 縦方向に並べる */
+  align-items: center; /* アイテムを縦方向中央に配置 */
+  margin-bottom: 20px; /* 下部の余白を設定 */
+  text-align: center; /* テキストを中央に配置 */
+}
+
+.gameTitle2 {
+  margin-top: 10px; /* アイコンとタイトルの間隔 */
+  font-size: 16px; /* タイトルのフォントサイズ */
+  color: #333; /* タイトルの色 */
+}
+
+.gameIconContainer {
+  display: flex; /* Flexboxを使用して */
+  align-items: center; /* 中央寄せ */
+  justify-content: center; /* 中央寄せ */
+  width: 140px; /* アイコンコンテナの幅 */
+  height: 140px; /* アイコンコンテナの高さ */
+  overflow: hidden; /* 円形の外側を非表示にする */
+  background-color: rgb(224 224 224); /* 背景色 */
+  background-repeat: no-repeat; /* 背景画像の繰り返しを停止 */
+  background-position: center; /* 背景画像を中央に配置 */
+  background-size: 70% 50%; /* コンテナの50%のサイズに設定 */
+  border: 3px solid rgb(224 224 224); /* 2pxの黒の縁を追加 */
+  border-radius: 50%; /* 円形にする */
+  object-fit: contain; /* 画像がコンテナ内に収まるように調整 */
+}
+
+.gameIcon {
+  /* 画像が`<img>`タグで使われている場合のスタイル */
+  width: 100%; /* コンテナ内での最大幅 */
+  object-fit: cover; /* 余白なしでコンテナを満たす */
+}
+
+.container3 {
+  position: relative;
+  top: 30px;
+  width: 199px;
+  height: 199px;
+  margin: 20px auto 0;
+  background-color: rgb(255 22 22);
 }

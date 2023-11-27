@@ -51,9 +51,10 @@ model BosyuuList {
   title       String // 募集のタイトル
   rank        String[] // 募集のランク
   subjectRank String[]
-  role        String[]
   tag         String[]
   description String // 募集の詳細説明
+  suchedule   String // 募集の予定
+  OneWord     String // 一言
   teacherId   String // この募集を出した教師のID
   createdAt   DateTime @default(now()) // 募集の作成日時
   updatedAt   DateTime @updatedAt // 募集の最終更新日時

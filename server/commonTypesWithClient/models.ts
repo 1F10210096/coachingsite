@@ -45,9 +45,10 @@ export type BosyuuListModel = {
   title: string;
   rank: string[];
   subjectRank: string[];
-  role: string[];
   tag: string[];
   description: string;
+  suchedule: string;
+  OneWord: string;
   teacherId: string;
   createdAt: Date;
   updatedAt: Date;

@@ -33,16 +33,23 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
               <Link href="/userProfile">
                 <button className={styles.profileButton}>プロフィール</button>
               </Link>
+              <Link href="/bosyuu">
+                <button className={styles.redButton}>募集</button>
+              </Link>
               {/* その他のユーザー関連のオプション */}
             </div>
           ) : (
-              <><Link href="/login">
+            <>
+              <Link href="/login">
                 <button className={styles.kaninButton}>ログイン</button>
-              </Link><Link href="/signUp">
-                  <button className={styles.loginButton}>会員登録</button>
-                </Link><Link href="/coachSignUp">
-                  <button className={styles.redButton}>コーチ登録</button>
-                </Link></>
+              </Link>
+              <Link href="/signUp">
+                <button className={styles.loginButton}>会員登録</button>
+              </Link>
+              <Link href="/coachSignUp">
+                <button className={styles.redButton}>コーチ登録</button>
+              </Link>
+            </>
           )}
         </div>
         <div className={styles.contheme}>

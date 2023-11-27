@@ -1,0 +1,112 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 画面の高さに合わせる */
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* フォーム要素間の隙間 */
+}
+
+.loginButton {
+  position: relative;
+  top: 30px;
+  left: 27px;
+  width: 550px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+
+.container {
+  height: 80px;
+  background: #fafafa;
+  border-bottom: 1px solid #63b5e5;
+}
+
+.loginTitle {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.kaninn {
+  position: absolute;
+  top: 180px;
+  left: 65%;
+  font-size: 15px;
+  color: #0141c193;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.kaninn:hover {
+  color: #93c6fd;
+}
+
+.searchmail {
+  position: relative;
+  left: 5%;
+  width: 550px;
+  height: 65px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.mail {
+  position: relative;
+  left: 55%;
+
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.password {
+  position: relative;
+  top: 370px;
+  left: 36%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.searchpass {
+  position: relative;
+  top: -px;
+  left: 10%;
+  width: 600px;
+  height: 65px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchpass:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}

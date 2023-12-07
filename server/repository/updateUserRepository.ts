@@ -2,6 +2,7 @@ import type { UserModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import type { User } from '@prisma/client';
 
+
 const toUserModel = (prismaUser: User): UserModel => ({
   userId: prismaUser.userId,
   name: prismaUser.name,

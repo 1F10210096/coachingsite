@@ -2,28 +2,12 @@ import type { GameListModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import type { GameList } from '@prisma/client';
 
-const toCompanyModel = (prismaGameList: GameList): GameListModel => ({
+const toGameListModel = (prismaGameList: GameList): GameListModel => ({
   id: prismaGameList.id,
   title: prismaGameList.title,
-  icon: prismaGameList.icon,
 });
 
 export const gameListRepository = {
-  save: async (gameList: GameListModel) => {
-    await prismaClient.gameList.upsert({
-      where: { id: gameList.id },
-      update: {
-        title: gameList.title,
-        icon: gameList.icon,
-      },
-      create: {
-        id: gameList.id,
-        title: gameList.title,
-        icon: gameList.icon,
-      },
-    });
-  },
-
   fetchinfo: async (): Promise<GameListModel[] | null> => {
     console.log('gameListRepository.fetchinfo');
     const topGameIds = await prismaClient.bosyuuList.groupBy({
@@ -51,7 +35,8 @@ export const gameListRepository = {
     if (!topGames) {
       throw new Error('games not found');
     }
+    console.log(topGames);
 
-    return topGames.filter((game): game is GameList => game !== null).map(toCompanyModel);
+    return topGames.filter((game): game is GameList => game !== null).map(toGameListModel);
   },
 };

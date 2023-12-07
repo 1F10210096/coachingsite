@@ -5,6 +5,7 @@ export type UserModel = {
   userId: string;
   name: string;
   myProfile: string | null;
+  rating?: number | null;
   imageUrl: string | null;
   created: number;
   game?: string;
@@ -41,14 +42,17 @@ export type TeacherModel = {
 
 export type BosyuuListModel = {
   id: string;
-  gameId: string;
+  gameId: number;
   title: string;
-  rank: string[];
-  subjectRank: string[];
+  rank: number;
+  subjectRank: number[];
   tag: string[];
   description: string;
+  notes: string;
+  myProfile: string;
+  descriptionDetail: string;
   suchedule: string;
-  OneWord: string;
+  lessonType: string[];
   teacherId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -56,9 +60,22 @@ export type BosyuuListModel = {
 };
 
 export type GameListModel = {
-  id: string;
+  id: number;
   title: string;
-  icon: string;
+};
+
+export type GameRankPngModel = {
+  id: string;
+  gameId: string;
+  rankId: number;
+  user?: UserModel; // UserModelへの参照
+};
+
+export type UserSummaryModel = {
+  name: string; // ユーザーの名前
+  imageUrl: string; // ユーザーのイメージプロフィールのURL
+  myProfile: string; // ユーザーのひと言コメント
+  rating: number; // ユーザーの評価
 };
 
 export type TaskModel = z.infer<typeof taskParser>;

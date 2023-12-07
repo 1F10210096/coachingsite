@@ -1,0 +1,163 @@
+.container {
+  position: relative;
+  top: 30px;
+  display: flex;
+  width: 60%;
+  height: 1500px;
+  margin: auto; /* マージンを自動に設定 */
+  background: #ddd;
+  border-bottom: 1px solid #63b5e5;
+}
+
+.detail {
+  position: relative;
+  top: 60px;
+  right: 20%; /* 左端から30%の位置に配置 */
+  width: 20%;
+  height: auto;
+  font-size: 22px; /* フォントサイズを16ピクセルに設定 */
+  background: #fff;
+}
+
+.detailContent {
+  position: relative;
+  width: 90%;
+  height: 1400px;
+  margin: auto;
+  font-size: 22px;
+  font-weight: 700;
+  background: rgb(255 255 255);
+}
+
+.title {
+  position: relative;
+  top: 60px;
+  left: 20%; /* 左端から30%の位置に配置 */
+  width: 55%;
+  height: 50px;
+  font-size: 26px;
+  font-weight: 700;
+  background: #fff;
+}
+
+.rank {
+  position: relative;
+  top: -10px;
+  left: 650px; /* 左端から30%の位置に配置 */
+  width: 90px;
+  height: auto;
+  font-size: 22px;
+  background: #fff;
+}
+
+.subjectRankContainer {
+  position: relative;
+  top: 30px;
+  left: 110px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
+  width: 80%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.subjectRank {
+  position: relative;
+  top: 80px;
+  right: 60px;
+  width: 60px;
+  height: auto;
+  margin-left: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.tagContainer {
+  position: relative;
+  top: 180px;
+  left: 110px;
+  flex-direction: column; /* 子要素を垂直方向に配置 */
+  width: 80%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.tag {
+  position: relative;
+  top: 20px;
+  left: 100px;
+  width: 70%; /* 親コンテナの幅に合わせる */
+  margin-bottom: 10px; /* 下にマージンを追加 */
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.lessonTypeContainer {
+  position: relative;
+  top: 270px;
+  left: 110px;
+  flex-direction: column; /* 子要素を垂直方向に配置 */
+  width: 80%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.lessonType {
+  position: relative;
+  top: 20px;
+  left: 100px;
+  width: 70%; /* 親コンテナの幅に合わせる */
+  margin-bottom: 10px; /* 下にマージンを追加 */
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.sucheduleContainer {
+  position: relative;
+  top: 360px;
+  left: 110px;
+  flex-direction: column; /* 子要素を垂直方向に配置 */
+  width: 80%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.suchedule {
+  position: relative;
+  top: 20px;
+  left: 100px;
+}
+
+.notesContainer {
+  position: relative;
+  top: 460px;
+  left: 110px;
+  flex-direction: column; /* 子要素を垂直方向に配置 */
+  width: 80%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.notes {
+  position: relative;
+  top: 20px;
+  left: 100px;
+}
+
+.descriptionContainer {
+  position: relative;
+  top: 560px;
+  left: 110px;
+  flex-direction: column; 
+  width: 60%;
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.description {
+  position: relative;
+  top: 20px;
+  left: 100px;
+}
+

@@ -1,15 +1,23 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { logout } from 'src/utils/login';
-import { uploadProfileImage } from 'src/utils/uploadProfile';
 import styles from './index.module.css';
 // eslint-disable-next-line complexity
 const UserProfile = () => {
+
+  const router = useRouter();
   const [modalContent, setModalContent] = useState('');
-  const [imagePreview, setImagePreview] = useState('');
+
+  useEffect(() => {
+    // URLからmodalパラメータを取得
+    if (router.query.modal) {
+      setModalContent(router.query.modal);
+    }
+  }, [router.query]);
+  
   const [newName, setNewName] = useState('');
   const [newProfile, setNewProfile] = useState('');
   const showModal = (content: SetStateAction<string>) => {
@@ -56,27 +64,38 @@ const UserProfile = () => {
     setNewProfile(e.target.value);
   };
 
+  const [lookImage, setLookImage] = useState('');
+
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const [selectedFile, setSelectedFile] = useState('');
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImagePreview(file);
+      const fileUrl = URL.createObjectURL(file);
+      setLookImage(fileUrl); // ローカルでのプレビュー用
+
+      // ファイルをBase64にエンコード
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64String = e.target.result;
+        setSelectedFile(base64String); // Base64エンコードされた文字列を状態に設定
+      };
+      reader.readAsDataURL(file);
     }
   };
-
   // フォーム送信時の処理
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(imagePreview, 'imagePreview');
-    const imageUrl = await uploadProfileImage(imagePreview);
     const userId = getAuth().currentUser.uid;
-    console.log(userId, newName, newProfile, imageUrl);
-    try {
-      await apiClient.updateProfile.post({ body: { userId, newName, newProfile, imageUrl } });
+    console.log(selectedFile);
 
-      // 応答に基づいて何らかのアクションを実行
-      // 例: ユーザーに通知する、状態を更新する、等
+    try {
+      console.log(imageUrl);
+      await apiClient.updateProfile.post({
+        body: { userId,selectedFile }, // 修正: formDataを直接bodyに設定
+      });
     } catch (error) {
-      // エラーハンドリング
       console.error('プロフィール更新エラー:', error);
     }
   };
@@ -153,7 +172,9 @@ const UserProfile = () => {
                       onChange={handleImageChange}
                       accept="image/*"
                     />
-                    {imagePreview && <img src={imagePreview} alt="プレビュー" />}
+                    {lookImage && (
+                      <img src={lookImage} alt="プレビュー" className={styles.profileImage} />
+                    )}
                     <button type="submit">プロフィール更新</button>
                   </form>
                 </>

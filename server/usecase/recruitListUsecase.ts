@@ -5,14 +5,12 @@ import assert from 'assert';
 
 export const recruitListUsecase = {
   fetchinfo: async (params: {
-    Id: string;
-    ranks?: string[];
-    subjectRank?: string[];
+    Id: number;
+    ranks?: number[];
+    subjectRank?: number[];
     tags?: string[];
-    roles?: string[];
+    lessonTypes?: string[];
   }): Promise<BosyuuListModel[]> => {
-    console.log('recruitListUsecase.fetchinfo');  
-    console.log(params)
     const recuritList = await recruitListRepository.fetchinfo(params);
     assert(recuritList !== null, 'gameListはnullです');
     return recuritList;

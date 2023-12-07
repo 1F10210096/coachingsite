@@ -19,7 +19,7 @@
 
 .container {
   position: relative;
-  top: 30px;
+  top: 10px;
   width: 1600px;
   margin: 20px auto 0;
   background-color: rgb(255 255 255);
@@ -34,8 +34,18 @@
 
 .coachTitle {
   position: relative;
+  top: 20px;
   right: 500px;
-  margin-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(103 103 103);
+  text-align: center;
+}
+
+.coachTitle2 {
+  position: relative;
+  top: 40px;
+  right: 500px;
   font-size: 20px;
   font-weight: bold;
   color: rgb(103 103 103);
@@ -56,10 +66,11 @@
 }
 
 .gameList {
+  position: relative;
+  top: 60px;
   display: flex; /* Flexboxを使用して要素を横に並べる */
   gap: 60px; /* 要素間の間隔 */
   justify-content: center; /* 中央寄せ */
-  margin-top: 40px;
 }
 
 .gameItem {
@@ -105,4 +116,212 @@
   height: 199px;
   margin: 20px auto 0;
   background-color: rgb(255 22 22);
+}
+
+.userSummary {
+  width: 170px; /* Sets the width of the container */
+  height: 200px; /* Sets the height of the container */
+  text-align: center; /* Centers the content */
+}
+
+.userImage {
+  position: relative;
+  top: 30px;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.userName {
+  margin-top: 60px; /* Adjust space between name and image */
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.myProfile {
+  position: relative;
+  top: 10px;
+  right: 15px;
+  width: 200px;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* テキストを1行に保つ */
+  background-color: rgb(255 255 255);
+}
+
+.userList {
+  position: relative;
+  top: 60px;
+  display: flex; /* Flexboxを使用して要素を横に並べる */
+  gap: 70px; /* 要素間の間隔 */
+  justify-content: center; /* 中央寄せ */
+}
+
+.allContainer {
+  height: 1799px;
+}
+
+.rate {
+  position: relative;
+  top: 40px;
+  right: 10px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 30px;
+  font-size: 30px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.coachContainer {
+  position: relative;
+  top: 80px;
+  width: 1600px;
+  margin: 20px auto 0;
+  margin-bottom: 90px;
+  background-color: rgb(255 255 255);
+}
+
+.recruitContainer {
+  position: relative;
+  top: 120px;
+  width: 1600px;
+  margin: 20px auto 0;
+  background-color: rgb(255 255 255);
+}
+
+.recruitListTitle {
+  position: relative;
+  top: 50px;
+  right: 500px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(103 103 103);
+  text-align: center;
+}
+
+.recruitList {
+  position: relative;
+  top: 90px;
+  left: 240px;
+  display: flex;
+  flex-wrap: wrap; /* これにより、アイテムが折り返される */
+  gap: 70px; /* 要素間の間隔 */
+  width: 1240px;
+}
+
+.recruitSummary {
+  width: calc((100% / 4) - 80px); /* 一行に4つのアイテムが収まるように調整 */
+  height: 390px;
+  margin-bottom: 20px; /* 下部の余白を設定 */
+  background-color: rgb(244 244 244);
+}
+
+.recruitListImage {
+  display: flex; /* Flexboxを使用して要素を横に並べる */
+  justify-content: center; /* 中央寄せ */
+}
+
+.recruitDetailTitle {
+  position: relative;
+  top: 10px;
+  display: -webkit-box;
+  height: 45px;
+  padding-right: 18px;
+  padding-left: 18px;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 14px;
+  text-overflow: ellipsis; /* 末尾に省略記号を表示 */
+  white-space: normal; /* 複数行のテキストに変更 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 2行まで表示 */
+}
+
+.gameIconContainer2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: rgb(54 54 54);
+  background-position: center;
+  background-size: cover; /* アスペクト比を保持しつつ、コンテナに合わせてサイズ調整 */
+  border: 3px solid rgb(224 224 224);
+}
+
+.divide {
+  position: relative;
+  top: 80px;
+  width: 72%; /* ここで幅を設定 */
+  height: 1px; /* 線の高さ */
+  margin: 20px auto; /* 上下の余白と左右を自動で中央寄せ */
+  background-color: #c4c1c1; /* 線の色 */
+}
+
+.divide2 {
+  position: relative;
+  top: 130px;
+  width: 72%; /* ここで幅を設定 */
+  height: 0.8px; /* 線の高さ */
+  margin: 20px auto; /* 上下の余白と左右を自動で中央寄せ */
+  background-color: #c4c1c1; /* 線の色 */
+}
+
+.recruitDetail {
+  position: relative;
+  top: 25px;
+  display: -webkit-box;
+  padding: 3px;
+  margin-right: 18px;
+  margin-left: 18px;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 13px;
+  text-overflow: ellipsis; /* 末尾に省略記号を表示 */
+  letter-spacing: -0.1px; /* 文字の間隔を狭める */
+  white-space: normal; /* 複数行のテキストに変更 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* 2行まで表示 */
+}
+
+.recruitDetailLessonType {
+  position: relative;
+  top: 19px;
+  display: -webkit-box;
+  padding: 3px;
+  margin-right: 18px;
+  margin-left: 11px;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 11px;
+  text-overflow: ellipsis; /* 末尾に省略記号を表示 */
+  white-space: normal; /* 複数行のテキストに変更 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 2行まで表示 */
+}
+
+.lessonType {
+  position: relative;
+  padding: 1px 4px; /* 内側の余白 */
+  margin-right: 8px; /* ボタン間の余白 */
+  font-size: 11px; /* フォントサイズ */
+  font-weight: bold;
+  color: white; /* テキストの色 */
+  cursor: pointer; /* カーソルを指の形に */
+  background-color: #0cf117; /* ボタンの背景色 */
+  border: none; /* 枠線を削除 */
+  border-radius: 4px; /* 角丸の半径 */
+
+  /* その他のスタイル */
 }

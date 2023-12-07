@@ -56,11 +56,15 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
           <Link href="/">
             <button className={styles.button}>おすすめ</button>
           </Link>
-          <Link href="/valorant">
-            <button className={styles.button}>VALOLANT</button>
+          <Link href="/recruit?value=1">
+            <button className={styles.button}>VALORANT</button>
           </Link>
-          <button className={styles.button}>スプラトゥーン</button>
-          <button className={styles.button}>LOL</button>
+          <Link href="/recruit?value=2">
+            <button className={styles.button}>APEX</button>
+          </Link>
+          <Link href="/recruit?value=3">
+            <button className={styles.button}>LOL</button>
+          </Link>
           <button className={styles.button}>CSGO</button>
           <button className={styles.button}>COD 2</button>
           <button className={styles.button}>OverWatch2</button>

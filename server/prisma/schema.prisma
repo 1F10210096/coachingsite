@@ -16,55 +16,78 @@ model Task {
 }
 
 model User {
-  userId    String     @id @unique
+  userId    String        @id @unique
   name      String
   myProfile String?
+  rating    Float? // 評価フィールド（5段階評価、小数点第1位まで）
   imageUrl  String?
-  createdAt DateTime   @default(now())
-  game      gameRank? // ユーザーと生徒は任意の関連付け
+  createdAt DateTime      @default(now())
+  game      userGameRank? // ユーザーと生徒は任意の関連付け
   student   Student? // ユーザーと生徒は任意の関連付け
   teacher   Teacher? // ユーザーと教師は任意の関連付け
 }
 
-model gameRank {
-  userId   String @id
-  gameName String
-  rank     String
-  user     User   @relation(fields: [userId], references: [userId])
+model userGameRank {
+  userId   String   @id
+  gameId   Int
+  rank     Int
+  user     User     @relation(fields: [userId], references: [userId])
+  GameList GameList @relation(fields: [gameId], references: [id])
 }
 
 model Student {
-  userId String @id @unique
-  user   User   @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  userId String   @id @unique
+  user   User     @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  apply  apply[]
 }
 
 model Teacher {
   userId      String       @id @unique
   hitokoto    String
   user        User         @relation(fields: [userId], references: [userId]) // 必須の関連付け
-  bosyuuLists BosyuuList[]
+  bosyuuLists BosyuuList[] // ここは常に配列型
 }
 
 model BosyuuList {
-  id          String   @id @default(uuid())
-  gameId      String // この募集に対応するゲームのID
-  title       String // 募集のタイトル
-  rank        String[] // 募集のランク
-  subjectRank String[]
-  tag         String[]
-  description String // 募集の詳細説明
-  suchedule   String // 募集の予定
-  OneWord     String // 一言
-  teacherId   String // この募集を出した教師のID
-  createdAt   DateTime @default(now()) // 募集の作成日時
-  updatedAt   DateTime @updatedAt // 募集の最終更新日時
-  teacher     Teacher  @relation(fields: [teacherId], references: [userId])
-  game        GameList @relation(fields: [gameId], references: [id])
+  id                String   @id @default(uuid())
+  gameId            Int // この募集に対応するゲームのID
+  title             String // 募集のタイトル
+  rank              Int
+  subjectRank       Int[]
+  tag               String[]
+  lessonType        String[] // レッスンの種類
+  description       String // 募集の詳細説明
+  notes             String // 募集の注意事項
+  myProfile         String // 募集者のプロフィール
+  descriptionDetail String // 募集の詳細説明
+  suchedule         String // 募集の予定notes       String // 募集の注意事項
+  teacherId         String // この募集を出した教師のID
+  createdAt         DateTime @default(now()) // 募集の作成日時
+  updatedAt         DateTime @updatedAt // 募集の最終更新日時
+  teacher           Teacher  @relation(fields: [teacherId], references: [userId])
+  game              GameList @relation(fields: [gameId], references: [id])
+  apply             apply[]
+}
+
+model apply {
+  id        String     @id @default(uuid())
+  bosyuuId  String
+  studentId String
+  bosyuu    BosyuuList @relation(fields: [bosyuuId], references: [id])
+  student   Student    @relation(fields: [studentId], references: [userId])
 }
 
 model GameList {
-  id          String       @id
-  title       String // ゲームのタイトル
-  icon        String
-  bosyuuLists BosyuuList[] // GameListとBosyuuListの1対多のリレーション
+  id           Int             @id
+  title        String // ゲームのタイトル
+  gameRankList GameRanksList[] // ゲームとランクの1対1のリレーション
+  bosyuuLists  BosyuuList[] // GameListとBosyuuListの1対多のリレーション
+  usrGameRank  userGameRank[]
+}
+
+model GameRanksList {
+  id     String   @id @default(uuid())
+  gameId Int
+  rankId Int
+  game   GameList @relation(fields: [gameId], references: [id])
 }

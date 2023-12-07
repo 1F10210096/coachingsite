@@ -3,11 +3,11 @@ import type { BosyuuListModel } from '$/commonTypesWithClient/models';
 export type Methods = {
   post: {
     reqBody: {
-      Id: string;
-      ranks: string[];
-      subjectRank: string[];
+      Id: number;
+      ranks: number[];
+      subjectRank: number[];
       tag: string[];
-      roles: string[];
+      lessonTypes: string[];
     };
     resBody: BosyuuListModel[];
   };

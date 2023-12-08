@@ -51,6 +51,12 @@ const Login = () => {
       console.log(responseUser.body);
       setUserDetail(responseUser.body);
 
+      const responseReview = await apiClient.fetchReview.post({
+        body: {
+          teacherId: response.body.id,
+        },
+      });
+
       console.log(response.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
@@ -121,7 +127,7 @@ const Login = () => {
               <div className={styles.description}>{RecruitDetail?.descriptionDetail}</div>
             </p>
             <p className={styles.lessonTypeContainer}>
-            【コーチング方法】
+              【コーチング方法】
               {RecruitDetail?.lessonType.map((lessonType, index) => (
                 <div key={index} className={styles.lessonType}>
                   <span>・{lessonType}</span>
@@ -146,13 +152,12 @@ const Login = () => {
             </p>
 
             <p className={styles.sucheduleContainer}>
-            【スケジュール】
+              【スケジュール】
               <div className={styles.suchedule}>{RecruitDetail?.suchedule}</div>
             </p>
             <button className={styles.button}>応募する</button>
           </div>
         </div>
-
         <div className={styles.profileContainer}>
           <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.userImage} />
           <div className={styles.nameContainer}>
@@ -177,6 +182,16 @@ const Login = () => {
           <div className={styles.descriptionDetailContainer}>
             <div className={styles.descriptionTitle}>【自己紹介】</div>
             <div className={styles.descriptions}>{userDetail?.hitokoto}</div>
+          </div>
+        </div>
+        <div className={styles.reviewContainer}>
+          <div className={styles.reviewTitle}>レビュー</div>
+          <div className={styles.line} />
+          <div className={styles.review}>
+            <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.reviewImage} />
+            <div className={styles.reviewName}>{userDetail?.name}</div>
+            <div className={styles.reviewRating}>{userDetail?.rating}</div>
+            <div className={styles.reviewDescription}>{userDetail?.hitokoto}</div>
           </div>
         </div>
       </div>

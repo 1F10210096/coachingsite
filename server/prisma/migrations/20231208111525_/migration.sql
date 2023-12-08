@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "apply" ADD COLUMN     "rating" DOUBLE PRECISION,
+ALTER COLUMN "review" DROP NOT NULL;

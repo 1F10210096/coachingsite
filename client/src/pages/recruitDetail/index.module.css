@@ -235,7 +235,7 @@
   width: 300px;
   height: auto;
   padding: 20px; /* Optional: adds space inside the container */
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   font-size: 19px;
   background: rgb(255 255 255);
   border: 1px solid #ccc; /* Optional: adds a border */
@@ -322,7 +322,7 @@
   top: 50px;
   left: 20px;
   width: 90%;
-  height: 250px;
+  height: auto;
   background-color: #fff;
 }
 
@@ -332,7 +332,7 @@
   left: 10px;
   display: -webkit-box; /* Required for line clamping */
   width: 93%;
-  height: 150px;
+  height: auto;
   overflow: hidden;
   font-size: 14px;
   line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
@@ -353,10 +353,10 @@
 
 .descriptionDetailContainer {
   position: relative;
-  top: 40px;
   left: 20px;
   width: 90%;
   height: auto;
+  margin-top: 80px;
   background-color: #fff;
 }
 
@@ -434,4 +434,79 @@
 
 .button:active {
   background-color: #397d35; /* クリック時の背景色をもっと暗く */
+}
+
+.reviewContainer {
+  position: relative;
+  left: 60px;
+  width: 300px;
+  height: 500px;
+  margin-top: 660px;
+  border: 1px solid #ccc; /* Optional: adds a border */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
+}
+
+.reviewTitle {
+  position: relative;
+  top: 20px;
+  left: 30px;
+  width: 150px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold; /* 文字を太字に */
+  color: #6c6d6d;
+}
+
+.line {
+  width: 80%; /* 幅を親要素に合わせる */
+  margin-top: 10px; /* 上部の余白 */
+  margin-left: 10%;
+  border-top: 1px solid rgb(184 184 184); /* 上部に1ピクセルの黒線を引く */
+}
+
+.review {
+  position: relative;
+  top: 20px;
+  left: 30px;
+  width: 150px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold; /* 文字を太字に */
+  color: #6c6d6d;
+}
+
+.reviewImage {
+}
+
+.reviewName {
+  position: relative;
+  top: 20px;
+  left: 30px;
+  width: 150px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold; /* 文字を太字に */
+  color: #6c6d6d;
+}
+
+.reviewRating {
+  position: relative;
+  top: 20px;
+  left: 30px;
+  width: 150px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold; /* 文字を太字に */
+  color: #6c6d6d;
+}
+
+.reviewDescription {
+  position: relative;
+  top: 20px;
+  left: 30px;
+  width: 150px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold; /* 文字を太字に */
+  color: #6c6d6d;
 }

@@ -466,47 +466,109 @@
 
 .review {
   position: relative;
-  top: 20px;
   left: 30px;
-  width: 150px;
-  height: 50px;
+  width: 90%;
+  height: auto;
   font-size: 22px;
-  font-weight: bold; /* 文字を太字に */
-  color: #6c6d6d;
+  color: #5b5b5b;
+}
+
+.reviewA {
+  position: relative;
+  top: 10px;
+}
+
+.review:not(:first-child) {
 }
 
 .reviewImage {
+  position: relative;
+  width: 40px;
+  height: auto;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover; /* アスペクト比を保持しつつ、コンテナに合わせてサイズ調整 */
+  border: 3px solid rgb(224 224 224);
+  border-radius: 50%;
 }
 
 .reviewName {
   position: relative;
-  top: 20px;
-  left: 30px;
+  top: 13px;
+  left: 10px;
   width: 150px;
   height: 50px;
-  font-size: 22px;
-  font-weight: bold; /* 文字を太字に */
-  color: #6c6d6d;
+  font-size: 16px;
+  color: #000;
 }
 
 .reviewRating {
   position: relative;
-  top: 20px;
-  left: 30px;
+  top: 9px;
+  left: 10px;
   width: 150px;
   height: 50px;
   font-size: 22px;
-  font-weight: bold; /* 文字を太字に */
+  font-weight: bold;
   color: #6c6d6d;
 }
 
 .reviewDescription {
   position: relative;
-  top: 20px;
-  left: 30px;
-  width: 150px;
-  height: 50px;
-  font-size: 22px;
-  font-weight: bold; /* 文字を太字に */
-  color: #6c6d6d;
+  max-width: 80%; /* 最大の幅を親要素に合わせる */
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 12px;
+  word-wrap: break-word; /* 長い単語でも折り返す */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.reviewDescription::before {
+  position: absolute;
+  bottom: -10px; /* 吹き出しの位置を調整 */
+  left: 20px;
+  content: '';
+  border-color: #f0f0f0 transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.reviewHeader {
+  display: flex;
+  gap: 10px; /* Adjust the gap between the image and the name as needed */
+  align-items: center; /* Vertically centers the content */
+}
+
+.ratingContainer2 {
+  display: flex;
+  gap: 10px; /* Adjust the gap between the image and the name as needed */
+  align-items: center; /* Vertically centers the content */
+}
+
+.rate2 {
+  position: relative;
+  display: inline-block;
+  width: 100px; /* 最大の星の幅 */
+  height: auto;
+  font-size: 20px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+  letter-spacing: -2px;
+}
+
+.rateInner2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.line2 {
+  position: relative;
+  padding-bottom: 10px;
+  width: 80%; /* 幅を親要素に合わせる */
+  border-top: 1px solid rgb(184 184 184); /* 上部に1ピクセルの黒線を引く */
 }

@@ -15,8 +15,8 @@ const Register = () => {
   const [selectedGame, setSelectedGame] = useState('');
   const [selectedRanks, setSelectedRanks] = useState([]);
   const games = {
-    ゲーム1: ['ランク1', 'ランク2', 'ランク3'],
-    ゲーム2: ['ランクA', 'ランクB', 'ランクC'],
+    VALORANT: ['アイアン', 'ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'アセンダント' ,'イモータル', 'レディアント'],
+    LOL: ['ランクA', 'ランクB', 'ランクC'],
   };
 
   useEffect(() => {

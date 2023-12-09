@@ -1,15 +1,34 @@
-import type { BosyuuListModel } from '$/commonTypesWithClient/models';
+import type { reviewModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
+
 export const reviewRepository = {
-  fetchinfo: async (Id: string): Promise<BosyuuListModel> => {
-    const bosyuuDetail = await prismaClient.apply.findFirst({
-      where: { id: Id },
+  fetchSortedReviews: async (Id: string): Promise<reviewModel[]> => {
+    const sortedReviews = await prismaClient.apply.findMany({
+      where: {
+        bosyuuId: Id,
+      },
+      orderBy: {
+        rating: 'desc',
+      },
+      include: {
+        student: {
+          include: {
+            user: {
+              select: {
+                imageUrl: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
 
-    if (!bosyuuDetail) {
-      throw new Error('bosyuuDetail not found');
-    }
-
-    return bosyuuDetail;
+    return sortedReviews.map((review) => ({
+      name: review.student?.user?.name,
+      imageUrl: review.student?.user?.imageUrl,
+      rating: review.rating,
+      review: review.review,
+    }));
   },
 };

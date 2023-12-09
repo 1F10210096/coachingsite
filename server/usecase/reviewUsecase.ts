@@ -1,11 +1,12 @@
-import type { BosyuuListModel } from '$/commonTypesWithClient/models';
+import type { BosyuuListModel, reviewModel } from '$/commonTypesWithClient/models';
+import { reviewRepository } from '$/repository/reviewRepositroy';
 
 import assert from 'assert';
 
 export const reviewUsecase = {
-  fetchinfo: async (Id: string): Promise<BosyuuListModel> => {
-    console.log('recruitDetailUsecase.fetchinfo');
-    const review = await reviewRepository.fetchinfo(Id);
+  fetchinfo: async (Id: string): Promise<reviewModel[]> => {
+    console.log('reviewUsecase.fetchinfo');
+    const review = await reviewRepository.fetchSortedReviews(Id);
     assert(review !== null, 'reviewはnullです');
     return review;
   },

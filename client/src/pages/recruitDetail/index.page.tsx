@@ -1,4 +1,9 @@
-import type { BosyuuListModel, UserSummaryDetailModel } from 'commonTypesWithClient/models';
+/* eslint-disable max-lines */
+import type {
+  BosyuuListModel,
+  UserSummaryDetailModel,
+  reviewModel,
+} from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -11,6 +16,7 @@ import styles from './index.module.css';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListModel>();
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
+  const [reviews, setReviews] = useState<reviewModel[]>([]);
   const [user, setUser] = useState(null);
   const router = useRouter();
   const id = router.query.id;
@@ -53,15 +59,18 @@ const Login = () => {
 
       const responseReview = await apiClient.fetchReview.post({
         body: {
-          teacherId: response.body.id,
+          Id: response.body.id,
         },
       });
 
-      console.log(response.body);
+      setReviews(responseReview.body);
+      console.log(reviews);
+      console.log(responseReview.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+
   useEffect(() => {
     if (idAsString) {
       fetchRecruitDetail();
@@ -88,6 +97,11 @@ const Login = () => {
   const calculateRateWidth = (rating: number): number => {
     console.log(rating * 30);
     return rating * 30;
+  };
+
+  const calculateRateWidth2 = (rating: number): number => {
+    console.log(rating * 20);
+    return rating * 20;
   };
 
   return (
@@ -187,11 +201,35 @@ const Login = () => {
         <div className={styles.reviewContainer}>
           <div className={styles.reviewTitle}>レビュー</div>
           <div className={styles.line} />
-          <div className={styles.review}>
-            <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.reviewImage} />
-            <div className={styles.reviewName}>{userDetail?.name}</div>
-            <div className={styles.reviewRating}>{userDetail?.rating}</div>
-            <div className={styles.reviewDescription}>{userDetail?.hitokoto}</div>
+          <div className={styles.reviewA}>
+            {reviews.map((review, index) => (
+              <>
+                <div key={index} className={styles.review}>
+                  <div className={styles.reviewHeader}>
+                    <img
+                      src={review.imageUrl}
+                      alt={review.imageUrl}
+                      className={styles.reviewImage}
+                    />
+                    <div className={styles.reviewName}>{review.name}</div>
+                  </div>
+                  <div className={styles.ratingContainer2}>
+                    <span className={styles.rate2}>
+                      ★★★★★
+                      <span
+                        className={styles.rateInner2}
+                        style={{ width: `${calculateRateWidth2(review.rating)}px` }}
+                      >
+                        ★★★★★
+                      </span>
+                    </span>
+                    <div className={styles.reviewRating}>{review.rating}</div>
+                  </div>
+                  <div className={styles.reviewDescription}>{review.review}</div>
+                  <div className={styles.line2} />
+                </div>
+              </>
+            ))}
           </div>
         </div>
       </div>

@@ -95,3 +95,21 @@ export type reviewModel = {
 };
 
 export type TaskModel = z.infer<typeof taskParser>;
+
+export type BosyuuListFrontModel = {
+  id: string;
+  gameId: number;
+  title: string;
+  rank: number;
+  subjectRank: number[];
+  tag: string[];
+  description: string;
+  notes: string;
+  myProfile: string;
+  descriptionDetail: string;
+  suchedule: string;
+  lessonType: string[];
+  createdAt: Date;
+  updatedAt: Date;
+  teacher: TeacherModel; // 教師との必須の関連付け
+};

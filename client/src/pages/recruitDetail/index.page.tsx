@@ -116,12 +116,6 @@ const Login = () => {
       console.log(response.body);
       console.log(response.body.teacherId);
 
-      const responseUser = await apiClient.fetchUserDetail.post({
-        body: {
-          teacherId: response.body.teacherId,
-        },
-      });
-      console.log(responseUser.body);
       setUserDetail(responseUser.body);
 
       const responseReview = await apiClient.fetchReview.post({

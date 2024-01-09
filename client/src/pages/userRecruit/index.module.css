@@ -1,0 +1,308 @@
+.modal {
+}
+
+.searchNameContainer2 {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchContainer {
+  position: relative;
+  top: 60px;
+  left: 250px;
+  width: 300px;
+  height: 600px;
+}
+
+.helpwanted {
+  position: relative;
+  top: -260px;
+  left: 400px;
+  width: 600px;
+  height: 600px;
+  background-color: rgb(241 241 241);
+}
+
+.searchNameContainer {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchNameContainer2 {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.rankContent {
+  /* ランクとチェックマークのスタイル */
+}
+
+.rankDropdown {
+  /* 既存のスタイル... */
+  position: relative;
+  padding-right: 20px; /* 矢印のスペースを確保する */
+  cursor: pointer;
+}
+
+.dropdownIcon {
+  /* 矢印マークのスタイリング */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-block;
+  padding: 3px; /* 矢印のサイズ */
+  border: solid black;
+  border-width: 0 2px 2px 0; /* 線の太さを調整 */
+  transition: transform 0.3s ease; /* アニメーション効果 */
+  transform: translateY(-50%) rotate(45deg); /* 下向き矢印 */
+}
+
+.rankDropdown.active .dropdownIcon {
+  transform: translateY(-50%) rotate(-135deg); /* 上向き矢印 */
+}
+
+.rankCheckboxes {
+  display: none; /* 初期状態では非表示 */
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px 30px; /* 上下のパディング */
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.rankDropdown.active + .rankCheckboxes {
+  display: flex; /* アクティブなときに表示 */
+}
+
+.rankCheckboxes label {
+  display: flex;
+  align-items: center;
+  margin-top: 5px; /* ラベル間の余白 */
+}
+
+/* チェックボックスのテキストサイズを設定 */
+.rankCheckboxes label span {
+  font-size: 17px; /* 例として14ピクセルに設定 */
+}
+
+/* チェックボックスのスタイリング */
+.rankCheckboxes input[type='checkbox'] {
+  margin-right: 30px; /* チェックボックスとテキストの間隔 */
+}
+
+.search {
+  position: relative;
+  top: 5px;
+  left: auto;
+  padding-top: 20px;
+  padding-bottom: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを17pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(0 0 0);
+  text-align: center; /* テキストを中央揃えにする */
+  background-color: #d6fbfc; /* 背景色を灰色に設定する */
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.searchContainer {
+  position: relative;
+  top: 60px;
+  left: 250px;
+  width: 300px;
+  height: 600px;
+}
+
+.container {
+  height: 80px;
+  background: #fafafa;
+  border-bottom: 1px solid #63b5e5;
+}
+
+.profileImage {
+  width: 100px; /* 画像のサイズを設定 */
+  height: 100px; /* 画像のサイズを設定 */
+  border-radius: 50%; /* 画像を円形にする */
+  object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
+  border: 1px solid #000000; /* ボーダーの太さと色を設定 */
+}
+
+
+
+.profileContainer {
+  position: relative;
+  display: inline-block;
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  padding: 20px; /* Optional: adds space inside the container */
+  padding-bottom: 40px;
+  font-size: 19px;
+  background: rgb(255 255 255);
+  border: 1px solid #ccc; /* Optional: adds a border */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
+}
+
+.userImage {
+  position: relative;
+  top: 40px;
+  left: 80px;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: flex-start; /* Aligns items to the start of the container horizontally */
+}
+
+.rate {
+  position: relative;
+  top: 40px;
+  left: 21px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 30px;
+  font-size: 30px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.rating {
+  position: relative;
+  top: 13px;
+  left: 200px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 25px;
+  color: #454444; /* 背景の灰色の星 */
+}
+
+.name {
+  position: relative;
+  top: 50px;
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Horizontally center the child elements */
+  width: 100%;
+  height: 50px;
+}
+
+.achievementsContainer {
+  position: relative;
+  top: 50px;
+  left: 20px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+.achievements {
+  position: relative;
+  top: -20px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.achievementsTitle {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  background: rgb(255 255 255);
+}
+
+.descriptionDetailContainer {
+  position: relative;
+  left: 20px;
+  width: 90%;
+  height: auto;
+  margin-top: 80px;
+  background-color: #fff;
+}
+
+.descriptionTitle {
+  position: relative;
+  top: -20px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.descriptions {
+  position: relative;
+  top: -10px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+}

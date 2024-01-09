@@ -16,10 +16,29 @@ export const createUserRepository = async (
     data: {
       userId, // Assuming 'userId' is a unique identifier for the User
       name: userName, // Set the 'name' field to the provided userName
+      myProfile: '皆さんよろしくお願いします!', // Set the 'myProfile' field to null
+      rating: 3.0, // Set the 'rating' field to 0
+      imageUrl:
+        'https://coach-user-profile.s3.ap-northeast-1.amazonaws.com/profile-images/kkrn_icon_user_1.png', // Set the 'imageUrl' field to null
       // Include other necessary fields as per your User model in Prisma
     },
   });
-  console.log("dawd");
+  console.log('dawd');
+
+  const newStudent = await prismaClient.student.create({
+    data: {
+      userId, // Assuming 'userId' is a unique identifier for the User
+    },
+  });
+  const newTeacher = await prismaClient.teacher.create({
+    data: {
+      userId, // Assuming 'userId' is a unique identifier for the User
+      hitokoto: '一緒に頑張りましょう！',
+      Achievements: '特になし',
+    },
+  });
+
+  console.log('dawd');
 
   return toUserModel(newUser);
 };

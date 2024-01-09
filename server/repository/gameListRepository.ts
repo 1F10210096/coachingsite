@@ -20,7 +20,7 @@ export const gameListRepository = {
           gameId: 'desc',
         },
       },
-      take: 6,
+      take: 5,
     });
 
     // 上位6つのGameListを取得

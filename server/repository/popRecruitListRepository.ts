@@ -3,6 +3,7 @@ import { prismaClient } from '$/service/prismaClient';
 
 export const popRecruitListRepository = {
   fetchinfo: async (): Promise<BosyuuListModel[] | null> => {
+    try {
     const allApplies = await prismaClient.apply.findMany({});
 
     const bosyuuApplyCount: { [bosyuuId: string]: number } = allApplies.reduce((acc, apply) => {
@@ -21,6 +22,10 @@ export const popRecruitListRepository = {
         },
       },
     });
+    console.log(top25BosyuuLists);
     return top25BosyuuLists;
+  } catch (e) {
+    console.log(e);
+  }
   },
 };

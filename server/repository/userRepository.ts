@@ -70,4 +70,63 @@ export const userRepository = {
       return null;
     }
   },
+  fetchReview: async (teacherId: string): Promise<UserSummaryDetailModel | null> => {
+    try {
+      const user = await prismaClient.user.findUnique({
+        where: {
+          userId: teacherId,
+        },
+        select: {
+          name: true,
+          imageUrl: true,
+          myProfile: true,
+          rating: true,
+          teacher: {
+            select: {
+              Achievements: true,
+              hitokoto: true,
+            },
+          },
+        },
+      });
+      assert(user !== null, 'usersはnullです');
+
+      // You need to handle the possibility that the teacher data might be null
+      const userSummary: UserSummaryDetailModel = {
+        name: user.name,
+        imageUrl: user.imageUrl !== null ? user.imageUrl : '',
+        myProfile: user.myProfile !== null ? user.myProfile : '',
+        rating: user.rating !== null ? user.rating : 0,
+        // Add teacher fields to the response
+        Achievements: user.teacher?.Achievements ?? '',
+        hitokoto: user.teacher?.hitokoto ?? '',
+      };
+
+      return userSummary;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return null;
+    }
+  },
+  fetchMyProfile: async (userId: string): Promise<UserSummaryDetailModel | null> => {
+    try {
+      const user = await prismaClient.user.findUnique({
+        where: {
+          userId,
+        },
+        select: {
+          name: true,
+          imageUrl: false,
+          myProfile: false,
+          rating: false,
+        },
+      });
+      assert(user !== null, 'usersはnullです');
+
+      return user;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return null;
+    }
+  },
 };

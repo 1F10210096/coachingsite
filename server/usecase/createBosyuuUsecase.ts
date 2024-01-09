@@ -7,6 +7,7 @@ export const createBosyuuUsecase = {
     selectedGameIndex: number,
     selectedMyRankIndex: number,
     selectedRanksIndex: number[],
+    lessonType: string,
     selectedTags: string[],
     achevement: string,
     description: string,
@@ -15,12 +16,14 @@ export const createBosyuuUsecase = {
   ) => {
     console.log('usecaseにきてるよ');
     console.log('useAAAAAAAAAr', achevement);
+    console.log(lessonType)
     const bosyuu = await createBosyuuRepository(
       user,
       title,
       selectedGameIndex,
       selectedMyRankIndex,
       selectedRanksIndex,
+      lessonType,
       selectedTags,
       achevement,
       description,

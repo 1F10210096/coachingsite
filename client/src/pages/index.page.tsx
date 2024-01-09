@@ -9,8 +9,8 @@ import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
+import Link from 'next/link';
 const Home = () => {
-  const [label, setLabel] = useState('');
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
   const fetchGames = async () => {
@@ -52,12 +52,9 @@ const Home = () => {
         setUserUUID(firebaseUser.uid);
         setUser(firebaseUser);
       } else {
-        // ユーザーがログアウトしている場合
         setUser(null);
       }
     });
-
-    // コンポーネントがアンマウントされる際に購読を解除
     return () => unsubscribe();
   }, []);
 
@@ -81,12 +78,23 @@ const Home = () => {
     fetchRecruit();
   }, []);
 
+  const fetchUserRecruit = async () => {
+    try {
+      // const response = await apiClient.fetchUserRecritList.post();
+      // setUserRecruitlist(response.body);
+      // console.log(response.body);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
   return (
     <>
       <BasicHeader user={user} />
       <div className={styles.allContainer}>
         <div className={styles.container}>
           <div className={styles.coachTitle}>人気のゲーム</div>
+          <div className={styles.blueTitle}>全て見る {'>'}</div>
           <div className={styles.gameList}>
             {gameList.map((game, index) => (
               <div key={game.id} className={styles.gameItem}>
@@ -106,27 +114,40 @@ const Home = () => {
           <div className={styles.coachTitle2}>人気のコーチ</div>
           <div className={styles.userList}>
             {userList.map((user) => (
-              <div key={user.name} className={styles.userSummary}>
-                <img src={user.imageUrl} alt={user.name} className={styles.userImage} />
-                <span className={styles.rate}>
-                  ★★★★★
-                  <span
-                    className={styles.rateInner}
-                    style={{ width: `${calculateRateWidth(user.rating)}px` }}
-                  >
+              <Link
+                key={user.name}
+                href={{
+                  pathname: '/userRecruit',
+                  query: {
+                    name: user.name,
+                    rating: user.rating,
+                    profile: user.myProfile,
+                  },
+                }}
+              >
+                <div key={user.name} className={styles.userSummary}>
+                  <img src={user.imageUrl} alt={user.name} className={styles.userImage} />
+                  <span className={styles.rate}>
                     ★★★★★
+                    <span
+                      className={styles.rateInner}
+                      style={{ width: `${calculateRateWidth(user.rating)}px` }}
+                    >
+                      ★★★★★
+                    </span>
                   </span>
-                </span>
 
-                <div className={styles.userName}>{user.name}</div>
-                <div className={styles.myProfile}>{user.myProfile}</div>
-              </div>
+                  <div className={styles.userName}>{user.name}</div>
+                  <div className={styles.myProfile}>{user.myProfile}</div>
+                </div>
+              </Link>
             ))}
           </div>
           <div className={styles.divide2}> </div>
         </div>
         <div className={styles.recruitContainer}>
           <div className={styles.recruitListTitle}>人気の募集</div>
+          <div className={styles.blueTitle2}>全て見る {'>'}</div>
           <div className={styles.recruitList}>
             {recruitList.map((recruitList, index) => (
               <div key={recruitList.id} className={styles.recruitSummary}>
@@ -140,13 +161,11 @@ const Home = () => {
                 </div>
                 <h3 className={styles.recruitDetailTitle}>{recruitList.title}</h3>
                 <h3 className={styles.recruitDetailLessonType}>
-                  {recruitList.lessonType.map((type, index) => (
-                    <button key={index} className={styles.lessonType}>
-                      {type}
-                    </button>
-                  ))}
+                  <button key={index} className={styles.lessonType}>
+                    {recruitList.lessonType}
+                  </button>
                 </h3>
-                <p className={styles.recruitDetail}>{recruitList.descriptionDetail}</p>
+                <p className={styles.recruitDetail}>{recruitList.description}</p>
               </div>
             ))}
           </div>

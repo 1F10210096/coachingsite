@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { taskIdParser } from '../service/idParsers';
-import exp from 'constants';
 
 export type UserModel = {
   userId: string;
@@ -109,7 +108,18 @@ export type BosyuuListFrontModel = {
   myProfile: string;
   descriptionDetail: string;
   suchedule: string;
-  lessonType: string[];
+  lessonType: string;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type msgModel = {
+  id: string;
+  content: string;
+  createdAt: Date;
+  roomId: string;
+  updatedAt: Date;
+  userId: string;
+  userIdentity: number;
+  userImageUrl: string;
 };

@@ -1,8 +1,11 @@
 .container {
+  position: fixed; /* ヘッダーを固定位置に設定 */
+  top: 0; /* ページの上端に配置 */
+  z-index: 1000; /* 他の要素より上に表示されるようにする */
+  width: 100%; /* 幅を画面全体に拡張 */
   height: 110px;
   background: #fafafa;
-  border-bottom: 1px solid #63b5e5;
-
+  border-bottom: 1px solid #68b5fe;
 }
 
 .contheme {
@@ -12,10 +15,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 1200px;
+  width: 930px;
   height: 40px;
   background: #fafafa;
-  border-bottom: 1px solid #63b5e5;
+  border-bottom: 1px solid #68b5fe;
   transform: translateX(-50%); /* 要素を左に半分移動して完全に中央揃えにする */
 }
 
@@ -43,13 +46,13 @@
 .contheme2 {
   position: absolute;
   top: 10px;
-  left: 1140px;
-  display: flex; /* Flexboxを適用 */
-  align-items: center; /* ボタンを垂直方向に中央揃え */
-  justify-content: flex-start; /* ボタンを左端に揃える */
+  left: 1090px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   width: 500px;
   height: 50px;
-  margin: 0 auto; /* 左右のマージンを自動で計算して中央寄せにする */
+  margin: 0 auto;
   background: #fafafa;
 }
 
@@ -176,8 +179,61 @@
   border-radius: 50%;
 }
 
+.userContainer {
+  display: flex;
+  flex-wrap: nowrap; /* 子要素が折り返さないように設定 */
+  align-items: center;
+  justify-content: flex-start;
+  width: 200px; /* 必要に応じて幅を調整 */
+  background-color: #63b5e5;
+}
+
 .userName {
   font-size: 14px;
   font-weight: bold;
   color: #555;
+}
+
+.userName2 {
+  /* 隣接する要素との間隔を設定 */
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #555;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* ビューポートの高さに合わせる */
+}
+
+.loading::after {
+  width: 50px;
+  height: 50px;
+  content: '';
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.selectedButton {
+  box-sizing: border-box;
+  display: flex; /* Flexbox を使用 */
+  align-items: center; /* テキストを垂直中央に揃える */
+  justify-content: center; /* テキストを水平中央に揃える */
+  height: 40px;
+  padding: 15px 29px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 30px; /* テキストの行の高さを設定 */
+  color: rgb(0, 132, 255);
+  cursor: pointer;
+  background: #fafafa;
+  border: none;
+  border-bottom: 3px solid rgb(0, 132, 255);
+  transition: background-color 0.3s ease;
 }

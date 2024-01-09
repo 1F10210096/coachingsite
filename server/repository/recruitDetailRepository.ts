@@ -2,7 +2,7 @@
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 /* eslint-disable max-lines */
-import type { BosyuuListFrontModel, UserSummaryDetailModel } from 'commonTypesWithClient/models';
+import type { BosyuuListFrontModel, UserSummaryDetailModel,reviewModel } from 'commonTypesWithClient/models';
 
 export const recruitDetailRepository = {
   fetchinfo: async (Id: string) => {
@@ -29,6 +29,9 @@ export const recruitDetailRepository = {
           game: true,
           teacher: {
             select: {
+              userId: false,
+              Achievements: true,
+              hitokoto: true,
               user: {
                 select: {
                   name: true,
@@ -61,6 +64,7 @@ export const recruitDetailRepository = {
           },
         },
       });
+      console.log('bosyuuDetail', bosyuuDetail);
 
       assert(bosyuuDetail, 'Bosyuu not found');
       const bosyuuListFront: BosyuuListFrontModel = {
@@ -80,20 +84,28 @@ export const recruitDetailRepository = {
         updatedAt: bosyuuDetail.updatedAt,
       };
 
-      assert(bosyuuDetail.teacher.user.imageUrl, 'Teacher not found');
-      assert(bosyuuDetail.teacher.user.myProfile, 'Teacher not found');
-      assert(bosyuuDetail.teacher.user.name, 'Teacher not found');
-      assert(bosyuuDetail.teacher.user.rating, 'Teacher not found');
       const teacherProfile: UserSummaryDetailModel = {
         name: bosyuuDetail.teacher.user.name,
         imageUrl: bosyuuDetail.teacher.user.imageUrl,
         myProfile: bosyuuDetail.teacher.user.myProfile,
         rating: bosyuuDetail.teacher.user.rating,
-        Achievements: bosyuuDetail.teacher.achievements,
+        Achievements: bosyuuDetail.teacher.Achievements,
         hitokoto: bosyuuDetail.teacher.hitokoto,
       };
-      console.log('bosyuuDetail', bosyuuListFront);
-      return bosyuuDetail;
+
+      const reviewList: reviewModel[] = bosyuuDetail.apply.map((apply) => ({
+        name: apply.student.user.name,
+        imageUrl: apply.student.user.imageUrl,
+        rating: apply.rating,
+        review: apply.review,
+      }));
+
+      console.log('reviewList', reviewList);
+      return {
+        bosyuuDetail,
+        teacherProfile,
+        reviewList
+      };
     } catch (error) {
       console.error('Error fetching teacher details:', error);
       return null;

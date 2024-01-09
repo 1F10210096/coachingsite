@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import type { BosyuuListModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
@@ -18,7 +19,6 @@ const Valorant = () => {
   const [showMyRankCheckboxes, setShowMyRankCheckboxes] = useState(false);
   const [showTagCheckboxes, setShowTagCheckboxes] = useState(false);
   const [showLessonTypeCheckboxes, setShowLessonTypeCheckboxes] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [RecruitList, setRecruitlist] = useState<BosyuuListModel[]>([]);
 
   const [valoRanks, setValoRanks] = useState({
@@ -42,7 +42,7 @@ const Valorant = () => {
     マスター: false,
     プレデター: false,
   });
-  const [myranks, setMyRanks] = useState({
+  const [myValoRanks, setMyValoRanks] = useState({
     アイアン: false,
     ブロンズ: false,
     シルバー: false,
@@ -54,18 +54,35 @@ const Valorant = () => {
     レディアント: false,
   });
 
+  const [myApexRanks, setMyApexRanks] = useState({
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+    プレデター: false,
+  });
+
   const [Tags, setTags] = useState({
     初心者歓迎: false,
     高ランク歓迎: false,
-    ストイック: false,
+    スパルタ指導: false,
     仲良くワイワイ: false,
-    うまくなりたい人必見: false,
+    上級者歓迎: false,
+    エイム強化: false,
+    メンタル強化: false,
+    プロ志向: false,
   });
 
   const [LessonTypes, setLessonTypes] = useState({
     一緒にプレイ: false,
     ビデオで学ぼう: false,
-    解説: false,
+    '1 on 1': false,
+    プレイを振り返ろう: false,
+    プレイを見てもらおう: false,
+    プレイを一緒に見よう: false,
+    ゲームを一緒に学ぼう: false,
   });
 
   const handleCheckboxChange = (rank) => {
@@ -82,11 +99,18 @@ const Valorant = () => {
     }
   };
 
-  const handleMyRankCheckboxChange = (myrank) => {
-    setMyRanks((prevMyRanks) => ({
-      ...prevMyRanks,
-      [myrank]: !prevMyRanks[myrank],
-    }));
+  const handleMyRankCheckboxChange = (rank) => {
+    if (Id === 1) {
+      setMyValoRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 2) {
+      setMyApexRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    }
   };
 
   const handleTagCheckboxChange = (Tag) => {
@@ -141,14 +165,103 @@ const Valorant = () => {
     }
   };
 
+  const getSelectedMyRanksIndices = (Id) => {
+    if (Id === 1) {
+      const selectedRanksIndices = Object.keys(valoRanks)
+        .map((key, index) => ({ rank: key, index }))
+        .filter((item) => myValoRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 2) {
+      console.log('wdas');
+      const selectedRanksIndices = Object.keys(apexRanks)
+        .map((key, index) => ({ rank: key, index }))
+        .filter((item) => myApexRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    }
+  };
+
+  const handleClearButtonClick = () => {
+    // クリアボタンが押されたときにIdが1の場合、Valoのランクをすべてfalseにする
+    if (Id === 1) {
+      setValoRanks({
+        アイアン: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        アセンダント: false,
+        イモータル: false,
+        レディアント: false,
+      });
+
+      setMyValoRanks({
+        アイアン: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        アセンダント: false,
+        イモータル: false,
+        レディアント: false,
+      });
+    }
+    if (Id === 2) {
+      // 他のランクや条件もすべてfalseにする
+      setApexRanks({
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+        プレデター: false,
+      });
+
+      setMyApexRanks({
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+        プレデター: false,
+      });
+    }
+
+    setTags({
+      初心者歓迎: false,
+      高ランク歓迎: false,
+      スパルタ指導: false,
+      仲良くワイワイ: false,
+      上級者歓迎: false,
+      エイム強化: false,
+      メンタル強化: false,
+      プロ志向: false,
+    });
+
+    setLessonTypes({
+      一緒にプレイ: false,
+      ビデオで学ぼう: false,
+      '1 on 1': false,
+      プレイを振り返ろう: false,
+      プレイを見てもらおう: false,
+      プレイを一緒に見よう: false,
+      ゲームを一緒に学ぼう: false,
+    });
+  };
+
+  // JSX内でクリアボタンを設置
   const fetchRecruitList = async () => {
     try {
       const rank = getSelectedRanksIndices(Id);
 
-      const selectedMyRanksIndices = Object.keys(myranks)
-        .map((key, index) => ({ rank: key, index }))
-        .filter((item) => myranks[item.rank])
-        .map((item) => item.index);
+      const selectedMyRanksIndices = getSelectedMyRanksIndices(Id);
       const selectedTags = Object.keys(Tags).filter((key) => Tags[key]);
       const selectedLessonTypes = Object.keys(LessonTypes).filter((key) => LessonTypes[key]);
 
@@ -192,12 +305,60 @@ const Valorant = () => {
     return `/${directory}/${rankImage}`;
   };
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = new Date(dateString);
+    return date
+      .toLocaleDateString('ja-JP', options)
+      .replace(/\//g, '-')
+      .replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3');
+  }
+
   const ranksToDisplay = Id === 1 ? valoRanks : Id === 2 ? apexRanks : {};
+  const myRanksToDisplay = Id === 1 ? myValoRanks : Id === 2 ? myApexRanks : {};
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = RecruitList.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const [sortDescending, setSortDescending] = useState(true);
+
+  const handleSortClick = (list: BosyuuListModel[]): BosyuuListModel[] => {
+    if (!Array.isArray(list)) {
+      // もし list が配列でない場合、適切な処理を行ってください
+      return list;
+    }
+
+    const sortedList = [...list].sort((a, b) =>
+      sortDescending ? b.rank - a.rank : a.rank - b.rank
+    );
+    setRecruitlist(sortedList);
+    return sortedList;
+  };
+
   return (
     <>
       <BasicHeader user={user} />
       <div className={styles.searchContainer}>
+        <Link href="/">
+          <div className={styles.searchNameContainer}>ホーム</div>
+        </Link>
+        {Id === 1 ? <div className={styles.searchNameContainer}>VALORANT</div> : null}
+        {Id === 2 ? <div className={styles.searchNameContainer}>APEX</div> : null}
+        {Id === 3 ? <div className={styles.searchNameContainer}>LOL</div> : null}
         <div className={styles.searchNameContainer}>検索条件</div>
+        <div onClick={handleClearButtonClick} className={styles.blueTitle}>
+          クリア
+        </div>
         <div className={styles.searchNameContainer2}>
           <div
             className={`${styles.rankDropdown} ${showRankCheckboxes ? styles.active : ''}`}
@@ -231,11 +392,11 @@ const Valorant = () => {
           </div>
           {showMyRankCheckboxes && (
             <div className={styles.rankCheckboxes}>
-              {Object.keys(myranks).map((myrank) => (
+              {Object.keys(myRanksToDisplay).map((myrank) => (
                 <label key={myrank}>
                   <input
                     type="checkbox"
-                    checked={myranks[myrank]}
+                    checked={myRanksToDisplay[myrank]}
                     onChange={() => handleMyRankCheckboxChange(myrank)}
                   />
                   <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
@@ -297,63 +458,91 @@ const Valorant = () => {
           検索
         </div>
       </div>
+      <div className={styles2.gameTitle}>
+        {Id === 1 ? <div>VALORANT</div> : null}
+        {Id === 2 ? <div>APEX</div> : null}
+        {Id === 3 ? <div>LOL</div> : null}
+      </div>
+      <div className={styles2.gameSort} onClick={() => handleSortClick(RecruitList)}>
+        ランク順に並び替え
+      </div>
+      <div className={styles2.titleLine} />
 
       <div className={styles2.helpwanted}>
-        {RecruitList.map((item) => (
+        {currentItems.map((item) => (
           <div
             key={item.id}
             className={styles2.container}
             onClick={() => handleClick(item.id, item.gameId)}
           >
-            <p className={styles2.title}>{item.title}</p>
-            <div className={styles2.rank}>
+            <div className={styles2.flexContainer}>
               <img
-                src={getRankImage(Id, item.rank)}
-                className={styles2.rankImage}
-                alt={`Rank: ${item.rank}`}
+                src={item.teacher.user.imageUrl}
+                alt="User"
+                className={styles2.userImageDetail}
               />
-            </div>
-            <div className={styles2.subjectRank}>
-              <p>対象のランク:</p>
-              <div className={styles2.subjectRankContainer}>
-                {item.subjectRank.map((rank, index) => (
-                  <img
-                    key={index}
-                    src={getRankImage(Id, rank)}
-                    className={styles2.subjectRankImage}
-                    alt={`Rank: ${rank}`}
-                  />
-                ))}
+              <p className={styles2.title}>{item.title}</p>
+              <div className={styles2.rank}>
+                <img
+                  src={getRankImage(Id, item.rank)}
+                  className={styles2.rankImage}
+                  alt={`Rank: ${item.rank}`}
+                />
               </div>
             </div>
-            <div className={styles2.tag}>
-              <div className={styles2.tagContainer}>
-                {item.tag.map((tag, index) => (
-                  <p key={index} className={styles2.tagText}>
-                    {tag}
-                  </p>
-                ))}
-              </div>
-            </div>
+            <div className={styles2.line} />
 
-            <div className={styles2.lessonType}>
-              <div className={styles2.lessonTypeContainer}>
-                {item.lessonType?.map((LessonType, index) => (
-                  <p key={index} className={styles2.lessonTypeText}>
-                    {LessonType}
-                  </p>
-                ))}
+            <div className={styles2.wrapper}>
+              <div className={styles2.tag}>
+                <div className={styles2.tagContainer}>
+                  {item.tag.map((tag, index) => (
+                    <p key={index} className={styles2.tagText}>
+                      {tag}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <div className={styles2.lessonType}>
+                <div className={styles2.lessonTypeContainer}>{item.lessonType}</div>
+              </div>
+              <div className={styles2.subjectRank}>
+                <p className={styles2.subjectRankTitle}>対象のランク:</p>
+                <div className={styles2.subjectRankContainer}>
+                  {item.subjectRank.map((rank, index) => (
+                    <img
+                      key={index}
+                      src={getRankImage(Id, rank)}
+                      className={styles2.subjectRankImage}
+                      alt={`Rank: ${rank}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className={styles2.descriptionContainer}>
+                <p className={styles2.descriptionTitle}>募集詳細:</p>
+                <p className={styles2.description}>{item.description}</p>
+              </div>
+              <div className={styles2.descriptionContainer}>
+                <p className={styles2.descriptionTitle}>実績:</p>
+                <p className={styles2.description}>{item.myProfile}</p>
               </div>
             </div>
-
-            <p className={styles2.description}>ひと言：{item.description}</p>
-            {/* <p>主題ランク: {item.subjectRank.join(', ')}</p>
-            <p>タグ: {item.tag.length > 0 ? item.tag.join(', ') : 'なし'}</p>
-            <p>教師ID: {item.teacherId}</p>
-            <p>作成日: {new Date(item.createdAt).toLocaleString()}</p>
-            <p>更新日: {new Date(item.updatedAt).toLocaleString()}</p> */}
+            <div className={styles2.line2} />
+            <div className={styles2.horizontalLayout}>
+              <button className={styles2.applyButton}>
+                <span className={styles2.starIcon}>★</span> いいねする
+              </button>
+              <div>
+                <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>
+                <p className={styles2.date}>情報更新日： {formatDate(item.updatedAt)}</p>
+              </div>
+            </div>
           </div>
         ))}
+        <div className={styles2.selectPage}>
+          {currentPage > 1 && <button onClick={handlePreviousPage}>前へ</button>}
+          {RecruitList.length > indexOfLastItem && <button onClick={handleNextPage}>次へ</button>}
+        </div>
       </div>
     </>
   );

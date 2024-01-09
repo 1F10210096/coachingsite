@@ -1,0 +1,222 @@
+.titleContainer {
+  position: relative;
+  top: 80px;
+  left: 50%; /* Set left to 50% of the parent container */
+  width: 800px;
+  height: 250px;
+  margin-bottom: 90px;
+  background-color: rgb(255 255 255);
+  border-top: 3px solid #00bfff; /* Light blue top border */
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 35%);
+  transform: translateX(-50%); /* Shift back by 50% of its own width */
+}
+
+.userImageDetail {
+  position: relative;
+  right: 40px;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.line {
+  position: relative;
+  width: 800px;
+  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.titleContainer2 {
+  position: relative;
+  display: flex; /* フレックスボックスを有効にする */
+  align-items: center; /* 子要素を縦軸の中央に配置 */
+  width: 800px;
+  height: 150px;
+  background-color: rgb(255 255 255);
+}
+
+.nameContainer {
+  position: relative;
+  right: 70px;
+  width: 460px;
+  height: 100px;
+  background-color: rgb(255 255 255);
+}
+
+.name {
+  position: relative;
+  width: 300px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #585858;
+}
+
+.title {
+  position: relative;
+  top: 5px;
+  width: 440px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  background: #fff;
+}
+
+.tagContainer {
+  position: relative;
+  top: 20px;
+  left: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
+  width: 60%;
+  font-size: 17px;
+  font-weight: 700;
+  color: rgb(95 94 94); /* 文字色を灰色に設定 */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  background: rgb(255 255 255);
+}
+
+.tag {
+  position: relative;
+  left: 60px;
+  display: flex; /* Flexboxを使う */
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
+  justify-content: center; /* 水平方向の中央に配置 */
+  font-size: 19px;
+  background: rgb(255 255 255);
+}
+
+.tagImage {
+  width: 50px;
+  height: auto; /* 親コンテナの幅に合わせる */
+  margin-right: 10px; /* 右の間隔を設定 */
+}
+
+.headerContainer {
+  position: relative;
+  top: 50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(255 255 255);
+  border-bottom: 2px solid #00aeef;
+}
+
+.titleSection {
+  position: relative;
+  left: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleBox {
+  position: relative;
+  width: 90px; /* Adjust the width as needed */
+  padding: 10px;
+  margin-right: 10px; /* Adjust the space between the title box and the subtitle */
+  background-color: #469efc; /* The blue background color for the title box */
+}
+
+.titleText {
+  position: relative;
+  left: 5px;
+  font-size: 14px; /* Adjust as needed */
+  font-weight: bold;
+  color: #fff; /* White text color */
+}
+
+.line2 {
+  position: absolute;
+  top: 50%; /* Center the line vertically */
+  left: 0;
+  width: 100%; /* Line width to extend to the edge of the container */
+  height: 5px; /* Thickness of the line */
+  background-color: #00aeef; /* The color of the line */
+  transform: translateY(-50%); /* Ensure the line is exactly centered */
+}
+
+/* This will ensure the line starts after the titleSection */
+.titleSection + .line {
+  margin-left: calc(100% - 800px); /* Adjust this value based on your design */
+}
+
+.titleContainer1 {
+  position: relative;
+  top: 150px;
+  left: 50%;
+  display: flex; /* Add flex display */
+  align-items: center; /* Vertically center children */
+  justify-content: flex-start; /* Align children to the start horizontally */
+  width: 800px; /* This should match the left value of .title1 */
+  margin-bottom: 90px;
+  transform: translateX(-50%);
+}
+
+.title1 {
+  /* Remove position, top, and left properties if .title1 is a child */
+
+  /* position: relative; */
+
+  /* top: 50px; */
+
+  /* left: 10%; */
+  width: 140px;
+  height: 30px;
+
+  /* Add margin-top if you want to lower .title1 within the container */
+  margin-top: auto; /* Adjust this as needed */
+  font-size: 21px;
+  font-weight: 700;
+  color: #585858;
+}
+
+.date {
+  position: relative;
+  top: 20px;
+  right: 10px;
+  width: 180px;
+  height: auto;
+  font-size: 13px;
+  color: rgb(0 0 0);
+  background-color: rgb(255 255 255);
+}
+
+.horizontalContainer {
+  display: flex;
+  align-items: center; /* This will vertically center the items if they have different heights */
+  justify-content: space-between; /* This will add space between the two child elements */
+}
+
+.applyButton {
+  position: relative;
+  top: 20px;
+  left: 330px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #007bff; /* Blue text */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #fff; /* White background */
+  border: 1px solid #7b81ff; /* Blue border */
+  border-radius: 5px; /* Rounded borders */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+  transition: box-shadow 0.6s; /* Smooth transition for shadow */
+}
+
+.applyButton .starIcon {
+  margin-right: 5px; /* Space between star and text */
+  color: #ffd700; /* Gold color for the star */
+}
+
+.applyButton:hover {
+  box-shadow: 0 0 10px rgb(0 123 255 / 50%); /* Blue shadow on hover */
+}
+
+.horizontalLayout {
+  display: flex; /* Establishes a flex container */
+  gap: 20px; /* Adjusts the gap between items */
+  align-items: center; /* Centers items vertically */
+}
+

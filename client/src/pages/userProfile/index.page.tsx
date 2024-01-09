@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
@@ -7,7 +8,6 @@ import { logout } from 'src/utils/login';
 import styles from './index.module.css';
 // eslint-disable-next-line complexity
 const UserProfile = () => {
-
   const router = useRouter();
   const [modalContent, setModalContent] = useState('');
 
@@ -17,26 +17,27 @@ const UserProfile = () => {
       setModalContent(router.query.modal);
     }
   }, [router.query]);
-  
+
   const [newName, setNewName] = useState('');
   const [newProfile, setNewProfile] = useState('');
   const showModal = (content: SetStateAction<string>) => {
     setModalContent(content);
   };
-
+  const [Id, setUserUUID] = useState('');
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // ユーザーがログインしている場合の処理
-        console.log('Logged in as:', user.email);
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        // ユーザーがログインしている場合、ユーザー情報をセット
+        console.log(firebaseUser);
+        console.log(firebaseUser.uid);
+        setUserUUID(firebaseUser.uid);
       } else {
-        // ユーザーがログインしていない場合の処理
-        console.log('No user logged in');
+        setUserUUID(null);
       }
     });
 
-    // コンポーネントのアンマウント時にリスナーを解除
+    // コンポーネントがアンマウントされる際に購読を解除
     return () => unsubscribe();
   }, []);
 
@@ -93,15 +94,71 @@ const UserProfile = () => {
     try {
       console.log(imageUrl);
       await apiClient.updateProfile.post({
-        body: { userId,selectedFile }, // 修正: formDataを直接bodyに設定
+        body: { userId, selectedFile }, // 修正: formDataを直接bodyに設定
       });
     } catch (error) {
       console.error('プロフィール更新エラー:', error);
     }
   };
 
+  const [recruitList, setMyRecruitlist] = useState<BosyuuListModel[]>([]);
+  const [user2, setUser2] = useState([]);
+  const fetchMyRecruitList = async () => {
+    try {
+      console.log(Id);
+      const response = await apiClient.fetchMyRecruitList.post({ body: { Id } });
+      console.log(response.body);
+      setMyRecruitlist(response.body.user);
+      setUser2(response.body.user2);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMyRecruitList();
+  }, [Id]);
+
+  const [myRoomList, setMyRoomlist] = useState<RoomListModel[]>([]);
+  const fetchMyRoomList = async (roomId: string) => {
+    try {
+      console.log(roomId);
+      const response = await apiClient.fetchMyRoomList.post({ body: { roomId } });
+      console.log(response.body);
+      setMyRoomlist(response.body);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
+
+  const fetchMyDmList = async (roomId: string) => {
+    try {
+      router.push(`../dm?id=${roomId}`);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
+  const [selectedId, setSelectedId] = useState(null);
+  const [rating, setRating] = useState('');
+  const [review, setReview] = useState('');
+
+  const handleButtonClick = (id) => {
+    setSelectedId(id);
+  };
+
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    // ここで評価と感想を処理
+    console.log('Submitted:', { selectedId, rating, review });
+    const response = await apiClient.reviewList.post({ body: { selectedId,rating,review } });
+    // 必要に応じてサーバーへ送信
+  };
+
   return (
     <>
+    
       <div className={styles.container} />
       <div className={styles.searchContainer}>
         <div className={styles.searchNameContainer}>設定画面</div>
@@ -179,8 +236,77 @@ const UserProfile = () => {
                   </form>
                 </>
               )}
-              {modalContent === 'applicationHistory' && <div>コーチング応募履歴</div>}
-              {modalContent === 'recruitmentHistory' && <div>コーチング募集履歴</div>}
+              {modalContent === 'applicationHistory' && (
+                <>
+                  <div>コーチング応募履歴</div>
+                  <ul>
+                    {user2.map((application, index) => (
+                      <div key={index}>
+                        <div>
+                          応募ID: {application.id}
+                          <button onClick={() => handleButtonClick(application.id)}>
+                            評価する
+                          </button>
+                        </div>
+                        {selectedId === application.id && (
+                          <form onSubmit={handleSubmit2}>
+                            <div>
+                              <label>
+                                評価：
+                                <input
+                                  type="number"
+                                  value={rating}
+                                  onChange={(e) => setRating(e.target.value)}
+                                />
+                              </label>
+                            </div>
+                            <div>
+                              <label>
+                                感想：
+                                <textarea
+                                  value={review}
+                                  onChange={(e) => setReview(e.target.value)}
+                                />
+                              </label>
+                            </div>
+                            <button type="submit">送信</button>
+                          </form>
+                        )}
+                      </div>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {modalContent === 'recruitmentHistory' && (
+                <div>
+                  <button onClick={fetchMyRecruitList}>コーチング応募履歴</button>
+                  {recruitList.length > 0 ? (
+                    <ul>
+                      {recruitList.map((recruit, index) => (
+                        <li key={index} onClick={() => fetchMyRoomList(recruit.id)}>
+                          <h3>{recruit.title}</h3>
+                          <p>{recruit.description}</p>
+                          {/* 他の必要な情報をここに追加 */}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>募集履歴はありません。</p>
+                  )}
+                  {myRoomList.length > 0 && (
+                    <div>
+                      <h2>マイルームリスト</h2>
+                      <ul>
+                        {myRoomList.map((room, index) => (
+                          <li key={index} onClick={() => fetchMyDmList(room.id)}>
+                            <h3>{room.id}</h3>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
               {modalContent === 'logout' && <div>ログアウト処理</div>}
             </div>
           </div>

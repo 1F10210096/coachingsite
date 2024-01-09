@@ -15,4 +15,17 @@ export const recruitListUsecase = {
     assert(recuritList !== null, 'gameListはnullです');
     return recuritList;
   },
+  fetchUserinfo: async (
+    name: string,
+    rating: string,
+    profile: string,
+): Promise<BosyuuListModel[]> => {
+    console.log('recruitListUsecase.fetchUserinfo');
+    console.log(name, 'wdsadw');
+    console.log(rating, 'wdsadw');
+    console.log(profile, 'wdsadw');
+    const recuritList = await recruitListRepository.fetchUserinfo(name, rating, profile);
+    assert(recuritList !== null, 'gameListはnullです');
+    return recuritList;
+  },
 };

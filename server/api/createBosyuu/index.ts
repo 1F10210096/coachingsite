@@ -8,6 +8,7 @@ export type Methods = {
       selectedGameIndex: number;
       selectedMyRankIndex: number;
       selectedRanksIndex: number[]; // 配列としてランクを保持
+      lessonType: string;
       selectedTags: string[]; // 配列としてタグを保持
       acheavement: string;
       description: string;

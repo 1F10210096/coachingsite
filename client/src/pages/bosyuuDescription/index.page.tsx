@@ -33,7 +33,9 @@ const YourComponent = () => {
       'グランドマスター',
       'チャレンジャー',
     ],
-    PUBG: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    CSGO: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    "COD 2": ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
   };
 
   const stepTitles = ['ゲーム選択', 'ランク選択', '詳細情報', '注意事項'];
@@ -130,6 +132,12 @@ const YourComponent = () => {
     setDescription(event.target.value); // 入力された値を state にセット
   };
 
+  const [lessonType, setLessonType] = useState(''); // React の state hook
+
+  const handleChangeLessonType = (event) => {
+    setLessonType(event.target.value); // 入力された値を state にセット
+  };
+
   const [acheavement, setAcheavement] = useState(''); // React の state hook
 
   const handleAcheavement = (event) => {
@@ -146,7 +154,7 @@ const YourComponent = () => {
     setSuchedule(event.target.value); // 入力された値を state にセット
   };
 
-  const tags = ['タグ1', 'タグ2', 'タグ3', 'タグ4']; // 例としてのタグリスト
+  const tags = ['初心者歓迎', '上級者歓迎', 'スパルタ指導', '仲良くワイワイ']; // 例としてのタグリスト
 
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -179,12 +187,14 @@ const YourComponent = () => {
       console.log(selectedMyRanks);
       const unknownRanks = selectedMyRanks as unknown;
       const unknownGame = unknownRanks as number;
+      console.log(lessonType);
       const response = await apiClient.createBosyuu.post({
         body: {
           user,
           title,
           selectedGameIndex,
           selectedMyRankIndex,
+          lessonType,
           selectedRanksIndex,
           selectedTags,
           acheavement,
@@ -315,6 +325,13 @@ const YourComponent = () => {
             type="text"
             placeholder="募集内容を入力してください"
             onChange={handleChangeDescription} // ユーザーの入力を処理する関数
+            className={styles.inputDescription} // スタイリングのためのCSSクラス
+          />
+          <div className={styles.description}>レッスン形式を入力してください</div>
+          <input
+            type="text"
+            placeholder="レッスン形式を入力してください"
+            onChange={handleChangeLessonType} // ユーザーの入力を処理する関数
             className={styles.inputDescription} // スタイリングのためのCSSクラス
           />
           <div className={styles.acheavement}>実績を入力してください</div>

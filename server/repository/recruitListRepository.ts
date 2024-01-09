@@ -2,7 +2,6 @@ import type { BosyuuListModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import type { BosyuuList, Teacher, User } from '@prisma/client';
 
-// PrismaのBosyuuListモデルをBosyuuListModelに変換するヘルパー関数
 const toBosyuuListModel = (
   prismaBosyuuList: BosyuuList,
   prismaTeacher: Teacher,
@@ -16,27 +15,22 @@ const toBosyuuListModel = (
   tag: prismaBosyuuList.tag,
   description: prismaBosyuuList.description,
   suchedule: prismaBosyuuList.suchedule,
+  myProfile: prismaBosyuuList.myProfile,
   notes: prismaBosyuuList.notes,
   lessonType: prismaBosyuuList.lessonType,
-  teacherId: prismaBosyuuList.teacherId,
   createdAt: prismaBosyuuList.createdAt,
   updatedAt: prismaBosyuuList.updatedAt,
   teacher: {
-    // ここにTeacher型に合ったプロパティをマッピングする
-    userId: prismaTeacher.userId,
     hitokoto: prismaTeacher.hitokoto,
     user: {
-      userId: prismaUser.userId,
-      name: prismaUser.name,
-      imageUrl: null,
-      createdAt: new Date(),
-      game: undefined,
-      studentId: undefined,
-      teacherId: undefined,
+      imageUrl: prismaUser.imageUrl,
+      // 他の必要なUserのフィールド
     },
-    bosyuuLists: [],
+    // 他の必要なTeacherのフィールド
   },
+  // 他の必要なBosyuuListのフィールド
 });
+
 export const recruitListRepository = {
   // eslint-disable-next-line complexity
   fetchinfo: async (params: {
@@ -79,8 +73,78 @@ export const recruitListRepository = {
     }
 
     try {
-      const bosyuuLists = await prismaClient.bosyuuList.findMany({ where: query });
-      return bosyuuLists.map(toBosyuuListModel);
+      const bosyuuLists = await prismaClient.bosyuuList.findMany({
+        where: query,
+        include: {
+          teacher: {
+            include: {
+              user: {
+                select: {
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      console.log(bosyuuLists, 'bosyuuLists');
+
+      const models = await Promise.all(
+        bosyuuLists.map(async (bosyuuList) => {
+          // `findUnique` を使わずに、既に取得した `teacher` と `user` を使用
+          return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher?.user);
+        })
+      );
+
+      return models;
+    } catch (error) {
+      console.error('Error fetching recruit list:', error);
+      throw error; // Re-throw the error for upstream handling
+    }
+  },
+  fetchUserinfo: async (
+    name: string,
+    rating: string,
+    profile: string
+  ): Promise<BosyuuListModel[]> => {
+    try {
+      const user = await prismaClient.user.findFirst({
+        where: {
+          name,
+          rating: parseFloat(rating), // ratingを数値に変換
+          myProfile: profile,
+        },
+      });
+
+      if (!user) {
+        console.log('User not found');
+        return null; // ユーザーが見つからない場合はnullを返す
+      }
+      const bosyuuList = await prismaClient.bosyuuList.findMany({
+        where: {
+          teacherId: user.userId,
+        },
+        include: {
+          teacher: {
+            include: {
+              user: {
+                select: {
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      const models = await Promise.all(
+        bosyuuList.map(async (bosyuuList) => {
+          // `findUnique` を使わずに、既に取得した `teacher` と `user` を使用
+          return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher?.user);
+        })
+      );
+
+      console.log(user, 'user');
+      return {models, user};
     } catch (error) {
       console.error('Error fetching recruit list:', error);
       throw error; // Re-throw the error for upstream handling

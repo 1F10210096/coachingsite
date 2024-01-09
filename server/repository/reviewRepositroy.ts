@@ -31,4 +31,32 @@ export const reviewRepository = {
       review: review.review,
     }));
   },
+  updateReview: async (
+    selectedId: string,
+    rating: string,
+    review: string
+  ): Promise<reviewModel[]> => {
+    try {
+      // parseFloat を使って rating を数値に変換
+      const numericRating = parseFloat(rating);
+
+      // 指定されたIDで apply レコードを更新
+      const updatedApplication = await prismaClient.apply.update({
+        where: {
+          id: selectedId,
+        },
+        data: {
+          rating: numericRating,
+          review,
+        },
+      });
+
+      // 更新されたレコードを返す
+      return updatedApplication;
+    } catch (error) {
+      console.error('Error updating review:', error);
+      // エラー時は適切に処理（例：nullを返す、エラーを再スローするなど）
+      throw error;
+    }
+  },
 };

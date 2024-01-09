@@ -10,6 +10,7 @@ export default defineController(() => ({
       body. selectedGameIndex,
       body.selectedMyRankIndex,
       body.selectedRanksIndex,
+      body.lessonType,
       body.selectedTags,
       body.acheavement,
       body.description,

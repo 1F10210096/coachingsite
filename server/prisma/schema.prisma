@@ -59,7 +59,7 @@ model BosyuuList {
   rank              Int
   subjectRank       Int[]
   tag               String[]
-  lessonType        String[] // レッスンの種類
+  lessonType        String // レッスンの種類
   description       String // 募集の詳細説明
   notes             String // 募集の注意事項
   myProfile         String // 募集者のプロフィール
@@ -78,11 +78,11 @@ model apply {
   id        String     @id @default(uuid())
   bosyuuId  String
   studentId String
+  status    String
   rating    Float? // 評価フィールド（5段階評価、小数点第1位まで）
   review    String? // レビュー
   bosyuu    BosyuuList @relation(fields: [bosyuuId], references: [id])
   student   Student    @relation(fields: [studentId], references: [userId])
-  rooms     Room?
 }
 
 model GameList {
@@ -101,18 +101,16 @@ model GameRanksList {
 }
 
 model Room {
-  id            String   @id @unique @default(uuid())
+  id            String     @id @unique @default(uuid())
   bosyuuId      String // BosyuuListへのリンク
-  applyId       String   @unique
   hostId        String // コーチのID (BosyuuListのteacherIdに対応)
   participantId String // 応募者のID (applyのstudentIdに対応)
-  createdAt     DateTime @default(now())
-  status        String 
-  bosyuu      BosyuuList @relation(fields: [bosyuuId], references: [id])
-  apply       apply      @relation(fields: [applyId], references: [id])
-  host        Teacher    @relation(fields: [hostId], references: [userId])
-  participant Student    @relation(fields: [participantId], references: [userId])
-  Comment     Comment[]
+  createdAt     DateTime   @default(now())
+  status        String
+  bosyuu        BosyuuList @relation(fields: [bosyuuId], references: [id])
+  host          Teacher    @relation(fields: [hostId], references: [userId])
+  participant   Student    @relation(fields: [participantId], references: [userId])
+  Comment       Comment[]
 }
 
 model Comment {

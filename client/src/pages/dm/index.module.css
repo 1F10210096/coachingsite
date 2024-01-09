@@ -13,10 +13,10 @@
 
 .loginButton {
   position: relative;
-  top: 50px;;  
+  top: 50px;
+  width: 400px;
   padding: 10px 15px;
   color: white;
-  width: 400px;
   cursor: pointer;
   background-color: #007bff;
   border: none;
@@ -109,4 +109,400 @@
 
 .searchpass:focus {
   border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+/* メッセージ入力フィールドのスタイル */
+
+/* メッセージ入力フィールドのスタイル */
+.messageInput {
+  position: absolute;
+  top: 620px;
+  left: 100px;
+  width: 400px;
+  padding: 10px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  background-color: #fff; /* 背景色を白に */
+  border: 1px solid #ccc; /* 灰色の境界線 */
+  border-radius: 4px; /* 角を少し丸める */
+}
+
+/* 送信ボタンのスタイル */
+.sendButton {
+  position: absolute;
+  top: 620px;
+  left: 500px;
+  padding: 10px 15px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+  background-color: #84c6ff; /* 背景色を薄い灰色に */
+  border: 1px solid #ccc; /* 灰色の境界線 */
+  border-radius: 4px; /* 角を少し丸める */
+  transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
+}
+
+.sendButton:hover {
+  background-color: #e8e8e8; /* ホバー時に背景色を少し暗く */
+}
+
+.message {
+  /* 共通のスタイル */
+}
+
+.left {
+  /* 左側に配置するスタイル */
+}
+
+.right {
+  /* 右側に配置するスタイル */
+}
+
+/* 左側のメッセージ（他のユーザー） */
+.messageLeft {
+  max-width: 70%;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px; /* 下にマージンを設定 */
+  word-wrap: break-word;
+  border-radius: 15px;
+}
+
+/* 右側のメッセージ（自分） */
+.messageRight {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-self: flex-end; /* 右側に寄せる */
+}
+
+.messageContainer {
+  display: flex; /* Flexboxを有効化 */
+
+  align-items: center; /* 要素を垂直方向の中央に配置 */
+}
+
+.msgContent {
+  position: relative;
+  width: 100%;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  margin-left: 5px;
+  font-size: 15px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  word-wrap: break-word; /* 長いテキストを折り返す */
+  background-color: #68fcff;
+  border-radius: 15px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.userImage2 {
+  position: relative;
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* チャット欄全体のスタイル */
+.messageBox {
+  position: relative;
+  top: 50px;
+  left: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 子要素を左寄せにする */
+  width: 747px;
+  height: 688px;
+  padding: 20px; /* 内側の余白 */
+  margin-bottom: 240px;
+  overflow-y: auto; /* 長い内容に対してスクロールバーを表示 */
+  background-color: rgb(255 255 255);
+  border: solid 2px rgb(159 159 159);
+  border-radius: 8px; /* 角を丸める */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%); /* 影を追加 */
+}
+
+.messageBox3::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messageBox3::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.messageBox3::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.messageBox3::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 10px; /* 丸みを加える */
+}
+
+.messageBox3::-webkit-scrollbar-thumb:hover {
+  background: #d9d9d9;
+  border-radius: 10px; /* ホバー時も丸みを保持 */
+}
+
+.messageBox2 {
+  position: relative;
+  height: 100px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #fff;
+}
+
+.messageBox1 {
+  position: relative;
+  top: 10px;
+  left: 50%;
+  width: 150px;
+  height: 50px;
+  padding: 10px 19px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #333;
+  border-radius: 15px;
+  transform: translateX(-50%);
+}
+
+.line {
+  position: relative;
+  top: 30px;
+  width: 700px;
+  border-top: 2px solid rgb(173 173 173); /* 上部に1ピクセルの黒線を引く */
+}
+
+.line2 {
+  position: absolute;
+  top: 570px;
+  width: 700px;
+  border-top: 2px solid rgb(173 173 173); /* 上部に1ピクセルの黒線を引く */
+}
+
+.messageBox3 {
+  position: relative;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 子要素を左寄せにする */
+  width: 100%;
+  max-height: 440px; /* 最大高さを設定 */
+  overflow-y: auto; /* 高さを超えた際にスクロールバーを表示 */
+  background-color: #fff;
+}
+
+.applayButton {
+  position: absolute;
+  top: 620px;
+  left: 580px;
+  height: 40px;
+  padding: 10px 20px; /* ボタン内の余白 */
+  font-size: 16px; /* フォントサイズ */
+  color: white; /* テキストの色を白に設定 */
+  cursor: pointer; /* カーソルをポインターに設定 */
+  background-color: orange; /* ボタンの背景色をオレンジに設定 */
+  border: none; /* 境界線をなくす */
+  border-radius: 10px; /* ボタンの角を丸くする */
+  transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
+}
+
+.applayButton:hover {
+  background-color: darkorange; /* ホバー時にはより濃いオレンジ色に変更 */
+}
+
+
+
+.applayButton2 {
+  position: absolute;
+  top: 620px;
+  left: 580px;
+  height: 40px;
+  padding: 10px 20px; /* ボタン内の余白 */
+  font-size: 16px; /* フォントサイズ */
+  color: white; /* テキストの色を白に設定 */
+  cursor: pointer; /* カーソルをポインターに設定 */
+  background-color: rgb(254, 84, 248); /* ボタンの背景色をオレンジに設定 */
+  border: none; /* 境界線をなくす */
+  border-radius: 10px; /* ボタンの角を丸くする */
+  transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
+}
+
+.applayButton2:hover {
+  background-color: rgb(253, 43, 218); /* ホバー時にはより濃いオレンジ色に変更 */
+}
+
+
+.profileContainer {
+  position: relative;
+  top: 50px;
+  left: 300px;
+  display: inline-block;
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  padding: 20px; /* Optional: adds space inside the container */
+  padding-bottom: 40px;
+  font-size: 19px;
+  background: rgb(255 255 255);
+  border: 1px solid #ccc; /* Optional: adds a border */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
+}
+
+.userImage {
+  position: relative;
+  top: 40px;
+  left: 80px;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: flex-start; /* Aligns items to the start of the container horizontally */
+}
+
+.rate {
+  position: relative;
+  top: 40px;
+  left: 21px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 30px;
+  font-size: 30px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.rating {
+  position: relative;
+  top: 13px;
+  left: 200px;
+  display: inline-block;
+  width: 140px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 25px;
+  color: #454444; /* 背景の灰色の星 */
+}
+
+.name {
+  position: relative;
+  top: 50px;
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Horizontally center the child elements */
+  width: 100%;
+  height: 50px;
+}
+
+.achievementsContainer {
+  position: relative;
+  top: 50px;
+  left: 20px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+.achievements {
+  position: relative;
+  top: -20px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.achievementsTitle {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  background: rgb(255 255 255);
+}
+
+.descriptionDetailContainer {
+  position: relative;
+  left: 20px;
+  width: 90%;
+  height: auto;
+  margin-top: 80px;
+  background-color: #fff;
+}
+
+.descriptionTitle {
+  position: relative;
+  top: -20px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.descriptions {
+  position: relative;
+  top: -10px;
+  left: 10px;
+  display: -webkit-box; /* Required for line clamping */
+  width: 93%;
+  height: auto;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
+  text-overflow: ellipsis;
+  letter-spacing: -0.02em;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+}
+
+.parent {
+  position: relative;
+  right: 80px;
+  display: flex;
+  align-items: start;
+  width: 1500px;
 }

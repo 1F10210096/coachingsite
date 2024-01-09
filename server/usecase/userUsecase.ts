@@ -15,4 +15,19 @@ export const userUsecase = {
     assert(userDetail !== null, 'userDetailはnullです');
     return userDetail;
   },
+  fetchReview: async (teacherId: string): Promise<UserSummaryModel> => {
+    console.log('gameListUsecase.fetchinfo');
+    console.log('teacherId', teacherId);
+    const userDetail = await userRepository.fetchReview(teacherId);
+    assert(userDetail !== null, 'userDetailはnullです');
+    return userDetail;
+  },
+  fetchMyProfile: async (userId: string): Promise<UserSummaryModel> => {
+    console.log('gameListUsecase.fetchinfo');
+    console.log('userId', userId);
+    const userDetail = await userRepository.fetchMyProfile(userId);
+    assert(userDetail !== null, 'userDetailはnullです');
+    return userDetail;
+  }
+  
 };

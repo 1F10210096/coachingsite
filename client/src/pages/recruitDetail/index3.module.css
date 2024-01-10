@@ -9,6 +9,8 @@
 }
 
 .titleText {
+  position: relative;
+  top: 150px;
   font-size: 18px;
   font-weight: 700;
   color: #585858;
@@ -17,8 +19,7 @@
 
 .recruitList {
   position: relative;
-  top: 90px;
-  left: 240px;
+  top: 190px;
   display: flex;
   flex-wrap: wrap; /* これにより、アイテムが折り返される */
   gap: 70px; /* 要素間の間隔 */

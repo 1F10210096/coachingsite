@@ -9,4 +9,10 @@ export const roomUsecase = {
     assert(room !== null, 'roomはnullです');
     return room;
   },
+  fetchRecruitDetail: async (Id: string): Promise<BosyuuListModel> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchRecruitDetail(Id);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
 };

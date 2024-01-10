@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import type { UserSummaryDetailModel, msgModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -12,6 +14,7 @@ const Dm = () => {
   const [userNumber, setUserNumber] = useState('');
   const [bosyuuId, setBosyuuId] = useState('');
   const [message, setMessage] = useState<msgModel[]>([]);
+  const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
   const router = useRouter();
   const id = router.query.id;
@@ -26,6 +29,13 @@ const Dm = () => {
       });
       console.log(response);
 
+      const detailResponse = await apiClient.fetachRoomRecruitDetail.post({
+        body: {
+          Id: id,
+        },
+      });
+      console.log(detailResponse);
+      setRecruitDetail(detailResponse.body);
       setUserDetail(response.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
@@ -118,7 +128,7 @@ const Dm = () => {
           setApprovalUrl(data.url); // 受信したURLを状態にセット
         } else if (data.type === 'new-message') {
           console.log('新しいメッセージを受信しました:', data);
-          
+
           setMessage((prevMessages) => [...prevMessages, data]);
         } else {
           // 他のメッセージタイプの処理...
@@ -162,12 +172,13 @@ const Dm = () => {
     websocket.send(JSON.stringify(messageData));
 
     console.log('承諾用URLを送信しました:', approvalUrl);
+    window.confirm('承諾用URLを送信しました');
   };
 
   const handleUrlClick = async (approvalUrl) => {
     // 確認ダイアログを表示
     const confirmResult = window.confirm('本当に承諾しますか？');
-  
+
     // ユーザーが「OK」をクリックした場合のみ処理を続行
     if (confirmResult) {
       console.log(approvalUrl);
@@ -188,7 +199,114 @@ const Dm = () => {
       }
     }
   };
-  
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalFinalOpen, setIsModalFinalOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const onCloseRecruit = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const onApplyRecruit = () => {
+    setIsModalOpen(false);
+    setIsModalFinalOpen(true);
+  };
+
+  const onApplyFinalRecruit = () => {
+    setIsModalFinalOpen(false);
+    sendApply();
+  };
+
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  const handleTimeChange = (event) => {
+    setTime(event.target.value);
+  };
+
+  function Modal({ isOpen, onClose, onApply }) {
+    if (!isOpen) return null;
+
+    return (
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <div className={styles.modalMsgContent}>
+            <div className={styles.modalTitle}>お申込み確認</div>
+            <div className={styles.modalMsg}>日付と時間を設定してください</div>
+            <div className={styles.dateTimePicker}>
+              <input
+                type="date"
+                className={styles.dateInput}
+                value={date}
+                onChange={handleDateChange}
+              />
+              <input
+                type="time"
+                className={styles.timeInput}
+                value={time}
+                onChange={handleTimeChange}
+              />
+            </div>
+          </div>
+          <button className={styles.closeButton} onClick={onCloseRecruit}>
+            閉じる
+          </button>
+          <button className={styles.applyButton2} onClick={onApplyRecruit}>
+            申し込む
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function FinalModal({ isOpen, onClose, onApply }) {
+    if (!isOpen) return null;
+
+    const getGameName = (gameId) => {
+      switch (gameId) {
+        case 1:
+          return 'VALORANT';
+        case 2:
+          return 'APEX';
+        case 3:
+          return 'LOL';
+        default:
+          return 'Unknown Game';
+      }
+    };
+
+    return (
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <div className={styles.modalMsgContent}>
+            <div className={styles.modalTitle}>最終お申込み確認</div>
+            <p className={styles.title}>{RecruitDetail?.title}</p>
+            <p className={styles.title}>{getGameName(RecruitDetail?.gameId)}</p>
+            <div className={styles.dateMsg}>日時：{date}</div>
+            <div className={styles.timeMsg}>時間：{time}</div>
+          </div>
+          <button className={styles.closeButton} onClick={onFinalClose}>
+            閉じる
+          </button>
+          <button className={styles.applyButton2} onClick={onApplyFinalRecruit}>
+            申し込む
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const [approvalUrl, setApprovalUrl] = useState('');
 
@@ -228,15 +346,29 @@ const Dm = () => {
               Send
             </button>
             {userNumber === 1 && (
-              <button onClick={sendApply} className={styles.applayButton}>
+              <button onClick={handleButtonClick} className={styles.applayButton}>
                 申し込む
               </button>
             )}
-{approvalUrl && userNumber === 2 && (
-  <div onClick={() => handleUrlClick(approvalUrl)} className={styles.applayButton2}>
-    {'受諾ボタン'}
-  </div>
-)}
+            {isModalOpen && (
+              <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onApply={sendApply}
+              />
+            )}
+            {isModalFinalOpen && (
+              <FinalModal
+                isOpen={isModalFinalOpen}
+                onClose={() => setIsModalFinalOpen(false)}
+                onApply={sendApply}
+              />
+            )}
+            {approvalUrl && userNumber === 2 && (
+              <div onClick={() => handleUrlClick(approvalUrl)} className={styles.applayButton2}>
+                {'受諾ボタン'}
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.profileContainer}>

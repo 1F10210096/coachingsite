@@ -65,4 +65,29 @@ export const roomRepository = {
       participantIdentity,
     };
   },
+  fetchRecruitDetail: async (Id: string) => {
+    try {
+      // ルームのIDに基づいてBosyuuListを検索
+      const room = await prisma.room.findUnique({
+        where: {
+          id: Id,
+        },
+        include: {
+          bosyuu: true, // 関連するBosyuuListを取得
+        },
+      });
+
+      // BosyuuListが見つからない場合の処理
+      if (!room || !room.bosyuu) {
+        return null;
+      }
+
+      // BosyuuListのデータを返す
+      return room.bosyuu;
+    } catch (error) {
+      // エラーハンドリング
+      console.error('Error fetching recruitment details:', error);
+      throw error;
+    }
+  },
 };

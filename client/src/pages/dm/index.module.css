@@ -170,6 +170,7 @@
 
 /* 右側のメッセージ（自分） */
 .messageRight {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-self: flex-end; /* 右側に寄せる */
@@ -283,7 +284,7 @@
 
 .line2 {
   position: absolute;
-  top: 570px;
+  top: 580px;
   width: 700px;
   border-top: 2px solid rgb(173 173 173); /* 上部に1ピクセルの黒線を引く */
 }

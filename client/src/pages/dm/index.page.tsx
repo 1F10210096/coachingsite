@@ -97,7 +97,7 @@ const Dm = () => {
     // 送信するメッセージのデータ構造
     const messageData = {
       type: 'message',
-      imageurl: userDetail?.imageUrl,
+      userImageUrl: userDetail?.imageUrl,
       roomId: id,
       userId: user,
       content: comment,
@@ -110,6 +110,7 @@ const Dm = () => {
   };
 
   const [websocket, setWebsocket] = useState(null);
+  const [a, setA] = useState("");
   useEffect(() => {
     if (typeof user === 'string' && user.trim() !== '') {
       const newSocket = new WebSocket(`ws://localhost:8000?userId=${user}`);
@@ -124,12 +125,21 @@ const Dm = () => {
         const data = JSON.parse(event.data);
         console.log(`[message] データを受信しました: `, data);
 
+
         if (data.type === 'url') {
           setApprovalUrl(data.url); // 受信したURLを状態にセット
+          setTime(data.time);
+          setDate(data.date);
+          setIsModalApproveOpen(false)
+          console.log('承諾用URLを受信しました:', data.url);
+          console.log(data.gameId)
+          setA(data.gameId);
+          console.log(RecruitDetail)
         } else if (data.type === 'new-message') {
           console.log('新しいメッセージを受信しました:', data);
 
           setMessage((prevMessages) => [...prevMessages, data]);
+          
         } else {
           // 他のメッセージタイプの処理...
           fetchRoom();
@@ -166,6 +176,10 @@ const Dm = () => {
       userId: user,
       userNumber,
       url: approvalUrl, // 送信するURL
+      gameTitle: RecruitDetail?.title,
+      gameId: RecruitDetail?.gameId,
+      date,
+      time,
     };
 
     // メッセージをJSON形式でサーバーに送信
@@ -177,6 +191,7 @@ const Dm = () => {
 
   const handleUrlClick = async (approvalUrl) => {
     // 確認ダイアログを表示
+    setIsModalApproveOpen(false);
     const confirmResult = window.confirm('本当に承諾しますか？');
 
     // ユーザーが「OK」をクリックした場合のみ処理を続行
@@ -184,6 +199,7 @@ const Dm = () => {
       console.log(approvalUrl);
       console.log(id);
       console.log(user);
+
       try {
         const response = await apiClient.recruitApprove.post({
           body: {
@@ -202,9 +218,15 @@ const Dm = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFinalOpen, setIsModalFinalOpen] = useState(false);
+  const [isModalApproveOpen, setIsModalApproveOpen] = useState(false);
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
+  };
+
+  
+  const handleButtonApproveClick = () => {
+    setIsModalApproveOpen(true);
   };
 
   const onCloseRecruit = () => {
@@ -237,6 +259,7 @@ const Dm = () => {
   };
 
   function Modal({ isOpen, onClose, onApply }) {
+    
     if (!isOpen) return null;
 
     return (
@@ -296,6 +319,7 @@ const Dm = () => {
             <p className={styles.title}>{getGameName(RecruitDetail?.gameId)}</p>
             <div className={styles.dateMsg}>日時：{date}</div>
             <div className={styles.timeMsg}>時間：{time}</div>
+            <div>本当に申し込みますか？</div>
           </div>
           <button className={styles.closeButton} onClick={onFinalClose}>
             閉じる
@@ -309,6 +333,45 @@ const Dm = () => {
   }
 
   const [approvalUrl, setApprovalUrl] = useState('');
+
+  function ApproveModal({ isOpen, onClose, onApply }) {
+    if (!isOpen) return null;
+
+    const getGameName = (gameId) => {
+      switch (gameId) {
+        case 1:
+          return 'VALORANT';
+        case 2:
+          return 'APEX';
+        case 3:
+          return 'LOL';
+        default:
+          return 'Unknown Game';
+      }
+    };
+    console.log(a);
+    console.log(RecruitDetail?.gameId);
+    return (
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <div className={styles.modalMsgContent}>
+            <div className={styles.modalTitle}>最終受諾確認</div>
+            <p className={styles.title}>{RecruitDetail?.title}</p>
+            <p className={styles.title}>{getGameName(RecruitDetail?.gameId)}</p>
+            <div className={styles.dateMsg}>日時：{date}</div>
+            <div className={styles.timeMsg}>時間：{time}</div>
+            <div>本当に了承しますか？</div>
+          </div>
+          <button className={styles.closeButton} onClick={onFinalClose}>
+            閉じる
+          </button>
+          <button className={styles.applyButton2} onClick={handleUrlClick}>
+            了承する
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -365,9 +428,16 @@ const Dm = () => {
               />
             )}
             {approvalUrl && userNumber === 2 && (
-              <div onClick={() => handleUrlClick(approvalUrl)} className={styles.applayButton2}>
+              <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
                 {'受諾ボタン'}
               </div>
+            )}
+            {isModalApproveOpen && (
+              <ApproveModal
+                isOpen={isModalApproveOpen}
+                onClose={() => setIsModalApproveOpen(false)}
+                
+              />
             )}
           </div>
         </div>

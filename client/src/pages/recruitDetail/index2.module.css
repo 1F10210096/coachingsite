@@ -1,6 +1,6 @@
 .titleContainer {
   position: relative;
-  top: 80px;
+  top: 130px;
   left: 50%; /* Set left to 50% of the parent container */
   width: 800px;
   height: 250px;
@@ -95,7 +95,7 @@
 
 .headerContainer {
   position: relative;
-  top: 50px;
+  top: 90px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -144,13 +144,14 @@
 
 .titleContainer1 {
   position: relative;
-  top: 150px;
+  top: 190px;
   left: 50%;
   display: flex; /* Add flex display */
   align-items: center; /* Vertically center children */
   justify-content: flex-start; /* Align children to the start horizontally */
   width: 800px; /* This should match the left value of .title1 */
   margin-bottom: 90px;
+  background-color: rgb(255 255 255);
   transform: translateX(-50%);
 }
 
@@ -220,3 +221,10 @@
   align-items: center; /* Centers items vertically */
 }
 
+.allparent {
+  position: absolute; /* 絶対位置指定 */
+  top: 1560px; 
+  left: 50%; /* 水平方向の中央 */
+  height: auto;
+  transform: translate(-50%, -50%); /* X軸とY軸の両方で中央揃え */
+}

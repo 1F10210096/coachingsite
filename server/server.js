@@ -49,14 +49,14 @@ wss.on('connection', function (ws, request) {
     clientSockets.set(userId, ws);
     console.log("\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8\u3068\u306E\u63A5\u7D9A\u304C\u78BA\u7ACB\u3055\u308C\u307E\u3057\u305F: ".concat(userId));
     ws.on('message', function (message) { return __awaiter(void 0, void 0, void 0, function () {
-        var msgData, imageurl, roomId, userId_1, content, room, targetUserId, clientWebSocket, roomId, userId_2, userNumber, url, room, clientWebSocket, e_1;
+        var msgData, userImageUrl, roomId, userId_1, content, room, targetUserId, clientWebSocket, roomId, userId_2, userNumber, url, gameTitle, gameId, date, time, room, clientWebSocket, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 6, , 7]);
                     msgData = JSON.parse(message);
                     if (!(msgData.type === 'message')) return [3 /*break*/, 3];
-                    imageurl = msgData.imageurl, roomId = msgData.roomId, userId_1 = msgData.userId, content = msgData.content;
+                    userImageUrl = msgData.userImageUrl, roomId = msgData.roomId, userId_1 = msgData.userId, content = msgData.content;
                     console.log('メッセージを受信しました:', msgData);
                     return [4 /*yield*/, prismaClient_1.prismaClient.room.findUnique({
                             where: { id: roomId },
@@ -84,17 +84,21 @@ wss.on('connection', function (ws, request) {
                     }
                     clientWebSocket = clientSockets.get(targetUserId);
                     if (clientWebSocket && clientWebSocket.readyState === WebSocket.OPEN) {
-                        clientWebSocket.send(JSON.stringify({ type: 'new-message', content: content, imageurl: imageurl }));
+                        clientWebSocket.send(JSON.stringify({ type: 'new-message', content: content, userImageUrl: userImageUrl }));
                     }
                     return [3 /*break*/, 5];
                 case 3:
                     if (!(msgData.type === 'apply')) return [3 /*break*/, 5];
-                    roomId = msgData.roomId, userId_2 = msgData.userId, userNumber = msgData.userNumber, url = msgData.url;
+                    roomId = msgData.roomId, userId_2 = msgData.userId, userNumber = msgData.userNumber, url = msgData.url, gameTitle = msgData.gameTitle, gameId = msgData.gameId, date = msgData.date, time = msgData.time;
                     return [4 /*yield*/, prismaClient_1.prismaClient.room.findUnique({
                             where: { id: roomId },
                         })];
                 case 4:
                     room = _a.sent();
+                    console.log(gameTitle, 'wadawdad');
+                    console.log(gameId, 'wadawdad');
+                    console.log(date, 'wadawdad');
+                    console.log(time, 'wadawdad');
                     console.log(room, 'wadawdad');
                     console.log(room.hostId, 'wadawdad');
                     console.log(userId_2, 'wadawda333d');
@@ -105,7 +109,7 @@ wss.on('connection', function (ws, request) {
                         if (clientWebSocket) {
                             console.log("\u627F\u8AFE\u7528URL\u3092\u9001\u4FE1\u3057\u307E\u3059: ".concat(url));
                             // URLを対象のクライアントに送信
-                            clientWebSocket.send(JSON.stringify({ type: 'url', url: url }));
+                            clientWebSocket.send(JSON.stringify({ type: 'url', url: url, gameTitle: gameTitle, gameId: gameId, date: date, time: time, userNumber: userNumber, userId: userId_2 }));
                         }
                         else {
                             console.log("\u6307\u5B9A\u3055\u308C\u305F\u30E6\u30FC\u30B6\u30FCID\u306B\u95A2\u9023\u4ED8\u3051\u3089\u308C\u305FWebSocket\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F: ".concat(userId_2));

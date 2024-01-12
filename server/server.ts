@@ -17,7 +17,7 @@ wss.on('connection', (ws, request) => {
       const msgData = JSON.parse(message);
 
       if (msgData.type === 'message') {
-        const { imageurl,roomId, userId, content } = msgData;
+        const { userImageUrl, roomId, userId, content } = msgData;
         console.log('メッセージを受信しました:', msgData);
 
         const room = await prismaClient.room.findUnique({
@@ -43,14 +43,18 @@ wss.on('connection', (ws, request) => {
 
         const clientWebSocket = clientSockets.get(targetUserId);
         if (clientWebSocket && clientWebSocket.readyState === WebSocket.OPEN) {
-          clientWebSocket.send(JSON.stringify({ type: 'new-message', content, imageurl }));
+          clientWebSocket.send(JSON.stringify({ type: 'new-message', content, userImageUrl }));
         }
       } else if (msgData.type === 'apply') {
-        const { roomId, userId, userNumber, url } = msgData;
+        const { roomId, userId, userNumber, url, gameTitle, gameId, date, time } = msgData;
 
         const room = await prismaClient.room.findUnique({
           where: { id: roomId },
         });
+        console.log(gameTitle, 'wadawdad');
+        console.log(gameId, 'wadawdad');  
+        console.log(date, 'wadawdad');
+        console.log(time, 'wadawdad');
 
         console.log(room, 'wadawdad');
         console.log(room.hostId, 'wadawdad');
@@ -64,7 +68,7 @@ wss.on('connection', (ws, request) => {
           if (clientWebSocket) {
             console.log(`承諾用URLを送信します: ${url}`);
             // URLを対象のクライアントに送信
-            clientWebSocket.send(JSON.stringify({ type: 'url', url }));
+            clientWebSocket.send(JSON.stringify({ type: 'url', url, gameTitle, gameId, date, time, userNumber, userId }));
           } else {
             console.log(
               `指定されたユーザーIDに関連付けられたWebSocketクライアントが見つかりませんでした: ${userId}`

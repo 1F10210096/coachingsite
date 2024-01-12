@@ -14,7 +14,7 @@
   width: 670px;
   height: auto; /* 適切な値に変更 */
   margin: 0; /* マージンをリセット */
-  background: rgb(255 255 255);
+  background: rgb(239 53 53);
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
 }
 
@@ -571,4 +571,69 @@
   top: 40px;
   width: 100%; /* 幅を親要素に合わせる */ /* 上部に1ピクセルの黒線を引く */
   border-top: 2px solid rgb(184 184 184);
+}
+
+.homeContainer {
+  position: relative;
+  top: 160px;
+  left: 250px;
+  display: flex;
+  align-items: center; /* アイテムを垂直方向の中央に配置 */
+  width: 1100px;
+  height: 30px;
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+}
+
+.home {
+  position: relative;
+  width: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home2 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home2:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home3 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px; /* 文字の大きさを17pxに設定する */
+  color: rgb(179 173 173);
+  background-color: #fff; /* 背景色を灰色に設定する */
+}
+
+.home4 {
+  position: relative;
+  width: 700px;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #ffffff;
 }

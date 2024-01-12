@@ -13,8 +13,8 @@
 
 .helpwanted {
   position: relative;
-  top: 100px;
-  left: 580px;
+  top:-460px;
+  left: 600px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
@@ -41,13 +41,11 @@
 
 .gameTitle {
   position: relative;
-  top: 40px;
-  left: 630px;
   width: 100%;
   height: auto;
   font-size: 26px;
   font-weight: bold;
-  color: rgb(55 55 55);
+  color: rgb(100, 100, 100);
   background-color: rgb(255 255 255);
 }
 
@@ -313,12 +311,27 @@
 
 .gameSort {
   position: relative;
-  top: 60px;
-  left: 1190px;
-  width: 100%;
+  top: 40px;
+  left: 650px;
+  width: 200px;
   height: auto;
   font-size: 14px;
   font-weight: bold;
   color: rgb(255, 5, 5);
-  background-color: rgb(255 255 255);
+  background-color: rgb(255, 255, 255);
+}
+
+.gameTitleContainer {
+  position: relative;
+  top: -490px;
+  left: 600px;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(142 142 142);
 }

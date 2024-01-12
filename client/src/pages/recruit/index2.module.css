@@ -5,7 +5,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
-  background: rgb(255, 255, 255);
+  background: rgb(255 255 255);
   border: 1px solid #b5b5b5; /* General border for all sides */
   border-top: 3px solid #71d3f7; /* Light blue top border */
   box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
@@ -13,21 +13,12 @@
 
 .helpwanted {
   position: relative;
-  top: -330px;
-  left: 580px;
+  top: 20px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
   height: auto;
-  background-color: rgb(255, 255, 255);
-}
-
-.titleLine {
-  position: relative;
-  top: -380px;
-  left: 580px;
-  width: 800px; /* 幅を親要素に合わせる */
-  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+  background-color: rgb(255 255 255);
 }
 
 .flexContainer {
@@ -36,19 +27,17 @@
   display: flex;
   align-items: center; /* 要素を垂直方向の中央に配置 */
   height: 70px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .gameTitle {
   position: relative;
-  top: -430px;
-  left: 630px;
   width: 100%;
   height: auto;
   font-size: 26px;
   font-weight: bold;
   color: rgb(55 55 55);
-  background-color: rgb(255 255 255);
+  background-color: rgb(255, 255, 255);
 }
 
 .title {
@@ -75,7 +64,7 @@
 
   /* 例えばパディング、マージン、ボーダーなどのスタイルを適用 */
 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 
   /* 必要に応じて他のスタイルを追加 */
 }
@@ -96,7 +85,7 @@
 
 .description {
   position: relative;
-  width: 330px;
+  width: 230px;
   height: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -308,17 +297,44 @@
   height: auto;
   font-size: 13px;
   color: rgb(255 5 5);
-  background-color: rgb(255 255 255);
+  background-color: rgb(255, 255, 255);
 }
 
 .gameSort {
   position: relative;
-  top: -400px;
-  left: 1190px;
-  width: 100%;
+  top: 40px;
+  left: 630px;
+  width: 199px;
   height: auto;
   font-size: 14px;
   font-weight: bold;
-  color: rgb(255, 5, 5);
-  background-color: rgb(255 255 255);
+  color: rgb(255 5 5);
+}
+
+.gameTitleContainer {
+  position: relative;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.subContanier {
+  position: relative;
+  top: -480px;
+  left: 600px;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(142 142 142);
 }

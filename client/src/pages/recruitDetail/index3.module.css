@@ -1,7 +1,9 @@
 .recomendTitle {
   position: relative;
-  top: 50px;
+  top: 150px;
+  width: 500px;
   left: 230px;
+  background-color: #ffffff;
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: 700;
@@ -10,7 +12,7 @@
 
 .titleText {
   position: relative;
-  top: 150px;
+  top: 90px;
   font-size: 18px;
   font-weight: 700;
   color: #585858;
@@ -19,11 +21,11 @@
 
 .recruitList {
   position: relative;
-  top: 190px;
+  top: 150px;
   display: flex;
   flex-wrap: wrap; /* これにより、アイテムが折り返される */
   gap: 70px; /* 要素間の間隔 */
-  width: 1240px;
+  width: 1140px;
 }
 
 .recruitSummary {

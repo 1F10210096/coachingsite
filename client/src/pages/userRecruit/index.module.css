@@ -145,15 +145,15 @@
 .profileImage {
   width: 100px; /* 画像のサイズを設定 */
   height: 100px; /* 画像のサイズを設定 */
+  border: 1px solid #000; /* ボーダーの太さと色を設定 */
   border-radius: 50%; /* 画像を円形にする */
   object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
-  border: 1px solid #000000; /* ボーダーの太さと色を設定 */
 }
-
-
 
 .profileContainer {
   position: relative;
+  top: 100px;
+  left: 200px;
   display: inline-block;
   flex-direction: column;
   width: 300px;
@@ -246,13 +246,11 @@
   left: 10px;
   display: -webkit-box; /* Required for line clamping */
   width: 93%;
-  height: auto;
   overflow: hidden;
   font-size: 14px;
   line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
   text-overflow: ellipsis;
   letter-spacing: -0.02em;
-  background-color: rgb(255 255 255);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
 }
@@ -305,4 +303,78 @@
   background-color: rgb(255 255 255);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 9;
+}
+
+.allContainer {
+  position: relative;
+  top: 150px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+
+.titleContainer {
+  position: relative;
+  top: 50px;
+  left: 180px;
+  width: 350px;
+  height: auto;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(114 114 114);
+  background-color: #fff;
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.homeContainer {
+  position: relative;
+  top: 10px;
+  left: 180px;
+  display: flex;
+  align-items: center; /* アイテムを垂直方向の中央に配置 */
+  width: 300px;
+  height: 30px;
+  color: rgb(50, 50, 50);
+  background-color: rgb(255 255 255);
+}
+
+.home {
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home2 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home2:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home3 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px; /* 文字の大きさを17pxに設定する */
+  color: rgb(179 173 173);
+  background-color: #fff; /* 背景色を灰色に設定する */
 }

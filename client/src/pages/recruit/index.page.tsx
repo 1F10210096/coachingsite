@@ -32,7 +32,7 @@ const Valorant = () => {
   type RankStatus = {
     [rank: string]: boolean;
   };
-
+  //ad
   const games = {
     VALORANT: [
       'アイアン',

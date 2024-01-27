@@ -7,7 +7,7 @@ const wss = new WebSocket.Server({ port: 8000 });
 const clientSockets = new Map();
 
 wss.on('connection', (ws, request) => {
-  const queryString = request.url.split('?')[1];
+  const queryString = request.url?.split('?')[1] ?? '';
   const urlParams = new URLSearchParams(queryString);
   const userId = urlParams.get('userId');
   clientSockets.set(userId, ws);
@@ -35,14 +35,16 @@ wss.on('connection', (ws, request) => {
         // 条件に基づいたクライアントへのメッセージ送信
         let targetUserId;
         console.log(userId, 'wadawdad');
-        if (userId === room.hostId) {
-          targetUserId = room.participantId;
-        } else if (userId === room.participantId) {
-          targetUserId = room.hostId;
+        if (room) {
+          if (userId === room.hostId) {
+            targetUserId = room.participantId;
+          } else if (userId === room.participantId) {
+            targetUserId = room.hostId;
+          }
         }
 
         const clientWebSocket = clientSockets.get(targetUserId);
-        if (clientWebSocket && clientWebSocket.readyState === WebSocket.OPEN) {
+        if (Boolean(clientWebSocket) && clientWebSocket.readyState === WebSocket.OPEN) {
           clientWebSocket.send(JSON.stringify({ type: 'new-message', content, userImageUrl }));
         }
       } else if (msgData.type === 'apply') {
@@ -57,7 +59,6 @@ wss.on('connection', (ws, request) => {
         console.log(time, 'wadawdad');
 
         console.log(room, 'wadawdad');
-        console.log(room.hostId, 'wadawdad');
         console.log(userId, 'wadawda333d');
 
         if (room) {
@@ -65,6 +66,7 @@ wss.on('connection', (ws, request) => {
 
           const clientWebSocket = clientSockets.get(room.hostId);
           console.log(`承諾用URLを送信します2: ${url}`);
+          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
           if (clientWebSocket) {
             console.log(`承諾用URLを送信します: ${url}`);
             // URLを対象のクライアントに送信

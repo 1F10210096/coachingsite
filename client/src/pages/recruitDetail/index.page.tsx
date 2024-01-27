@@ -4,9 +4,9 @@
 /* eslint-disable max-lines */
 import type {
   BosyuuListFrontModel,
-  BosyuuListModel,
   UserSummaryDetailModel,
-  reviewModel,
+  newBosyuu,
+  reviewModel2,
 } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
@@ -24,7 +24,7 @@ import styles3 from './index3.module.css';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
-  const [reviews, setReviews] = useState<reviewModel[]>([]);
+  const [reviews, setReviews] = useState<reviewModel2[]>([]);
   const [user, setUser] = useState('');
   const router = useRouter();
   const id = router.query.id;
@@ -107,7 +107,7 @@ const Login = () => {
             myId: user,
           },
         });
-        setRecruitDetail(response.body);
+        // setRecruitDetail(response.body);
         router.push(`../dm?id=${response.body.id}`);
       } else {
         // RecruitDetail が null の場合の処理
@@ -127,7 +127,7 @@ const Login = () => {
       .replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3');
   }
 
-  const [recruitList, setRecruitlist] = useState<BosyuuListModel[]>([]);
+  const [recruitList, setRecruitlist] = useState<newBosyuu[]>([]);
 
   const fetchRecruit = async () => {
     try {
@@ -310,8 +310,8 @@ const Login = () => {
                     <div key={index} className={styles.review}>
                       <div className={styles.reviewHeader}>
                         <img
-                          src={review.imageUrl}
-                          alt={review.imageUrl}
+                          src={review.imageUrl ? review.imageUrl : undefined}
+                          alt={review.imageUrl ? review.imageUrl : 'Default Alt Text'}
                           className={styles.reviewImage}
                         />
                         <div className={styles.reviewName}>{review.name}</div>

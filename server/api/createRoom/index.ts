@@ -1,5 +1,11 @@
-import type { RoomWithoutHostId } from '$/commonTypesWithClient/models';
-// Define the types for the methods of your API endpoint
+export type RoomWithoutHostId = {
+  id: string;
+  bosyuuId: string;
+  participantId: string;
+  createdAt: Date;
+  status: string;
+};
+
 export type Methods = {
   post: {
     reqBody: {

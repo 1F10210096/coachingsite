@@ -3,6 +3,7 @@
 import type {
   ApexRankType,
   BosyuuListModel,
+  BosyuuListModel3,
   LessonTypesType,
   TagsType,
   ValoRankType,
@@ -27,7 +28,7 @@ const Valorant = () => {
   const [showMyRankCheckboxes, setShowMyRankCheckboxes] = useState(false);
   const [showTagCheckboxes, setShowTagCheckboxes] = useState(false);
   const [showLessonTypeCheckboxes, setShowLessonTypeCheckboxes] = useState(false);
-  const [RecruitList, setRecruitlist] = useState<BosyuuListModel[]>([]);
+  const [RecruitList, setRecruitlist] = useState<BosyuuListModel3[]>([]);
 
   type RankStatus = {
     [rank: string]: boolean;
@@ -377,7 +378,7 @@ const Valorant = () => {
 
   const [sortDescending, setSortDescending] = useState(true);
 
-  const handleSortClick = (list: BosyuuListModel[]): BosyuuListModel[] => {
+  const handleSortClick = (list: BosyuuListModel3[]): BosyuuListModel3[] => {
     const sortedList = [...list].sort((a, b) =>
       sortDescending ? b.rank - a.rank : a.rank - b.rank
     );

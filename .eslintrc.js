@@ -48,4 +48,5 @@ module.exports = {
       rules: { '@typescript-eslint/no-var-requires': ['off'] },
     },
   ],
+  ignorePatterns: ['server/server.d.ts', 'server/server.js', 'server/service/prismaClient.js'],
 };

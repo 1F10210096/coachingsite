@@ -1,4 +1,6 @@
-import type { Name } from '$/commonTypesWithClient/models';
+export type Name = {
+  name: string;
+};
 
 export type Methods = {
   post: {

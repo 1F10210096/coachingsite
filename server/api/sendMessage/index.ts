@@ -1,5 +1,11 @@
-import type { newComment } from '$/commonTypesWithClient/models';
-// Define the types for the methods of your API endpoint
+export type newComment = {
+  id: string;
+  roomId: string;
+  userId: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 export type Methods = {
   post: {
     reqBody: {

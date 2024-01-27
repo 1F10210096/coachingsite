@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import type { GameListModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -24,7 +25,7 @@ const AllSearch = () => {
     title: string;
     // 他のプロパティがあればここに追加
   }
-  const [gameList, setGamelist] = useState<Game[]>([]);
+  const [gameList, setGamelist] = useState<GameListModel[]>([]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -70,7 +71,7 @@ const AllSearch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: number) => {
     router.push(`../recruit?value=${id}`);
   };
 

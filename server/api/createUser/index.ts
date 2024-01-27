@@ -1,5 +1,14 @@
-import type { UserModel } from '$/commonTypesWithClient/models';
-// Define the types for the methods of your API endpoint
+export type UserModel = {
+  userId: string;
+  name: string;
+  myProfile: string | null;
+  rating?: number | null;
+  imageUrl: string | null;
+  created: Date;
+  game?: string;
+  studentId?: string;
+  teacherId?: string;
+};
 export type Methods = {
   post: {
     reqBody: {

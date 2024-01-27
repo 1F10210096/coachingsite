@@ -1,8 +1,4 @@
-import type {
-  BosyuuListModel,
-  GameListModel,
-  UserSummaryModel,
-} from 'commonTypesWithClient/models';
+import type { GameListModel, UserSummaryModel, newBosyuu } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -62,7 +58,7 @@ const Home = () => {
     return rating * 30;
   };
 
-  const [recruitList, setRecruitlist] = useState<BosyuuListModel[]>([]);
+  const [recruitList, setRecruitlist] = useState<newBosyuu[]>([]);
 
   const fetchRecruit = async () => {
     try {

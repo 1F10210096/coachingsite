@@ -18,5 +18,10 @@
     "incremental": true
   },
   "include": ["**/*.ts", "**/*.js", ".eslintrc.js"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "server/server.js",
+    "server/service/prismaClient.js",
+    "server/server.d.ts"
+  ]
 }

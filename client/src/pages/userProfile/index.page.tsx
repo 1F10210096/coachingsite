@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import type { BosyuuListModel } from 'commonTypesWithClient/models';
+import type { NewApp, UserListItem } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
@@ -109,8 +109,8 @@ const UserProfile = () => {
     }
   };
 
-  const [recruitList, setMyRecruitlist] = useState<BosyuuListModel[]>([]);
-  const [user2, setUser2] = useState<UserType[]>([]);
+  const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
+  const [user2, setUser2] = useState<NewApp[]>([]);
   type UserType = {
     id: number;
     name: string;
@@ -162,8 +162,8 @@ const UserProfile = () => {
   const [rating, setRating] = useState('');
   const [review, setReview] = useState('');
 
-  const handleButtonClick = (id: number) => {
-    setSelectedId(id);
+  const handleButtonClick = (id: string) => {
+    setSelectedId(Number(id));
   };
 
   const handleSubmit2 = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -270,7 +270,7 @@ const UserProfile = () => {
                             評価する
                           </button>
                         </div>
-                        {selectedId === application.id && (
+                        {selectedId === Number(application.id) && (
                           <form onSubmit={handleSubmit2}>
                             <div>
                               <label>

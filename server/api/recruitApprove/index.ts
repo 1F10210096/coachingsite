@@ -1,4 +1,11 @@
-import type { Application } from '$/commonTypesWithClient/models';
+export type Application = {
+  id: string;
+  bosyuuId: string;
+  hostId: string;
+  participantId: string;
+  createdAt: Date;
+  status: string;
+};
 
 export type Methods = {
   post: {

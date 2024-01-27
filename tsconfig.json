@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$/*": ["server/commonTypesWithClient/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -17,5 +21,12 @@
     "types": ["vitest/importMeta"],
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "*.js", ".eslintrc.js"]
+  "include": ["**/*.ts", "**/*.tsx", "*.js", ".eslintrc.js"],
+  "exclude": [
+    "node_modules",
+    "server/server.js",
+    "server/service/prismaClient.js",
+    "server/server.d.ts",
+    "server/server.ts"
+  ]
 }

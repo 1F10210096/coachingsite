@@ -1,4 +1,7 @@
-import type { GameListModel } from '$/commonTypesWithClient/models';
+export type GameListModel = {
+  id: number;
+  title: string;
+};
 
 export type Methods = {
   post: {

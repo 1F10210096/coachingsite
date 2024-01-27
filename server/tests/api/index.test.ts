@@ -1,11 +1,5 @@
-
-import type { UserId } from '$/commonTypesWithClient/ids';
-import type { UserModel } from '$/commonTypesWithClient/models';
-import { taskIdParser } from '$/service/idParsers';
-import type { Task } from '@prisma/client';
-import fastify from 'fastify';
 import { expect, test } from 'vitest';
-import { apiClient, testUser } from './apiClient';
+import { apiClient } from './apiClient';
 
 test('API接続確認', async () => {
   const res = await apiClient.health.$get();

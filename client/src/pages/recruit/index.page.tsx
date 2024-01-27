@@ -2,7 +2,6 @@
 /* eslint-disable max-lines */
 import type {
   ApexRankType,
-  BosyuuListModel,
   BosyuuListModel3,
   LessonTypesType,
   TagsType,

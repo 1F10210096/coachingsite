@@ -343,4 +343,4 @@ export type User3 = {
   rating: number | null;
   imageUrl: string | null;
   createdAt: Date;
-}
+};

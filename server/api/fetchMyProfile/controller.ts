@@ -1,5 +1,3 @@
-import { recruitDetailUsecase } from '$/usecase/recruitDetailUsecase';
-import { recruitListUsecase } from '$/usecase/recruitListUsecase';
 import { userUsecase } from '$/usecase/userUsecase';
 import { defineController } from './$relay';
 

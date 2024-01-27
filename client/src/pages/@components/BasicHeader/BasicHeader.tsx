@@ -1,4 +1,3 @@
-import type { UserModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -81,7 +80,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
           <button className={styles.searchButton} onClick={handleSearch} />
         </div>
         <div className={styles.contheme2}>
-          {(user !== null) ? (
+          {user !== null ? (
             <div className={styles.userSection8}>
               <Link href="/userProfile">
                 <span className={styles.userName}>

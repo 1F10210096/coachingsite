@@ -45,5 +45,5 @@ export const gameListRepository = {
       where: { genre: id },
     });
     return gameList.filter((game): game is GameList => game !== null).map(toGameListModel);
-  }
+  },
 };

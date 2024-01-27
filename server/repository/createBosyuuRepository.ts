@@ -1,4 +1,4 @@
-import type { BosyuuListModel, newBosyuu } from '$/commonTypesWithClient/models';
+import type { newBosyuu } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 // その他の必要なインポート
 

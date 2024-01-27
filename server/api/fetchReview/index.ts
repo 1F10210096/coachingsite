@@ -1,4 +1,4 @@
-import type { BosyuuListModel, reviewModel } from '$/commonTypesWithClient/models';
+import type { reviewModel } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {

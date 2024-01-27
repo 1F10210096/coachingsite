@@ -1,11 +1,11 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
+import router from 'next/router';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { loginWithEmail } from 'src/utils/login';
 import { useLoading } from '../@hooks/useLoading';
 import styles from './index.module.css';
-import router from 'next/router';
 
 const Login = () => {
   const { addLoading, removeLoading } = useLoading();

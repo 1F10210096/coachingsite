@@ -1,4 +1,4 @@
-import type { BosyuuListFrontModel, Name, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {

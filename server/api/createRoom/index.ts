@@ -1,4 +1,4 @@
-import type { RoomWithoutHostId, UserModel } from '$/commonTypesWithClient/models';
+import type { RoomWithoutHostId } from '$/commonTypesWithClient/models';
 // Define the types for the methods of your API endpoint
 export type Methods = {
   post: {

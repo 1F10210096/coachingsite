@@ -26,7 +26,6 @@ const AllSearch = () => {
   }
   const [gameList, setGamelist] = useState<Game[]>([]);
 
-
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {

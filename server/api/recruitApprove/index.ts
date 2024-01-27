@@ -1,4 +1,4 @@
-import type { Application, BosyuuListFrontModel } from '$/commonTypesWithClient/models';
+import type { Application } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {

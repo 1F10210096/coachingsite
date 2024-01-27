@@ -7,7 +7,7 @@ export default defineController(() => ({
     body: await createBosyuuUsecase.fetchinfo(
       body.user,
       body.title,
-      body. selectedGameIndex,
+      body.selectedGameIndex,
       body.selectedMyRankIndex,
       body.selectedRanksIndex,
       body.lessonType,

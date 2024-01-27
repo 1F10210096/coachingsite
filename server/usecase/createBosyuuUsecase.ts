@@ -16,7 +16,7 @@ export const createBosyuuUsecase = {
   ) => {
     console.log('usecaseにきてるよ');
     console.log('useAAAAAAAAAr', achevement);
-    console.log(lessonType)
+    console.log(lessonType);
     const bosyuu = await createBosyuuRepository(
       user,
       title,

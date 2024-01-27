@@ -28,6 +28,5 @@ export const userUsecase = {
     const userDetail = await userRepository.fetchMyProfile(userId);
     assert(userDetail !== null, 'userDetailはnullです');
     return userDetail;
-  }
-  
+  },
 };

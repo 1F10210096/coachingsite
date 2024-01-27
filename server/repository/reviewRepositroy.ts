@@ -26,17 +26,13 @@ export const reviewRepository = {
     });
 
     return sortedReviews.map((review) => ({
-      name: review.student?.user?.name || "", // name プロパティが null の場合は空の文字列に変換
-      imageUrl: ((review.student?.user?.imageUrl) ?? "") || "", // imageUrl プロパティが null の場合は空の文字列に変換
+      name: review.student?.user?.name || '', // name プロパティが null の場合は空の文字列に変換
+      imageUrl: (review.student?.user?.imageUrl ?? '') || '', // imageUrl プロパティが null の場合は空の文字列に変換
       rating: (review.rating ?? 0) || 0, // rating プロパティが null の場合は数値の 0 に変換
-      review: (review.review ?? "") || "", // review プロパティが null の場合は空の文字列に変換
+      review: (review.review ?? '') || '', // review プロパティが null の場合は空の文字列に変換
     }));
   },
-  updateReview: async (
-    selectedId: string,
-    rating: string,
-    review: string
-  ): Promise<NewApp> => {
+  updateReview: async (selectedId: string, rating: string, review: string): Promise<NewApp> => {
     try {
       // parseFloat を使って rating を数値に変換
       const numericRating = parseFloat(rating);

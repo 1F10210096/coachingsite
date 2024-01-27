@@ -1,5 +1,5 @@
-import { defineController } from './$relay';
 import { userUsecase } from '$/usecase/userUsecase';
+import { defineController } from './$relay';
 export default defineController(() => ({
   post: async ({ body }) => ({
     status: 201,

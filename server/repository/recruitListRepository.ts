@@ -1,8 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-lines */
-import type { BosyuuListModel, BosyuuListModel3, User3, UserImage } from '$/commonTypesWithClient/models';
+import type { BosyuuListModel3, User3 } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
-import type { BosyuuList, Teacher, User } from '@prisma/client';
+import type { BosyuuList, Teacher } from '@prisma/client';
 
 const toBosyuuListModel = (
   prismaBosyuuList: BosyuuList,
@@ -28,7 +28,7 @@ const toBosyuuListModel = (
       imageUrl: prismaUser,
     },
     userId: '',
-    bosyuuLists: []
+    bosyuuLists: [],
   },
   // 他の必要なBosyuuListのフィールド
 });
@@ -91,20 +91,24 @@ export const recruitListRepository = {
       });
       const models = await Promise.all(
         bosyuuLists.map(async (bosyuuList) => {
-          return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl');
+          return toBosyuuListModel(
+            bosyuuList,
+            bosyuuList.teacher,
+            bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl'
+          );
         })
       );
       return models;
     } catch (error) {
       console.error('Error fetching recruit list:', error);
-      throw error; 
+      throw error;
     }
   },
   fetchUserinfo: async (
     name: string,
     rating: string,
     profile: string
-  ):Promise<{models:BosyuuListModel3[],user:User3}> => {
+  ): Promise<{ models: BosyuuListModel3[]; user: User3 }> => {
     try {
       const user = await prismaClient.user.findFirst({
         where: {
@@ -123,11 +127,11 @@ export const recruitListRepository = {
             name: 'defaultName',
             myProfile: 'defaultProfile',
             rating: 3,
-            imageUrl:"",
-            createdAt:new Date()
+            imageUrl: '',
+            createdAt: new Date(),
             // User3型に必要な他のプロパティも適切に設定
-          },  // User3が見つからなかったことを示すためにnullを使用
-        };     
+          }, // User3が見つからなかったことを示すためにnullを使用
+        };
       }
       const bosyuuList = await prismaClient.bosyuuList.findMany({
         where: {
@@ -148,11 +152,15 @@ export const recruitListRepository = {
       const models = await Promise.all(
         bosyuuList.map(async (bosyuuList) => {
           // `findUnique` を使わずに、既に取得した `teacher` と `user` を使用
-          return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl');
+          return toBosyuuListModel(
+            bosyuuList,
+            bosyuuList.teacher,
+            bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl'
+          );
         })
       );
       console.log(user, 'user');
-      return {models, user};
+      return { models, user };
     } catch (error) {
       console.error('Error fetching recruit list:', error);
       throw error; // Re-throw the error for upstream handling
@@ -175,8 +183,11 @@ export const recruitListRepository = {
       });
       const models = await Promise.all(
         bosyuuList.map(async (bosyuuList) => {
-
-          return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl');
+          return toBosyuuListModel(
+            bosyuuList,
+            bosyuuList.teacher,
+            bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl'
+          );
         })
       );
       return models;
@@ -187,7 +198,7 @@ export const recruitListRepository = {
   },
   fetchCategoriesRecruit: async (Id: string): Promise<BosyuuListModel3[]> => {
     try {
-      console.log(Id, 'Id')
+      console.log(Id, 'Id');
       const gamesInSameGenre = await prismaClient.gameList.findMany({
         where: {
           genre: Id,
@@ -197,12 +208,12 @@ export const recruitListRepository = {
         },
       });
       console.log(gamesInSameGenre, 'gamesInSameGenre');
-  
+
       // 取得したゲームIDに一致する募集リストを取得
       const bosyuuLists = await prismaClient.bosyuuList.findMany({
         where: {
           gameId: {
-            in: gamesInSameGenre.map(g => g.id),
+            in: gamesInSameGenre.map((g) => g.id),
           },
         },
         include: {
@@ -217,13 +228,17 @@ export const recruitListRepository = {
           },
         },
       });
-  
-      const models = bosyuuLists.map(bosyuuList => {
-        return toBosyuuListModel(bosyuuList, bosyuuList.teacher, bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl');
+
+      const models = bosyuuLists.map((bosyuuList) => {
+        return toBosyuuListModel(
+          bosyuuList,
+          bosyuuList.teacher,
+          bosyuuList.teacher.user.imageUrl ?? 'defaultImageUrl'
+        );
       });
 
-      console.log(models, 'wwwwwmodels'); 
-  
+      console.log(models, 'wwwwwmodels');
+
       return models;
     } catch (error) {
       console.error('Error fetching recruit list:', error);

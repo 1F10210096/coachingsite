@@ -1,6 +1,6 @@
-import { convertPngRepository } from "$/repository/convertPngRepository";
+import { convertPngRepository } from '$/repository/convertPngRepository';
 
-convertPngRepository
+convertPngRepository;
 export const updateUserUsecase = {
   fetchinfo: async (selectedFile: string) => {
     console.log('updateUserUsecase.fetchinfo');

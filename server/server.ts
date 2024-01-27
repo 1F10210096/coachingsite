@@ -52,7 +52,7 @@ wss.on('connection', (ws, request) => {
           where: { id: roomId },
         });
         console.log(gameTitle, 'wadawdad');
-        console.log(gameId, 'wadawdad');  
+        console.log(gameId, 'wadawdad');
         console.log(date, 'wadawdad');
         console.log(time, 'wadawdad');
 
@@ -68,7 +68,18 @@ wss.on('connection', (ws, request) => {
           if (clientWebSocket) {
             console.log(`承諾用URLを送信します: ${url}`);
             // URLを対象のクライアントに送信
-            clientWebSocket.send(JSON.stringify({ type: 'url', url, gameTitle, gameId, date, time, userNumber, userId }));
+            clientWebSocket.send(
+              JSON.stringify({
+                type: 'url',
+                url,
+                gameTitle,
+                gameId,
+                date,
+                time,
+                userNumber,
+                userId,
+              })
+            );
           } else {
             console.log(
               `指定されたユーザーIDに関連付けられたWebSocketクライアントが見つかりませんでした: ${userId}`

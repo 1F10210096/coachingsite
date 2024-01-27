@@ -37,7 +37,6 @@ const lolImageMap = {
 
 const defaultImage = 'default.png';
 
-
 const getImagePath = (Id: number, rank: number) => {
   let imageMap: { [rank: number]: string } | undefined;
   if (Id === 1) {
@@ -45,9 +44,8 @@ const getImagePath = (Id: number, rank: number) => {
   } else if (Id === 2) {
     imageMap = apexImageMap;
   } else if (Id === 3) {
-    imageMap = lolImageMap; 
-  }
-  else {
+    imageMap = lolImageMap;
+  } else {
     console.log('default');
   }
   if (!imageMap) {

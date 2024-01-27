@@ -1,5 +1,9 @@
 /* eslint-disable complexity */
-import type { Name, UserSummaryDetailModel, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type {
+  Name,
+  UserSummaryDetailModel,
+  UserSummaryModel,
+} from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 

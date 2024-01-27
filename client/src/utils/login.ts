@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   sendEmailVerification,
-
   updateProfile,
 } from 'firebase/auth';
 import { createAuth } from 'src/utils/firebase';
@@ -105,4 +104,3 @@ const handleLogout = async () => {
 function signInWithEmailAndPassword(auth: Auth, email: string, password: string) {
   throw new Error('Function not implemented.');
 }
-

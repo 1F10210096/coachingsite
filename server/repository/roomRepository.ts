@@ -59,7 +59,7 @@ export const roomRepository = {
 
     return commentsWithImages;
   },
-  fetchRecruitDetail: async (Id: string) : Promise<UserListItem | null>=> {
+  fetchRecruitDetail: async (Id: string): Promise<UserListItem | null> => {
     try {
       // ルームのIDに基づいてBosyuuListを検索
       const room = await prisma.room.findUnique({

@@ -1,4 +1,3 @@
-import { popRecruitListUsecase } from '$/usecase/popRecruitListUsecase';
 import { recruitListUsecase } from '$/usecase/recruitListUsecase';
 import { defineController } from './$relay';
 

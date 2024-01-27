@@ -1,5 +1,5 @@
-import assert from 'assert';
 import { commentRepository } from '$/repository/commentRepository';
+import assert from 'assert';
 export const commentUsecase = {
   fetchinfo: async (Id: string, userId: string, message: string) => {
     console.log('createU');
@@ -7,5 +7,4 @@ export const commentUsecase = {
     assert(comment !== null, 'commentrはnullです');
     return comment;
   },
-  
 };

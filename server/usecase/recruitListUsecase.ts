@@ -1,4 +1,4 @@
-import type { BosyuuListModel, BosyuuListModel3, User3 } from '$/commonTypesWithClient/models';
+import type { BosyuuListModel3, User3 } from '$/commonTypesWithClient/models';
 import { recruitListRepository } from '$/repository/recruitListRepository';
 
 import assert from 'assert';
@@ -18,14 +18,14 @@ export const recruitListUsecase = {
   fetchUserinfo: async (
     name: string,
     rating: string,
-    profile: string,
-): Promise<{models:BosyuuListModel3[],user:User3}> => {
+    profile: string
+  ): Promise<{ models: BosyuuListModel3[]; user: User3 }> => {
     console.log('recruitListUsecase.fetchUserinfo');
     const recuritList = await recruitListRepository.fetchUserinfo(name, rating, profile);
     assert(recuritList !== null, 'gameListはnullです');
     return recuritList;
   },
-  fetchAllInfo: async (): Promise<BosyuuListModel3[]> => { 
+  fetchAllInfo: async (): Promise<BosyuuListModel3[]> => {
     console.log('recruitListUsecase.fetchAllInfo');
     const recuritList = await recruitListRepository.fetchAllInfo();
     assert(recuritList !== null, 'gameListはnullです');

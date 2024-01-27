@@ -1,4 +1,4 @@
-import type { BosyuuListFrontModel, BosyuuListModel, CommentsWithImages, msgModel } from '$/commonTypesWithClient/models';
+import type { CommentsWithImages } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {

@@ -1,15 +1,6 @@
-import { firebaseAdmin } from '$/middleware/firebaseAdmin';
-import { API_BASE_PATH, FIREBASE_AUTH_EMULATOR_HOST, PORT } from '$/service/envValues';
+import { API_BASE_PATH, PORT } from '$/service/envValues';
 import aspida from '@aspida/axios';
 import axios from 'axios';
-import { initializeApp } from 'firebase/app';
-import {
-  GithubAuthProvider,
-  connectAuthEmulator,
-  getAuth,
-  signInWithCredential,
-} from 'firebase/auth';
-import { afterAll, beforeAll } from 'vitest';
 import api from '../../api/$api';
 
 // export const testUser = { name: 'vitest-user', email: 'vitest@example.com' };

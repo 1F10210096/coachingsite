@@ -6,23 +6,22 @@ import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import styles from './BasicHeader.module.css';
 
-export const BasicHeader = ({ user }: { user?: UserModel }) => {
+export const BasicHeader = ({ user }: { user?: string }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [myProfile, setMyProfile] = useState([]);
+  const [myProfile, setMyProfile] = useState<string | null>(null);
 
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
   const router = useRouter();
 
   // URLのクエリパラメーターからvalueを取得
   const { value } = router.query;
-  console.log(value);
 
   // ボタンがクリックされたときに呼ばれる関数
-  const handleButtonClick = (buttonName) => {
+  const handleButtonClick = (buttonName: string) => {
     setSelectedButton(buttonName);
   };
 
@@ -30,8 +29,6 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        // ユーザーがログインしている場合、ユーザー情報をセット
-        console.log(firebaseUser);
         setUserId(firebaseUser.uid);
       } else {
         setUserId(null);
@@ -43,18 +40,22 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
   const fetchRecruit = async () => {
     try {
       setIsLoading(true); // ローディング開始
-      const response = await apiClient.fetchMyProfile.post({
-        body: { Id: userId },
-      });
-      setMyProfile(response.body);
+      if (userId !== null) {
+        const response = await apiClient.fetchMyProfile.post({
+          body: { Id: userId },
+        });
+        setMyProfile(response.body.name);
+      } else {
+        // userId が null の場合の処理
+      }
       setIsLoading(false); // ローディング終了
     } catch (error) {
-      console.error('プロファイルの取得に失敗しました:', error);
       setIsLoading(false); // エラーが発生してもローディング終了
     }
   };
   useEffect(() => {
     fetchRecruit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const handleSearch = () => {
@@ -80,11 +81,12 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
           <button className={styles.searchButton} onClick={handleSearch} />
         </div>
         <div className={styles.contheme2}>
-          {user ? (
+          {(user !== null) ? (
             <div className={styles.userSection8}>
               <Link href="/userProfile">
                 <span className={styles.userName}>
-                  ようこそ, <span className={styles.userName2}>{myProfile.name}</span>さん
+                  ようこそ,
+                  <span className={styles.userName2}>{myProfile}</span>さん
                 </span>
               </Link>
               <Link href="/bosyuuDescription">
@@ -108,7 +110,7 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
         <div className={styles.contheme}>
           <Link href="/">
             <button
-              className={!value ? styles.selectedButton : styles.button}
+              className={value?.length === 0 ? styles.selectedButton : styles.button}
               onClick={() => handleButtonClick('おすすめ')}
             >
               おすすめ
@@ -131,7 +133,9 @@ export const BasicHeader = ({ user }: { user?: UserModel }) => {
           <button className={styles.button}>CSGO</button>
           <button className={styles.button}>COD 2</button>
           <button className={styles.button}>OverWatch2</button>
-          <button className={styles.button}>すべて見る</button>
+          <Link href="/allSearch">
+            <button className={styles.button}>すべて見る</button>
+          </Link>
         </div>
       </div>
     </>

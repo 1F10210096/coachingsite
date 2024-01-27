@@ -223,7 +223,7 @@
 
 .allparent {
   position: absolute; /* 絶対位置指定 */
-  top: 1560px; 
+  top:1160px; 
   left: 50%; /* 水平方向の中央 */
   height: auto;
   transform: translate(-50%, -50%); /* X軸とY軸の両方で中央揃え */

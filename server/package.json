@@ -43,6 +43,7 @@
     "@aspida/axios": "^1.14.0",
     "@types/busboy": "^1.5.0",
     "@types/node": "^20.4.10",
+    "@types/uuid": "^9.0.8",
     "axios": "^1.4.0",
     "commonTypesWithClient": "file:./commonTypesWithClient",
     "esbuild": "^0.18.18",

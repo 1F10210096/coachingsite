@@ -12,7 +12,7 @@
   left: 50%; /* 水平方向の中央 */
   width: 100%;
   height: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
 
@@ -127,10 +127,6 @@
   border-bottom: 2px solid rgb(142 142 142);
 }
 
-/* チェックボックスのカスタムスタイル */
-.rankCheckboxes input[type='checkbox'] {
-  display: none; /* デフォルトのチェックボックスを隠す */
-}
 
 .rankCheckboxes input[type='checkbox'] + span {
   position: relative;
@@ -160,16 +156,7 @@
   content: '✔';
 }
 
-/* ラベルのスタイル */
-.rankCheckboxes label {
-  display: block;
-  margin-bottom: 10px;
-}
 
-/* ラベルのホバー効果 */
-.rankCheckboxes label:hover span::before {
-  border-color: #007bff;
-}
 
 .homeContainer {
   position: relative;
@@ -180,7 +167,7 @@
   width: 300px;
   height: 30px;
   color: rgb(82 82 82);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .home {
@@ -190,7 +177,7 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .home:hover {
@@ -220,5 +207,5 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px; /* 文字の大きさを17pxに設定する */
   color: rgb(179 173 173);
-  background-color: #ffffff; /* 背景色を灰色に設定する */
+  background-color: #fff; /* 背景色を灰色に設定する */
 }

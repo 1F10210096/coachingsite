@@ -1,9 +1,9 @@
-import type { User } from 'firebase/auth';
+import type { Auth, User } from 'firebase/auth';
 import {
   createUserWithEmailAndPassword,
   getAuth,
   sendEmailVerification,
-  signInWithEmailAndPassword,
+
   updateProfile,
 } from 'firebase/auth';
 import { createAuth } from 'src/utils/firebase';
@@ -46,7 +46,7 @@ export const logout = async () => {
   }
 };
 // メールとパスワードでログイン
-export const loginWithEmail = async (email, password) => {
+export const loginWithEmail = async (email: string, password: string) => {
   // eslint-disable-next-line no-useless-catch
   try {
     console.log(auth, email, password);
@@ -102,3 +102,7 @@ const handleLogout = async () => {
     // エラーハンドリング
   }
 };
+function signInWithEmailAndPassword(auth: Auth, email: string, password: string) {
+  throw new Error('Function not implemented.');
+}
+

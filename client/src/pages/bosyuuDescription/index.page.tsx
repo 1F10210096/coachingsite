@@ -2,14 +2,16 @@
 /* eslint-disable complexity */
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { apiClient } from 'src/utils/apiClient';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
-  const [selectedGame, setSelectedGame] = useState('');
-  const [selectedRanks, setSelectedRanks] = useState([]);
-  const [selectedMyRanks, setSelectedMyRanks] = useState([]);
+  const [selectedGame, setSelectedGame] = useState<GameKey | undefined>();
+  // ジェネリック型を使って初期化
+  const [selectedRanks, setSelectedRanks] = useState<string[]>([]);
+  const [selectedMyRanks, setSelectedMyRanks] = useState<string>('');
+
+  type GameKey = keyof typeof games;
   const games = {
     VALORANT: [
       'アイアン',
@@ -34,13 +36,13 @@ const YourComponent = () => {
       'チャレンジャー',
     ],
     CSGO: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-    "COD 2": ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    'COD 2': ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
     OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
   };
 
   const stepTitles = ['ゲーム選択', 'ランク選択', '詳細情報', '注意事項'];
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -59,15 +61,21 @@ const YourComponent = () => {
     return () => unsubscribe();
   }, []);
 
-  const [selectedGameIndex, setSelectedGameIndex] = useState();
-  const [selectedMyRankIndex, setSelectedMyRankIndex] = useState([]);
-  const handleGameChange = (event) => {
+  const [selectedGameIndex, setSelectedGameIndex] = useState<number | undefined>();
+
+  const [selectedMyRankIndex, setSelectedMyRankIndex] = useState<number>();
+  const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const gameName = event.target.value;
-    setSelectedGame(gameName);
+    if (['VALORANT', 'LOL', 'CSGO', 'COD 2', 'OverWatch2'].includes(gameName)) {
+      setSelectedGame(gameName as GameKey);
+    }
 
     // ゲームの名前からインデックスを見つける
     const gameIndex = Object.keys(games).indexOf(gameName) + 1; // インデックスは0から始まるので、1を足す
-    setSelectedGame(event.target.value);
+    if (['VALORANT', 'LOL', 'CSGO', 'COD 2', 'OverWatch2'].includes(event.target.value)) {
+      setSelectedGame(event.target.value as GameKey);
+    }
+
     // インデックスを保存する
     setSelectedGameIndex(gameIndex);
 
@@ -75,26 +83,28 @@ const YourComponent = () => {
     setSelectedRanks([]);
   };
 
-  const handleMyRankChange = (event) => {
+  const handleMyRankChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedRank = event.target.value;
 
     // 現在選択されているゲームのランク配列を取得
-    const currentGameRanks = games[selectedGame];
+    const currentGameRanks = selectedGame ? games[selectedGame] : undefined;
 
-    // 選択されたランクのインデックスを見つける
-    const rankIndex = currentGameRanks.indexOf(selectedRank) + 1; // インデックスは0から始まるので、1を足す
-    setSelectedMyRanks(event.target.value);
-    // インデックスを保存する
-    setSelectedMyRankIndex(rankIndex);
+    if (currentGameRanks) {
+      const rankIndex = currentGameRanks.indexOf(selectedRank) + 1; // インデックスは0から始まるので、1を足す
+      setSelectedMyRanks(event.target.value);
+      setSelectedMyRankIndex(rankIndex);
+    } else {
+      // currentGameRanks が undefined の場合の処理
+      // 例えば、エラーメッセージを表示する、何もしない、デフォルト値を設定するなど
+    }
   };
+  const [selectedRanksIndex, setSelectedRanksIndex] = useState<number[]>([]);
 
-  const [selectedRanksIndex, setSelectedRanksIndex] = useState([]);
-
-  const handleRankChange = (rank) => {
-    const ranksArray = games[selectedGame];
+  const handleRankChange = (rank: string) => {
+    const ranksArray = selectedGame ? games[selectedGame] : undefined;
 
     // ランクの名前からインデックスを見つけます。
-    const rankIndex = ranksArray.indexOf(rank);
+    const rankIndex = ranksArray?.indexOf(rank);
 
     // 選択されたランクの名前に基づいて状態を更新します。
     setSelectedRanks((prevRanks) =>
@@ -102,11 +112,14 @@ const YourComponent = () => {
     );
 
     // 選択されたランクのインデックスに基づいて別の状態を更新します。
-    setSelectedRanksIndex((prevRanksIndex) =>
-      prevRanksIndex.includes(rankIndex)
-        ? prevRanksIndex.filter((index) => index !== rankIndex)
-        : [...prevRanksIndex, rankIndex]
-    );
+    // rankIndex が undefined の場合は処理を行わない
+    if (typeof rankIndex === 'number') {
+      setSelectedRanksIndex((prevRanksIndex) =>
+        prevRanksIndex.includes(rankIndex)
+          ? prevRanksIndex.filter((index) => index !== rankIndex)
+          : [...prevRanksIndex, rankIndex]
+      );
+    }
   };
 
   const handleNextStep = () => {
@@ -122,43 +135,43 @@ const YourComponent = () => {
 
   const [title, setTitle] = useState(''); // React の state hook
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value); // 入力された値を state にセット
   };
 
   const [description, setDescription] = useState(''); // React の state hook
 
-  const handleChangeDescription = (event) => {
+  const handleChangeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(event.target.value); // 入力された値を state にセット
   };
 
   const [lessonType, setLessonType] = useState(''); // React の state hook
 
-  const handleChangeLessonType = (event) => {
+  const handleChangeLessonType = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLessonType(event.target.value); // 入力された値を state にセット
   };
 
   const [acheavement, setAcheavement] = useState(''); // React の state hook
 
-  const handleAcheavement = (event) => {
+  const handleAcheavement = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAcheavement(event.target.value); // 入力された値を state にセット
   };
 
   const [notes, setNotes] = useState('');
-  const handleNotes = (event) => {
+  const handleNotes = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNotes(event.target.value); // 入力された値を state にセット
   };
 
   const [suchedule, setSuchedule] = useState('');
-  const handleSuchedule = (event) => {
+  const handleSuchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSuchedule(event.target.value); // 入力された値を state にセット
   };
 
   const tags = ['初心者歓迎', '上級者歓迎', 'スパルタ指導', '仲良くワイワイ']; // 例としてのタグリスト
 
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const handleTagChange = (tag) => {
+  const handleTagChange = (tag: string) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
@@ -166,8 +179,7 @@ const YourComponent = () => {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(acheavement);
     try {
       const coachData = {
@@ -188,21 +200,21 @@ const YourComponent = () => {
       const unknownRanks = selectedMyRanks as unknown;
       const unknownGame = unknownRanks as number;
       console.log(lessonType);
-      const response = await apiClient.createBosyuu.post({
-        body: {
-          user,
-          title,
-          selectedGameIndex,
-          selectedMyRankIndex,
-          lessonType,
-          selectedRanksIndex,
-          selectedTags,
-          acheavement,
-          description,
-          suchedule,
-          notes,
-        },
-      });
+      // const response = await apiClient.createBosyuu.post({
+      //   body: {
+      //     user,
+      //     title,
+      //     selectedGameIndex,
+      //     selectedMyRankIndex,
+      //     lessonType,
+      //     selectedRanksIndex,
+      //     selectedTags,
+      //     acheavement,
+      //     description,
+      //     suchedule,
+      //     notes,
+      //   },
+      // });
       // 成功時の処理（例：リダイレクト等）
     } catch (error) {
       console.error('エラー:', error);
@@ -237,7 +249,7 @@ const YourComponent = () => {
       </div>
       {step === 1 && (
         <>
-          <div className={styles.a}>
+          <div className={styles.as}>
             <label className={styles.mail}>対象ゲームを選択してください</label>
             <select
               id="game-select"
@@ -264,7 +276,7 @@ const YourComponent = () => {
               disabled={!selectedGame}
             >
               <option value="">自分のランクを選択してください</option>
-              {selectedGame && games.hasOwnProperty(selectedGame) ? (
+              {selectedGame && Object.prototype.hasOwnProperty.call(games, selectedGame) ? (
                 games[selectedGame].map((rank) => (
                   <option key={rank} value={rank}>
                     {rank}
@@ -277,7 +289,7 @@ const YourComponent = () => {
               )}
             </select>
 
-            {selectedGame && games[selectedGame] ? (
+            {selectedGame && games[selectedGame].length > 0 ? (
               <div>
                 <label htmlFor="rank-select" className={styles.subjectRank}>
                   対象ランクを選択してください
@@ -312,7 +324,7 @@ const YourComponent = () => {
       )}
 
       {step === 2 && (
-        <div className={styles.a}>
+        <div className={styles.as}>
           <div className={styles.title}>募集タイトルを入力してください</div>
           <input
             type="text"
@@ -348,7 +360,7 @@ const YourComponent = () => {
       )}
 
       {step === 3 && (
-        <div className={styles.a}>
+        <div className={styles.as}>
           <div className={styles.title}>スケジュールを入力してください</div>
           <input
             type="text"

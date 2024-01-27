@@ -1,4 +1,4 @@
-const tagImages = {
+const tagImages: { [key: string]: string } = {
   初心者歓迎: 'beginner.png',
   上級者歓迎: 'wellplayer.png',
   エイム強化: 'aim.png',
@@ -11,7 +11,6 @@ const tagImages = {
 
 const getTagImagePath = (tag: string) => {
   console.log(tag);
-  console.log(tagImages[tag]);
   return `/tags/${tagImages[tag] || 'default.png'}`;
 };
 export default getTagImagePath;

@@ -5,8 +5,9 @@ import type { User } from '@prisma/client';
 const toUserModel = (prismaUser: User): UserModel => ({
   userId: prismaUser.userId,
   name: prismaUser.name,
-  imageUrl: prismaUser.imageUrl ?? null, // nullの場合にundefinedを使用
-  created: prismaUser.createdAt.getTime(),
+  myProfile: prismaUser.myProfile, // 'myProfile' プロパティを追加
+  imageUrl: prismaUser.imageUrl ?? null, // 'null' の場合に 'undefined' を使用
+  created: prismaUser.createdAt,
 });
 export const createUserRepository = async (
   userId: string,

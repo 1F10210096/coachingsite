@@ -1,4 +1,4 @@
-import type { reviewModel } from '$/commonTypesWithClient/models';
+import type { NewApp, reviewModel } from '$/commonTypesWithClient/models';
 import { reviewRepository } from '$/repository/reviewRepositroy';
 
 import assert from 'assert';
@@ -14,7 +14,7 @@ export const reviewUsecase = {
     selectedId: string,
     rating: string,
     review: string,
-  ): Promise<reviewModel[]> => {
+  ): Promise<NewApp> => {
     console.log('reviewUsecase.fetchinfo');
     const review1 = await reviewRepository.updateReview(selectedId, rating, review);  
     assert(review1 !== null, 'reviewはnullです');

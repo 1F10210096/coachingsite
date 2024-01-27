@@ -1,0 +1,106 @@
+.allContainer {
+  display: flex;
+  align-items: center; /* 垂直方向（上下）の中央揃え */
+  justify-content: center; /* 水平方向（左右）の中央揃え */
+  width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  background-color: rgb(255 255 255);
+}
+
+.title {
+  padding-bottom: 10px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: rgb(99 99 99);
+  border-bottom: 2px solid rgb(99 99 99);
+}
+
+.homeContainer {
+  position: relative;
+  top: 140px;
+  left: 200px;
+  display: flex;
+  align-items: center; /* アイテムを垂直方向の中央に配置 */
+  width: 300px;
+  height: 30px;
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+}
+
+.home {
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home2 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+  background-color: #fff;
+}
+
+.home2:hover {
+  color: rgb(120 120 255); /* ホバー時の文字色を変更 */
+  text-decoration: none; /* ホバー時に下線を消去 */
+}
+
+.home3 {
+  position: relative;
+  margin-left: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px; /* 文字の大きさを17pxに設定する */
+  color: rgb(179 173 173);
+  background-color: #fff; /* 背景色を灰色に設定する */
+}
+
+.allSearch {
+  position: relative;
+  top: 200px;
+  right: 100px;
+  width: 300px;
+  height: 400px;
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+}
+
+.searchContainer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+}
+
+.smallContainer {
+  display: flex;
+  flex-direction: row; /* 横並びにする */
+  align-items: center; /* 縦方向の中央揃え（子要素に対して） */
+  width: 300px;
+  height: 50px;
+  padding-bottom: 10px;
+  margin-bottom: 1rem;
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+  border-bottom: 1px solid rgb(208 208 208);
+}
+
+.aw {
+  position: relative;
+  font-size: 17px;
+  color: rgb(82 82 82);
+}

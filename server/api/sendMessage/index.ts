@@ -1,4 +1,4 @@
-import type { UserModel } from '$/commonTypesWithClient/models';
+import type { newComment } from '$/commonTypesWithClient/models';
 // Define the types for the methods of your API endpoint
 export type Methods = {
   post: {
@@ -7,6 +7,6 @@ export type Methods = {
       userId: string;
       message: string;
     };
-    resBody: UserModel;
+    resBody: newComment;
   };
 };

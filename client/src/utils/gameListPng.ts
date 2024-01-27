@@ -1,6 +1,4 @@
-// utils/getRankImagePath.js
-
-const gameListImageMap = {
+const gameListImageMap: { [key: number]: string } = {
   1: 'valorant.png',
   2: 'apex.png',
   3: 'lol.png',
@@ -9,9 +7,9 @@ const gameListImageMap = {
   6: 'fortnite.png',
 };
 
-const getGameListImagePath = (game) => {
+const getGameListImagePath = (game: number) => {
   console.log(gameListImageMap[game]);
-  return gameListImageMap[game] || 'default.png'; // デフォルト画像がある場合はそれを返す
+  return gameListImageMap[game] || 'default.png';
 };
 
 export default getGameListImagePath;

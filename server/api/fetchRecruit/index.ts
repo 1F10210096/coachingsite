@@ -1,4 +1,4 @@
-import type { BosyuuListModel } from '$/commonTypesWithClient/models';
+import type { BosyuuListModel3 } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
@@ -9,6 +9,6 @@ export type Methods = {
       tag: string[];
       lessonTypes: string[];
     };
-    resBody: BosyuuListModel[];
+    resBody: BosyuuListModel3[];
   };
 };

@@ -35,10 +35,11 @@ const lolImageMap = {
   9: 'challe.png',
 };
 
+const defaultImage = 'default.png';
+
 
 const getImagePath = (Id: number, rank: number) => {
-
-  let imageMap;
+  let imageMap: { [rank: number]: string } | undefined;
   if (Id === 1) {
     imageMap = valoImageMap;
   } else if (Id === 2) {
@@ -48,6 +49,10 @@ const getImagePath = (Id: number, rank: number) => {
   }
   else {
     console.log('default');
+  }
+  if (!imageMap) {
+    console.log('default');
+    return `/${defaultImage}`;
   }
   return `/${imageMap[rank] || 'default.png'}`;
 };

@@ -1,7 +1,7 @@
-import type { BosyuuListModel } from '$/commonTypesWithClient/models';
+import type { newBosyuu } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
-    resBody: BosyuuListModel[];
+    resBody: newBosyuu[];
   };
 };

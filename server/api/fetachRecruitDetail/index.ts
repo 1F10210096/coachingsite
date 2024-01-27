@@ -1,10 +1,10 @@
-import type { BosyuuListFrontModel } from '$/commonTypesWithClient/models';
+import type { BosyuuListFrontModel, UserSummaryDetailModel, reviewModel2 } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
     reqBody: {
       Id: string;
     };
-    resBody: BosyuuListFrontModel;
+    resBody: {bosyuuListFront: BosyuuListFrontModel; teacherProfile: UserSummaryDetailModel;reviewList:reviewModel2[]};
   };
 };

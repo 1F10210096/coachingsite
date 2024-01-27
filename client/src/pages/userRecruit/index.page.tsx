@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 import type { BosyuuListModel, UserSummaryDetailModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import type { DateTimeFormatOptions } from 'intl';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
@@ -8,7 +10,6 @@ import getImagePath from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
-import Link from 'next/link';
 
 const UserProfile = () => {
   const router = useRouter();
@@ -31,13 +32,13 @@ const UserProfile = () => {
         console.log(firebaseUser);
         setUser(firebaseUser.uid);
       } else {
-        setUser(null);
+        console.log('ユーザーがログインしていません');
       }
     });
     return () => unsubscribe();
   }, []);
 
-  const fetchRecruit = async (name, rating, profile) => {
+  const fetchRecruit = async (name: string, rating: string, profile: string) => {
     try {
       console.log(name, rating, profile);
       const response = await apiClient.fetchUserRecritList.post({
@@ -47,11 +48,13 @@ const UserProfile = () => {
           profile,
         },
       });
+      const responseBody = response.body as unknown as {
+        models: BosyuuListModel[];
+        user: UserSummaryDetailModel;
+      };
+      setRecruitlist(responseBody.models);
+      setUserDetail(responseBody.user);
       console.log(response.body);
-      setRecruitlist(response.body.models);
-      setUserDetail(response.body.user);
-
-      console.log(response.body.user);
       console.log(response.body);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
@@ -62,8 +65,9 @@ const UserProfile = () => {
     // ...
 
     // ルータークエリの値が更新されたときにfetchRecruitを呼び出す
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (name && rating && profile) {
-      fetchRecruit(name, rating, profile);
+      fetchRecruit(name as string, rating as string, profile as string);
     }
   }, [name, rating, profile]);
 
@@ -85,8 +89,8 @@ const UserProfile = () => {
     return `/${directory}/${rankImage}`;
   };
 
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  function formatDate(dateString: Date) {
+    const options: DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const date = new Date(dateString);
     return date
       .toLocaleDateString('ja-JP', options)
@@ -130,13 +134,12 @@ const UserProfile = () => {
     <div>
       <BasicHeader user={user} />
       <div className={styles.allContainer}>
-      <div className={styles.homeContainer}>
+        <div className={styles.homeContainer}>
           <Link href="/">
             <div className={styles.home}>ホーム</div>
           </Link>
-          <div className={styles.home3}>></div>
-<div className={styles.home2}>{userDetail?.name}</div>
-
+          <div className={styles.home3}>{'>'}</div>
+          <div className={styles.home2}>{userDetail?.name}</div>
         </div>
         <div className={styles.titleContainer}>コーチの情報</div>
         <div className={styles.profileContainer}>
@@ -149,7 +152,10 @@ const UserProfile = () => {
               ★★★★★
               <span
                 className={styles.rateInner}
-                style={{ width: `${calculateRateWidth(userDetail?.rating)}px` }}
+                style={{
+                  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                  width: `${userDetail ? calculateRateWidth(userDetail?.rating ?? 0) : 0}px`,
+                }}
               >
                 ★★★★★
               </span>
@@ -166,24 +172,27 @@ const UserProfile = () => {
           </div>
         </div>
         <div className={styles2.gameTitleContainer}>
-        <div className={styles2.gameTitle}>ゲーム一覧</div>
-        <div className={styles2.gameSort} onClick={() => handleSortClick(RecruitList)}>
-          ランク順に並び替え
-        </div>
+          <div className={styles2.gameTitle}>ゲーム一覧</div>
+          <div className={styles2.gameSort} onClick={() => handleSortClick(RecruitList)}>
+            ランク順に並び替え
+          </div>
         </div>
         <div className={styles2.helpwanted}>
           {currentItems.map((item) => (
-            <div
-              key={item.id}
-              className={styles2.container}
-              onClick={() => handleClick(item.id, item.gameId)}
-            >
+            <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>
               <div className={styles2.flexContainer}>
                 <img
-                  src={item.teacher.user.imageUrl}
+                  src={
+                    item.teacher.user.imageUrl !== null &&
+                    item.teacher.user.imageUrl !== undefined &&
+                    item.teacher.user.imageUrl !== ''
+                      ? item.teacher.user.imageUrl
+                      : 'default-image-url.jpg'
+                  }
                   alt="User"
                   className={styles2.userImageDetail}
                 />
+
                 <p className={styles2.title}>{item.title}</p>
                 <div className={styles2.rank}>
                   <img

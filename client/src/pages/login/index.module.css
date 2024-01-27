@@ -13,10 +13,11 @@
 
 .loginButton {
   position: relative;
-  top: 50px;;  
+  top: -50px;
+  left: 15%;
+  width: 500px;
   padding: 10px 15px;
   color: white;
-  width: 400px;
   cursor: pointer;
   background-color: #007bff;
   border: none;
@@ -35,19 +36,18 @@
 }
 
 .loginTitle {
-  position: absolute;
-  top: 120px;
-  left: 50%;
+  position: relative;
+  left: 40%;
+  width: 500px;
   font-size: 30px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .kaninn {
   position: absolute;
-  top: 180px;
-  left: 65%;
+  top: 63px;
+  left: 71%;
   font-size: 15px;
   color: #0141c193;
   transform: translateX(-50%); /* 左に50%ずらす */
@@ -59,9 +59,9 @@
 
 .searchmail {
   position: relative;
-  top: -50px;
-  left: 10%;
-  width: 600px;
+  top: -110px;
+  left: 15%;
+  width: 500px;
   height: 65px;
   padding: 10px;
   font-size: 16px;
@@ -76,8 +76,8 @@
 
 .mail {
   position: absolute;
-  top: 210px;
-  left: 35%;
+  top: 130px;
+  left: 20%;
   font-size: 20px;
   font-weight: bold;
   color: #000;
@@ -85,9 +85,9 @@
 }
 
 .password {
-  position: absolute;
-  top: 370px;
-  left: 36%;
+  position: relative;
+  top: -100px;
+  left: 320px;
   font-size: 20px;
   font-weight: bold;
   color: #000;
@@ -96,9 +96,9 @@
 
 .searchpass {
   position: relative;
-  top: -px;
-  left: 10%;
-  width: 600px;
+  top: -100px;
+  left: 15%;
+  width: 500px;
   height: 65px;
   padding: 10px;
   font-size: 16px;
@@ -109,4 +109,15 @@
 
 .searchpass:focus {
   border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.box {
+  position: absolute;
+  top: 200px;
+  left: 42%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  transform: translateX(-50%); /* 左に50%ずらす */
 }

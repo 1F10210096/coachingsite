@@ -8,7 +8,7 @@ const toUserModel = (prismaUser: User): UserModel => ({
   name: prismaUser.name,
   myProfile: prismaUser.myProfile,
   imageUrl: prismaUser.imageUrl ?? null, // nullの場合にundefinedを使用
-  created: prismaUser.createdAt.getTime(),
+  created: prismaUser.createdAt,
 });
 
 export const updateUserRepository = async (

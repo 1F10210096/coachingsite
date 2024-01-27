@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable complexity */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-lines */
@@ -8,6 +9,7 @@ import type {
   reviewModel,
 } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -35,7 +37,7 @@ const Login = () => {
         console.log(firebaseUser);
         setUser(firebaseUser.uid);
       } else {
-        setUser(null);
+        console.log('error');
       }
     });
     return () => unsubscribe();
@@ -52,7 +54,7 @@ const Login = () => {
         },
       });
       console.log(response.body);
-      setRecruitDetail(response.body.bosyuuDetail);
+      setRecruitDetail(response.body.bosyuuListFront);
       setUserDetail(response.body.teacherProfile);
 
       setReviews(response.body.reviewList);
@@ -98,21 +100,26 @@ const Login = () => {
     try {
       console.log(RecruitDetail?.id);
       console.log(user);
-      const response = await apiClient.createRoom.post({
-        body: {
-          Id: RecruitDetail.id,
-          myId: user,
-        },
-      });
-      setRecruitDetail(response.body);
-      router.push(`../dm?id=${response.body.id}`);
+      if (RecruitDetail !== null) {
+        const response = await apiClient.createRoom.post({
+          body: {
+            Id: RecruitDetail.id,
+            myId: user,
+          },
+        });
+        setRecruitDetail(response.body);
+        router.push(`../dm?id=${response.body.id}`);
+      } else {
+        // RecruitDetail が null の場合の処理
+        // 例: エラーハンドリング、デフォルト値の設定など
+      }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
 
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  function formatDate(dateString: Date) {
+    const options: DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const date = new Date(dateString);
     return date
       .toLocaleDateString('ja-JP', options)
@@ -139,21 +146,23 @@ const Login = () => {
     <>
       <BasicHeader user={user} />
       <div className={styles.homeContainer}>
-          <Link href="/">
-            <div className={styles.home}>ホーム</div>
-          </Link>
-          <div className={styles.home3}>></div>
+        <Link href="/">
+          <div className={styles.home}>ホーム</div>
+        </Link>
+        <div className={styles.home3}>{'>'}</div>
 
-          {RecruitDetail?.gameId && (
-  <Link href={`/recruit/?value=${RecruitDetail.gameId}`}>
-    {RecruitDetail.gameId === 1 && <div className={styles.home2}>VALORANT</div>}
-    {RecruitDetail.gameId === 2 && <div className={styles.home2}>APEX</div>}
-    {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}
-  </Link>
-)}
-          <div className={styles.home3}>></div>
-          <div className={styles.home4}>{RecruitDetail?.title}</div>
-        </div>
+        {RecruitDetail?.gameId !== null && RecruitDetail?.gameId !== undefined && (
+          <Link href={`/recruit/?value=${RecruitDetail.gameId}`}>
+            {RecruitDetail.gameId === 1 && <div className={styles.home2}>VALORANT</div>}
+            {RecruitDetail.gameId === 2 && <div className={styles.home2}>APEX</div>}
+            {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}
+          </Link>
+        )}
+
+        <div className={styles.home3}>{'>'}</div>
+
+        <div className={styles.home4}>{RecruitDetail?.title}</div>
+      </div>
 
       <div className={styles2.titleContainer1}>
         <div className={styles2.title1}>募集詳細情報</div>
@@ -162,9 +171,10 @@ const Login = () => {
         <div className={styles2.titleContainer2}>
           <img
             className={styles2.userImageDetail}
-            src={`/gameLists/${getGameListImagePath(RecruitDetail?.gameId)}`}
+            src={`/gameLists/${getGameListImagePath(RecruitDetail?.gameId ?? 0)}`}
             alt={`Rank: ${RecruitDetail?.gameId}`}
           />
+
           <div className={styles2.nameContainer}>
             <div className={styles2.name}>{userDetail?.name}</div>
             <p className={styles2.title}>{RecruitDetail?.title}</p>
@@ -184,7 +194,8 @@ const Login = () => {
           <p className={styles2.tagContainer}>
             【タグ】
             {RecruitDetail &&
-              RecruitDetail.tag &&
+              Array.isArray(RecruitDetail.tag) &&
+              RecruitDetail.tag.length > 0 && // 配列であり、長さが0より大きいことを確認
               RecruitDetail.tag.map((tag, index) => (
                 <div key={index} className={styles2.tag}>
                   <img src={getTagImagePath(tag)} className={styles2.tagImage} />
@@ -192,8 +203,12 @@ const Login = () => {
               ))}
           </p>
           <div>
-            <p className={styles2.date}>掲載開始日： {formatDate(RecruitDetail?.createdAt)}</p>
-            <p className={styles2.date}>情報更新日： {formatDate(RecruitDetail?.updatedAt)}</p>
+            <p className={styles2.date}>
+              掲載開始日： {RecruitDetail?.createdAt ? formatDate(RecruitDetail.createdAt) : ''}
+            </p>
+            <p className={styles2.date}>
+              情報更新日： {RecruitDetail?.updatedAt ? formatDate(RecruitDetail.updatedAt) : ''}
+            </p>
           </div>
         </div>
       </div>
@@ -231,7 +246,7 @@ const Login = () => {
                   {RecruitDetail?.subjectRank &&
                     Array.isArray(RecruitDetail.subjectRank) &&
                     RecruitDetail.subjectRank.map((rank, index) => (
-                      <div key={index} className={styles.a}>
+                      <div key={index} className={styles.aadw}>
                         <img
                           className={styles.subjectRank}
                           src={getRankImage(RecruitDetail?.gameId, rank)}
@@ -266,7 +281,9 @@ const Login = () => {
                   ★★★★★
                   <span
                     className={styles.rateInner}
-                    style={{ width: `${calculateRateWidth(userDetail?.rating)}px` }}
+                    style={{
+                      width: `${userDetail ? calculateRateWidth(userDetail?.rating ?? 0) : 0}px`,
+                    }}
                   >
                     ★★★★★
                   </span>

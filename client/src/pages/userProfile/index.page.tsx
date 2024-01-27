@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import type { BosyuuListModel } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
@@ -13,8 +14,9 @@ const UserProfile = () => {
 
   useEffect(() => {
     // URLからmodalパラメータを取得
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (router.query.modal) {
-      setModalContent(router.query.modal);
+      setModalContent(typeof router.query.modal === 'string' ? router.query.modal : '');
     }
   }, [router.query]);
 
@@ -33,7 +35,7 @@ const UserProfile = () => {
         console.log(firebaseUser.uid);
         setUserUUID(firebaseUser.uid);
       } else {
-        setUserUUID(null);
+        console.log('error');
       }
     });
 
@@ -41,7 +43,7 @@ const UserProfile = () => {
     return () => unsubscribe();
   }, []);
 
-  const logOut = async (event: React.FormEvent<HTMLFormElement>) => {
+  const logOut = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
       const userCredential = await logout();
@@ -70,39 +72,50 @@ const UserProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [selectedFile, setSelectedFile] = useState('');
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
       setLookImage(fileUrl); // ローカルでのプレビュー用
 
       // ファイルをBase64にエンコード
       const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64String = e.target.result;
-        setSelectedFile(base64String); // Base64エンコードされた文字列を状態に設定
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const base64String = e.target?.result;
+        setSelectedFile(base64String as string); // Base64エンコードされた文字列を状態に設定
       };
       reader.readAsDataURL(file);
     }
   };
   // フォーム送信時の処理
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const userId = getAuth().currentUser.uid;
-    console.log(selectedFile);
+    const user = getAuth().currentUser;
 
-    try {
-      console.log(imageUrl);
-      await apiClient.updateProfile.post({
-        body: { userId, selectedFile }, // 修正: formDataを直接bodyに設定
-      });
-    } catch (error) {
-      console.error('プロフィール更新エラー:', error);
+    if (user) {
+      const userId = user.uid;
+      console.log(selectedFile);
+
+      try {
+        console.log(imageUrl);
+        await apiClient.updateProfile.post({
+          body: { selectedFile },
+        });
+      } catch (error) {
+        console.error('プロフィール更新エラー:', error);
+      }
+    } else {
+      console.error('ユーザーがログインしていません。');
     }
   };
 
   const [recruitList, setMyRecruitlist] = useState<BosyuuListModel[]>([]);
-  const [user2, setUser2] = useState([]);
+  const [user2, setUser2] = useState<UserType[]>([]);
+  type UserType = {
+    id: number;
+    name: string;
+    // その他のプロパティ...
+  };
   const fetchMyRecruitList = async () => {
     try {
       console.log(Id);
@@ -117,9 +130,15 @@ const UserProfile = () => {
 
   useEffect(() => {
     fetchMyRecruitList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Id]);
 
-  const [myRoomList, setMyRoomlist] = useState<RoomListModel[]>([]);
+  type RoomType = {
+    id: string; // または number など、id の実際の型に応じて変更
+    // 他のプロパティがあればここに追加
+  };
+
+  const [myRoomList, setMyRoomlist] = useState<RoomType[]>([]);
   const fetchMyRoomList = async (roomId: string) => {
     try {
       console.log(roomId);
@@ -131,7 +150,6 @@ const UserProfile = () => {
     }
   };
 
-
   const fetchMyDmList = async (roomId: string) => {
     try {
       router.push(`../dm?id=${roomId}`);
@@ -139,26 +157,30 @@ const UserProfile = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const [selectedId, setSelectedId] = useState(null);
   const [rating, setRating] = useState('');
   const [review, setReview] = useState('');
 
-  const handleButtonClick = (id) => {
+  const handleButtonClick = (id: number) => {
     setSelectedId(id);
   };
 
-  const handleSubmit2 = async (e) => {
+  const handleSubmit2 = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // ここで評価と感想を処理
     console.log('Submitted:', { selectedId, rating, review });
-    const response = await apiClient.reviewList.post({ body: { selectedId,rating,review } });
-    // 必要に応じてサーバーへ送信
+    const response = await apiClient.reviewList.post({
+      body: {
+        selectedId: selectedId !== null ? selectedId.toString() : '',
+        rating,
+        review,
+      },
+    });
   };
 
   return (
     <>
-    
       <div className={styles.container} />
       <div className={styles.searchContainer}>
         <div className={styles.searchNameContainer}>設定画面</div>

@@ -1,4 +1,4 @@
-import type { BosyuuListFrontModel } from '$/commonTypesWithClient/models';
+import type { Application, BosyuuListFrontModel } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
@@ -8,6 +8,6 @@ export type Methods = {
       roomId: string;
       userId: string;
     };
-    resBody: BosyuuListFrontModel;
+    resBody: Application;
   };
 };

@@ -177,7 +177,7 @@
   text-align: center;
 }
 
-.a {
+.as {
   position: relative;
   top: 200px;
   left: 410px;
@@ -343,8 +343,8 @@
 
 .next2 {
   position: relative;
-  left: 100px;
   top: 90px;
+  left: 100px;
   width: 250px;
   padding: 10px 15px;
   color: white;
@@ -379,7 +379,7 @@
 .tagItem {
   position: relative;
   top: 30px;
-  left: 0px;
+  left: 0;
   display: flex;
   gap: 5px; /* チェックボックスとラベルの間のスペース */
   align-items: center; /* チェックボックスとラベルを中央揃え */

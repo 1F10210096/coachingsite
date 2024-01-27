@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+import type { BosyuuList } from '@prisma/client';
 import { z } from 'zod';
 import { taskIdParser } from '../service/idParsers';
 
@@ -7,7 +9,7 @@ export type UserModel = {
   myProfile: string | null;
   rating?: number | null;
   imageUrl: string | null;
-  created: number;
+  created: Date;
   game?: string;
   studentId?: string;
   teacherId?: string;
@@ -52,7 +54,7 @@ export type BosyuuListModel = {
   myProfile: string;
   descriptionDetail: string;
   suchedule: string;
-  lessonType: string[];
+  lessonType: string;
   teacherId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -123,3 +125,222 @@ export type msgModel = {
   userIdentity: number;
   userImageUrl: string;
 };
+
+export type ValoRankType = {
+  アイアン: boolean;
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  ダイヤモンド: boolean;
+  アセンダント: boolean;
+  イモータル: boolean;
+  レディアント: boolean;
+};
+
+export type ApexRankType = {
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  ダイヤモンド: boolean;
+  マスター: boolean;
+  プレデター: boolean;
+};
+
+export type TagsType = {
+  初心者歓迎: boolean;
+  高ランク歓迎: boolean;
+  スパルタ指導: boolean;
+  仲良くワイワイ: boolean;
+  上級者歓迎: boolean;
+  エイム強化: boolean;
+  メンタル強化: boolean;
+  プロ志向: boolean;
+};
+
+export type LessonTypesType = {
+  一緒にプレイ: boolean;
+  ビデオで学ぼう: boolean;
+  '1 on 1': boolean;
+  プレイを振り返ろう: boolean;
+  プレイを見てもらおう: boolean;
+  プレイを一緒に見よう: boolean;
+  ゲームを一緒に学ぼう: boolean;
+};
+
+export type Application = {
+  id: string;
+  bosyuuId: string;
+  hostId: string;
+  participantId: string;
+  createdAt: Date;
+  status: string;
+};
+
+export type newBosyuu = {
+  id: string;
+  gameId: number;
+  title: string;
+  rank: number;
+  subjectRank: number[];
+  tag: string[];
+  lessonType: string;
+  description: string;
+  notes: string;
+  myProfile: string;
+  descriptionDetail: string;
+  suchedule: string;
+  teacherId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type RoomWithoutHostId = {
+  id: string;
+  bosyuuId: string;
+  participantId: string;
+  createdAt: Date;
+  status: string;
+};
+
+export type NewApp = {
+  id: string;
+  bosyuuId: string;
+  studentId: string;
+  status: string;
+  date: Date;
+  time: string;
+  rating: number | null;
+  review: string | null;
+};
+
+export type UserListItem = {
+  id: string;
+  gameId: number;
+  title: string;
+  rank: number;
+  subjectRank: number[];
+  tag: string[];
+  lessonType: string;
+  description: string;
+  notes: string;
+  myProfile: string;
+  descriptionDetail: string;
+  suchedule: string;
+  teacherId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Name = {
+  name: string;
+};
+
+export type BosyuuDetail = {
+  id: number;
+  gameId: number;
+  title: string;
+  rank: string;
+  subjectRank: string;
+  tag: string[];
+  lessonType: string;
+  description: string;
+  notes: string;
+  myProfile: string;
+  descriptionDetail: string;
+  suchedule: string; // note: check if this is a typo and should be 'schedule'
+  createdAt: Date;
+  updatedAt: Date;
+  game: any; // replace 'any' with actual game type if available
+  teacher: {
+    Achievements: any; // replace 'any' with actual achievements type if available
+    hitokoto: string;
+    user: {
+      name: string;
+      myProfile: string;
+      rating: number;
+      imageUrl: string;
+    };
+  };
+  apply: Array<{
+    id: number;
+    bosyuuId: number;
+    rating: number;
+    review: string;
+    student: {
+      user: {
+        name: string;
+        imageUrl: string;
+      };
+    };
+  }>;
+};
+
+export type reviewModel2 = {
+  name: string;
+  imageUrl: string | null; // imageUrl を string | null に変更
+  rating: number;
+  review: string | null; // review も string | null に変更
+};
+
+export type CommentsWithImages = {
+  userImageUrl: string | null | undefined;
+  userIdentity: number;
+  id: string;
+  roomId: string;
+  userId: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type ParticipantIdentity = {
+  participantIdentity: number;
+};
+
+export type newComment = {
+  id: string;
+  roomId: string;
+  userId: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type UserImage = {
+  imageUrl: string;
+};
+
+export type BosyuuListModel3 = {
+  id: string; // またはstring
+  gameId: number; // またはstring
+  title: string;
+  rank: number; // またはstring
+  subjectRank: number[]; // またはstring[]
+  tag: string[];
+  description: string;
+  suchedule: string; // 注意: タイポかもしれません（schedule?）
+  myProfile: string;
+  notes: string;
+  lessonType: string;
+  createdAt: Date;
+  updatedAt: Date;
+  teacher: {
+    hitokoto: string;
+    user: {
+      imageUrl: string;
+    };
+    userId: string;
+    bosyuuLists: BosyuuList[]; // この部分はBosyuuListの配列を想定
+  };
+  // 他の必要なBosyuuListのフィールドがあればここに追加
+};
+
+export type User3 = {
+  userId: string;
+  name: string;
+  myProfile: string | null;
+  rating: number | null;
+  imageUrl: string | null;
+  createdAt: Date;
+}

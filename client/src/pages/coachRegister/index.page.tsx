@@ -28,7 +28,7 @@ const Login = () => {
     return () => unsubscribe();
   }, []);
 
-  const loginEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+  const loginEmail = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
       const userCredential = await loginWithEmail(email, password);
@@ -38,7 +38,6 @@ const Login = () => {
       console.error('ログイン失敗:', error);
     }
   };
-
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };

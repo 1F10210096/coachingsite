@@ -11,7 +11,7 @@ function generateRandomFileName() {
 }
 const s3 = new AWS.S3();
 
-export async function convertPngRepository(base64String) {
+export async function convertPngRepository(base64String: string) {
   console.log('dwadadsas');
   console.log(process.env.AWS_REGION);
   console.log(process.env.AWS_ACCESS_KEY_ID);

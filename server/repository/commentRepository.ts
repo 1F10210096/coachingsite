@@ -1,6 +1,6 @@
 import { prismaClient } from '$/service/prismaClient';
 
-export const commentRepository = async (roomId, userId, content) => {
+export const commentRepository = async (roomId: string, userId: string, content: string) => {
   try {
     const newComment = await prismaClient.comment.create({
       data: {

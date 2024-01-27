@@ -1,4 +1,4 @@
-import type { UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { userRepository } from '$/repository/userRepository';
 import assert from 'assert';
 export const userUsecase = {
@@ -22,7 +22,7 @@ export const userUsecase = {
     assert(userDetail !== null, 'userDetailはnullです');
     return userDetail;
   },
-  fetchMyProfile: async (userId: string): Promise<UserSummaryModel> => {
+  fetchMyProfile: async (userId: string): Promise<Name> => {
     console.log('gameListUsecase.fetchinfo');
     console.log('userId', userId);
     const userDetail = await userRepository.fetchMyProfile(userId);

@@ -1,4 +1,4 @@
-import type { BosyuuListModel } from '$/commonTypesWithClient/models';
+import type { BosyuuListModel, newBosyuu } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 // その他の必要なインポート
 
@@ -14,7 +14,7 @@ export const createBosyuuRepository = async (
   description: string,
   notes: string,
   schedule: string
-): Promise<BosyuuListModel> => {
+): Promise<newBosyuu> => {
   console.log('repositoryにきてるよ');
   console.log('user', user);
   console.log('title', title);
@@ -46,7 +46,7 @@ export const createBosyuuRepository = async (
     });
 
     console.log('newBosyuu', newBosyuu);
-    return toBosyuuListModel(newBosyuu);
+    return newBosyuu;
   } catch (error) {
     console.error('Error creating new Bosyuu', error);
     throw error; // or handle the error as needed

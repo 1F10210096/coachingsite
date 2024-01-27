@@ -5,7 +5,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
-  background: rgb(255, 255, 255);
+  background: rgb(255 255 255);
   border: 1px solid #b5b5b5; /* General border for all sides */
   border-top: 3px solid #71d3f7; /* Light blue top border */
   box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
@@ -19,7 +19,7 @@
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
   height: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .titleLine {
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center; /* 要素を垂直方向の中央に配置 */
   height: 70px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .gameTitle {
@@ -45,7 +45,7 @@
   height: auto;
   font-size: 26px;
   font-weight: bold;
-  color: rgb(100, 100, 100);
+  color: rgb(100 100 100);
   background-color: rgb(255 255 255);
 }
 
@@ -73,7 +73,7 @@
 
   /* 例えばパディング、マージン、ボーダーなどのスタイルを適用 */
 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 
   /* 必要に応じて他のスタイルを追加 */
 }
@@ -317,8 +317,8 @@
   height: auto;
   font-size: 14px;
   font-weight: bold;
-  color: rgb(255, 5, 5);
-  background-color: rgb(255, 255, 255);
+  color: rgb(255 5 5);
+  background-color: rgb(255 255 255);
 }
 
 .gameTitleContainer {
@@ -332,6 +332,6 @@
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   border-bottom: 2px solid rgb(142 142 142);
 }

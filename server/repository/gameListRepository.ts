@@ -39,4 +39,11 @@ export const gameListRepository = {
 
     return topGames.filter((game): game is GameList => game !== null).map(toGameListModel);
   },
+  fetchCategories: async (id: string): Promise<GameListModel[] | null> => {
+    console.log('gameListRepository.fetchCategories');
+    const gameList = await prismaClient.gameList.findMany({
+      where: { genre: id },
+    });
+    return gameList.filter((game): game is GameList => game !== null).map(toGameListModel);
+  }
 };

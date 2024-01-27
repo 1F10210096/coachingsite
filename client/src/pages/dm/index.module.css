@@ -240,11 +240,6 @@
   background: #888;
 }
 
-.messageBox3::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
-  border-radius: 10px; /* 丸みを加える */
-}
-
 .messageBox3::-webkit-scrollbar-thumb:hover {
   background: #d9d9d9;
   border-radius: 10px; /* ホバー時も丸みを保持 */

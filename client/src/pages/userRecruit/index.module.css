@@ -1,26 +1,7 @@
 .modal {
+  position: relative;
 }
 
-.searchNameContainer2 {
-  position: relative;
-  top: 5px;
-  left: auto;
-  padding-bottom: 17px;
-  margin-top: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px; /* 文字の大きさを20pxに設定する */
-  font-weight: bold; /* 文字を太くする */
-  color: rgb(0 0 0);
-  border-bottom: 2px solid rgb(142 142 142);
-}
-
-.searchContainer {
-  position: relative;
-  top: 60px;
-  left: 250px;
-  width: 300px;
-  height: 600px;
-}
 
 .helpwanted {
   position: relative;
@@ -310,7 +291,7 @@
   top: 150px;
   width: 100%;
   height: auto;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .titleContainer {
@@ -335,7 +316,7 @@
   align-items: center; /* アイテムを垂直方向の中央に配置 */
   width: 300px;
   height: 30px;
-  color: rgb(50, 50, 50);
+  color: rgb(50 50 50);
   background-color: rgb(255 255 255);
 }
 

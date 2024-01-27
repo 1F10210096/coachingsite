@@ -1,12 +1,12 @@
+import type { Application } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
-import type { User } from '@prisma/client';
 
 export const approveRepository = async (
   Id: string,
   bosyuuId: string,
   roomId: string,
   userId: string
-): Promise<User | null> => {
+): Promise<Application | null> => {
   try {
     console.log('userMyRepository');
     console.log('Id', Id);
@@ -34,11 +34,14 @@ export const approveRepository = async (
         },
       });
       console.log(bosyuuId);
+      const now = new Date();
       const application = await prismaClient.apply.create({
         data: {
           bosyuuId: applications[0].bosyuuId,
           studentId: applications[0].participantId,
           status: '応募済み',
+          date: now, // 適切な日付を設定
+          time: now.toISOString(),
           // 必要に応じて任意フィールドもここに追加
         },
       });

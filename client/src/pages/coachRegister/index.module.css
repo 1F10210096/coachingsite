@@ -13,10 +13,10 @@
 
 .loginButton {
   position: relative;
-  top: 50px;;  
+  top: 50px;
+  width: 400px;
   padding: 10px 15px;
   color: white;
-  width: 400px;
   cursor: pointer;
   background-color: #007bff;
   border: none;

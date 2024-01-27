@@ -230,10 +230,14 @@
   font-size: 15px;
   font-weight: bold;
   line-height: 30px; /* テキストの行の高さを設定 */
-  color: rgb(0, 132, 255);
+  color: rgb(0 132 255);
   cursor: pointer;
   background: #fafafa;
   border: none;
-  border-bottom: 3px solid rgb(0, 132, 255);
+  border-bottom: 3px solid rgb(0 132 255);
   transition: background-color 0.3s ease;
+}
+
+.userSection8 {
+  position: relative;
 }

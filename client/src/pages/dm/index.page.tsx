@@ -1,7 +1,12 @@
+/* eslint-disable max-depth */
 /* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
-import type { UserSummaryDetailModel, msgModel } from 'commonTypesWithClient/models';
+import type {
+  BosyuuListFrontModel,
+  UserSummaryDetailModel,
+  msgModel,
+} from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -15,7 +20,8 @@ const Dm = () => {
   const [bosyuuId, setBosyuuId] = useState('');
   const [message, setMessage] = useState<msgModel[]>([]);
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
-  const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
+  const [userDetail, setUserDetail] = useState<UserSummaryDetailModel | undefined>(undefined);
+
   const router = useRouter();
   const id = router.query.id;
 
@@ -28,15 +34,25 @@ const Dm = () => {
         },
       });
       console.log(response);
+      setUserDetail(response.body as UserSummaryDetailModel | undefined);
 
-      const detailResponse = await apiClient.fetachRoomRecruitDetail.post({
-        body: {
-          Id: id,
-        },
-      });
-      console.log(detailResponse);
-      setRecruitDetail(detailResponse.body);
-      setUserDetail(response.body);
+      if (typeof id === 'string') {
+        const detailResponse = await apiClient.fetachRoomRecruitDetail.post({
+          body: {
+            Id: id,
+          },
+        });
+        console.log(detailResponse);
+        setRecruitDetail(detailResponse.body);
+        // 応答の処理
+      } else {
+        // `id`が`string`型でない場合の処理
+      }
+      // if (response.body) {
+      //   setUserDetail(response.body);
+      // } else {
+      //   // 適切な処理、例えばエラーを表示するなど
+      // }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
@@ -50,6 +66,7 @@ const Dm = () => {
     if (user) {
       fetchRecruitDetail();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]); // idAsString に依存
 
   useEffect(() => {
@@ -59,8 +76,6 @@ const Dm = () => {
         // ユーザーがログインしている場合、ユーザー情報をセット
         console.log(firebaseUser);
         setUser(firebaseUser.uid);
-      } else {
-        setUser(null);
       }
     });
     return () => unsubscribe();
@@ -68,15 +83,20 @@ const Dm = () => {
 
   const fetchRoom = async () => {
     try {
-      const response = await apiClient.fetchRoom.post({
-        body: {
-          Id: id,
-          userId: user,
-        },
-      });
-      console.log(response.body.participantIdentity, 'wdasdawda');
-      setMessage(response.body.commentsWithImages);
-      setUserNumber(response.body.participantIdentity);
+      if (typeof id === 'string') {
+        const response = await apiClient.fetchRoom.post({
+          body: {
+            Id: id,
+            userId: user,
+          },
+        });
+        console.log(response);
+        // if (response.body.participantIdentity) {
+        //   console.log(response.body.participantIdentity, 'wdasdawda');
+        //   setMessage(response.body.commentsWithImages);
+        //   setUserNumber(response.body.participantIdentity);
+        // }
+      }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
@@ -86,6 +106,7 @@ const Dm = () => {
     if (user) {
       fetchRoom();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const sendMessage = () => {
@@ -109,8 +130,9 @@ const Dm = () => {
     fetchRoom();
   };
 
-  const [websocket, setWebsocket] = useState(null);
-  const [a, setA] = useState("");
+  const [websocket, setWebsocket] = useState<WebSocket | null>(null);
+
+  const [a, setA] = useState('');
   useEffect(() => {
     if (typeof user === 'string' && user.trim() !== '') {
       const newSocket = new WebSocket(`ws://localhost:8000?userId=${user}`);
@@ -125,21 +147,19 @@ const Dm = () => {
         const data = JSON.parse(event.data);
         console.log(`[message] データを受信しました: `, data);
 
-
         if (data.type === 'url') {
           setApprovalUrl(data.url); // 受信したURLを状態にセット
           setTime(data.time);
           setDate(data.date);
-          setIsModalApproveOpen(false)
+          setIsModalApproveOpen(false);
           console.log('承諾用URLを受信しました:', data.url);
-          console.log(data.gameId)
+          console.log(data.gameId);
           setA(data.gameId);
-          console.log(RecruitDetail)
+          console.log(RecruitDetail);
         } else if (data.type === 'new-message') {
           console.log('新しいメッセージを受信しました:', data);
 
           setMessage((prevMessages) => [...prevMessages, data]);
-          
         } else {
           // 他のメッセージタイプの処理...
           fetchRoom();
@@ -152,11 +172,12 @@ const Dm = () => {
         newSocket.close();
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   console.log(message);
 
-  const createApprovalUrl = (roomId) => {
+  const createApprovalUrl = (roomId: string) => {
     return `https://yourapp.com/approve?roomId=${roomId}`;
   };
 
@@ -167,29 +188,35 @@ const Dm = () => {
     }
 
     // 承諾用のURLを作成
-    const approvalUrl = createApprovalUrl(id);
+    if (typeof id === 'string') {
+      const approvalUrl = createApprovalUrl(id);
+      const messageData = {
+        type: 'apply', // メッセージの種類を指定
+        roomId: id,
+        userId: user,
+        userNumber,
+        url: approvalUrl, // 送信するURL
+        gameTitle: RecruitDetail?.title,
+        gameId: RecruitDetail?.gameId,
+        date,
+        time,
+      };
+
+      // メッセージをJSON形式でサーバーに送信
+      websocket.send(JSON.stringify(messageData));
+
+      console.log('承諾用URLを送信しました:', approvalUrl);
+      window.confirm('承諾用URLを送信しました');
+
+      // approvalUrlを使用する処理
+    } else {
+      // `id`が`string`型でない場合のエラーハンドリング
+    }
 
     // WebSocketを通じてURLを送信するメッセージを作成
-    const messageData = {
-      type: 'apply', // メッセージの種類を指定
-      roomId: id,
-      userId: user,
-      userNumber,
-      url: approvalUrl, // 送信するURL
-      gameTitle: RecruitDetail?.title,
-      gameId: RecruitDetail?.gameId,
-      date,
-      time,
-    };
-
-    // メッセージをJSON形式でサーバーに送信
-    websocket.send(JSON.stringify(messageData));
-
-    console.log('承諾用URLを送信しました:', approvalUrl);
-    window.confirm('承諾用URLを送信しました');
   };
 
-  const handleUrlClick = async (approvalUrl) => {
+  const handleUrlClick = async () => {
     // 確認ダイアログを表示
     setIsModalApproveOpen(false);
     const confirmResult = window.confirm('本当に承諾しますか？');
@@ -201,14 +228,21 @@ const Dm = () => {
       console.log(user);
 
       try {
-        const response = await apiClient.recruitApprove.post({
-          body: {
-            Id: approvalUrl,
-            bosyuuId,
-            roomId: id,
-            userId: user,
-          },
-        });
+        if (
+          typeof id === 'string' &&
+          typeof approvalUrl === 'string' &&
+          typeof bosyuuId === 'string' &&
+          typeof user === 'string'
+        ) {
+          const response = await apiClient.recruitApprove.post({
+            body: {
+              Id: approvalUrl,
+              bosyuuId,
+              roomId: id,
+              userId: user,
+            },
+          });
+        }
         // 必要に応じて成功時の処理をここに追加
       } catch (error) {
         console.error('Error updating status:', error);
@@ -224,7 +258,6 @@ const Dm = () => {
     setIsModalOpen(true);
   };
 
-  
   const handleButtonApproveClick = () => {
     setIsModalApproveOpen(true);
   };
@@ -250,16 +283,20 @@ const Dm = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
-  const handleDateChange = (event) => {
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
   };
 
-  const handleTimeChange = (event) => {
+  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTime(event.target.value);
   };
 
-  function Modal({ isOpen, onClose, onApply }) {
-    
+  // モーダルを閉じるコールバック関数
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  function Modal({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) return null;
 
     return (
@@ -294,10 +331,10 @@ const Dm = () => {
     );
   }
 
-  function FinalModal({ isOpen, onClose, onApply }) {
+  function FinalModal({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) return null;
 
-    const getGameName = (gameId) => {
+    const getGameName = (gameId: number) => {
       switch (gameId) {
         case 1:
           return 'VALORANT';
@@ -316,7 +353,11 @@ const Dm = () => {
           <div className={styles.modalMsgContent}>
             <div className={styles.modalTitle}>最終お申込み確認</div>
             <p className={styles.title}>{RecruitDetail?.title}</p>
-            <p className={styles.title}>{getGameName(RecruitDetail?.gameId)}</p>
+            <p className={styles.title}>
+              {RecruitDetail !== null &&
+                RecruitDetail?.gameId !== null &&
+                getGameName(RecruitDetail.gameId)}
+            </p>
             <div className={styles.dateMsg}>日時：{date}</div>
             <div className={styles.timeMsg}>時間：{time}</div>
             <div>本当に申し込みますか？</div>
@@ -334,10 +375,10 @@ const Dm = () => {
 
   const [approvalUrl, setApprovalUrl] = useState('');
 
-  function ApproveModal({ isOpen, onClose, onApply }) {
+  function ApproveModal({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) return null;
 
-    const getGameName = (gameId) => {
+    const getGameName = (gameId: number) => {
       switch (gameId) {
         case 1:
           return 'VALORANT';
@@ -357,7 +398,12 @@ const Dm = () => {
           <div className={styles.modalMsgContent}>
             <div className={styles.modalTitle}>最終受諾確認</div>
             <p className={styles.title}>{RecruitDetail?.title}</p>
-            <p className={styles.title}>{getGameName(RecruitDetail?.gameId)}</p>
+            <p className={styles.title}>
+              {' '}
+              {RecruitDetail !== null &&
+                RecruitDetail?.gameId !== null &&
+                getGameName(RecruitDetail.gameId)}
+            </p>
             <div className={styles.dateMsg}>日時：{date}</div>
             <div className={styles.timeMsg}>時間：{time}</div>
             <div>本当に了承しますか？</div>
@@ -408,37 +454,19 @@ const Dm = () => {
             <button onClick={sendMessage} className={styles.sendButton}>
               Send
             </button>
-            {userNumber === 1 && (
+            {userNumber === '1' && (
               <button onClick={handleButtonClick} className={styles.applayButton}>
                 申し込む
               </button>
             )}
-            {isModalOpen && (
-              <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onApply={sendApply}
-              />
-            )}
-            {isModalFinalOpen && (
-              <FinalModal
-                isOpen={isModalFinalOpen}
-                onClose={() => setIsModalFinalOpen(false)}
-                onApply={sendApply}
-              />
-            )}
-            {approvalUrl && userNumber === 2 && (
+            {isModalOpen && <Modal isOpen={isModalOpen} />}
+            {isModalFinalOpen && <FinalModal isOpen={isModalFinalOpen} />}
+            {approvalUrl && userNumber === '2' && (
               <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
                 {'受諾ボタン'}
               </div>
             )}
-            {isModalApproveOpen && (
-              <ApproveModal
-                isOpen={isModalApproveOpen}
-                onClose={() => setIsModalApproveOpen(false)}
-                
-              />
-            )}
+            {isModalApproveOpen && <ApproveModal isOpen={isModalApproveOpen} />}
           </div>
         </div>
         <div className={styles.profileContainer}>
@@ -449,12 +477,14 @@ const Dm = () => {
           <div className={styles.ratingContainer}>
             <span className={styles.rate}>
               ★★★★★
-              <span
-                className={styles.rateInner}
-                style={{ width: `${calculateRateWidth(userDetail?.rating)}px` }}
-              >
-                ★★★★★
-              </span>
+              {userDetail?.rating && (
+                <span
+                  className={styles.rateInner}
+                  style={{ width: `${calculateRateWidth(userDetail.rating)}px` }}
+                >
+                  ★★★★★
+                </span>
+              )}
             </span>
           </div>
           <div className={styles.rating}>{userDetail?.rating}</div>

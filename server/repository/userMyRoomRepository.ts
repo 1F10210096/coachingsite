@@ -1,7 +1,7 @@
+import type { RoomWithoutHostId } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
-import type { User } from '@prisma/client';
 
-export const userMyRoomRepository = async (userId: string): Promise<User | null> => {
+export const userMyRoomRepository = async (userId: string): Promise<RoomWithoutHostId[] | null> => {
   try {
     console.log('userMyRepository');
     console.log('userId', userId);

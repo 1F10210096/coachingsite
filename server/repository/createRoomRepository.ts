@@ -1,9 +1,12 @@
+import type { RoomWithoutHostId } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 
 export const createRoomRepository = {
-  fetchOrCreateRoom: async (bosyuuId: string, participantId: string): Promise<RoomModel> => {
-    try {
+  fetchOrCreateRoom: async (
+    bosyuuId: string,
+    participantId: string
+  ): Promise<RoomWithoutHostId> => {
       console.log('createU');
 
       // 既存の Room を検索
@@ -40,9 +43,5 @@ export const createRoomRepository = {
 
       const { hostId, ...roomWithoutHostId } = room;
       return roomWithoutHostId;
-    } catch (error) {
-      console.error('Error creating room:', error);
-      return null;
-    }
   },
 };

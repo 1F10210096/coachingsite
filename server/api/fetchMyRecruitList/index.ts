@@ -1,10 +1,10 @@
-import type { BosyuuListFrontModel } from '$/commonTypesWithClient/models';
+import type { NewApp, UserListItem } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
     reqBody: {
       Id: string;
     };
-    resBody: BosyuuListFrontModel;
+    resBody: { user: UserListItem[]; user2: NewApp[] };
   };
 };

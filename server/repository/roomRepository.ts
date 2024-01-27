@@ -1,9 +1,10 @@
+import type { CommentsWithImages, UserListItem } from '$/commonTypesWithClient/models';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 export const roomRepository = {
-  fetchRoom: async (roomId: string, userId: string) => {
+  fetchRoom: async (roomId: string, userId: string): Promise<CommentsWithImages[] | null> => {
     console.log('r ', roomId);
     // 指定されたIDでRoomを検索し、Participantが一致するか確認
     const room = await prisma.room.findFirst({
@@ -54,18 +55,11 @@ export const roomRepository = {
 
     console.log('roomRepository.ts: fetchRoom: room: ', commentsWithImages);
 
-    if (!commentsWithImages) {
-      // Roomが見つからない、またはParticipantが一致しない場合
-      return [];
-    }
     console.log(userId);
 
-    return {
-      commentsWithImages,
-      participantIdentity,
-    };
+    return commentsWithImages;
   },
-  fetchRecruitDetail: async (Id: string) => {
+  fetchRecruitDetail: async (Id: string) : Promise<UserListItem | null>=> {
     try {
       // ルームのIDに基づいてBosyuuListを検索
       const room = await prisma.room.findUnique({
@@ -78,6 +72,7 @@ export const roomRepository = {
       });
 
       // BosyuuListが見つからない場合の処理
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!room || !room.bosyuu) {
         return null;
       }

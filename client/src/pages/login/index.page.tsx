@@ -1,11 +1,11 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
+import router from 'next/router';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { loginWithEmail } from 'src/utils/login';
 import { useLoading } from '../@hooks/useLoading';
 import styles from './index.module.css';
-import router from 'next/router';
 
 const Login = () => {
   const { addLoading, removeLoading } = useLoading();
@@ -28,7 +28,7 @@ const Login = () => {
     return () => unsubscribe();
   }, []);
 
-  const loginEmail = async (event: React.FormEvent<HTMLFormElement>) => {
+  const loginEmail = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
       const userCredential = await loginWithEmail(email, password);
@@ -50,38 +50,40 @@ const Login = () => {
   return (
     <>
       <div className={styles.container} />
-      <div className={styles.loginTitle}>ログイン</div>
-      <Link href="/signUp">
-        <div className={styles.kaninn}>会員登録はこちら</div>
-      </Link>
-      <div className={styles.loginContainer}>
-        <form className={styles.loginForm}>
-          <label htmlFor="username" className={styles.mail}>
-            メール
-          </label>
-          <input
-            type="text"
-            className={styles.searchmail}
-            placeholder="メールアドレスを入力してください"
-            value={email}
-            onChange={handleEmail}
-          />
+      <div className={styles.box}>
+        <div className={styles.loginTitle}>ログイン</div>
+        <Link href="/signUp">
+          <div className={styles.kaninn}>会員登録はこちら</div>
+        </Link>
+        <div className={styles.loginContainer}>
+          <form className={styles.loginForm}>
+            <label htmlFor="username" className={styles.mail}>
+              メール
+            </label>
+            <input
+              type="text"
+              className={styles.searchmail}
+              placeholder="メールアドレスを入力してください"
+              value={email}
+              onChange={handleEmail}
+            />
 
-          <label htmlFor="password" className={styles.password}>
-            パスワード
-          </label>
-          <input
-            type="text"
-            className={styles.searchpass}
-            placeholder="パスワードを入力してください"
-            value={password}
-            onChange={handlePassword}
-          />
+            <label htmlFor="password" className={styles.password}>
+              パスワード
+            </label>
+            <input
+              type="text"
+              className={styles.searchpass}
+              placeholder="パスワードを入力してください"
+              value={password}
+              onChange={handlePassword}
+            />
 
-          <button type="submit" className={styles.loginButton} onClick={loginEmail}>
-            ログイン
-          </button>
-        </form>
+            <button type="submit" className={styles.loginButton} onClick={loginEmail}>
+              ログイン
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

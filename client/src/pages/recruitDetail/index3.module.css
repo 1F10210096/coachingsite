@@ -1,13 +1,13 @@
 .recomendTitle {
   position: relative;
   top: 150px;
-  width: 500px;
   left: 230px;
-  background-color: #ffffff;
+  width: 500px;
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: 700;
   color: #333;
+  background-color: #fff;
 }
 
 .titleText {
@@ -17,7 +17,6 @@
   font-weight: 700;
   color: #585858;
 }
-
 
 .recruitList {
   position: relative;
@@ -54,7 +53,6 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; /* 2行まで表示 */
 }
-
 
 .gameIconContainer2 {
   display: flex;

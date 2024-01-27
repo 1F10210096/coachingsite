@@ -1,4 +1,4 @@
-import type { BosyuuListFrontModel } from '$/commonTypesWithClient/models';
+import type { BosyuuListFrontModel, NewApp } from '$/commonTypesWithClient/models';
 
 export type Methods = {
   post: {
@@ -7,6 +7,6 @@ export type Methods = {
       rating: string;
       review : string;
     };
-    resBody: BosyuuListFrontModel;
+    resBody: NewApp;
   };
 };

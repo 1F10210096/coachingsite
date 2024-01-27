@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import type { UserSummaryDetailModel, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name, UserSummaryDetailModel, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 
@@ -108,7 +108,7 @@ export const userRepository = {
       return null;
     }
   },
-  fetchMyProfile: async (userId: string): Promise<UserSummaryDetailModel | null> => {
+  fetchMyProfile: async (userId: string): Promise<Name | null> => {
     try {
       const user = await prismaClient.user.findUnique({
         where: {

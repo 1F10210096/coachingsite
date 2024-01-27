@@ -1,5 +1,5 @@
-import type { BosyuuList } from '@prisma/client';
-// Define the types for the methods of your API endpoint
+import type { newBosyuu } from '$/commonTypesWithClient/models';
+
 export type Methods = {
   post: {
     reqBody: {
@@ -15,6 +15,6 @@ export type Methods = {
       notes: string;
       suchedule: string;
     };
-    resBody: BosyuuList;
+    resBody: newBosyuu;
   };
 };

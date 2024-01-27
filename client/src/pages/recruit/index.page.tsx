@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
-import type { BosyuuListModel } from 'commonTypesWithClient/models';
+import type { BosyuuListModel ,ValoRankType,ApexRankType,TagsType,LessonTypesType} from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,6 +10,7 @@ import { default as getImagePath } from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
+import type { DateTimeFormatOptions } from 'intl';
 // eslint-disable-next-line complexity
 const Valorant = () => {
   const router = useRouter();
@@ -21,6 +23,40 @@ const Valorant = () => {
   const [showLessonTypeCheckboxes, setShowLessonTypeCheckboxes] = useState(false);
   const [RecruitList, setRecruitlist] = useState<BosyuuListModel[]>([]);
 
+  type RankStatus = {
+    [rank: string]: boolean;
+  };
+
+  const games = {
+    VALORANT: [
+      'アイアン',
+      'ブロンズ',
+      'シルバー',
+      'ゴールド',
+      'プラチナ',
+      'ダイヤ',
+      'アセンダント',
+      'イモータル',
+      'レディアント',
+    ],
+    LOL: [
+      'アイアン',
+      'ブロンズ',
+      'シルバー',
+      'ゴールド',
+      'プラチナ',
+      'ダイヤ',
+      'マスター',
+      'グランドマスター',
+      'チャレンジャー',
+    ],
+    CSGO: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    'COD 2': ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+    OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
+  };
+  
+
+  
   const [valoRanks, setValoRanks] = useState({
     アイアン: false,
     ブロンズ: false,
@@ -64,7 +100,7 @@ const Valorant = () => {
     プレデター: false,
   });
 
-  const [Tags, setTags] = useState({
+  const [Tags, setTags] = useState<TagsType>({
     初心者歓迎: false,
     高ランク歓迎: false,
     スパルタ指導: false,
@@ -74,6 +110,7 @@ const Valorant = () => {
     メンタル強化: false,
     プロ志向: false,
   });
+  
 
   const [LessonTypes, setLessonTypes] = useState({
     一緒にプレイ: false,
@@ -85,7 +122,7 @@ const Valorant = () => {
     ゲームを一緒に学ぼう: false,
   });
 
-  const handleCheckboxChange = (rank) => {
+  const  handleCheckboxChange = (rank: keyof (ValoRankType | ApexRankType)) => {
     if (Id === 1) {
       setValoRanks((prevRanks) => ({
         ...prevRanks,
@@ -98,8 +135,8 @@ const Valorant = () => {
       }));
     }
   };
-
-  const handleMyRankCheckboxChange = (rank) => {
+  
+  const handleMyRankCheckboxChange = (rank: keyof (ValoRankType | ApexRankType)) => {
     if (Id === 1) {
       setMyValoRanks((prevRanks) => ({
         ...prevRanks,
@@ -112,22 +149,23 @@ const Valorant = () => {
       }));
     }
   };
+  
 
-  const handleTagCheckboxChange = (Tag) => {
+  const handleTagCheckboxChange = (Tag:keyof (TagsType)) => {
     setTags((prevTags) => ({
       ...prevTags,
       [Tag]: !prevTags[Tag],
     }));
   };
 
-  const handleLessonTypeCheckboxChange = (LessonType) => {
+  const handleLessonTypeCheckboxChange = (LessonType:keyof (LessonTypesType)) => {
     setLessonTypes((prevLessonTypes) => ({
       ...prevLessonTypes,
       [LessonType]: !prevLessonTypes[LessonType],
     }));
   };
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     const auth = getAuth();
@@ -135,10 +173,9 @@ const Valorant = () => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット
         console.log(firebaseUser);
-        setUser(firebaseUser);
-      } else {
+        setUser(firebaseUser.uid);
+      } else { 
         // ユーザーがログアウトしている場合
-        setUser(null);
       }
     });
 
@@ -146,29 +183,28 @@ const Valorant = () => {
     return () => unsubscribe();
   }, []);
 
-  const getSelectedRanksIndices = (Id) => {
+  const getSelectedRanksIndices = (Id: number) => {
+    let selectedRanksIndices: number[] = [];
+  
     if (Id === 1) {
-      const selectedRanksIndices = Object.keys(valoRanks)
-        .map((key, index) => ({ rank: key, index }))
-        .filter((item) => valoRanks[item.rank])
-        .map((item) => item.index);
-      console.log(selectedRanksIndices);
-      return selectedRanksIndices;
+      selectedRanksIndices = Object.keys(valoRanks)
+        .filter((key) => valoRanks[key as keyof typeof valoRanks])
+        .map((key, index) => index);
     } else if (Id === 2) {
-      console.log('wdas');
-      const selectedRanksIndices = Object.keys(apexRanks)
-        .map((key, index) => ({ rank: key, index }))
-        .filter((item) => apexRanks[item.rank])
-        .map((item) => item.index);
-      console.log(selectedRanksIndices);
-      return selectedRanksIndices;
+      selectedRanksIndices = Object.keys(apexRanks)
+        .filter((key) => apexRanks[key as keyof typeof apexRanks])
+        .map((key, index) => index);
     }
+  
+    console.log(selectedRanksIndices);
+    return selectedRanksIndices;
   };
+  
 
-  const getSelectedMyRanksIndices = (Id) => {
+  const getSelectedMyRanksIndices = (Id: number) => {
     if (Id === 1) {
       const selectedRanksIndices = Object.keys(valoRanks)
-        .map((key, index) => ({ rank: key, index }))
+        .map((key, index) => ({ rank: key as keyof typeof myValoRanks, index }))
         .filter((item) => myValoRanks[item.rank])
         .map((item) => item.index);
       console.log(selectedRanksIndices);
@@ -176,13 +212,14 @@ const Valorant = () => {
     } else if (Id === 2) {
       console.log('wdas');
       const selectedRanksIndices = Object.keys(apexRanks)
-        .map((key, index) => ({ rank: key, index }))
+        .map((key, index) => ({ rank: key as keyof typeof myApexRanks, index }))
         .filter((item) => myApexRanks[item.rank])
         .map((item) => item.index);
       console.log(selectedRanksIndices);
       return selectedRanksIndices;
     }
   };
+  
 
   const handleClearButtonClick = () => {
     // クリアボタンが押されたときにIdが1の場合、Valoのランクをすべてfalseにする
@@ -256,24 +293,30 @@ const Valorant = () => {
     });
   };
 
-  // JSX内でクリアボタンを設置
   const fetchRecruitList = async () => {
     try {
-      const rank = getSelectedRanksIndices(Id);
-
-      const selectedMyRanksIndices = getSelectedMyRanksIndices(Id);
-      const selectedTags = Object.keys(Tags).filter((key) => Tags[key]);
-      const selectedLessonTypes = Object.keys(LessonTypes).filter((key) => LessonTypes[key]);
-
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      const rank = getSelectedRanksIndices(Id) || [];
+      const selectedMyRanksIndices = getSelectedMyRanksIndices(Id) || [];
+  
+      const selectedTags = Object.keys(Tags)
+        .filter((key) => Tags[key as keyof typeof Tags])
+        .map((key) => key as keyof typeof Tags);
+  
+      const selectedLessonTypes = Object.keys(LessonTypes)
+        .filter((key) => LessonTypes[key as keyof typeof LessonTypes])
+        .map((key) => key as keyof typeof LessonTypes);
+  
       const response = await apiClient.fetchRecruit.post({
         body: {
           Id,
-          ranks: rank || [],
+          ranks: rank,
           subjectRank: selectedMyRanksIndices,
           tag: selectedTags,
           lessonTypes: selectedLessonTypes,
         },
       });
+  
       console.log(response);
       setRecruitlist(response.body);
       console.log(RecruitList);
@@ -281,8 +324,11 @@ const Valorant = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+  
+  
   useEffect(() => {
     fetchRecruitList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = (id: string) => {
@@ -305,8 +351,8 @@ const Valorant = () => {
     return `/${directory}/${rankImage}`;
   };
 
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  function formatDate(dateString: Date) {
+    const options: DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const date = new Date(dateString);
     return date
       .toLocaleDateString('ja-JP', options)
@@ -314,8 +360,8 @@ const Valorant = () => {
       .replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3');
   }
 
-  const ranksToDisplay = Id === 1 ? valoRanks : Id === 2 ? apexRanks : {};
-  const myRanksToDisplay = Id === 1 ? myValoRanks : Id === 2 ? myApexRanks : {};
+  const ranksToDisplay:RankStatus  = Id === 1 ? valoRanks : Id === 2 ? apexRanks : {};
+  const myRanksToDisplay:RankStatus = Id === 1 ? myValoRanks : Id === 2 ? myApexRanks : {};
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -349,7 +395,7 @@ const Valorant = () => {
           <Link href="/">
             <div className={styles.home}>ホーム</div>
           </Link>
-          <div className={styles.home3}>></div>
+          <div className={styles.home3}>{'>'}</div>
           {Id === 1 ? <div className={styles.home2}>VALORANT</div> : null}
           {Id === 2 ? <div className={styles.home2}>APEX</div> : null}
           {Id === 3 ? <div className={styles.home2}>LOL</div> : null}
@@ -374,7 +420,7 @@ const Valorant = () => {
                     <input
                       type="checkbox"
                       checked={ranksToDisplay[rank]}
-                      onChange={() => handleCheckboxChange(rank)}
+                      onChange={() => handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))}
                     />
                     <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
                   </label>
@@ -397,7 +443,7 @@ const Valorant = () => {
                     <input
                       type="checkbox"
                       checked={myRanksToDisplay[myrank]}
-                      onChange={() => handleMyRankCheckboxChange(myrank)}
+                      onChange={() => handleMyRankCheckboxChange(myrank as keyof (ValoRankType | ApexRankType))}
                     />
                     <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
                   </label>
@@ -420,8 +466,8 @@ const Valorant = () => {
                   <label key={Tag}>
                     <input
                       type="checkbox"
-                      checked={Tags[Tag]}
-                      onChange={() => handleTagCheckboxChange(Tag)}
+                      checked={Tags[Tag as keyof TagsType]}
+                      onChange={() => handleTagCheckboxChange(Tag as keyof (TagsType))}
                     />
                     <span>{Tag.charAt(0).toUpperCase() + Tag.slice(1)}</span>{' '}
                   </label>
@@ -444,8 +490,8 @@ const Valorant = () => {
                   <label key={LessonType}>
                     <input
                       type="checkbox"
-                      checked={LessonTypes[LessonType]}
-                      onChange={() => handleLessonTypeCheckboxChange(LessonType)}
+                      checked={LessonTypes[LessonType as keyof LessonTypesType]}
+                      onChange={() => handleLessonTypeCheckboxChange(LessonType as keyof (LessonTypesType))}
                     />
                     <span>{LessonType.charAt(0).toUpperCase() + LessonType.slice(1)}</span>{' '}
                   </label>
@@ -475,14 +521,15 @@ const Valorant = () => {
             <div
               key={item.id}
               className={styles2.container}
-              onClick={() => handleClick(item.id, item.gameId)}
+              onClick={() => handleClick(item.id)}
             >
               <div className={styles2.flexContainer}>
-                <img
-                  src={item.teacher.user.imageUrl}
-                  alt="User"
-                  className={styles2.userImageDetail}
-                />
+              <img
+  src={item.teacher.user.imageUrl ?? 'placeholder-image-url.jpg'}
+  alt="User"
+  className={styles2.userImageDetail}
+/>
+
                 <p className={styles2.title}>{item.title}</p>
                 <div className={styles2.rank}>
                   <img

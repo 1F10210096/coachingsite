@@ -37,7 +37,7 @@
   font-size: 26px;
   font-weight: bold;
   color: rgb(55 55 55);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .title {
@@ -85,7 +85,7 @@
 
 .description {
   position: relative;
-  width: 230px;
+  width: 330px;
   height: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -279,6 +279,7 @@
   width: 180px;
   height: auto;
   font-size: 13px;
+  font-weight: 200;
   color: rgb(55 55 55);
   background-color: rgb(255 255 255);
 }
@@ -297,7 +298,7 @@
   height: auto;
   font-size: 13px;
   color: rgb(255 5 5);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
 }
 
 .gameSort {
@@ -320,7 +321,7 @@
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   border-bottom: 2px solid rgb(142 142 142);
 }
 
@@ -335,6 +336,6 @@
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   border-bottom: 2px solid rgb(142 142 142);
 }

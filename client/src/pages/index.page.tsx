@@ -4,12 +4,12 @@ import type {
   UserSummaryModel,
 } from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
-import Link from 'next/link';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
@@ -41,7 +41,7 @@ const Home = () => {
     fetchUsers();
   }, []);
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     const auth = getAuth();
@@ -50,9 +50,8 @@ const Home = () => {
         // ユーザーがログインしている場合、ユーザー情報をセット
         console.log(firebaseUser);
         setUserUUID(firebaseUser.uid);
-        setUser(firebaseUser);
       } else {
-        setUser(null);
+        console.log('ユーザーがログインしていません');
       }
     });
     return () => unsubscribe();

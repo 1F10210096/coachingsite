@@ -37,7 +37,7 @@ const Home = () => {
     fetchUsers();
   }, []);
 
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const auth = getAuth();

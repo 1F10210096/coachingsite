@@ -80,7 +80,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
           <button className={styles.searchButton} onClick={handleSearch} />
         </div>
         <div className={styles.contheme2}>
-          {user !== null ? (
+          {userId !== null ? (
             <div className={styles.userSection8}>
               <Link href="/userProfile">
                 <span className={styles.userName}>

@@ -1,9 +1,10 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import router from 'next/router';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
-import { createUser } from 'src/utils/login'; // createUser関数をインポート
+import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css'; // スタイルシートは適宜調整してください
 
 const Register = () => {
@@ -16,7 +17,8 @@ const Register = () => {
   const handleRegister = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
-      const userCredential = await createUser(email, password, displayName);
+      const auth = createAuth(); // `createAuth` 関数を使用して `auth` オブジェクトを取得
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userId = userCredential.user.uid;
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!userCredential || !userCredential.user) {

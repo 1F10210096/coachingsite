@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
-import { logout } from 'src/utils/login';
+import { createAuth, logout } from 'src/utils/firebase';
 import styles from './index.module.css';
 // eslint-disable-next-line complexity
 const UserProfile = () => {
@@ -27,7 +27,7 @@ const UserProfile = () => {
   };
   const [Id, setUserUUID] = useState('');
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット

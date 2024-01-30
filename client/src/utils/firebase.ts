@@ -1,32 +1,92 @@
-import type { FirebaseOptions } from 'firebase/app';
-import { getApps, initializeApp } from 'firebase/app';
-import type { Auth } from 'firebase/auth';
-import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import type { FirebaseApp } from 'firebase/app';
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import type { Auth, User } from 'firebase/auth';
+import { getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-let cachedAuth: Auth | undefined;
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
 
-export const createAuth = () => {
-  if (cachedAuth !== undefined) return cachedAuth;
-
-  let app;
-  if (getApps().length === 0) {
-    // Firebaseアプリケーションがまだ初期化されていない場合のみ初期化する
-    const firebaseConfig: FirebaseOptions =
-      process.env.NEXT_PUBLIC_AUTH_EMULATOR_URL !== undefined
-        ? { apiKey: 'fake-api-key', authDomain: location.hostname }
-        : JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG ?? '{}');
-
-    app = initializeApp(firebaseConfig);
+export const getFirebaseAppInstance = (): FirebaseApp => {
+  if (!getApps().some((app) => app.name === 'coach')) {
+    // 'coach' という名前のFirebaseアプリが存在しない場合、新たに初期化
+    return initializeApp(firebaseConfig, 'coach');
   } else {
-    // 既に初期化されているFirebaseアプリケーションを使用する
-    app = getApps()[0];
+    // 既に存在する場合、そのインスタンスを返す
+    return getApp('coach');
   }
+};
 
-  const auth = getAuth(app);
-  if (process.env.NEXT_PUBLIC_AUTH_EMULATOR_URL !== undefined) {
-    connectAuthEmulator(auth, process.env.NEXT_PUBLIC_AUTH_EMULATOR_URL, { disableWarnings: true });
+export const createAuth = (): Auth => {
+  const app = getFirebaseAppInstance();
+  return getAuth(app);
+};
+export const logout = async (): Promise<void> => {
+  try {
+    const auth = createAuth();
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout failed:', error);
   }
-  cachedAuth = auth;
+};
 
-  return auth;
+// メールとパスワードでログイン
+export const loginWithEmail = async (email: string, password: string) => {
+  try {
+    const auth = createAuth();
+    console.log(auth, email, password);
+    console.log('loginWithEmail');
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.log('login error');
+    throw error;
+  }
+};
+
+// // emailとpasswordからユーザー登録
+// import type { UserCredential } from 'firebase/auth';
+
+// export const createUser = async (
+//   email: string,
+//   password: string,
+//   displayName: string
+// ): Promise<UserCredential> => {
+//   // 戻り値の型を修正
+//   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+//   console.log(auth);
+//   const analytics = getAnalytics(getFirebaseAppInstance());
+//   console.log(analytics);
+//   const user = auth.currentUser;
+//   if (user) {
+//     await updateProfile(user, { displayName });
+//   }
+//   const isNotVerified = !userCredential.user.emailVerified;
+//   if (isNotVerified) {
+//     console.log('メールを送信しました');
+//     await reSendVerifyMail(userCredential.user); // この関数の実装を確認
+//   }
+//   return userCredential; // 正しい型の値を返す
+// };
+
+// 確認メール送信
+const reSendVerifyMail = async (user: User): Promise<void> => {
+  try {
+    await sendEmailVerification(user);
+    return;
+  } catch (error) {
+    switch ((error as { code: string }).code) {
+      case 'auth/too-many-requests':
+        console.error('Too many requests. Try again later.');
+        break;
+      default:
+        console.error('Failed to send verification email:', error);
+    }
+  }
 };

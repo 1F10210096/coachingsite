@@ -1,8 +1,9 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import styles from './BasicHeader.module.css';
 
 export const BasicHeader = ({ user }: { user?: string }) => {
@@ -25,7 +26,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
   };
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUserId(firebaseUser.uid);

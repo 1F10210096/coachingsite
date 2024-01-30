@@ -1,9 +1,10 @@
 import type { GameListModel, UserSummaryModel, newBosyuu } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
 const Home = () => {
@@ -40,7 +41,7 @@ const Home = () => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット

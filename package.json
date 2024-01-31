@@ -44,7 +44,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.1544.0",
+    "aws-sdk": "^2.1547.0",
     "fastify-websocket": "^4.3.0",
     "firebase": "^10.7.2",
     "firebase-admin": "^11.11.0",

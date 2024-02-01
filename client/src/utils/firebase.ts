@@ -4,20 +4,13 @@ import type { Auth, User } from 'firebase/auth';
 import { getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-};
+const firebaseConfig = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
 export const getFirebaseAppInstance = (): FirebaseApp => {
   if (!getApps().some((app) => app.name === 'coach')) {
     // 'coach' という名前のFirebaseアプリが存在しない場合、新たに初期化
-    return initializeApp(firebaseConfig, 'coach');
+    // 名前をFirebaseAppSettingsオブジェクトのnameプロパティにセットする
+    return initializeApp(firebaseConfig, { name: 'coach' });
   } else {
     // 既に存在する場合、そのインスタンスを返す
     return getApp('coach');

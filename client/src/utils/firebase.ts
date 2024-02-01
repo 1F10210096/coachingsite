@@ -42,6 +42,7 @@ export const loginWithEmail = async (email: string, password: string) => {
   }
 };
 
+//e
 // // emailとpasswordからユーザー登録
 // import type { UserCredential } from 'firebase/auth';
 

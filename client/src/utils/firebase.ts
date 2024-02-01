@@ -1,10 +1,9 @@
-import type { FirebaseApp } from 'firebase/app';
+import type { FirebaseApp, FirebaseOptions } from 'firebase/app';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import type { Auth, User } from 'firebase/auth';
 import { getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-
-const firebaseConfig = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const firebaseConfig = process.env.NEXT_PUBLIC_FIREBASE_API_KEY as FirebaseOptions;
 
 export const getFirebaseAppInstance = (): FirebaseApp => {
   if (!getApps().some((app) => app.name === 'coach')) {

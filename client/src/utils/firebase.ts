@@ -3,7 +3,6 @@ import { getApp, getApps, initializeApp } from 'firebase/app';
 import type { Auth, User } from 'firebase/auth';
 import { getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

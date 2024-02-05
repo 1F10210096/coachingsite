@@ -1,9 +1,9 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import router from 'next/router';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
-import { loginWithEmail } from 'src/utils/firebase';
+import { createAuth, loginWithEmail } from 'src/utils/firebase';
 import { useLoading } from '../@hooks/useLoading';
 import styles from './index.module.css';
 
@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // ユーザーがログインしている場合の処理
@@ -32,10 +32,11 @@ const Login = () => {
     try {
       event.preventDefault();
       const userCredential = await loginWithEmail(email, password);
-      console.log('ログイン成功:', userCredential);
-      router.push('http://localhost:3000/');
+      console.log('アカウント作成成功:', userCredential);
+      alert('アカウント作成成功しました');
     } catch (error) {
-      console.error('ログイン失敗:', error);
+      console.error('アカウント作成失敗:', error);
+      alert(`アカウント作成失敗: ${error}`);
     }
   };
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,0 +1,60 @@
+.as {
+  width: 100%;
+  padding-bottom: 400px;
+}
+
+.allContainer {
+  position: relative;
+  top: 180px;
+  left: 400px;
+  width: 900px;
+  height: auto;
+  padding-bottom: 200px;
+  overflow: hidden;
+  border: 1px solid rgb(158 158 158 / 50%);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.title {
+  position: relative;
+  top: 60px;
+  left: 100px;
+  width: 600px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #717171;
+}
+
+.content {
+  position: relative;
+  left: 140px;
+  width: 600px;
+  margin-top: 30px;
+}
+
+.subTitle {
+  position: relative;
+  left: 140px;
+  margin-top: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #717171;
+}
+
+.subTitleContainer {
+  position: relative;
+  top: 100px;
+}
+
+.next2 {
+  position: relative;
+  top: 150px;
+  left: 150px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+}

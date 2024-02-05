@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
+import { createAuth } from 'src/utils/firebase';
 // eslint-disable-next-line complexity
 const AllSearch = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const AllSearch = () => {
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         console.log(firebaseUser);

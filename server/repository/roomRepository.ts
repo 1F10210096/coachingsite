@@ -85,4 +85,82 @@ export const roomRepository = {
       throw error;
     }
   },
+  fetchUser: async (roomId: string, userId: string): Promise<number | null> => {
+    try {
+      const room = await prisma.room.findFirst({
+        where: {
+          id: roomId,
+        },
+      });
+
+      if (!room) {
+        console.log('Room not found');
+        return null; // 部屋が見つからない場合はnullを返す
+      }
+
+      console.log(userId);
+      console.log(room);
+
+      // userIdがparticipantIdと一致する場合は1を返す
+      if (userId === room.participantId) {
+        return 1;
+      }
+
+      // userIdがhostIdと一致する場合は2を返す
+      if (userId === room.hostId) {
+        return 2;
+      }
+
+      // userIdがparticipantIdやhostIdと一致しない場合
+      return null;
+    } catch (error) {
+      // エラーハンドリング
+      console.error('Error fetching recruitment details:', error);
+      throw error;
+    }
+  },
+  fetchRooms: async (
+    userId: string
+  ): Promise<(Room & { latestComment: Comment | null; commentUser: User | null })[] | null> => {
+    try {
+      const roomsWithLatestComment = await prisma.room.findMany({
+        where: {
+          hostId: userId,
+        },
+        include: {
+          Comment: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+            include: {
+              user: {
+                select: {
+                  name:true,
+                  imageUrl: true, // ユーザーの写真（imageUrl）のみを取得
+                  // 他に必要なフィールドがあれば、ここに追加
+                }
+              },
+            }
+          },
+          // 他に必要なフィールドがあれば、ここに追加
+        },
+      });
+
+      const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+        ...room,
+        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+      }));
+
+      if (roomsWithMappedComments.length === 0) {
+        return null;
+      }
+
+      return roomsWithMappedComments;
+    } catch (error) {
+      console.error('Error fetching rooms with latest comment and user:', error);
+      throw error;
+    }
+  },
 };

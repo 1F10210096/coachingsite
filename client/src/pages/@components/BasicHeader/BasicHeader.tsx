@@ -83,6 +83,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
         <div className={styles.contheme2}>
           {userId !== null ? (
             <div className={styles.userSection8}>
+              <Link href="/room">message</Link>
               <Link href="/userProfile">
                 <span className={styles.userName}>
                   ようこそ,

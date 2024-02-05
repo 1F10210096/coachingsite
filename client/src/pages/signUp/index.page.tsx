@@ -25,12 +25,14 @@ const Register = () => {
         throw new Error('ユーザー情報の取得に失敗しました。');
       }
       console.log('アカウント作成成功。UUID:', userCredential.user.uid);
+      alert('アカウント作成成功しました');
       console.log(userId, userName);
       const response = await apiClient.createUser.post({ body: { userId, userName } });
       console.log(response);
-      router.push('http://localhost:3000/login');
+      router.push('http://localhost:3000');
     } catch (error) {
       console.error('アカウント作成失敗:', error);
+      alert(`アカウント作成失敗: ${error}`);
     }
   };
 

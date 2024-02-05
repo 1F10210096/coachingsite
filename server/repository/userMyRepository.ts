@@ -18,7 +18,10 @@ export const userMyRepository = async (
       where: {
         studentId: userId,
       },
-      // 必要に応じて他のフィールドや関連を指定
+      include: {
+        bosyuu: true, // 関連するBosyuuListデータを含む
+        student: true, // 関連するStudentデータを含む
+      },
     });
     return { user, user2 };
   } catch (error) {

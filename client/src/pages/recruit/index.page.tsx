@@ -7,12 +7,13 @@ import type {
   TagsType,
   ValoRankType,
 } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import { default as getImagePath } from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
@@ -170,7 +171,7 @@ const Valorant = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット
@@ -497,7 +498,7 @@ const Valorant = () => {
                         handleLessonTypeCheckboxChange(LessonType as keyof LessonTypesType)
                       }
                     />
-                    <span>{LessonType.charAt(0).toUpperCase() + LessonType.slice(1)}</span>{' '}
+                    <span>{LessonType}</span>{' '}
                   </label>
                 ))}
               </div>

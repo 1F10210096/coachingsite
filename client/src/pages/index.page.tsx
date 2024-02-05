@@ -90,18 +90,30 @@ const Home = () => {
       <div className={styles.allContainer}>
         <div className={styles.container}>
           <div className={styles.coachTitle}>人気のゲーム</div>
+          <Link href="/allSearch">
           <div className={styles.blueTitle}>全て見る {'>'}</div>
+          </Link>
           <div className={styles.gameList}>
             {gameList.map((game, index) => (
-              <div key={game.id} className={styles.gameItem}>
-                <img
-                  key={index}
-                  className={styles.gameIconContainer}
-                  src={`/gameLists/${getGameListImagePath(game.id)}`}
-                  alt={`Rank: ${game.title}`}
-                />
-                <div className={styles.gameTitle}>{game.title}</div>
-              </div>
+              <Link
+                key={game.id}
+                href={{
+                  pathname: '/recruit',
+                  query: {
+                    value: game.id,
+                  },
+                }}
+              >
+                <div key={game.id} className={styles.gameItem}>
+                  <img
+                    key={index}
+                    className={styles.gameIconContainer}
+                    src={`/gameLists/${getGameListImagePath(game.id)}`}
+                    alt={`Rank: ${game.title}`}
+                  />
+                  <div className={styles.gameTitle}>{game.title}</div>
+                </div>
+              </Link>
             ))}
           </div>
           <div className={styles.divide}> </div>

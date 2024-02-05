@@ -21,6 +21,7 @@ import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
 import styles3 from './index3.module.css';
+import { createAuth } from 'src/utils/firebase';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
@@ -30,7 +31,7 @@ const Login = () => {
   const id = router.query.id;
   console.log(id);
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット

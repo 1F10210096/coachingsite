@@ -1,8 +1,13 @@
 /* eslint-disable max-lines */
 /* eslint-disable complexity */
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import assert from 'assert';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
+import styles2 from './index2.module.css';
+import router from 'next/router';
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
@@ -42,10 +47,10 @@ const YourComponent = () => {
 
   const stepTitles = ['ゲーム選択', 'ランク選択', '詳細情報', '注意事項'];
 
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<string>('');
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット
@@ -53,7 +58,7 @@ const YourComponent = () => {
         setUser(firebaseUser.uid);
       } else {
         // ユーザーがログアウトしている場合
-        setUser(null);
+        setUser('');
       }
     });
 
@@ -61,9 +66,9 @@ const YourComponent = () => {
     return () => unsubscribe();
   }, []);
 
-  const [selectedGameIndex, setSelectedGameIndex] = useState<number | undefined>();
+  const [selectedGameIndex, setSelectedGameIndex] = useState<number>(0);
 
-  const [selectedMyRankIndex, setSelectedMyRankIndex] = useState<number>();
+  const [selectedMyRankIndex, setSelectedMyRankIndex] = useState<number>(0);
   const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const gameName = event.target.value;
     if (['VALORANT', 'LOL', 'CSGO', 'COD 2', 'OverWatch2'].includes(gameName)) {
@@ -135,35 +140,35 @@ const YourComponent = () => {
 
   const [title, setTitle] = useState(''); // React の state hook
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(event.target.value); // 入力された値を state にセット
   };
 
   const [description, setDescription] = useState(''); // React の state hook
 
-  const handleChangeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value); // 入力された値を state にセット
   };
 
   const [lessonType, setLessonType] = useState(''); // React の state hook
 
-  const handleChangeLessonType = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeLessonType = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLessonType(event.target.value); // 入力された値を state にセット
   };
 
   const [acheavement, setAcheavement] = useState(''); // React の state hook
 
-  const handleAcheavement = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAcheavement = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAcheavement(event.target.value); // 入力された値を state にセット
   };
 
   const [notes, setNotes] = useState('');
-  const handleNotes = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNotes = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNotes(event.target.value); // 入力された値を state にセット
   };
 
   const [suchedule, setSuchedule] = useState('');
-  const handleSuchedule = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSuchedule = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSuchedule(event.target.value); // 入力された値を state にセット
   };
 
@@ -179,7 +184,7 @@ const YourComponent = () => {
     }
   };
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(acheavement);
     try {
       const coachData = {
@@ -200,30 +205,30 @@ const YourComponent = () => {
       const unknownRanks = selectedMyRanks as unknown;
       const unknownGame = unknownRanks as number;
       console.log(lessonType);
-      // const response = await apiClient.createBosyuu.post({
-      //   body: {
-      //     user,
-      //     title,
-      //     selectedGameIndex,
-      //     selectedMyRankIndex,
-      //     lessonType,
-      //     selectedRanksIndex,
-      //     selectedTags,
-      //     acheavement,
-      //     description,
-      //     suchedule,
-      //     notes,
-      //   },
-      // });
-      // 成功時の処理（例：リダイレクト等）
+      const response = await apiClient.createBosyuu.post({
+        body: {
+          user,
+          title,
+          selectedGameIndex,
+          selectedMyRankIndex,
+          lessonType,
+          selectedRanksIndex,
+          selectedTags,
+          acheavement,
+          description,
+          suchedule,
+          notes,
+        },
+      });
+      assert('募集作成が完了しました');
+      router.push('http://localhost:3000/');
     } catch (error) {
-      console.error('エラー:', error);
+      assert(error);
     }
   };
 
   return (
     <>
-      <div className={styles.progressBarContainer} />
       <div className={styles.container} />
       <div className={styles.loginTitle}>コーチング募集</div>
       <div className={styles.step}>
@@ -283,9 +288,7 @@ const YourComponent = () => {
                   </option>
                 ))
               ) : (
-                <option value="" disabled>
-                  利用可能なランクがありません
-                </option>
+                <option value="" disabled />
               )}
             </select>
 
@@ -313,7 +316,7 @@ const YourComponent = () => {
                 </div>
               </div>
             ) : (
-              <div>選択したゲームに対応するランクはありません。</div>
+              <div className={styles.noPick} />
             )}
 
             <button onClick={handleNextStep} className={styles.next}>
@@ -326,29 +329,25 @@ const YourComponent = () => {
       {step === 2 && (
         <div className={styles.as}>
           <div className={styles.title}>募集タイトルを入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="タイトルを入力してください"
             onChange={handleChange} // ユーザーの入力を処理する関数
             className={styles.input} // スタイリングのためのCSSクラス
           />
           <div className={styles.description}>募集内容を入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="募集内容を入力してください"
             onChange={handleChangeDescription} // ユーザーの入力を処理する関数
             className={styles.inputDescription} // スタイリングのためのCSSクラス
           />
           <div className={styles.description}>レッスン形式を入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="レッスン形式を入力してください"
             onChange={handleChangeLessonType} // ユーザーの入力を処理する関数
             className={styles.inputDescription} // スタイリングのためのCSSクラス
           />
           <div className={styles.acheavement}>実績を入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="実績を入力してください"
             onChange={handleAcheavement} // ユーザーの入力を処理する関数
             className={styles.inputAcheavement} // スタイリングのためのCSSクラス
@@ -362,15 +361,13 @@ const YourComponent = () => {
       {step === 3 && (
         <div className={styles.as}>
           <div className={styles.title}>スケジュールを入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="スケジュールを入力してください"
             onChange={handleSuchedule} // ユーザーの入力を処理する関数
             className={styles.input} // スタイリングのためのCSSクラス
           />
           <div className={styles.notes}>注意事項を入力してください</div>
-          <input
-            type="text"
+          <textarea
             placeholder="注意事項を入力してください"
             onChange={handleNotes} // ユーザーの入力を処理する関数
             className={styles.inputNotes} // スタイリングのためのCSSクラス
@@ -398,9 +395,35 @@ const YourComponent = () => {
       )}
 
       {step === 4 && (
-        <div>
-          {' '}
-          <button onClick={handleSubmit}>登録</button>
+        <div className={styles2.as}>
+          <div className={styles2.allContainer}>
+            <div className={styles2.title}>入力内容はこの通りでいいですか？</div>
+            <div className={styles2.subTitleContainer}>
+              <div className={styles2.subTitle}>ゲーム名</div>
+              <div className={styles2.content}>{selectedGame}</div>
+              <div className={styles2.subTitle}>自分のランク</div>
+              <div className={styles2.content}>{selectedMyRanks}</div>
+              <div className={styles2.subTitle}>対象ランク</div>
+              <div className={styles2.content}>{selectedRanks}</div>
+              <div className={styles2.subTitle}>募集タイトル</div>
+              <div className={styles2.content}>{title}</div>
+              <div className={styles2.subTitle}>募集内容</div>
+              <div className={styles2.content}>{description}</div>
+              <div className={styles2.subTitle}>レッスン形式</div>
+              <div className={styles2.content}>{lessonType}</div>
+              <div className={styles2.subTitle}>実績</div>
+              <div className={styles2.content}>{acheavement}</div>
+              <div className={styles2.subTitle}>スケジュール</div>
+              <div className={styles2.content}>{suchedule}</div>
+              <div className={styles2.subTitle}>注意事項</div>
+              <div className={styles2.content}>{notes}</div>
+              <div className={styles2.subTitle}>タグ</div>
+              <div className={styles2.content}>{selectedTags}</div>
+            </div>
+            <button className={styles2.next2} onClick={handleSubmit}>
+              登録
+            </button>
+          </div>
         </div>
       )}
     </>

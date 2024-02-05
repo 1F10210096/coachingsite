@@ -76,10 +76,11 @@ model BosyuuList {
 
 model apply {
   id        String     @id @default(uuid())
+  roomId    String  
   bosyuuId  String
   studentId String
   status    String
-  date      DateTime   
+  date      String
   time      String
   rating    Float? // 評価フィールド（5段階評価、小数点第1位まで）
   review    String? // レビュー
@@ -105,8 +106,8 @@ model GameRanksList {
 
 model Room {
   id            String     @id @unique @default(uuid())
-  bosyuuId      String 
-  hostId        String 
+  bosyuuId      String
+  hostId        String
   participantId String
   createdAt     DateTime   @default(now())
   status        String

@@ -23,15 +23,6 @@ wss.on('connection', (ws, request) => {
         const room = await prismaClient.room.findUnique({
           where: { id: roomId },
         });
-
-        // コメントを保存
-        await prismaClient.comment.create({
-          data: {
-            content,
-            userId,
-            roomId,
-          },
-        });
         // 条件に基づいたクライアントへのメッセージ送信
         let targetUserId;
         console.log(userId, 'wadawdad');

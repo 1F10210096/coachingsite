@@ -255,7 +255,7 @@
 
 .myRank {
   position: relative;
-  top: 120px;
+  top: 90px;
   left: 100px;
   width: 600px;
   font-size: 19px;
@@ -266,7 +266,7 @@
 
 .select2 {
   position: relative;
-  top: 130px;
+  top: 120px;
   left: 100px;
   width: 600px;
   padding: 10px 15px;
@@ -383,4 +383,9 @@
   display: flex;
   gap: 5px; /* チェックボックスとラベルの間のスペース */
   align-items: center; /* チェックボックスとラベルを中央揃え */
+}
+
+.noPick{
+  position: relative;
+  left: 100px;
 }

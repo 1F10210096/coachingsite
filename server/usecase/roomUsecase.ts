@@ -15,4 +15,16 @@ export const roomUsecase = {
     assert(room !== null, 'roomはnullです');
     return room;
   },
+  fetchUser: async (Id: string, userId: string): Promise<CommentsWithImages[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchUser(Id, userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
+  fetchRooms: async (userId: string): Promise<CommentsWithImages[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchRooms(userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
 };

@@ -15,17 +15,18 @@ export const approveRepository = async (
     console.log('userId', userId);
 
     // 条件に一致する応募を検索
-    const applications = await prismaClient.room.findMany({
+    const applications = await prismaClient.apply.findMany({
       where: {
-        id: roomId,
-        hostId: userId,
+        roomId,
       },
     });
     console.log('applications', applications[0].bosyuuId);
 
     // 最初の応募のステータスを更新（該当する応募がある場合）
     if (applications.length > 0) {
-      await prismaClient.room.update({
+      console.log(applications);
+      console.log('Ddgrdgd');
+      const a = await prismaClient.apply.update({
         where: {
           id: applications[0].id,
         },
@@ -33,20 +34,7 @@ export const approveRepository = async (
           status: '応募済み',
         },
       });
-      console.log(bosyuuId);
-      const now = new Date();
-      const application = await prismaClient.apply.create({
-        data: {
-          bosyuuId: applications[0].bosyuuId,
-          studentId: applications[0].participantId,
-          status: '応募済み',
-          date: now, // 適切な日付を設定
-          time: now.toISOString(),
-          // 必要に応じて任意フィールドもここに追加
-        },
-      });
-
-      console.log('application', application);
+      console.log(a);
 
       console.log('Application status updated to 応募済み');
       return applications[0];

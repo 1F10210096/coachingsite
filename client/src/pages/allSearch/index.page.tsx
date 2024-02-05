@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
+import { createAuth } from 'src/utils/firebase';
 // eslint-disable-next-line complexity
 const AllSearch = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const AllSearch = () => {
   });
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         console.log(firebaseUser);

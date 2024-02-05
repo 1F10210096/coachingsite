@@ -38,9 +38,9 @@ export const reviewRepository = {
       const numericRating = parseFloat(rating);
 
       // 指定されたIDで apply レコードを更新
-      const updatedApplication = await prismaClient.apply.update({
+      const updatedApplication = await prismaClient.apply.updateMany({
         where: {
-          id: selectedId,
+          roomId: selectedId,
         },
         data: {
           rating: numericRating,

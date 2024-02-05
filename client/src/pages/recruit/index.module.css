@@ -127,37 +127,6 @@
   border-bottom: 2px solid rgb(142 142 142);
 }
 
-
-.rankCheckboxes input[type='checkbox'] + span {
-  position: relative;
-  padding-left: 35px;
-  cursor: pointer;
-}
-
-.rankCheckboxes input[type='checkbox'] + span::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 18px;
-  height: 18px;
-  content: '';
-  border: 3px solid #bdbcbc;
-  border-radius: 4px;
-}
-
-.rankCheckboxes input[type='checkbox']:checked + span::before {
-  background-color: #007bff;
-}
-
-.rankCheckboxes input[type='checkbox']:checked + span::after {
-  position: absolute;
-  left: 4px;
-  color: white;
-  content: '✔';
-}
-
-
-
 .homeContainer {
   position: relative;
   top: 160px;

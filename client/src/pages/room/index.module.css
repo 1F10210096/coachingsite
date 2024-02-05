@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  top: 200px;
+  left: 500px;
+  width: 700px;
+  height: auto;
+  background-color: rgb(255 255 255);
+}
+
+.title {
+  position: relative;
+  left: 300px;
+  font-size: 24px; /* 文字の大きさを24pxに設定 */
+  font-weight: bold; /* 文字を太くする */
+}
+
+.roomList {
+  position: relative;
+  top: 30px;
+  width: 100%;
+  height: auto;
+  background-color: aliceblue;
+  border: 1px solid #ccc; /* 薄いグレーのボーダー */
+  border-radius: 8px; /* 角を丸くする */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+}
+
+.commentContainer {
+  position: relative;
+  left: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  padding: 16px; /* 内側のパディング */
+  margin: 16px 0; /* 上下のマージン */
+  background-color: #fff; /* 白い背景色 */
+  border: 1px solid #ccc; /* 薄いグレーのボーダー */
+  border-radius: 8px; /* 角を丸くする */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+}
+
+.userImage {
+  position: relative;
+  height: 50px;
+}
+
+.comment {
+  position: relative;
+  top: 5px;
+  font-size: 18px;
+}
+
+.userName {
+  position: relative;
+  font-size: 13px;
+}
+
+.userContainer {
+  position: relative;
+  top: -4px;
+  left: 20px;
+  background-color: rgb(255, 255, 255);
+}

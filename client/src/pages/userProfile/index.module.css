@@ -1,16 +1,18 @@
 .modal {
   position: relative;
+  padding-bottom: 100px;
+  background-color: #fff;
 }
-
-
 
 .helpwanted {
   position: relative;
   top: -260px;
   left: 400px;
   width: 600px;
-  height: 600px;
-  background-color: rgb(241 241 241);
+  height: auto;
+  background-color: rgb(255 255 255);
+  border: 1px solid rgb(158 158 158 / 50%);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
 }
 
 .searchNameContainer {
@@ -23,6 +25,12 @@
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
   border-bottom: 2px solid rgb(142 142 142);
+}
+
+.noRecruit {
+  position: relative;
+  top: 70px;
+  left: 100px;
 }
 
 .searchNameContainer2 {
@@ -130,4 +138,502 @@
   border: 1px solid #000; /* ボーダーの太さと色を設定 */
   border-radius: 50%; /* 画像を円形にする */
   object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
+}
+
+.title {
+  position: relative;
+  top: 30px;
+  left: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px; /* 文字の大きさを17pxに設定する */
+  font-weight: 600;
+}
+
+.container2 {
+  position: relative;
+  top: 60px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 各要素間のスペースを設定 */
+  padding: 20px; /* パディングを適用 */
+
+  /* その他必要なスタイル */
+}
+
+.nameTitle {
+}
+
+.name {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.name2 {
+  width: 500px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.button {
+  position: relative;
+  top: 20px;
+  width: 400px;
+  height: 30px;
+  color: #fafafa;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+}
+
+.line {
+  position: relative;
+  top: 50px;
+  left: 5%;
+  width: 90%; /* 幅を親要素に合わせる */
+  height: 10px;
+  border-top: 2px solid rgb(104 104 104); /* 上部に1ピクセルの黒線を引く */
+}
+
+.container3 {
+  position: relative;
+  background-color: #fff;
+}
+
+.allContainer {
+  padding-bottom: 300px;
+}
+
+.box {
+  position: relative;
+  top: 30px;
+  left: 30px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+.box2 {
+  position: relative;
+  top: 50px;
+  height: auto;
+  padding-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  border: 1px solid #b5b5b5; /* General border for all sides */
+  border-top: 3px solid #71d3f7; /* Light blue top border */
+  box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
+}
+
+.box3 {
+  position: relative;
+  top: 60px;
+  left: 30px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+
+.line2 {
+  position: relative;
+  top: 14px;
+  width: 100%; /* 幅を親要素に合わせる */
+  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.line3 {
+  position: relative;
+  top: 20px;
+  width: 100%; /* 幅を親要素に合わせる */
+  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.title2 {
+  position: relative;
+  top: 10px;
+  left: 50px;
+  width: 400px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #000;
+  background-color: #fff;
+}
+
+.rank {
+  position: relative;
+  top: 3px;
+  left: 23px;
+  display: flex;
+  align-items: center; /* 中央揃え */
+  width: 30px;
+  height: auto;
+  font-size: 15px;
+  background-color: rgb(255 255 255);
+}
+
+.rankImage {
+  position: relative;
+  top: 5px;
+  width: 50px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}
+
+.titleContainer {
+  display: flex; /* Flexboxを有効にする */
+  gap: 10px; /* 要素間の間隔を設定する */
+  align-items: center; /* 要素を垂直方向の中心に配置する */
+  justify-content: flex-start; /* 要素を水平方向の始点に配置する */
+  background-color: #fff;
+
+  /* その他のスタイル（必要に応じて） */
+}
+
+.wrapper {
+  position: relative;
+  top: 10px;
+  left: 30px;
+  width: 80%;
+  height: auto;
+
+  /* 例えばパディング、マージン、ボーダーなどのスタイルを適用 */
+
+  background-color: rgb(255 255 255);
+
+  /* 必要に応じて他のスタイルを追加 */
+}
+
+.descriptionTitle {
+  position: relative;
+  display: flex;
+  align-items: center; /* This aligns children vertically in the center */
+  justify-content: center; /* Optionally, to center horizontally as well */
+  width: 130px;
+  height: auto;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(55 55 55);
+  background-color: rgb(180 227 254);
+  border-right: #e6e6e6 2px solid;
+}
+
+.description {
+  position: relative;
+  width: 330px;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  line-height: 1.2; /* Adjust this value as needed */
+  letter-spacing: -0.1px;
+  background-color: rgb(255 255 255);
+}
+
+.descriptionContainer {
+  display: flex;
+  gap: 20px; /* 画像間のスペースを20pxに設定 */
+  width: 450px;
+  margin-left: 30px;
+  border: #d7d7d7 1px solid;
+}
+
+.subjectRank {
+  display: flex;
+  gap: 20px; /* 画像間のスペースを20pxに設定 */
+  width: 450px;
+  margin-left: 30px;
+  border: #d7d7d7 1px solid;
+}
+
+.subjectRankTitle {
+  position: relative;
+  display: flex;
+  align-items: center; /* This aligns children vertically in the center */
+  justify-content: center; /* Optionally, to center horizontally as well */
+  width: 120px;
+  height: auto;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(55 55 55);
+  background-color: rgb(180 227 254);
+  border-right: #e6e6e6 1px solid;
+}
+
+.subjectRankImage {
+  width: 30px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}
+
+.subjectRankContainer {
+  display: flex;
+  gap: 10px; /* 画像間のスペースを20pxに設定 */
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.tag {
+  position: relative;
+  gap: 40px;
+  align-items: center;
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: 13px;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.tagText {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0 0.1em 0.6em 0;
+  line-height: 1;
+  color: rgb(0 111 238);
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgb(0 131 238);
+  border-radius: 2em;
+}
+
+.tagText::before {
+  content: '#';
+}
+
+.lessonType {
+  position: relative;
+  display: flex;
+  gap: 40px;
+  align-items: center; /* 中央揃え */
+  width: 90%;
+  height: auto;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 30px;
+  font-size: 13px;
+  background-color: rgb(255 255 255);
+}
+
+.lessonTypeContainer {
+  display: flex;
+  flex-wrap: wrap; /* 要素が折り返すように設定 */
+  gap: 13px;
+}
+
+.lessonTypeText {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0 0.1em 0.6em 0;
+  line-height: 1;
+  color: rgb(0 238 159);
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgb(0 238 143);
+  border-radius: 2em;
+}
+
+.userImageDetail {
+  position: relative;
+  right: 60px;
+  width: 80px; /* Adjust the size as needed */
+  height: 80px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.applyButton {
+  position: relative;
+  top: 35px;
+  left: 200px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #007bff; /* Blue text */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #fff; /* White background */
+  border: 1px solid #7b81ff; /* Blue border */
+  border-radius: 5px; /* Rounded borders */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+  transition: box-shadow 0.6s; /* Smooth transition for shadow */
+}
+
+.applyButton .starIcon {
+  margin-right: 5px; /* Space between star and text */
+  color: #ffd700; /* Gold color for the star */
+}
+
+.applyButton:hover {
+  box-shadow: 0 0 10px rgb(0 123 255 / 50%); /* Blue shadow on hover */
+}
+
+.date {
+  position: relative;
+  top: 20px;
+  left: 380px;
+  width: 180px;
+  height: auto;
+  font-size: 13px;
+  font-weight: 200;
+  color: rgb(55 55 55);
+  background-color: rgb(255 255 255);
+}
+
+.horizontalLayout {
+  display: flex; /* Establishes a flex container */
+  gap: 20px; /* Adjusts the gap between items */
+  align-items: center; /* Centers items vertically */
+}
+
+.selectPage {
+  position: relative;
+  top: 120px;
+  left: 30px;
+  width: 100%;
+  height: auto;
+  font-size: 13px;
+  color: rgb(255 5 5);
+  background-color: rgb(255 255 255);
+}
+
+.gameSort {
+  position: relative;
+  top: 40px;
+  left: 630px;
+  width: 199px;
+  height: auto;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(255 5 5);
+}
+
+.gameTitleContainer {
+  position: relative;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.subContanier {
+  position: relative;
+  top: -480px;
+  left: 600px;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.mail {
+  position: relative;
+  left: 100px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #717171;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.select {
+}
+
+.myRank {
+  position: relative;
+  top: 90px;
+  left: 100px;
+  width: 600px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #717171;
+  white-space: nowrap;
+}
+
+.select2 {
+  position: relative;
+  top: 120px;
+  left: 100px;
+  width: 600px;
+  padding: 10px 15px;
+  font-size: 22px;
+  color: rgb(0 0 0);
+  cursor: pointer;
+  background-color: #fff;
+  border: 2px solid #9e9e9e;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pick {
+  display: flex;
+  flex-direction: column; /* 子要素を縦に並べる */
+  gap: 10px;
+
+  /* 必要に応じて他のスタイリングを追加 */
+}
+
+.rankItem {
+  position: relative;
+  top: 230px;
+  left: 100px;
+  display: flex;
+  gap: 5px; /* チェックボックスとラベルの間のスペース */
+  align-items: center; /* チェックボックスとラベルを中央揃え */
+}
+
+.rankName {
+}
+
+.noPick {
+}
+.notes {
+}
+
+.tagItem {
+}
+
+.logout {
+  position: relative;
+  top: 70px;
+  left: 140px;
+}
+
+.logoutButton {
+  position: relative;
+  top: 80px;
+  left: 230px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* ボタンの角を丸くする */
+  background-color: #ff4b2b; /* 赤い背景色 */
+  color: white; /* テキスト色を白に */
+  font-size: 16px; /* フォントサイズ */
+  font-weight: bold; /* フォントを太く */
+  cursor: pointer; /* マウスカーソルをポインターに */
+  box-shadow: 0 4px 8px rgba(255, 75, 43, 0.4); /* 赤い色の影を付ける */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズなトランジション効果 */
+}
+
+.logoutButton:hover {
+  background-color: #ff6b4a; /* ホバー時の背景色を少し明るく */
+  box-shadow: 0 6px 12px rgba(255, 75, 43, 0.6); /* ホバー時の影を大きく */
+  transform: translateY(-2px); /* ホバー時に少し上に持ち上げる */
 }

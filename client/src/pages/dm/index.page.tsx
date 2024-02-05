@@ -2,15 +2,17 @@
 /* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
+import assert from 'assert';
 import type {
   BosyuuListFrontModel,
   UserSummaryDetailModel,
   msgModel,
 } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css';
 
 const Dm = () => {
@@ -70,7 +72,7 @@ const Dm = () => {
   }, [user]); // idAsString に依存
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット
@@ -84,6 +86,7 @@ const Dm = () => {
   const fetchRoom = async () => {
     try {
       if (typeof id === 'string') {
+        console.log(id);
         const response = await apiClient.fetchRoom.post({
           body: {
             Id: id,
@@ -91,11 +94,15 @@ const Dm = () => {
           },
         });
         console.log(response);
-        // if (response.body.participantIdentity) {
-        //   console.log(response.body.participantIdentity, 'wdasdawda');
-        //   setMessage(response.body.commentsWithImages);
-        //   setUserNumber(response.body.participantIdentity);
-        // }
+        console.log('dadaddfffffffff');
+        const response2 = await apiClient.fetchUserInfo.post({
+          body: {
+            Id: id,
+            userId: user,
+          },
+        });
+        console.log(response2.body);
+        setUserNumber(response2.body);
       }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
@@ -109,7 +116,7 @@ const Dm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!websocket || websocket.readyState !== WebSocket.OPEN) {
       console.error('WebSocketが開いていません');
       return;
@@ -125,6 +132,13 @@ const Dm = () => {
     };
     console.log(messageData);
 
+    const response = await apiClient.sendMessage.post({
+      body: {
+        Id: id,
+        userId: user,
+        message: comment,
+      },
+    });
     // メッセージをJSON形式でサーバーに送信
     websocket.send(JSON.stringify(messageData));
     fetchRoom();
@@ -182,6 +196,17 @@ const Dm = () => {
   };
 
   const sendApply = async () => {
+    console.log(bosyuuId);
+    const response = await apiClient.sendApprove.post({
+      body: {
+        bosyuuId: RecruitDetail?.id,
+        roomId: id,
+        userId: user,
+        date,
+        time,
+      },
+    });
+
     if (!websocket || websocket.readyState !== WebSocket.OPEN) {
       console.error('WebSocketが開いていません');
       return;
@@ -218,7 +243,6 @@ const Dm = () => {
 
   const handleUrlClick = async () => {
     // 確認ダイアログを表示
-    setIsModalApproveOpen(false);
     const confirmResult = window.confirm('本当に承諾しますか？');
 
     // ユーザーが「OK」をクリックした場合のみ処理を続行
@@ -226,6 +250,7 @@ const Dm = () => {
       console.log(approvalUrl);
       console.log(id);
       console.log(user);
+      setIsModalApproveOpen(false);
 
       try {
         if (
@@ -330,6 +355,27 @@ const Dm = () => {
       </div>
     );
   }
+  const [waitApprove, setWaitApprove] = useState('');
+  const fetchApplay = async () => {
+    try {
+      console.log(id);
+      const response = await apiClient.fetchApplay.post({
+        body: {
+          id,
+        },
+      });
+      // set(response.body);
+      console.log(response.body);
+      setWaitApprove(response.body);
+      setTime(response.body.time);
+      setDate(response.body.date);
+    } catch (error) {
+      assert(error);
+    }
+  };
+  useEffect(() => {
+    fetchApplay();
+  }, [id]);
 
   function FinalModal({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) return null;
@@ -454,14 +500,14 @@ const Dm = () => {
             <button onClick={sendMessage} className={styles.sendButton}>
               Send
             </button>
-            {userNumber === '1' && (
+            {userNumber === 1 && (
               <button onClick={handleButtonClick} className={styles.applayButton}>
                 申し込む
               </button>
             )}
             {isModalOpen && <Modal isOpen={isModalOpen} />}
             {isModalFinalOpen && <FinalModal isOpen={isModalFinalOpen} />}
-            {approvalUrl && userNumber === '2' && (
+            {waitApprove && userNumber === 2 && (
               <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
                 {'受諾ボタン'}
               </div>

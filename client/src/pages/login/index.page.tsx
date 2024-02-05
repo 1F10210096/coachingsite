@@ -33,9 +33,11 @@ const Login = () => {
       event.preventDefault();
       const userCredential = await loginWithEmail(email, password);
       console.log('ログイン成功:', userCredential);
+      alert('ログイン成功!');
       router.push('http://localhost:3000/');
     } catch (error) {
       console.error('ログイン失敗:', error);
+      alert(`ログイン失敗: ${error}`);
     }
   };
 

@@ -10,6 +10,7 @@ import getImagePath from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
+import { createAuth } from 'src/utils/firebase';
 
 const UserProfile = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const UserProfile = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    const auth = getAuth();
+    const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         // ユーザーがログインしている場合、ユーザー情報をセット

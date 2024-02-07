@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import type { BosyuuList } from '@prisma/client';
+import type { BosyuuList, Student } from '@prisma/client';
 import { z } from 'zod';
 import { taskIdParser } from '../service/idParsers';
 
@@ -171,11 +171,14 @@ export type LessonTypesType = {
 
 export type Application = {
   id: string;
+  roomId: string;
   bosyuuId: string;
-  hostId: string;
-  participantId: string;
-  createdAt: Date;
+  studentId: string;
   status: string;
+  date: string;
+  time: string;
+  rating: number | null;
+  review: string | null;
 };
 
 export type newBosyuu = {
@@ -343,4 +346,44 @@ export type User3 = {
   rating: number | null;
   imageUrl: string | null;
   createdAt: Date;
+};
+
+export type RoomWithLatestComment = {
+  latestComment:
+    | ({
+        user: {
+          name: string;
+          imageUrl: string | null;
+        };
+      } & {
+        id: string;
+        roomId: string;
+        userId: string;
+        content: string;
+        createdAt: Date;
+        updatedAt: Date;
+      })
+    | null;
+  commentUser: {
+    name: string;
+    imageUrl: string | null;
+  } | null;
+  // ... Include the rest of the properties that a room has ...
+  status: string;
+
+  // ... other properties from the room model ...
+};
+
+export type NewApplyData = {
+  id: string;
+  roomId: string;
+  bosyuuId: string;
+  studentId: string;
+  status: string;
+  date: string; // データ型がstringのため、Date型への変換が必要かどうかはデータの使い方によります
+  time: string;
+  rating: number | null; // Float?はnumber型に対応し、nullが許容されます
+  review: string | null; // String?はstring型に対応し、nullが許容されます
+  bosyuu: BosyuuList; // この型は別途定義する必要があります
+  student: Student; // この型は別途定義する必要があります
 };

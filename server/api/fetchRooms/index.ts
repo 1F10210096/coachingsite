@@ -13,6 +13,31 @@ export type Methods = {
     reqBody: {
       userId: string;
     };
-    resBody: CommentsWithImages[];
+    resBody: RoomWithLatestComment[];
   };
+};
+export type RoomWithLatestComment = {
+  latestComment:
+    | ({
+        user: {
+          name: string;
+          imageUrl: string | null;
+        };
+      } & {
+        id: string;
+        roomId: string;
+        userId: string;
+        content: string;
+        createdAt: Date;
+        updatedAt: Date;
+      })
+    | null;
+  commentUser: {
+    name: string;
+    imageUrl: string | null;
+  } | null;
+  // ... Include the rest of the properties that a room has ...
+  status: string;
+
+  // ... other properties from the room model ...
 };

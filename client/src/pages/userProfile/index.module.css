@@ -162,6 +162,7 @@
 }
 
 .nameTitle {
+  position: relative;
 }
 
 .name {
@@ -234,7 +235,6 @@
   height: auto;
   background-color: #fff;
 }
-
 
 .line2 {
   position: relative;
@@ -554,6 +554,7 @@
 }
 
 .select {
+  position: relative;
 }
 
 .myRank {
@@ -600,14 +601,19 @@
 }
 
 .rankName {
+  position: relative;
 }
 
 .noPick {
+  position: relative;
 }
+
 .notes {
+  position: relative;
 }
 
 .tagItem {
+  position: relative;
 }
 
 .logout {
@@ -621,19 +627,19 @@
   top: 80px;
   left: 230px;
   padding: 10px 20px;
-  border: none;
-  border-radius: 20px; /* ボタンの角を丸くする */
-  background-color: #ff4b2b; /* 赤い背景色 */
-  color: white; /* テキスト色を白に */
   font-size: 16px; /* フォントサイズ */
   font-weight: bold; /* フォントを太く */
+  color: white; /* テキスト色を白に */
   cursor: pointer; /* マウスカーソルをポインターに */
-  box-shadow: 0 4px 8px rgba(255, 75, 43, 0.4); /* 赤い色の影を付ける */
+  background-color: #ff4b2b; /* 赤い背景色 */
+  border: none;
+  border-radius: 20px; /* ボタンの角を丸くする */
+  box-shadow: 0 4px 8px rgb(255 75 43 / 40%); /* 赤い色の影を付ける */
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズなトランジション効果 */
 }
 
 .logoutButton:hover {
   background-color: #ff6b4a; /* ホバー時の背景色を少し明るく */
-  box-shadow: 0 6px 12px rgba(255, 75, 43, 0.6); /* ホバー時の影を大きく */
+  box-shadow: 0 6px 12px rgb(255 75 43 / 60%); /* ホバー時の影を大きく */
   transform: translateY(-2px); /* ホバー時に少し上に持ち上げる */
 }

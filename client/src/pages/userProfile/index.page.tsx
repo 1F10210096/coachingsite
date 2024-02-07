@@ -1,6 +1,10 @@
 /* eslint-disable max-lines */
 import assert from 'assert';
-import type { BosyuuListFrontModel, NewApp, UserListItem } from 'commonTypesWithClient/models';
+import type {
+  BosyuuListFrontModel,
+  NewApplyData,
+  UserListItem,
+} from 'commonTypesWithClient/models';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import { useRouter } from 'next/router';
@@ -114,7 +118,7 @@ const UserProfile = () => {
   };
 
   const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
-  const [user2, setUser2] = useState<NewApp[]>([]);
+  const [user2, setUser2] = useState<NewApplyData[]>([]);
   type UserType = {
     id: number;
     name: string;
@@ -568,18 +572,18 @@ const UserProfile = () => {
                               </div>
                               <div className={styles.descriptionContainer}>
                                 <p className={styles.descriptionTitle}>募集詳細:</p>
-                                <p className={styles.description}>{recruit.description}</p>
+                                <p className={styles.description}>{recruit.bosyuu.description}</p>
                               </div>
                               <div className={styles.descriptionContainer}>
                                 <p className={styles.descriptionTitle}>実績:</p>
-                                <p className={styles.description}>{recruit.myProfile}</p>
+                                <p className={styles.description}>{recruit.bosyuu.myProfile}</p>
                               </div>
                             </div>
                             <div className={styles.line3} />
                             <div className={styles.horizontalLayout}>
                               <button
                                 className={styles.applyButton}
-                                onClick={() => showModal4('review', recruit.bosyuu.roomId)}
+                                onClick={() => showModal4('review', recruit.bosyuu.id)}
                               >
                                 <span className={styles.starIcon}>★</span>評価する
                               </button>
@@ -615,7 +619,11 @@ const UserProfile = () => {
                         placeholder="感想"
                         className={styles.name2}
                       />
-                      <button className={styles.button} onClick={handleSubmit2()} type="submit">
+                      <button
+                        className={styles.button}
+                        onClick={() => handleSubmit2()}
+                        type="submit"
+                      >
                         送信
                       </button>
                     </form>

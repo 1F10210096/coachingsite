@@ -15,6 +15,5 @@ export type Methods = {
       rating: string;
       review: string;
     };
-    resBody: NewApp;
   };
 };

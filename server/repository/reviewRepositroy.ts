@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import type { NewApp, reviewModel } from '$/commonTypesWithClient/models';
+import type { reviewModel } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 
 export const reviewRepository = {
@@ -32,7 +32,7 @@ export const reviewRepository = {
       review: (review.review ?? '') || '', // review プロパティが null の場合は空の文字列に変換
     }));
   },
-  updateReview: async (selectedId: string, rating: string, review: string): Promise<NewApp> => {
+  updateReview: async (selectedId: string, rating: string, review: string) => {
     try {
       // parseFloat を使って rating を数値に変換
       const numericRating = parseFloat(rating);
@@ -47,9 +47,6 @@ export const reviewRepository = {
           review,
         },
       });
-
-      // 更新されたレコードを返す
-      return updatedApplication;
     } catch (error) {
       console.error('Error updating review:', error);
       // エラー時は適切に処理（例：nullを返す、エラーを再スローするなど）

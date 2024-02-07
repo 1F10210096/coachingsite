@@ -91,7 +91,7 @@ const Home = () => {
         <div className={styles.container}>
           <div className={styles.coachTitle}>人気のゲーム</div>
           <Link href="/allSearch">
-          <div className={styles.blueTitle}>全て見る {'>'}</div>
+            <div className={styles.blueTitle}>全て見る {'>'}</div>
           </Link>
           <div className={styles.gameList}>
             {gameList.map((game, index) => (

@@ -1,9 +1,9 @@
-import type { NewApp, UserListItem } from '$/commonTypesWithClient/models';
+import type { NewApplyData, UserListItem } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 
 export const userMyRepository = async (
   userId: string
-): Promise<{ user: UserListItem[]; user2: NewApp[] } | null> => {
+): Promise<{ user: UserListItem[]; user2: NewApplyData[] } | null> => {
   try {
     console.log('userMyRepository');
     console.log('userId', userId);

@@ -9,7 +9,7 @@ export const applayRepository = async (
   time: string
 ): Promise<Application | null> => {
   try {
-    console.log("dawdadsaddw")
+    console.log('dawdadsaddw');
     // まず指定されたroomIdでRoomを検索します
     const room = await prismaClient.room.findUnique({
       where: {
@@ -17,7 +17,7 @@ export const applayRepository = async (
       },
     });
 
-    console.log(bosyuuId)
+    console.log(bosyuuId);
     // roomIdとuserIdが一致するRoomが見つかったかチェックします
     if (room && room.participantId === userId) {
       // 条件に一致した場合、新しいapplyレコードを作成します
@@ -32,7 +32,6 @@ export const applayRepository = async (
           // ratingとreviewは初期値を持たないかもしれません
         },
       });
-
 
       return newApplication;
     }

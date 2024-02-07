@@ -4,6 +4,7 @@
 /* eslint-disable max-lines */
 import assert from 'assert';
 import type {
+  Application,
   BosyuuListFrontModel,
   UserSummaryDetailModel,
   msgModel,
@@ -18,7 +19,7 @@ import styles from './index.module.css';
 const Dm = () => {
   const [user, setUser] = useState('');
   const [comment, setComment] = useState('');
-  const [userNumber, setUserNumber] = useState('');
+  const [userNumber, setUserNumber] = useState<number | null>(0);
   const [bosyuuId, setBosyuuId] = useState('');
   const [message, setMessage] = useState<msgModel[]>([]);
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
@@ -134,7 +135,7 @@ const Dm = () => {
 
     const response = await apiClient.sendMessage.post({
       body: {
-        Id: id,
+        Id: id as string,
         userId: user,
         message: comment,
       },
@@ -199,8 +200,8 @@ const Dm = () => {
     console.log(bosyuuId);
     const response = await apiClient.sendApprove.post({
       body: {
-        bosyuuId: RecruitDetail?.id,
-        roomId: id,
+        bosyuuId: RecruitDetail?.id ?? 'defaultId',
+        roomId: id as string,
         userId: user,
         date,
         time,
@@ -355,13 +356,13 @@ const Dm = () => {
       </div>
     );
   }
-  const [waitApprove, setWaitApprove] = useState('');
+  const [waitApprove, setWaitApprove] = useState<Application>();
   const fetchApplay = async () => {
     try {
       console.log(id);
       const response = await apiClient.fetchApplay.post({
         body: {
-          id,
+          id: id as string,
         },
       });
       // set(response.body);
@@ -375,6 +376,7 @@ const Dm = () => {
   };
   useEffect(() => {
     fetchApplay();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function FinalModal({ isOpen }: { isOpen: boolean }) {

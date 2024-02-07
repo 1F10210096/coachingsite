@@ -14,6 +14,6 @@ export type Methods = {
       Id: string;
       userId: string;
     };
-    resBody: CommentsWithImages[];
+    resBody: number | null;
   };
 };

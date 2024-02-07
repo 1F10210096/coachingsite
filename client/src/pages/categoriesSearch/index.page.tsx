@@ -1,13 +1,13 @@
 /* eslint-disable max-lines */
 import type { GameListModel } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
-import { createAuth } from 'src/utils/firebase';
 // eslint-disable-next-line complexity
 const AllSearch = () => {
   const router = useRouter();

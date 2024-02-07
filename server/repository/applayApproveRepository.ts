@@ -1,9 +1,8 @@
-import type { Application } from '$/commonTypesWithClient/models'; // 適切なパスに修正してください
+import type { Application } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 
-export const applyApproveRepository = async (id: string): Promise<Application | null> => {
+export const applyApproveRepository = async (id: string): Promise<Application> => {
   try {
-    console.log('adwdggdgjjjjharagahetta');
     // prismaを使用して、指定されたidに一致するapplyを取得
     const application = await prismaClient.apply.findFirst({
       where: {
@@ -11,15 +10,19 @@ export const applyApproveRepository = async (id: string): Promise<Application | 
       },
     });
 
+    if (!application) {
+      throw new Error('Application not found');
+    }
+
     // applyが見つかり、状態が 'wait' ならば、そのapplyを返す
     if (application.status === 'wait') {
       return application;
     } else {
-      // 条件に一致しない場合はnullを返す
-      return null;
+      throw new Error('Application is not in wait status');
     }
   } catch (error) {
     console.error('Error fetching application:', error);
+    // エラーハンドリングを適切に行う
     throw error;
   }
 };

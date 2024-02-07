@@ -1,4 +1,8 @@
-import type { CommentsWithImages, UserListItem } from '$/commonTypesWithClient/models';
+import type {
+  CommentsWithImages,
+  RoomWithLatestComment,
+  UserListItem,
+} from '$/commonTypesWithClient/models';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -119,9 +123,7 @@ export const roomRepository = {
       throw error;
     }
   },
-  fetchRooms: async (
-    userId: string
-  ): Promise<(Room & { latestComment: Comment | null; commentUser: User | null })[] | null> => {
+  fetchRooms: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
@@ -136,12 +138,12 @@ export const roomRepository = {
             include: {
               user: {
                 select: {
-                  name:true,
+                  name: true,
                   imageUrl: true, // ユーザーの写真（imageUrl）のみを取得
                   // 他に必要なフィールドがあれば、ここに追加
-                }
+                },
               },
-            }
+            },
           },
           // 他に必要なフィールドがあれば、ここに追加
         },
@@ -154,7 +156,7 @@ export const roomRepository = {
       }));
 
       if (roomsWithMappedComments.length === 0) {
-        return null;
+        return [];
       }
 
       return roomsWithMappedComments;

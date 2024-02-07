@@ -8,16 +8,21 @@ export const recruitApproveUsecase = {
     console.log(userId);
     const user = await approveRepository(Id, bosyuuId, roomId, userId);
     assert(user !== null, 'userはnullです');
-    return user;
   },
-  sendInfo: async (bosyuuId: string, roomId: string, userId: string, date: any, time: string) => {
+  sendInfo: async (
+    bosyuuId: string,
+    roomId: string,
+    userId: string,
+    date: string,
+    time: string
+  ) => {
     console.log('createU');
     console.log(userId);
     const user = await applayRepository(bosyuuId, roomId, userId, date, time);
     assert(user !== null, 'userはnullです');
     return user;
   },
-  approveInfo: async (id:string) => {
+  approveInfo: async (id: string) => {
     console.log('lllllllll');
     const user = await applyApproveRepository(id);
     assert(user !== null, 'userはnullです');

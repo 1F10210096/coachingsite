@@ -2,12 +2,12 @@
 /* eslint-disable complexity */
 import assert from 'assert';
 import { onAuthStateChanged } from 'firebase/auth';
+import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 import styles2 from './index2.module.css';
-import router from 'next/router';
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態

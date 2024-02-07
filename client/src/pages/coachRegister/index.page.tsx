@@ -1,6 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
-import router from 'next/router';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { createAuth, loginWithEmail } from 'src/utils/firebase';

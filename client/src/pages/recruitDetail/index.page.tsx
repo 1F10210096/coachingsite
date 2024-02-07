@@ -8,12 +8,13 @@ import type {
   newBosyuu,
   reviewModel2,
 } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
+import { createAuth } from 'src/utils/firebase';
 import getGameListImagePath from 'src/utils/gameListPng';
 import getImagePath from 'src/utils/gamePng';
 import getTagImagePath from 'src/utils/tagPng';
@@ -21,7 +22,6 @@ import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
 import styles3 from './index3.module.css';
-import { createAuth } from 'src/utils/firebase';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();

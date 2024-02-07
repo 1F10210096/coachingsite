@@ -1,11 +1,11 @@
 /* eslint-disable max-lines */
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { createAuth } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
-import { createAuth } from 'src/utils/firebase';
 // eslint-disable-next-line complexity
 const AllSearch = () => {
   const router = useRouter();

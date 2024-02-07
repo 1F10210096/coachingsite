@@ -15,6 +15,5 @@ export type Methods = {
       roomId: string;
       userId: string;
     };
-    resBody: Application;
   };
 };

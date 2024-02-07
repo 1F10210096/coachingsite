@@ -3,6 +3,18 @@ export type Methods = {
     reqBody: {
       id: string;
     };
-    resBody: UserListItem;
+    resBody: Application;
   };
+};
+
+export type Application = {
+  id: string;
+  roomId: string;
+  bosyuuId: string;
+  studentId: string;
+  status: string;
+  date: string;
+  time: string;
+  rating: number | null;
+  review: string | null;
 };

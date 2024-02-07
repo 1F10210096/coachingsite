@@ -3,7 +3,7 @@ export type Application = {
   bosyuuId: string;
   hostId: string;
   participantId: string;
-  createdAt: Date;
+  createdAt: string;
   status: string;
 };
 
@@ -13,9 +13,8 @@ export type Methods = {
       bosyuuId: string;
       roomId: string;
       userId: string;
-      date: any;
+      date: string;
       time: string;
     };
-    resBody: Application;
   };
 };

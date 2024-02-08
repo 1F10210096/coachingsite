@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import styles from './index.module.css';
 
+//adminページ
 const Admin = () => {
   const [id, setId] = useState(0);
   const [title, setGameName] = useState('');

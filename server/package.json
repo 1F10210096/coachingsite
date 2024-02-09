@@ -19,6 +19,7 @@
     "migrate:deploy": "prisma migrate deploy && npx prisma db seed",
     "migrate:reset": "prisma migrate reset",
     "start": "node --enable-source-maps index.js",
+    "start1": "node server.js",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

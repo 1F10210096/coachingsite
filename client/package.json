@@ -18,6 +18,7 @@
     "typecheck": "npm run hcm && tsc --noEmit"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.0",
     "@aspida/axios": "^1.14.0",
     "api": "file:../server/api",
     "aspida": "^1.14.0",

@@ -61,8 +61,6 @@
   background: rgb(255 255 255);
 }
 
-
-
 .rankImagesContainer {
   position: relative;
   top: 60px;
@@ -137,9 +135,12 @@
   position: relative;
   top: 20px;
   left: 20px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: normal;
   color: #000;
+  text-align: left; /* Aligns text to the left */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
+  background-color: #fff;
 }
 
 .notesContainer {
@@ -159,6 +160,11 @@
   position: relative;
   top: 50px;
   left: 20px;
+  font-size: 15px;
+  font-weight: normal;
+  color: #000;
+  text-align: left; /* Aligns text to the left */
+  letter-spacing: -1px; /* 文字の間隔を狭める */
   background-color: #fff;
 }
 
@@ -621,12 +627,16 @@
 
 .home4 {
   position: relative;
-  width: 700px;
+  width: 300px;
+  height: 17px;
   margin-left: 13px;
+  overflow: hidden;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px;
-  color: rgb(69 69 254); /* 文字色を青色に設定 */
+  color: rgb(69 69 254); /* 文字色を青色に設定 */ /* 下線を追加 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
   background-color: #fff;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }

@@ -55,11 +55,15 @@
 .title {
   position: relative;
   top: 5px;
+  display: -webkit-box;
   width: 440px;
-  height: 50px;
+  height: 80px;
+  overflow: hidden;
   font-size: 25px;
   font-weight: 700;
   background: #fff;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .tagContainer {
@@ -222,9 +226,14 @@
 }
 
 .allparent {
-  position: absolute; /* 絶対位置指定 */
-  top:1160px; 
+  position: relative; /* 絶対位置指定 */
+  top: 60px;
   left: 50%; /* 水平方向の中央 */
   height: auto;
-  transform: translate(-50%, -50%); /* X軸とY軸の両方で中央揃え */
+  transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
+}
+
+.allContainer {
+  position: relative;
+  width: 100%;
 }

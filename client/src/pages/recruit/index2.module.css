@@ -52,7 +52,7 @@
   font-weight: bold;
   background-color: rgb(255 255 255);
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 }
 
 .wrapper {
@@ -85,14 +85,19 @@
 
 .description {
   position: relative;
-  width: 330px;
+  display: -webkit-box;
+  width: 450px;
   height: auto;
   margin-top: 15px;
   margin-bottom: 15px;
+  overflow: hidden;
+  font-family: 100;
   font-size: 13px;
   line-height: 1.2; /* Adjust this value as needed */
   letter-spacing: -0.1px;
   background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .descriptionContainer {
@@ -196,6 +201,7 @@
 .lessonType {
   position: relative;
   display: flex;
+  flex-wrap: wrap; /* 複数行に対応するため */
   gap: 40px;
   align-items: center; /* 中央揃え */
   width: 90%;
@@ -205,6 +211,15 @@
   margin-left: 30px;
   font-size: 13px;
   background-color: rgb(255 255 255);
+}
+
+.lessonType div {
+  display: -webkit-box;
+  width: 100%; /* 必要に応じて調整 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 2行までに制限 */
 }
 
 .lessonTypeContainer {

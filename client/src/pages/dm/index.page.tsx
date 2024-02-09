@@ -6,8 +6,8 @@ import assert from 'assert';
 import type {
   Application,
   BosyuuListFrontModel,
+  CommentsWithImages,
   UserSummaryDetailModel,
-  msgModel,
 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
@@ -21,7 +21,7 @@ const Dm = () => {
   const [comment, setComment] = useState('');
   const [userNumber, setUserNumber] = useState<number | null>(0);
   const [bosyuuId, setBosyuuId] = useState('');
-  const [message, setMessage] = useState<msgModel[]>([]);
+  const [message, setMessage] = useState<CommentsWithImages[]>([]);
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel | undefined>(undefined);
 
@@ -95,6 +95,7 @@ const Dm = () => {
           },
         });
         console.log(response);
+        setMessage(response.body);
         console.log('dadaddfffffffff');
         const response2 = await apiClient.fetchUserInfo.post({
           body: {
@@ -111,28 +112,49 @@ const Dm = () => {
   };
 
   useEffect(() => {
+    let intervalId: string | number | NodeJS.Timeout | undefined;
+
+    const fetchRoom = async () => {
+      try {
+        if (typeof id === 'string') {
+          console.log(id);
+          const response = await apiClient.fetchRoom.post({
+            body: {
+              Id: id,
+              userId: user,
+            },
+          });
+          console.log(response);
+          setMessage(response.body);
+          console.log('dadaddfffffffff');
+          const response2 = await apiClient.fetchUserInfo.post({
+            body: {
+              Id: id,
+              userId: user,
+            },
+          });
+          console.log(response2.body);
+          setUserNumber(response2.body);
+        }
+      } catch (error) {
+        console.error('ゲームの取得に失敗しました:', error);
+      }
+    };
+
     if (user) {
-      fetchRoom();
+      fetchRoom(); // コンポーネントがマウントされたときに初回で実行
+      intervalId = setInterval(fetchRoom, 10000); // その後、5秒ごとに実行
     }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId); // コンポーネントがアンマウントされるときにインターバルをクリア
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user]); // 依存配列に `user` を設定
 
   const sendMessage = async () => {
-    if (!websocket || websocket.readyState !== WebSocket.OPEN) {
-      console.error('WebSocketが開いていません');
-      return;
-    }
-
-    // 送信するメッセージのデータ構造
-    const messageData = {
-      type: 'message',
-      userImageUrl: userDetail?.imageUrl,
-      roomId: id,
-      userId: user,
-      content: comment,
-    };
-    console.log(messageData);
-
     const response = await apiClient.sendMessage.post({
       body: {
         Id: id as string,
@@ -140,61 +162,12 @@ const Dm = () => {
         message: comment,
       },
     });
-    // メッセージをJSON形式でサーバーに送信
-    websocket.send(JSON.stringify(messageData));
+
     fetchRoom();
   };
 
-  const [websocket, setWebsocket] = useState<WebSocket | null>(null);
-
   const [a, setA] = useState('');
-  useEffect(() => {
-    if (typeof user === 'string' && user.trim() !== '') {
-      const newSocket = new WebSocket(`ws://localhost:8000?userId=${user}`);
-      console.log(newSocket);
-      // 接続が開かれたときのイベントハンドラ
-      newSocket.onopen = function () {
-        console.log('サーバーに接続しました');
-        newSocket.send('こんにちは、サーバー！');
-      };
-
-      newSocket.onmessage = function (event) {
-        const data = JSON.parse(event.data);
-        console.log(`[message] データを受信しました: `, data);
-
-        if (data.type === 'url') {
-          setApprovalUrl(data.url); // 受信したURLを状態にセット
-          setTime(data.time);
-          setDate(data.date);
-          setIsModalApproveOpen(false);
-          console.log('承諾用URLを受信しました:', data.url);
-          console.log(data.gameId);
-          setA(data.gameId);
-          console.log(RecruitDetail);
-        } else if (data.type === 'new-message') {
-          console.log('新しいメッセージを受信しました:', data);
-
-          setMessage((prevMessages) => [...prevMessages, data]);
-        } else {
-          // 他のメッセージタイプの処理...
-          fetchRoom();
-        }
-      };
-
-      setWebsocket(newSocket);
-
-      return () => {
-        newSocket.close();
-      };
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   console.log(message);
-
-  const createApprovalUrl = (roomId: string) => {
-    return `https://yourapp.com/approve?roomId=${roomId}`;
-  };
 
   const sendApply = async () => {
     console.log(bosyuuId);
@@ -208,36 +181,9 @@ const Dm = () => {
       },
     });
 
-    if (!websocket || websocket.readyState !== WebSocket.OPEN) {
-      console.error('WebSocketが開いていません');
-      return;
-    }
+    console.log('承諾用URLを送信しました:', approvalUrl);
 
-    // 承諾用のURLを作成
-    if (typeof id === 'string') {
-      const approvalUrl = createApprovalUrl(id);
-      const messageData = {
-        type: 'apply', // メッセージの種類を指定
-        roomId: id,
-        userId: user,
-        userNumber,
-        url: approvalUrl, // 送信するURL
-        gameTitle: RecruitDetail?.title,
-        gameId: RecruitDetail?.gameId,
-        date,
-        time,
-      };
-
-      // メッセージをJSON形式でサーバーに送信
-      websocket.send(JSON.stringify(messageData));
-
-      console.log('承諾用URLを送信しました:', approvalUrl);
-      window.confirm('承諾用URLを送信しました');
-
-      // approvalUrlを使用する処理
-    } else {
-      // `id`が`string`型でない場合のエラーハンドリング
-    }
+    // approvalUrlを使用する処理
 
     // WebSocketを通じてURLを送信するメッセージを作成
   };
@@ -484,9 +430,21 @@ const Dm = () => {
                   className={msg.userIdentity === 1 ? styles.messageLeft : styles.messageRight}
                 >
                   <div className={styles.messageContainer}>
-                    <img src={msg.userImageUrl} alt="User" className={styles.userImage2} />
-                    <div className={styles.msgContent}>{msg.content}</div>{' '}
-                    {/* contentプロパティをレンダリング */}
+                    {msg.userIdentity === 1 ? (
+                      <>
+                        {msg.userImageUrl && (
+                          <img src={msg.userImageUrl} alt="User" className={styles.userImage2} />
+                        )}
+                        <div className={styles.msgContent}>{msg.content}</div>
+                      </>
+                    ) : (
+                      <>
+                        <div className={styles.msgContent}>{msg.content}</div>
+                        {msg.userImageUrl && (
+                          <img src={msg.userImageUrl} alt="User" className={styles.userImage2} />
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
               ))}

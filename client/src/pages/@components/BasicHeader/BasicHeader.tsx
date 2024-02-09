@@ -1,3 +1,4 @@
+import { MailOutlined } from '@ant-design/icons';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -5,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import styles from './BasicHeader.module.css';
-
 export const BasicHeader = ({ user }: { user?: string }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -83,7 +83,13 @@ export const BasicHeader = ({ user }: { user?: string }) => {
         <div className={styles.contheme2}>
           {userId !== null ? (
             <div className={styles.userSection8}>
-              <Link href="/room">message</Link>
+              <Link href="/room">
+                <div className={styles.roomButton}>
+                  <MailOutlined
+                    style={{ fontSize: '26px', color: '#000000', marginRight: '18px' }}
+                  />
+                </div>
+              </Link>
               <Link href="/userProfile">
                 <span className={styles.userName}>
                   ようこそ,
@@ -102,7 +108,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
               <Link href="/signUp">
                 <button className={styles.loginButton}>会員登録</button>
               </Link>
-              <Link href="/coachSignUp">
+              <Link href="/signUp">
                 <button className={styles.redButton}>コーチ登録</button>
               </Link>
             </>

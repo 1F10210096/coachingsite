@@ -240,4 +240,21 @@
 
 .userSection8 {
   position: relative;
+  top: -10px;
+  right: 10px;
+}
+
+.iconblack {
+  position: relative;
+  top: 18px;
+  width: 100px;
+  padding: 10px; /* アイコンの周りに余白を設定 */
+  color: black; /* アイコンの色 */
+  background-color: white; /* 背景色 */
+}
+
+.roomButton {
+  position: relative;
+  top: 35px;
+  right: 60px;
 }

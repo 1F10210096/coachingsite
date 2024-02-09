@@ -66,7 +66,7 @@ const Home = () => {
                   className={styles.commentContainer}
                   onClick={() =>
                     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-                    room.latestComment?.id && handleCommentClick(room.latestComment.id)
+                    room.latestComment?.id && handleCommentClick(room.latestComment.roomId)
                   }
                   // ここでも同様
                 >

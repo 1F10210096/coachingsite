@@ -262,6 +262,7 @@ const Login = () => {
                   【注意事項】
                   <div className={styles.notes}>{RecruitDetail?.notes}</div>
                 </p>
+                
 
                 <p className={styles.sucheduleContainer}>
                   【スケジュール】

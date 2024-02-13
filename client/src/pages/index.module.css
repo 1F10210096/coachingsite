@@ -203,9 +203,9 @@
   position: relative;
   top: 120px;
   left: 60px;
+  background-color: #ffffff;
   width: 1500px;
   margin: 20px auto 0;
-  background-color: rgb(255 255 255);
 }
 
 .recruitListTitle {
@@ -233,6 +233,7 @@
   height: 390px;
   margin-bottom: 20px; /* 下部の余白を設定 */
   background-color: rgb(244 244 244);
+  box-shadow: rgb(0 0 0 / 16%) 0 10px 36px 0, rgb(0 0 0 / 6%) 0 0 0 1px;
 }
 
 .recruitListImage {
@@ -288,7 +289,6 @@
 
 .recruitDetail {
   position: relative;
-  top: 10px;
   display: -webkit-box;
   padding: 3px;
   margin-right: 18px;
@@ -357,4 +357,12 @@
 
 .blueTitle2:hover {
   color: #0141c193;
+}
+
+.recruitContainer1 {
+  position: relative;
+  top: -10px;
+  left: 17px;
+  width: 200px;
+  background-color: rgb(244 244 244);
 }

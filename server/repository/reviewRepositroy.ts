@@ -40,7 +40,7 @@ export const reviewRepository = {
       // 指定されたIDで apply レコードを更新
       const updatedApplication = await prismaClient.apply.updateMany({
         where: {
-          roomId: selectedId,
+          id: selectedId,
         },
         data: {
           rating: numericRating,

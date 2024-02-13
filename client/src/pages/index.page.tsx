@@ -168,11 +168,13 @@ const Home = () => {
                   />
                 </div>
                 <h3 className={styles.recruitDetailTitle}>{recruitList.title}</h3>
-                <h3 className={styles.recruitDetailLessonType}>
-                  <button key={index} className={styles.lessonType}>
-                    {recruitList.lessonType}
-                  </button>
-                </h3>
+                <div className={styles.recruitContainer1}>
+                  {recruitList.tag.map((recruit, index) => (
+                    <button key={index} className={styles.lessonType}>
+                      {recruit}
+                    </button>
+                  ))}
+                </div>
                 <p className={styles.recruitDetail}>{recruitList.description}</p>
               </div>
             ))}

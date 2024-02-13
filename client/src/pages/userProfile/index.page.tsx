@@ -14,6 +14,7 @@ import { apiClient } from 'src/utils/apiClient';
 import { createAuth, logout } from 'src/utils/firebase';
 import getGameListImagePath from 'src/utils/gameListPng';
 import getImagePath from 'src/utils/gamePng';
+import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 // eslint-disable-next-line complexity
 const UserProfile = () => {
@@ -174,6 +175,12 @@ const UserProfile = () => {
     setSelectedId(Number(id));
   };
 
+  const handleSubmit4 = async () => {
+    console.log('Submitted:', { selectedId, rating, review });
+
+    assert('レビューが完了しました');
+  };
+
   const handleSubmit2 = async () => {
     console.log('Submitted:', { selectedId, rating, review });
     const response = await apiClient.reviewList.post({
@@ -185,6 +192,11 @@ const UserProfile = () => {
     });
     assert('レビューが完了しました');
   };
+
+  useEffect(() => {
+    console.log('Submitted:', { reviewId, rating, review });
+  }, [rating, review]); // 依存配列にこれらの状態を含める
+
 
   const getRankImage = (Id: number, rank: number) => {
     let directory;
@@ -413,7 +425,7 @@ const UserProfile = () => {
   return (
     <>
       <div className={styles.allContainer}>
-        <div className={styles.container} />
+        <BasicHeader user={Id} />
         <div className={styles.searchContainer}>
           <div className={styles.searchNameContainer}>設定画面</div>
           <div className={styles.searchNameContainer2}>
@@ -583,7 +595,7 @@ const UserProfile = () => {
                             <div className={styles.horizontalLayout}>
                               <button
                                 className={styles.applyButton}
-                                onClick={() => showModal4('review', recruit.bosyuu.id)}
+                                onClick={() => showModal4('review', recruit.id)}
                               >
                                 <span className={styles.starIcon}>★</span>評価する
                               </button>

@@ -493,6 +493,7 @@
 
 .parent {
   position: relative;
+  top: 160px;
   right: 80px;
   display: flex;
   align-items: start;
@@ -501,7 +502,7 @@
 
 .modal {
   position: fixed; /* Stay in place */
-  top: 10px;
+  top: 60px;
   left: 10px;
   z-index: 1; /* Sit on top */
   width: 100%; /* Full width */

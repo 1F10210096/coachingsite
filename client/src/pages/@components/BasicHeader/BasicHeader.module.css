@@ -247,7 +247,7 @@
 .iconblack {
   position: relative;
   top: 18px;
-  width: 100px;
+  width: 40px;
   padding: 10px; /* アイコンの周りに余白を設定 */
   color: black; /* アイコンの色 */
   background-color: white; /* 背景色 */
@@ -257,4 +257,5 @@
   position: relative;
   top: 35px;
   right: 60px;
+  width: 50px;
 }

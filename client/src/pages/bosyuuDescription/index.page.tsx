@@ -8,6 +8,7 @@ import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 import styles2 from './index2.module.css';
+import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
@@ -229,7 +230,7 @@ const YourComponent = () => {
 
   return (
     <>
-      <div className={styles.container} />
+      <BasicHeader user={user} />
       <div className={styles.loginTitle}>コーチング募集</div>
       <div className={styles.step}>
         {Array.from({ length: totalSteps }, (_, i) => i + 1).map((stepNumber) => (

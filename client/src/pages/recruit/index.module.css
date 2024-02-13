@@ -1,9 +1,8 @@
 .searchContainer {
   position: relative;
-  top: 170px;
-  left: 250px;
+  left: 20px;
   width: 300px;
-  height: 600px;
+  height: auto;
   background-color: #fff;
 }
 
@@ -12,32 +11,32 @@
   left: 50%; /* 水平方向の中央 */
   width: 100%;
   height: auto;
-  background-color: rgb(255 255 255);
+  padding-bottom: 1000px;
+  background-color: rgb(248 248 248);
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
 
 .searchNameContainer {
   position: relative;
   top: 5px;
-  left: auto;
+  left: 20px;
   width: 300px;
   padding-bottom: 17px;
   margin-top: 20px;
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-  border-bottom: 2px solid rgb(142 142 142);
 }
 
 .blueTitle {
   position: absolute;
-  top: 8px;
+  top: 28px;
   left: 275px;
-  width: 90px;
+  width: 60px;
   font-family: Arial, sans-serif; /* Use single quotes around font names */
   font-size: 17px;
   font-weight: 700; /* Bold font weight */
-  color: #0141c193;
+  color: rgb(92 92 255);
   background-color: #fff;
   transform: translateX(-50%);
 }
@@ -49,10 +48,10 @@
   padding-bottom: 17px;
   margin-top: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px; /* 文字の大きさを20pxに設定する */
+  font-size: 15px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
-  color: rgb(0 0 0);
-  border-bottom: 2px solid rgb(142 142 142);
+  color: rgb(92 92 92);
+  border-bottom: 2px solid rgb(214 214 214);
 }
 
 .rankContent {
@@ -73,7 +72,8 @@
   right: 0;
   display: inline-block;
   padding: 3px; /* 矢印のサイズ */
-  border: solid black;
+  color: rgb(255 255 255);
+  border: solid rgb(130 130 130);
   border-width: 0 2px 2px 0; /* 線の太さを調整 */
   transition: transform 0.3s ease; /* アニメーション効果 */
   transform: translateY(-50%) rotate(45deg); /* 下向き矢印 */
@@ -114,29 +114,34 @@
 
 .search {
   position: relative;
-  top: 5px;
-  left: auto;
-  padding-top: 20px;
-  padding-bottom: 17px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px; /* 文字の大きさを17pxに設定する */
-  font-weight: bold; /* 文字を太くする */
-  color: rgb(0 0 0);
-  text-align: center; /* テキストを中央揃えにする */
-  background-color: #d6fbfc; /* 背景色を灰色に設定する */
-  border-bottom: 2px solid rgb(142 142 142);
+  top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 260px;
+  padding: 10px 25px;
+  margin: 0 auto;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgb(94 228 255);
+  border-radius: 3px;
+  transition: 0.3s ease-in-out;
+}
+
+.search:hover {
+  background-color: rgb(164 243 255);
 }
 
 .homeContainer {
   position: relative;
   top: 160px;
-  left: 250px;
+  left: 200px;
   display: flex;
   align-items: center; /* アイテムを垂直方向の中央に配置 */
   width: 300px;
   height: 30px;
   color: rgb(82 82 82);
-  background-color: rgb(255 255 255);
+  background-color: rgb(248 248 248);
 }
 
 .home {
@@ -146,7 +151,7 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
+  background-color: rgb(248 248 248);
 }
 
 .home:hover {
@@ -162,7 +167,7 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
+  background-color: rgb(248 248 248);
 }
 
 .home2:hover {
@@ -176,5 +181,121 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px; /* 文字の大きさを17pxに設定する */
   color: rgb(179 173 173);
-  background-color: #fff; /* 背景色を灰色に設定する */
+  background-color: rgb(248 248 248);
+}
+
+.sContainer {
+  position: relative;
+  top: 220px;
+  left: 200px;
+  width: 350px;
+  height: auto;
+  padding-bottom: 40px;
+  overflow: hidden;
+  background-color: rgb(255 255 255);
+  box-shadow: 0 0 3px rgb(103 103 103 / 70%), /* 明るいシアンの光沢 */ 0 0 1px rgb(0 255 255 / 50%),
+    /* より広がったシアンの光 */ inset 0 0 2px rgb(255 255 255 / 50%); /* 内側の強いハイライト */
+
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.sContainer2 {
+  position: relative;
+  top: 270px;
+  left: 200px;
+  width: 350px;
+  height: auto;
+  padding-bottom: 50px;
+  overflow: hidden;
+  background-color: rgb(255 255 255);
+  box-shadow: 0 0 3px rgb(103 103 103 / 70%), /* 明るいシアンの光沢 */ 0 0 1px rgb(0 255 255 / 50%),
+    /* より広がったシアンの光 */ inset 0 0 2px rgb(255 255 255 / 50%); /* 内側の強いハイライト */
+
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.categoryHeader {
+  position: relative;
+  top: -6px;
+  left: 25px;
+  display: flex; /* Flexboxを有効化 */
+  gap: 10px; /* アイコンとタイトルの間に少し隙間を作る */
+  align-items: center; /* アイテムを垂直方向に中央揃え */
+  width: 300px;
+  border-bottom: 1px solid rgb(197 197 197);
+}
+
+.categoryHeader2 {
+  position: relative;
+  top: -6px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 300px;
+  border-bottom: 2px solid rgb(142 142 142);
+}
+
+.categoryTitle {
+  position: relative;
+  top: 3px;
+  left: 35px;
+  width: 300px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+}
+
+.gameList {
+  position: relative;
+}
+
+.gameItem {
+  position: relative;
+  left: 25px;
+  width: 300px;
+  height: 30px;
+  margin-top: 10px;
+  border-bottom: 1px solid rgb(197 197 197);
+}
+
+.gameItem2 {
+  position: relative;
+  top: -3px;
+  left: 35px;
+  width: 300px;
+  font-weight: 400;
+  color: rgb(19 90 189);
+}
+
+.gameItem2:hover {
+  color: rgb(90 151 237);
+}
+
+.categoryIcon {
+  position: relative;
+  top: 6px;
+  left: 30px;
+}
+
+.categoryIcon2 {
+  position: relative;
+  top: 6px;
+  left: 10px;
+}
+
+.category {
+  position: relative;
+  top: 10px;
+  left: 30px;
+  font-weight: 400;
+  color: rgb(19 90 189);
+}
+
+.categoryArrow {
+  position: relative;
+  top: -10px;
+  left: 270px;
+  color: rgb(19 90 189);
 }

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import styles from './index.module.css';
+import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 
 const Dm = () => {
   const [user, setUser] = useState('');
@@ -239,7 +240,7 @@ const Dm = () => {
   };
 
   const onFinalClose = () => {
-    setIsModalOpen(false);
+    setIsModalFinalOpen(false);
   };
 
   const onApplyRecruit = () => {
@@ -393,7 +394,6 @@ const Dm = () => {
             <div className={styles.modalTitle}>最終受諾確認</div>
             <p className={styles.title}>{RecruitDetail?.title}</p>
             <p className={styles.title}>
-              {' '}
               {RecruitDetail !== null &&
                 RecruitDetail?.gameId !== null &&
                 getGameName(RecruitDetail.gameId)}
@@ -415,7 +415,7 @@ const Dm = () => {
 
   return (
     <>
-      <div className={styles.container} />
+      <BasicHeader user={user} />
       <div className={styles.parent}>
         <div className={styles.messageBox}>
           <div className={styles.messageBox2}>

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
+import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type {
   ApexRankType,
   BosyuuListModel3,
@@ -386,6 +387,45 @@ const Valorant = () => {
     return sortedList;
   };
 
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const categories = {
+    FPS: ['VALORANT', 'OverWatch2', 'APEX', 'CSGO2'],
+    カードゲーム: ['ハースストーン', 'シャドウバース', 'マジックザギャザリング'],
+    バトルロイヤル: ['PUBG', 'フォートナイト', 'APEX'],
+    MOBA: ['LOL', 'DOTA2'],
+    格闘ゲーム: ['ストリートファイター', '鉄拳'],
+    // 他のカテゴリとゲームを追加
+  };
+
+  const handleClick2 = (category) => {
+    setActiveCategory(category === activeCategory ? null : category);
+  };
+
+  const [sortCriteria, setSortCriteria] = useState('rank'); // デフォルトは「ランク順」
+
+  const handleSortChange = (e) => {
+    setSortCriteria(e.target.value);
+    // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
+    handleSortClick2();
+  };
+
+  const handleSortClick2 = () => {
+    if (sortCriteria === 'rank') {
+      // ランク順に並び替えるロジック
+      const sortedList = [...RecruitList].sort((a, b) =>
+        sortDescending ? b.rank - a.rank : a.rank - b.rank
+      );
+      setRecruitlist(sortedList);
+    } else if (sortCriteria === 'update') {
+      const sortedList = [...RecruitList].sort((a, b) =>
+        sortDescending ? b.updatedAt - a.updatedAt : a.updatedAt - b.updatedAt
+      );
+      setRecruitlist(sortedList);
+      // 更新順に並び替えるロジック
+    }
+  };
+
   return (
     <>
       <BasicHeader user={user} />
@@ -399,115 +439,151 @@ const Valorant = () => {
           {Id === 2 ? <div className={styles.home2}>APEX</div> : null}
           {Id === 3 ? <div className={styles.home2}>LOL</div> : null}
         </div>
-        <div className={styles.searchContainer}>
-          <div className={styles.searchNameContainer}>検索条件</div>
-          <div onClick={handleClearButtonClick} className={styles.blueTitle}>
-            クリア
-          </div>
-          <div className={styles.searchNameContainer2}>
-            <div
-              className={`${styles.rankDropdown} ${showRankCheckboxes ? styles.active : ''}`}
-              onClick={() => setShowRankCheckboxes(!showRankCheckboxes)}
-            >
-              コーチのランク
-              <span className={styles.dropdownIcon} />
-            </div>
-            {showRankCheckboxes && (
-              <div className={styles.rankCheckboxes}>
-                {Object.keys(ranksToDisplay).map((rank) => (
-                  <label key={rank}>
-                    <input
-                      type="checkbox"
-                      checked={ranksToDisplay[rank]}
-                      onChange={() =>
-                        handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))
-                      }
-                    />
-                    <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
-                  </label>
-                ))}
+        <div className={styles.sContainer}>
+          <div className={styles.searchContainer}>
+            <div className={styles.categoryHeader2}>
+              <div className={styles.categoryIcon2}>
+                <SearchOutlined style={{ fontSize: '20px', color: '#000000' }} />
               </div>
-            )}
-          </div>
-          <div className={styles.searchNameContainer2}>
-            <div
-              className={`${styles.rankDropdown} ${showMyRankCheckboxes ? styles.active : ''}`}
-              onClick={() => setShowMyRankCheckboxes(!showMyRankCheckboxes)}
-            >
-              対象のランク
-              <span className={styles.dropdownIcon} />
-            </div>
-            {showMyRankCheckboxes && (
-              <div className={styles.rankCheckboxes}>
-                {Object.keys(myRanksToDisplay).map((myrank) => (
-                  <label key={myrank}>
-                    <input
-                      type="checkbox"
-                      checked={myRanksToDisplay[myrank]}
-                      onChange={() =>
-                        handleMyRankCheckboxChange(myrank as keyof (ValoRankType | ApexRankType))
-                      }
-                    />
-                    <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
-                  </label>
-                ))}
+              <div className={styles.searchNameContainer}>検索条件</div>
+              <div onClick={handleClearButtonClick} className={styles.blueTitle}>
+                クリア
               </div>
-            )}
-          </div>
+            </div>
+            <div className={styles.searchNameContainer2}>
+              <div
+                className={`${styles.rankDropdown} ${showRankCheckboxes ? styles.active : ''}`}
+                onClick={() => setShowRankCheckboxes(!showRankCheckboxes)}
+              >
+                コーチのランク
+                <span className={styles.dropdownIcon} />
+              </div>
+              {showRankCheckboxes && (
+                <div className={styles.rankCheckboxes}>
+                  {Object.keys(ranksToDisplay).map((rank) => (
+                    <label key={rank}>
+                      <input
+                        type="checkbox"
+                        checked={ranksToDisplay[rank]}
+                        onChange={() =>
+                          handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))
+                        }
+                      />
+                      <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className={styles.searchNameContainer2}>
+              <div
+                className={`${styles.rankDropdown} ${showMyRankCheckboxes ? styles.active : ''}`}
+                onClick={() => setShowMyRankCheckboxes(!showMyRankCheckboxes)}
+              >
+                対象のランク
+                <span className={styles.dropdownIcon} />
+              </div>
+              {showMyRankCheckboxes && (
+                <div className={styles.rankCheckboxes}>
+                  {Object.keys(myRanksToDisplay).map((myrank) => (
+                    <label key={myrank}>
+                      <input
+                        type="checkbox"
+                        checked={myRanksToDisplay[myrank]}
+                        onChange={() =>
+                          handleMyRankCheckboxChange(myrank as keyof (ValoRankType | ApexRankType))
+                        }
+                      />
+                      <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          <div className={styles.searchNameContainer2}>
-            <div
-              className={`${styles.rankDropdown} ${showTagCheckboxes ? styles.active : ''}`}
-              onClick={() => setShowTagCheckboxes(!showTagCheckboxes)}
-            >
-              タグ
-              <span className={styles.dropdownIcon} />
-            </div>
-            {showTagCheckboxes && (
-              <div className={styles.rankCheckboxes}>
-                {Object.keys(Tags).map((Tag) => (
-                  <label key={Tag}>
-                    <input
-                      type="checkbox"
-                      checked={Tags[Tag as keyof TagsType]}
-                      onChange={() => handleTagCheckboxChange(Tag as keyof TagsType)}
-                    />
-                    <span>{Tag.charAt(0).toUpperCase() + Tag.slice(1)}</span>{' '}
-                  </label>
-                ))}
+            <div className={styles.searchNameContainer2}>
+              <div
+                className={`${styles.rankDropdown} ${showTagCheckboxes ? styles.active : ''}`}
+                onClick={() => setShowTagCheckboxes(!showTagCheckboxes)}
+              >
+                タグ
+                <span className={styles.dropdownIcon} />
               </div>
-            )}
-          </div>
-
-          <div className={styles.searchNameContainer2}>
-            <div
-              className={`${styles.rankDropdown} ${showLessonTypeCheckboxes ? styles.active : ''}`}
-              onClick={() => setShowLessonTypeCheckboxes(!showLessonTypeCheckboxes)}
-            >
-              レッスン形式
-              <span className={styles.dropdownIcon} />
+              {showTagCheckboxes && (
+                <div className={styles.rankCheckboxes}>
+                  {Object.keys(Tags).map((Tag) => (
+                    <label key={Tag}>
+                      <input
+                        type="checkbox"
+                        checked={Tags[Tag as keyof TagsType]}
+                        onChange={() => handleTagCheckboxChange(Tag as keyof TagsType)}
+                      />
+                      <span>{Tag.charAt(0).toUpperCase() + Tag.slice(1)}</span>{' '}
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
-            {showLessonTypeCheckboxes && (
-              <div className={styles.rankCheckboxes}>
-                {Object.keys(LessonTypes).map((LessonType) => (
-                  <label key={LessonType}>
-                    <input
-                      type="checkbox"
-                      checked={LessonTypes[LessonType as keyof LessonTypesType]}
-                      onChange={() =>
-                        handleLessonTypeCheckboxChange(LessonType as keyof LessonTypesType)
-                      }
-                    />
-                    <span>{LessonType}</span>{' '}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
 
-          <div className={styles.search} onClick={fetchRecruitList}>
-            検索
+            <div className={styles.searchNameContainer2}>
+              <div
+                className={`${styles.rankDropdown} ${
+                  showLessonTypeCheckboxes ? styles.active : ''
+                }`}
+                onClick={() => setShowLessonTypeCheckboxes(!showLessonTypeCheckboxes)}
+              >
+                レッスン形式
+                <span className={styles.dropdownIcon} />
+              </div>
+              {showLessonTypeCheckboxes && (
+                <div className={styles.rankCheckboxes}>
+                  {Object.keys(LessonTypes).map((LessonType) => (
+                    <label key={LessonType}>
+                      <input
+                        type="checkbox"
+                        checked={LessonTypes[LessonType as keyof LessonTypesType]}
+                        onChange={() =>
+                          handleLessonTypeCheckboxChange(LessonType as keyof LessonTypesType)
+                        }
+                      />
+                      <span>{LessonType}</span>{' '}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className={styles.search} onClick={fetchRecruitList}>
+              検索
+            </div>
           </div>
+        </div>
+        <div className={styles.sContainer2}>
+          <div className={styles.categoryHeader}>
+            <div className={styles.categoryIcon}>
+              <UnorderedListOutlined style={{ fontSize: '20px', color: '#000000' }} />
+            </div>
+            <div className={styles.categoryTitle}>カテゴリ一覧</div>
+          </div>
+          {Object.keys(categories).map((category, index) => (
+            <div key={index} onClick={() => handleClick2(category)}>
+              <h3 className={styles.category}>{category}</h3>
+              <div className={styles.categoryHeader}>
+                <div className={styles.categoryArrow}>
+                  {activeCategory === category ? '▲' : '▼'}
+                </div>{' '}
+              </div>
+              {activeCategory === category && (
+                <div className={styles.gameList}>
+                  {categories[category].map((game, idx) => (
+                    <div key={idx} className={styles.gameItem}>
+                      <div className={styles.gameItem2}>{game}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         <div className={styles2.subContanier}>
           <div className={styles2.gameTitleContainer}>
@@ -516,9 +592,11 @@ const Valorant = () => {
               {Id === 2 ? <div>APEX</div> : null}
               {Id === 3 ? <div>LOL</div> : null}
             </div>
-            <div className={styles2.gameSort} onClick={() => handleSortClick(RecruitList)}>
-              ランク順に並び替え
-            </div>
+            <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
+              <option value="rank">ランク順に並び替え</option>
+              <option value="update">更新順に並び替え</option>
+              {/* 他のソートオプションがあれば追加 */}
+            </select>
           </div>
 
           <div className={styles2.helpwanted}>

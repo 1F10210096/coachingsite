@@ -7,6 +7,7 @@ import type {
   Application,
   BosyuuListFrontModel,
   CommentsWithImages,
+  RoomWithLatestComment,
   UserSummaryDetailModel,
 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -14,6 +15,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 
 const Dm = () => {
@@ -239,7 +241,7 @@ const Dm = () => {
   };
 
   const onFinalClose = () => {
-    setIsModalOpen(false);
+    setIsModalFinalOpen(false);
   };
 
   const onApplyRecruit = () => {
@@ -393,7 +395,6 @@ const Dm = () => {
             <div className={styles.modalTitle}>最終受諾確認</div>
             <p className={styles.title}>{RecruitDetail?.title}</p>
             <p className={styles.title}>
-              {' '}
               {RecruitDetail !== null &&
                 RecruitDetail?.gameId !== null &&
                 getGameName(RecruitDetail.gameId)}
@@ -413,15 +414,113 @@ const Dm = () => {
     );
   }
 
+  const [selectedTitle, setSelectedTitle] = useState('dmTitle3');
+
+  // タイトルを選択する関数
+  const selectTitle = (title) => {
+    setSelectedTitle(title);
+    fetchRoom2(title);
+  };
+
+  const [rooms, setRooms] = useState<RoomWithLatestComment[]>([]);
+
+  const fetchRoom2 = async (title) => {
+    try {
+      console.log(user);
+      let response;
+      if (title === 'dmTitle3') {
+        // 'dmTitle3'が選択された場合のAPIエンドポイントを呼び出す
+        response = await apiClient.fetchDmCoach.post({
+          body: {
+            userId: user,
+          },
+        });
+        setRooms(response.body);
+        console.log(response.body);
+      } else if (title === 'dmTitle4') {
+        // 'dmTitle4'が選択された場合のAPIエンドポイントを呼び出す
+        response = await apiClient.fetchDm2Coach.post({
+          // fetchDm2post が正しい関数名か確認してください
+          body: {
+            userId: user,
+          },
+        });
+        setRooms(response.body);
+        console.log(response.body);
+      }
+      // API呼び出しの結果を状態にセット
+    } catch (error) {
+      console.error(error); // エラーをログに記録
+    }
+  };
+
+  const handleCommentClick = (roomId: string) => {
+    router.push(`../dmRecieave?id=${roomId}`); // 適切なURLにリダイレクト
+  };
+
   return (
     <>
-      <div className={styles.container} />
+      <BasicHeader user={user} />
       <div className={styles.parent}>
-        <div className={styles.messageBox}>
-          <div className={styles.messageBox2}>
-            <div className={styles.messageBox1}>チャット欄</div>
-            <div className={styles.line} />
+        <div className={styles.containerBox}>
+          <div className={styles.dmTitleContainer}>
+            <div className={styles.dmTitle}>コーチ用メッセージ一覧</div>
+            <div className={styles.dmTitle2}>
+              <div
+                className={`${styles.dmTitle3} ${
+                  selectedTitle === 'dmTitle3' ? styles.selected : ''
+                }`}
+                onClick={() => selectTitle('dmTitle3')}
+              >
+                未了承
+              </div>
+              <div
+                className={`${styles.dmTitle4} ${
+                  selectedTitle === 'dmTitle4' ? styles.selected : ''
+                }`}
+                onClick={() => selectTitle('dmTitle4')}
+              >
+                了承済み
+              </div>
+            </div>
           </div>
+          <div className={styles.roomList}>
+            {rooms.map(
+              (room) =>
+                room.latestComment && ( // この行を追加して、latestCommentがnullでないことを確認
+                  <div
+                    key={room.latestComment.id} // latestCommentがnullでない場合のみ、このコードが実行されます
+                    className={styles.commentContainer}
+                    onClick={() =>
+                      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                      room.latestComment?.id && handleCommentClick(room.latestComment.roomId)
+                    }
+                    // ここでも同様
+                  >
+                    {room.commentUser && (
+                      <>
+                        <img
+                          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                          src={room.commentUser.imageUrl || ''}
+                          alt="User"
+                          className={styles.userImage}
+                        />
+                        <div className={styles.userContainer}>
+                          <div className={styles.userName}>{room.commentUser.name}</div>
+                          <div className={styles.comment}>{room.latestComment.content}</div>
+                        </div>
+                        {/* コメントの内容を表示 */}
+                      </>
+                    )}
+                  </div>
+                )
+            )}
+          </div>
+        </div>
+        <div className={styles.chatContainer}>
+          <div className={styles.title2}>チャット欄</div>
+          </div>
+        <div className={styles.messageBox}>
           <div className={styles.messageBox3}>
             {Array.isArray(message) &&
               message.map((msg, index) => (
@@ -475,7 +574,7 @@ const Dm = () => {
             {isModalApproveOpen && <ApproveModal isOpen={isModalApproveOpen} />}
           </div>
         </div>
-        <div className={styles.profileContainer}>
+        {/* <div className={styles.profileContainer}>
           <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.userImage} />
           <div className={styles.nameContainer}>
             <div className={styles.name}>{userDetail?.name}</div>
@@ -502,7 +601,7 @@ const Dm = () => {
             <div className={styles.descriptionTitle}>【自己紹介】</div>
             <div className={styles.descriptions}>{userDetail?.hitokoto}</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

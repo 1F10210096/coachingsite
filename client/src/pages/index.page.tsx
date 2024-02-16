@@ -86,98 +86,100 @@ const Home = () => {
 
   return (
     <>
-      <BasicHeader user={user} />
-      <div className={styles.allContainer}>
-        <div className={styles.container}>
-          <div className={styles.coachTitle}>人気のゲーム</div>
-          <Link href="/allSearch">
-            <div className={styles.blueTitle}>全て見る {'>'}</div>
-          </Link>
-          <div className={styles.gameList}>
-            {gameList.map((game, index) => (
-              <Link
-                key={game.id}
-                href={{
-                  pathname: '/recruit',
-                  query: {
-                    value: game.id,
-                  },
-                }}
-              >
-                <div key={game.id} className={styles.gameItem}>
-                  <img
-                    key={index}
-                    className={styles.gameIconContainer}
-                    src={`/gameLists/${getGameListImagePath(game.id)}`}
-                    alt={`Rank: ${game.title}`}
-                  />
-                  <div className={styles.gameTitle}>{game.title}</div>
-                </div>
-              </Link>
-            ))}
+      <div className={styles.allContainer1}>
+        <BasicHeader user={user} />
+        <div className={styles.allContainer}>
+          <div className={styles.container}>
+            <div className={styles.coachTitle}>人気のゲーム</div>
+            <Link href="/allSearch">
+              <div className={styles.blueTitle}>全て見る {'>'}</div>
+            </Link>
+            <div className={styles.gameList}>
+              {gameList.map((game, index) => (
+                <Link
+                  key={game.id}
+                  href={{
+                    pathname: '/recruit',
+                    query: {
+                      value: game.id,
+                    },
+                  }}
+                >
+                  <div key={game.id} className={styles.gameItem}>
+                    <img
+                      key={index}
+                      className={styles.gameIconContainer}
+                      src={`/gameLists/${getGameListImagePath(game.id)}`}
+                      alt={`Rank: ${game.title}`}
+                    />
+                    <div className={styles.gameTitle}>{game.title}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className={styles.divide}> </div>
           </div>
-          <div className={styles.divide}> </div>
-        </div>
-        <div className={styles.coachContainer}>
-          <div className={styles.coachTitle2}>人気のコーチ</div>
-          <div className={styles.userList}>
-            {userList.map((user) => (
-              <Link
-                key={user.name}
-                href={{
-                  pathname: '/userRecruit',
-                  query: {
-                    name: user.name,
-                    rating: user.rating,
-                    profile: user.myProfile,
-                  },
-                }}
-              >
-                <div key={user.name} className={styles.userSummary}>
-                  <img src={user.imageUrl} alt={user.name} className={styles.userImage} />
-                  <span className={styles.rate}>
-                    ★★★★★
-                    <span
-                      className={styles.rateInner}
-                      style={{ width: `${calculateRateWidth(user.rating)}px` }}
-                    >
+          <div className={styles.coachContainer}>
+            <div className={styles.coachTitle2}>人気のコーチ</div>
+            <div className={styles.userList}>
+              {userList.map((user) => (
+                <Link
+                  key={user.name}
+                  href={{
+                    pathname: '/userRecruit',
+                    query: {
+                      name: user.name,
+                      rating: user.rating,
+                      profile: user.myProfile,
+                    },
+                  }}
+                >
+                  <div key={user.name} className={styles.userSummary}>
+                    <img src={user.imageUrl} alt={user.name} className={styles.userImage} />
+                    <span className={styles.rate}>
                       ★★★★★
+                      <span
+                        className={styles.rateInner}
+                        style={{ width: `${calculateRateWidth(user.rating)}px` }}
+                      >
+                        ★★★★★
+                      </span>
                     </span>
-                  </span>
 
-                  <div className={styles.userName}>{user.name}</div>
-                  <div className={styles.myProfile}>{user.myProfile}</div>
-                </div>
-              </Link>
-            ))}
+                    <div className={styles.userName}>{user.name}</div>
+                    <div className={styles.myProfile}>{user.myProfile}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className={styles.divide2}> </div>
           </div>
-          <div className={styles.divide2}> </div>
-        </div>
-        <div className={styles.recruitContainer}>
-          <div className={styles.recruitListTitle}>人気の募集</div>
-          <div className={styles.blueTitle2}>全て見る {'>'}</div>
-          <div className={styles.recruitList}>
-            {recruitList.map((recruitList, index) => (
-              <div key={recruitList.id} className={styles.recruitSummary}>
-                <div className={styles.recruitListImage}>
-                  <img
-                    key={index}
-                    className={styles.gameIconContainer2}
-                    src={`/gameLists2/${getGameListImagePath(recruitList.gameId)}`}
-                    alt={`Rank: ${recruitList.title}`}
-                  />
+          <div className={styles.recruitContainer}>
+            <div className={styles.recruitListTitle}>人気の募集</div>
+            <div className={styles.blueTitle2}>全て見る {'>'}</div>
+            <div className={styles.recruitList}>
+              {recruitList.map((recruitList, index) => (
+                <div key={recruitList.id} className={styles.recruitSummary}>
+                  <div className={styles.recruitListImage}>
+                    <img
+                      key={index}
+                      className={styles.gameIconContainer2}
+                      src={`/gameLists2/${getGameListImagePath(recruitList.gameId)}`}
+                      alt={`Rank: ${recruitList.title}`}
+                    />
+                  </div>
+                  <h3 className={styles.recruitDetailTitle}>{recruitList.title}</h3>
+                  <div className={styles.recruitContainer1}>
+                    {recruitList.tag.map((recruit, index) => (
+                      <button key={index} className={styles.lessonType}>
+                        {recruit}
+                      </button>
+                    ))}
+                  </div>
+                  <p className={styles.recruitDetail}>{recruitList.description}</p>
                 </div>
-                <h3 className={styles.recruitDetailTitle}>{recruitList.title}</h3>
-                <div className={styles.recruitContainer1}>
-                  {recruitList.tag.map((recruit, index) => (
-                    <button key={index} className={styles.lessonType}>
-                      {recruit}
-                    </button>
-                  ))}
-                </div>
-                <p className={styles.recruitDetail}>{recruitList.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

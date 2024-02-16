@@ -115,10 +115,10 @@
 
 /* メッセージ入力フィールドのスタイル */
 .messageInput {
-  position: absolute;
+  position: fixed;
   top: 620px;
-  left: 100px;
-  width: 400px;
+  left: 500px;
+  width: 700px;
   padding: 10px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
@@ -129,9 +129,9 @@
 
 /* 送信ボタンのスタイル */
 .sendButton {
-  position: absolute;
+  position: fixed;
   top: 620px;
-  left: 500px;
+  left: 1200px;
   padding: 10px 15px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
@@ -211,21 +211,17 @@
 
 /* チャット欄全体のスタイル */
 .messageBox {
-  position: relative;
-  top: 50px;
-  left: 250px;
+  position: fixed;
+  top: 190px;
+  left: 370px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 子要素を左寄せにする */
-  width: 747px;
+  width: 1207px;
   height: 688px;
   padding: 20px; /* 内側の余白 */
   margin-bottom: 240px;
   overflow-y: auto; /* 長い内容に対してスクロールバーを表示 */
-  background-color: rgb(255 255 255);
-  border: solid 2px rgb(159 159 159);
-  border-radius: 8px; /* 角を丸める */
-  box-shadow: 0 4px 8px rgb(0 0 0 / 20%); /* 影を追加 */
 }
 
 .messageBox3::-webkit-scrollbar {
@@ -297,9 +293,9 @@
 }
 
 .applayButton {
-  position: absolute;
+  position: fixed;
   top: 620px;
-  left: 580px;
+  left: 1300px;
   height: 40px;
   padding: 10px 20px; /* ボタン内の余白 */
   font-size: 16px; /* フォントサイズ */
@@ -316,9 +312,9 @@
 }
 
 .applayButton2 {
-  position: absolute;
+  position: fixed;
   top: 620px;
-  left: 580px;
+  left: 1300px;
   height: 40px;
   padding: 10px 20px; /* ボタン内の余白 */
   font-size: 16px; /* フォントサイズ */
@@ -352,13 +348,11 @@
 
 .userImage {
   position: relative;
-  top: 40px;
-  left: 80px;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  margin: 0 auto; /* Centers the image */
+  top: 6px;
+  left: 30px;
+  width: 70px; /* Adjust the size as needed */
+  height: 70px; /* Adjust the size as needed */
   border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
 }
 
 .ratingContainer {
@@ -493,6 +487,7 @@
 
 .parent {
   position: relative;
+  top: 160px;
   right: 80px;
   display: flex;
   align-items: start;
@@ -501,7 +496,7 @@
 
 .modal {
   position: fixed; /* Stay in place */
-  top: 10px;
+  top: 60px;
   left: 10px;
   z-index: 1; /* Sit on top */
   width: 100%; /* Full width */
@@ -643,4 +638,144 @@
   font-size: 15px;
   color: #000;
   transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.containerBox {
+  position: fixed;
+  top: 160px;
+  left: 1px;
+  width: 371px;
+  height: 115%;
+  border-right: 2px solid #c3c3c3;
+  box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
+}
+
+.dmTitleContainer {
+  position: relative;
+  left: 1px;
+  width: 369px;
+  height: 120px;
+  background-color: #f5f5f5;
+  border-right: 2px solid #c3c3c3;
+  border-bottom: 2px solid #c3c3c3;
+  box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
+}
+
+.dmTitle {
+  position: relative;
+  top: 30px;
+  left: 60px;
+  font-size: 23px; /* 文字サイズを設定 */
+  font-weight: bold;
+  color: #595959; /* 文字色を濃い灰色に */
+}
+
+.dmTitle2 {
+  position: relative;
+  top: 46px;
+  left: 90px;
+  display: flex; /* Flexboxを有効化 */
+  justify-content: space-between;
+  width: 200px;
+}
+
+.dmTitle3 {
+  font-size: 14px; /* 文字サイズを設定 */
+  font-weight: bold;
+  color: #525252; /* 文字色を濃い灰色に */
+}
+
+.dmTitle4 {
+  font-size: 14px; /* 文字サイズを設定 */
+  font-weight: bold;
+  color: #525252; /* 文字色を濃い灰色に */
+}
+
+.selected {
+  position: relative; /* ::after疑似要素の基準点 */
+}
+
+.selected::after {
+  position: absolute;
+  bottom: -2px;
+  left: -17%; /* 下線を中央に配置するために左にずらす */
+  width: 130%;
+  height: 2px;
+  content: '';
+  background-color: rgb(103 153 251); /* 下線の色 */
+}
+
+.roomList {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: rgb(255 255 255);
+  border: 1px solid #ccc; /* 薄いグレーのボーダー */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+}
+
+.commentContainer {
+  position: relative;
+  left: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 80px;
+  border: 1px solid #ccc; /* 薄いグレーのボーダー */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+}
+
+.comment {
+  position: relative;
+  top: 5px;
+  font-size: 18px;
+}
+
+.userName {
+  position: relative;
+  font-size: 13px;
+}
+
+.userContainer {
+  position: relative;
+  top: 15px;
+  left: 40px;
+  height: 60px;
+}
+
+.chatContainer {
+  position: fixed;
+  top: 160px;
+  left: 370px;
+  width:100%;
+  height: 50px;
+  background-color: #f5f5f5;
+  border-right: 2px solid #c3c3c3;
+  border-bottom: 2px solid #c3c3c3;
+  box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
+}
+
+.title2 {
+  position: relative;
+  top: 12px;
+  left: 35%;
+  font-size: 18px; /* 文字サイズを設定 */
+  font-weight: bold;
+  color: #595959; /* 文字色を濃い灰色に */
+}
+
+.containerBox2 {
+  position: fixed;
+  top: 110px;
+  left: 1px;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='100%25' gradientTransform='rotate(146,768,347)'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23DBFFFB'/%3E%3C/linearGradient%3E%3Cpattern patternUnits='userSpaceOnUse' id='b' width='300' height='250' x='0' y='0' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.04'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect x='0' y='0' fill='url(%23b)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.selectedRoom {
+  background-color: rgb(231, 231, 231); /* 背景色を黒に設定 */
 }

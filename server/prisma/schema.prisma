@@ -76,7 +76,7 @@ model BosyuuList {
 
 model apply {
   id        String     @id @default(uuid())
-  roomId    String  
+  roomId    String
   bosyuuId  String
   studentId String
   status    String
@@ -86,6 +86,7 @@ model apply {
   review    String? // レビュー
   bosyuu    BosyuuList @relation(fields: [bosyuuId], references: [id])
   student   Student    @relation(fields: [studentId], references: [userId])
+  room      Room       @relation(fields: [roomId], references: [id])
 }
 
 model GameList {
@@ -115,6 +116,7 @@ model Room {
   host          Teacher    @relation(fields: [hostId], references: [userId])
   participant   Student    @relation(fields: [participantId], references: [userId])
   Comment       Comment[]
+  apply         apply[]
 }
 
 model Comment {

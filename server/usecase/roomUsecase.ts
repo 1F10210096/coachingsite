@@ -31,4 +31,28 @@ export const roomUsecase = {
     assert(room !== null, 'roomはnullです');
     return room;
   },
+  fetchDm: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchDm(userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
+  fetchDm2: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchDm2(userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
+  fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchDmCoach(userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
+  fetchDm2Coach: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    console.log('recruitDetailUsecase.fetchinfo');
+    const room = await roomRepository.fetchDm2Coach(userId);
+    assert(room !== null, 'roomはnullです');
+    return room;
+  },
 };

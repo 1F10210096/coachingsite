@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import type {
   CommentsWithImages,
   RoomWithLatestComment,
@@ -150,6 +151,184 @@ export const roomRepository = {
       });
 
       const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+        ...room,
+        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+      }));
+
+      if (roomsWithMappedComments.length === 0) {
+        return [];
+      }
+
+      return roomsWithMappedComments;
+    } catch (error) {
+      console.error('Error fetching rooms with latest comment and user:', error);
+      throw error;
+    }
+  },
+  fetchDm: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    try {
+      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      const roomsWithLatestComment = await prisma.room.findMany({
+        where: {
+          participantId: userId,
+        },
+        include: {
+          Comment: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+          apply: true,
+          // 他に必要なフィールドがあれば、ここに追加
+        },
+      });
+      console.log(roomsWithLatestComment, 'dadwa');
+      const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+        ...room,
+        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+      }));
+
+      if (roomsWithMappedComments.length === 0) {
+        return [];
+      }
+
+      return roomsWithMappedComments;
+    } catch (error) {
+      console.error('Error fetching rooms with latest comment and user:', error);
+      throw error;
+    }
+  },
+  fetchDm2: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    try {
+      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      const roomsWithLatestComment = await prisma.room.findMany({
+        where: {
+          participantId: userId,
+        },
+        include: {
+          Comment: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+          apply: true,
+          // 他に必要なフィールドがあれば、ここに追加
+        },
+      });
+      console.log(roomsWithLatestComment, 'dadwa');
+      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
+        (room) => room.apply.length > 0
+      );
+      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
+        ...room,
+        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+      }));
+
+      if (roomsWithMappedComments.length === 0) {
+        return [];
+      }
+
+      return roomsWithMappedComments;
+    } catch (error) {
+      console.error('Error fetching rooms with latest comment and user:', error);
+      throw error;
+    }
+  },
+  fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    try {
+      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      const roomsWithLatestComment = await prisma.room.findMany({
+        where: {
+          hostId: userId,
+        },
+        include: {
+          Comment: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+          apply: true,
+          // 他に必要なフィールドがあれば、ここに追加
+        },
+      });
+      console.log(roomsWithLatestComment, 'dadwa');
+      const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+        ...room,
+        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+      }));
+
+      if (roomsWithMappedComments.length === 0) {
+        return [];
+      }
+
+      return roomsWithMappedComments;
+    } catch (error) {
+      console.error('Error fetching rooms with latest comment and user:', error);
+      throw error;
+    }
+  },
+  fetchDm2Coach: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    try {
+      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      const roomsWithLatestComment = await prisma.room.findMany({
+        where: {
+          hostId: userId,
+        },
+        include: {
+          Comment: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  imageUrl: true,
+                },
+              },
+            },
+          },
+          apply: true,
+          // 他に必要なフィールドがあれば、ここに追加
+        },
+      });
+      console.log(roomsWithLatestComment, 'dadwa');
+      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
+        (room) => room.apply.length > 0
+      );
+      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報

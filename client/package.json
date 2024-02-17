@@ -20,6 +20,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.0",
     "@aspida/axios": "^1.14.0",
+    "antd": "^5.14.1",
     "api": "file:../server/api",
     "aspida": "^1.14.0",
     "axios": "^1.4.0",

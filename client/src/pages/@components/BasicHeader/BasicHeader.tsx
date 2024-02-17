@@ -44,6 +44,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
         const response = await apiClient.fetchMyProfile.post({
           body: { Id: userId },
         });
+        console.log(response.body)
         setMyProfile(response.body.name);
       } else {
         // userId が null の場合の処理

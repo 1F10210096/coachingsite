@@ -12,8 +12,7 @@
 
 .loginContainer {
   position: relative;
-  left: 50px;
-  width: 550px;
+  width: 600px;
 }
 
 .customStepsContainer {
@@ -26,10 +25,11 @@
 
 .loginForm {
   position: relative;
-  top: 2px;
-  left: 20px;
+  top: 12px;
+  left: 10px;
   width: 400px;
-  font-size: 17px;
+  font-size: 19px;
+  font-style: normal;
   font-weight: 700;
 }
 
@@ -78,15 +78,17 @@
 
 .png {
   position: relative;
-  top: -40px;
-  right: 70px;
-  height: 170px;
+  top: -35px;
+  right: 50px;
+  height: 140px;
 }
 
 .title {
   position: relative;
-  top: -70px;
+  top: -40px;
   left: 25px;
+  width: 460px;
+  font-family: 'MS PMincho', 'MS Mincho', serif;
   font-size: 22px;
   font-weight: 800;
   color: #565656;
@@ -94,25 +96,29 @@
 
 .title2 {
   position: relative;
-  top: -50px;
+  top: -20px;
   left: 35px;
-  font-size: 16px;
+  width: 370px;
+  font-size: 13px;
   color: #000;
+  letter-spacing: -0.2px;
 }
+
+
 
 .containerAll {
   position: relative;
   top: 100px;
   display: flex;
   width: 100%;
-  height: 400px;
-  background-color: #fff;
-  border: 3px solid #c2c2c2;
+  height: 390px;
+  background-color: #e6ffe9;
+  border-top: 1px solid #c2c2c2;
 }
 
 .loginContainer1 {
   position: relative;
-  width: 500px;
+  width: 550px;
   height: 400px;
 }
 
@@ -186,7 +192,7 @@
 
 .loginContainer2 {
   width: 1100px;
-  background-color: #cdf6f7;
+  background-color: #d0fcd5;
 }
 
 .loginContainer3 {
@@ -209,9 +215,10 @@
 .logintitle2 {
   position: relative;
   top: 15px;
-  left: 50px;
+  left: 100px;
   width: 800px;
   font-size: 16px;
+  letter-spacing: -0.2px;
 }
 
 .loginContainer4 {
@@ -238,16 +245,19 @@
   left: 50px;
   width: 800px;
   margin-bottom: 10px;
+  letter-spacing: -0.2px;
 }
 
 .loginCon {
   position: relative;
   top: 30px;
-  left:30px;
+  left: 30px;
   width: 480px;
   height: 330px;
-  background-color: #dfffff;
-  border: 2px solid #b7b7b7; /* 青色のボーダーを追加 */
+  background-color: #fff; /* 青色のボーダーを追加 */
+  border-right: 1px solid #b7b7b7; /* 青色のボーダーを追加 */
+  border-left: 1px solid #b7b7b7; /* 青色のボーダーを追加 */
+  box-shadow: 10px 0 15px -5px rgb(0 0 0 / 10%), /* 右側の影 */ -10px 0 15px -5px rgb(0 0 0 / 10%); /* 左側の影 */
 }
 
 .loginForm2 {
@@ -266,4 +276,14 @@
   width: 400px;
   height: 30px;
   background-color: #fff;
+}
+
+.loginButton1 {
+  position: relative;
+  right: 100px;
+}
+
+.loginButton2 {
+  position: relative;
+  right: 100px;
 }

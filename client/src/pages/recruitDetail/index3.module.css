@@ -9,6 +9,22 @@
   color: #333;
 }
 
+.recruitContainer1 {
+  position: relative;
+  top: -10px;
+  left: 17px;
+  width: 200px;
+  background-color: rgb(244 244 244);
+}
+
+.r6 {
+  position: relative;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e6e;
+}
+
 .titleText {
   position: relative;
   top: 90px;
@@ -23,7 +39,7 @@
   display: flex;
   flex-wrap: wrap; /* これにより、アイテムが折り返される */
   gap: 70px; /* 要素間の間隔 */
-  width: 1140px;
+  width: 1240px;
 }
 
 .recruitSummary {
@@ -31,6 +47,7 @@
   height: 390px;
   margin-bottom: 20px; /* 下部の余白を設定 */
   background-color: rgb(244 244 244);
+  box-shadow: rgb(0 0 0 / 16%) 0 10px 36px 0, rgb(0 0 0 / 6%) 0 0 0 1px;
 }
 
 .recruitListImage {
@@ -86,13 +103,14 @@
 
 .recruitDetail {
   position: relative;
-  top: 25px;
+  top: 5px;
   display: -webkit-box;
   padding: 3px;
   margin-right: 18px;
   margin-left: 18px;
   overflow: hidden; /* 余分なテキストを隠す */
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 200;
   text-overflow: ellipsis; /* 末尾に省略記号を表示 */
   letter-spacing: -0.1px; /* 文字の間隔を狭める */
   white-space: normal; /* 複数行のテキストに変更 */
@@ -119,13 +137,11 @@
   position: relative;
   padding: 1px 4px; /* 内側の余白 */
   margin-right: 8px; /* ボタン間の余白 */
-  font-size: 11px; /* フォントサイズ */
+  font-size: 9px; /* フォントサイズ */
   font-weight: bold;
-  color: white; /* テキストの色 */
+  color: rgb(32 106 252); /* テキストの色 */
   cursor: pointer; /* カーソルを指の形に */
-  background-color: #0cf117; /* ボタンの背景色 */
-  border: none; /* 枠線を削除 */
-  border-radius: 4px; /* 角丸の半径 */
-
-  /* その他のスタイル */
+  background-color: #fff; /* ボタンの背景色 */
+  border: 1px solid rgb(32 106 252); /* 枠線を青色に */
+  border-radius: 20px; /* 角丸の半径 */
 }

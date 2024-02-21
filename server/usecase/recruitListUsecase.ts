@@ -9,7 +9,8 @@ export const recruitListUsecase = {
     ranks?: number[];
     subjectRank?: number[];
     tags?: string[];
-    lessonTypes?: string[];
+    lessonWard?:string;
+    ward?: string;
   }): Promise<BosyuuListModel3[]> => {
     const recuritList = await recruitListRepository.fetchinfo(params);
     assert(recuritList !== null, 'gameListはnullです');

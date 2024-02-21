@@ -130,3 +130,11 @@
   width: 900px;
   height: 300px;
 }
+
+.font {
+  font-size: 18px; /* タイトルのフォントサイズ */
+  font-weight: bold; /* フォントの太さ */
+  color: #333; /* タイトルの色 */
+  margin-bottom: 20px; /* 下の要素（ボタンなど）との間隔 */
+  text-align: center; /* テキストを中央揃えに */
+}

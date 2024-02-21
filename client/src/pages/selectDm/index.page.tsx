@@ -71,7 +71,7 @@ const Home = () => {
               }}
               className={styles.bottone1}
             >
-              先生用メッセージ一覧
+              <div className={styles.font}>先生用メッセージ一覧</div>
             </button>
             <button
               type="button"
@@ -80,7 +80,8 @@ const Home = () => {
               }}
               className={styles.bottone2}
             >
-              生徒用メッセージ一覧
+              {' '}
+              <div className={styles.font}>生徒用メッセージ一覧 </div>
             </button>
           </div>
         </div>{' '}

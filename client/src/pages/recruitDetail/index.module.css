@@ -54,7 +54,7 @@
   left: 60px;
   width: 80%;
   height: auto;
-  margin-top: 100px;
+  margin-top: 80px;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -100,7 +100,7 @@
   align-items: center; /* 子要素を垂直方向の中央に配置 */
   width: 80%;
   height: auto;
-  margin-top: 100px;
+  margin-top: 80px;
   font-size: 17px;
   color: rgb(95 94 94); /* 文字色を灰色に設定 */
   letter-spacing: -1px; /* 文字の間隔を狭める */
@@ -194,8 +194,8 @@
 
 .description {
   position: relative;
-  top: 20px;
-  left: 20px;
+  top: 40px;
+  left: 30px;
   width: auto;
   height: auto;
   font-size: 15px;
@@ -215,7 +215,7 @@
   padding: 20px; /* Optional: adds space inside the container */
   padding-bottom: 40px;
   font-size: 19px;
-  background: rgb(255 255 255);
+  background-color: #fff;
   border: 1px solid #ccc; /* Optional: adds a border */
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
 }
@@ -407,9 +407,10 @@
 
 .reviewContainer {
   position: relative;
-  top: 50px;
+  top: 40px;
   width: 300px;
   height: auto;
+  background-color: #fff;
   border: 1px solid #ccc; /* Optional: adds a border */
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Optional: adds a subtle shadow */
 }
@@ -562,7 +563,7 @@
   left: 380px;
   display: flex;
   flex-direction: column; /* Align children in a column */
-  background-color: rgb(255 255 255);
+  height: auto;
 }
 
 .line4 {

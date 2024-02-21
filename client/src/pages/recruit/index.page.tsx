@@ -4,7 +4,6 @@ import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type {
   ApexRankType,
   BosyuuListModel3,
-  LessonTypesType,
   TagsType,
   ValoRankType,
 } from 'commonTypesWithClient/models';
@@ -24,10 +23,11 @@ const Valorant = () => {
   const router = useRouter();
   const value = router.query.value;
   const Id = Number(value);
-  console.log(value);
   const [showRankCheckboxes, setShowRankCheckboxes] = useState(false);
   const [showMyRankCheckboxes, setShowMyRankCheckboxes] = useState(false);
   const [showTagCheckboxes, setShowTagCheckboxes] = useState(false);
+  const [showWard, setShowWard] = useState(false);
+  const [showLessonWard, setShowLessonWard] = useState(false);
   const [showLessonTypeCheckboxes, setShowLessonTypeCheckboxes] = useState(false);
   const [RecruitList, setRecruitlist] = useState<BosyuuListModel3[]>([]);
 
@@ -129,6 +129,7 @@ const Valorant = () => {
 
   const handleCheckboxChange = (rank: keyof (ValoRankType | ApexRankType)) => {
     if (Id === 1) {
+      console.log(rank);
       setValoRanks((prevRanks) => ({
         ...prevRanks,
         [rank]: !prevRanks[rank],
@@ -162,13 +163,6 @@ const Valorant = () => {
     }));
   };
 
-  const handleLessonTypeCheckboxChange = (LessonType: keyof LessonTypesType) => {
-    setLessonTypes((prevLessonTypes) => ({
-      ...prevLessonTypes,
-      [LessonType]: !prevLessonTypes[LessonType],
-    }));
-  };
-
   const [user, setUser] = useState('');
 
   useEffect(() => {
@@ -191,17 +185,22 @@ const Valorant = () => {
     let selectedRanksIndices: number[] = [];
 
     if (Id === 1) {
+      console.log(valoRanks);
       selectedRanksIndices = Object.keys(valoRanks)
-        .filter((key) => valoRanks[key as keyof typeof valoRanks])
-        .map((key, index) => index);
+        .map((key, index) => ({ rank: key as keyof typeof valoRanks, index }))
+        .filter((item) => valoRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
     } else if (Id === 2) {
-      selectedRanksIndices = Object.keys(apexRanks)
-        .filter((key) => apexRanks[key as keyof typeof apexRanks])
-        .map((key, index) => index);
+      console.log(valoRanks);
+      selectedRanksIndices = Object.keys(valoRanks)
+        .map((key, index) => ({ rank: key as keyof typeof valoRanks, index }))
+        .filter((item) => valoRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
     }
-
-    console.log(selectedRanksIndices);
-    return selectedRanksIndices;
   };
 
   const getSelectedMyRanksIndices = (Id: number) => {
@@ -309,13 +308,16 @@ const Valorant = () => {
         .filter((key) => LessonTypes[key as keyof typeof LessonTypes])
         .map((key) => key as keyof typeof LessonTypes);
 
+      console.log(rank);
+
       const response = await apiClient.fetchRecruit.post({
         body: {
           Id,
           ranks: rank,
           subjectRank: selectedMyRanksIndices,
           tag: selectedTags,
-          lessonTypes: selectedLessonTypes,
+          lessonWard,
+          ward,
         },
       });
 
@@ -345,9 +347,6 @@ const Valorant = () => {
     } else if (Id === 3) {
       directory = 'lolRanks'; // Adding the lolRanks condition
     }
-
-    console.log(rank);
-    console.log(directory);
     const rankImage = getImagePath(Id, rank);
     return `/${directory}/${rankImage}`;
   };
@@ -426,6 +425,17 @@ const Valorant = () => {
     }
   };
 
+  const [ward, setWard] = useState('');
+
+  const [lessonWard, setLessonWard] = useState('');
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setWard(event.target.value); // 入力された値を state にセット
+  };
+
+  const handleChange2 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setLessonWard(event.target.value); // 入力された値を state にセット
+  };
+
   return (
     <>
       <BasicHeader user={user} />
@@ -452,30 +462,37 @@ const Valorant = () => {
                     クリア
                   </div>
                 </div>
-                <div className={styles.searchNameContainer2}>
-                  <div
-                    className={`${styles.rankDropdown} ${showRankCheckboxes ? styles.active : ''}`}
-                    onClick={() => setShowRankCheckboxes(!showRankCheckboxes)}
-                  >
-                    コーチのランク
-                    <span className={styles.dropdownIcon} />
+                <div className={styles.sd}>
+                  <div className={styles.searchNameContainer2}>
+                    <div
+                      className={`${styles.rankDropdown} ${
+                        showRankCheckboxes ? styles.active : ''
+                      }`}
+                      onClick={() => setShowRankCheckboxes(!showRankCheckboxes)}
+                    >
+                      <div className={styles.searchDetailContainer}>コーチのランク</div>
+                      <span className={styles.dropdownIcon} />
+                    </div>{' '}
                   </div>
-                  {showRankCheckboxes && (
-                    <div className={styles.rankCheckboxes}>
-                      {Object.keys(ranksToDisplay).map((rank) => (
-                        <label key={rank}>
-                          <input
-                            type="checkbox"
-                            checked={ranksToDisplay[rank]}
-                            onChange={() =>
-                              handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))
-                            }
-                          />
-                          <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
+                  <div className={styles.sea1}>
+                    {showRankCheckboxes && (
+                      <div className={styles.rankCheckboxes}>
+                        {Object.keys(ranksToDisplay).map((rank) => (
+                          <label key={rank}>
+                            <input
+                              type="checkbox"
+                              checked={ranksToDisplay[rank]}
+                              className={styles.sell}
+                              onChange={() =>
+                                handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))
+                              }
+                            />
+                            <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}{' '}
+                  </div>
                 </div>
                 <div className={styles.searchNameContainer2}>
                   <div
@@ -484,15 +501,18 @@ const Valorant = () => {
                     }`}
                     onClick={() => setShowMyRankCheckboxes(!showMyRankCheckboxes)}
                   >
-                    対象のランク
+                    <div className={styles.searchDetailContainer}>対象のランク</div>
                     <span className={styles.dropdownIcon} />
-                  </div>
+                  </div>{' '}
+                </div>
+                <div className={styles.sea}>
                   {showMyRankCheckboxes && (
                     <div className={styles.rankCheckboxes}>
                       {Object.keys(myRanksToDisplay).map((myrank) => (
                         <label key={myrank}>
                           <input
                             type="checkbox"
+                            className={styles.sell}
                             checked={myRanksToDisplay[myrank]}
                             onChange={() =>
                               handleMyRankCheckboxChange(
@@ -505,60 +525,74 @@ const Valorant = () => {
                       ))}
                     </div>
                   )}
-                </div>
-
+                </div>{' '}
                 <div className={styles.searchNameContainer2}>
                   <div
                     className={`${styles.rankDropdown} ${showTagCheckboxes ? styles.active : ''}`}
                     onClick={() => setShowTagCheckboxes(!showTagCheckboxes)}
                   >
-                    タグ
+                    <div className={styles.searchDetailContainer}>タグ</div>
                     <span className={styles.dropdownIcon} />
-                  </div>
+                  </div>{' '}
+                </div>
+                <div className={styles.sea2}>
                   {showTagCheckboxes && (
-                    <div className={styles.rankCheckboxes}>
+                    <div className={styles.rankCheckboxes2}>
                       {Object.keys(Tags).map((Tag) => (
-                        <label key={Tag}>
+                        <label key={Tag} htmlFor={`tag-${Tag}`}>
                           <input
+                            id={`tag-${Tag}`}
                             type="checkbox"
                             checked={Tags[Tag as keyof TagsType]}
                             onChange={() => handleTagCheckboxChange(Tag as keyof TagsType)}
                           />
-                          <span>{Tag.charAt(0).toUpperCase() + Tag.slice(1)}</span>{' '}
+                          {/* spanをinputの直後に配置 */}
+                          <span className={styles.ra}>
+                            {Tag.charAt(0).toUpperCase() + Tag.slice(1)}
+                          </span>
                         </label>
                       ))}
                     </div>
-                  )}
+                  )}{' '}
                 </div>
-
                 <div className={styles.searchNameContainer2}>
                   <div
-                    className={`${styles.rankDropdown} ${
-                      showLessonTypeCheckboxes ? styles.active : ''
-                    }`}
-                    onClick={() => setShowLessonTypeCheckboxes(!showLessonTypeCheckboxes)}
+                    onClick={() => setShowLessonWard(!showLessonWard)}
+                    className={`${styles.rankDropdown} ${showLessonWard ? styles.active : ''}`}
                   >
-                    レッスン形式
-                    <span className={styles.dropdownIcon} />
-                  </div>
-                  {showLessonTypeCheckboxes && (
-                    <div className={styles.rankCheckboxes}>
-                      {Object.keys(LessonTypes).map((LessonType) => (
-                        <label key={LessonType}>
-                          <input
-                            type="checkbox"
-                            checked={LessonTypes[LessonType as keyof LessonTypesType]}
-                            onChange={() =>
-                              handleLessonTypeCheckboxChange(LessonType as keyof LessonTypesType)
-                            }
-                          />
-                          <span>{LessonType}</span>{' '}
-                        </label>
-                      ))}
-                    </div>
-                  )}
+                    <div className={styles.searchDetailContainer}>レッスン形式検索</div>
+                    <span className={styles.dropdownIcon} onChange={handleChange} />
+                  </div>{' '}
                 </div>
-
+                {showLessonWard && (
+                  <div className={styles.sea3}>
+                    <input
+                      type="text"
+                      className={styles.searchInput}
+                      onChange={handleChange2}
+                      placeholder="レッスンタイプを入力してください"
+                    />
+                  </div>
+                )}
+                <div className={styles.searchNameContainer2}>
+                  <div
+                    onClick={() => setShowWard(!showWard)}
+                    className={`${styles.rankDropdown} ${showWard ? styles.active : ''}`}
+                  >
+                    <div className={styles.searchDetailContainer}>ワード検索</div>
+                    <span className={styles.dropdownIcon} />
+                  </div>{' '}
+                </div>
+                {showWard && (
+                  <div className={styles.sea2}>
+                    <input
+                      type="text"
+                      className={styles.searchInput2}
+                      onChange={handleChange}
+                      placeholder="ワードを入力してください"
+                    />
+                  </div>
+                )}
                 <div className={styles.search} onClick={fetchRecruitList}>
                   検索
                 </div>
@@ -591,7 +625,7 @@ const Valorant = () => {
                 </div>
               ))}
             </div>
-          </div>{' '}
+          </div>
         </div>
         <div className={styles2.subContanier}>
           <div className={styles2.gameTitleContainer}>
@@ -606,7 +640,6 @@ const Valorant = () => {
               {/* 他のソートオプションがあれば追加 */}
             </select>
           </div>
-
           <div className={styles2.helpwanted}>
             {currentItems.map((item) => (
               <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>

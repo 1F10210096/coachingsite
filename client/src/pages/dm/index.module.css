@@ -115,9 +115,6 @@
 
 /* メッセージ入力フィールドのスタイル */
 .messageInput {
-  position: absolute;
-  top: 620px;
-  left: 100px;
   width: 400px;
   padding: 10px;
   font-size: 16px; /* 文字サイズを設定 */
@@ -643,4 +640,10 @@
   font-size: 15px;
   color: #000;
   transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+
+.mess {
+  position: relative;
+  background-color: #0056b3;
 }

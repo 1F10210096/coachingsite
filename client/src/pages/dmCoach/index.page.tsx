@@ -297,7 +297,7 @@ const Dm = () => {
           <button className={styles.closeButton} onClick={onCloseRecruit}>
             閉じる
           </button>
-          <button className={styles.applyButton2} onClick={onApplyRecruit}>
+          <button className={styles.applyButton5} onClick={onApplyRecruit}>
             申し込む
           </button>
         </div>
@@ -361,7 +361,7 @@ const Dm = () => {
           <button className={styles.closeButton} onClick={onFinalClose}>
             閉じる
           </button>
-          <button className={styles.applyButton2} onClick={onApplyFinalRecruit}>
+          <button className={styles.applyButton5} onClick={onApplyFinalRecruit}>
             申し込む
           </button>
         </div>
@@ -406,7 +406,7 @@ const Dm = () => {
           <button className={styles.closeButton} onClick={onFinalClose}>
             閉じる
           </button>
-          <button className={styles.applyButton2} onClick={handleUrlClick}>
+          <button className={styles.applyButton5} onClick={handleUrlClick}>
             了承する
           </button>
         </div>
@@ -453,15 +453,28 @@ const Dm = () => {
       console.error(error); // エラーをログに記録
     }
   };
+  const [roomId, setRoomId] = useState();
+
+  useEffect(() => {
+    setRoomId(id);
+  }, [id]);
+
+  useEffect(() => {
+    fetchRoom2(selectedTitle);
+  }, [user, selectedTitle]);
 
   const handleCommentClick = (roomId: string) => {
-    router.push(`../dmRecieave?id=${roomId}`); // 適切なURLにリダイレクト
+    setRoomId(roomId);
+    router.push(`../dmCoach?id=${roomId}`); // 適切なURLにリダイレクト
   };
 
   return (
     <>
-      <BasicHeader user={user} />
+      {' '}
       <div className={styles.parent}>
+        <BasicHeader user={user} />
+
+        <div className={styles.containerBox2} />
         <div className={styles.containerBox}>
           <div className={styles.dmTitleContainer}>
             <div className={styles.dmTitle}>コーチ用メッセージ一覧</div>
@@ -490,7 +503,9 @@ const Dm = () => {
                 room.latestComment && ( // この行を追加して、latestCommentがnullでないことを確認
                   <div
                     key={room.latestComment.id} // latestCommentがnullでない場合のみ、このコードが実行されます
-                    className={styles.commentContainer}
+                    className={`${styles.commentContainer} ${
+                      roomId === room.latestComment.roomId ? styles.selectedRoom : ''
+                    }`}
                     onClick={() =>
                       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
                       room.latestComment?.id && handleCommentClick(room.latestComment.roomId)
@@ -519,44 +534,59 @@ const Dm = () => {
         </div>
         <div className={styles.chatContainer}>
           <div className={styles.title2}>チャット欄</div>
-          </div>
+        </div>
         <div className={styles.messageBox}>
           <div className={styles.messageBox3}>
-            {Array.isArray(message) &&
-              message.map((msg, index) => (
-                <div
-                  key={index}
-                  className={msg.userIdentity === 1 ? styles.messageLeft : styles.messageRight}
-                >
-                  <div className={styles.messageContainer}>
+            <div className={styles.overflow}>
+              {Array.isArray(message) &&
+                message.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={msg.userIdentity === 1 ? styles.messageLeft : styles.messageRight}
+                  >
                     {msg.userIdentity === 1 ? (
                       <>
-                        {msg.userImageUrl && (
-                          <img src={msg.userImageUrl} alt="User" className={styles.userImage2} />
-                        )}
-                        <div className={styles.msgContent}>{msg.content}</div>
+                        <div className={styles.msgContent6}>
+                          {msg.userImageUrl && (
+                            <div className={styles.userImageContainer}>
+                              <img
+                                src={msg.userImageUrl}
+                                alt="User"
+                                className={styles.userImage2}
+                              />{' '}
+                            </div>
+                          )}
+                          <div className={styles.msgContent}>{msg.content}</div>
+                        </div>
                       </>
                     ) : (
                       <>
-                        <div className={styles.msgContent}>{msg.content}</div>
-                        {msg.userImageUrl && (
-                          <img src={msg.userImageUrl} alt="User" className={styles.userImage2} />
-                        )}
+                        <div className={styles.msgContent3}>
+                          <div className={styles.msgContent2}>
+                            <div className={styles.msgContent}>{msg.content}</div>
+                            {msg.userImageUrl && (
+                              <img
+                                src={msg.userImageUrl}
+                                alt="User"
+                                className={styles.userImage2}
+                              />
+                            )}
+                          </div>{' '}
+                        </div>
                       </>
                     )}
                   </div>
-                </div>
-              ))}
+                ))}{' '}
+            </div>{' '}
           </div>
-          <div className={styles.line2} />
-          <div>
+          <div className={styles.mess}>
             <input
               type="text"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               className={styles.messageInput}
             />
-            <button onClick={sendMessage} className={styles.sendButton}>
+            <button onClick={sendMessage} className={styles.sendButton1}>
               Send
             </button>
             {userNumber === 1 && (

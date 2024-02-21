@@ -450,7 +450,7 @@ const Dm = () => {
               ))}
           </div>
           <div className={styles.line2} />
-          <div>
+          <div className={styles.mess}>
             <input
               type="text"
               value={comment}

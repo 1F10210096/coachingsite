@@ -1,3 +1,59 @@
+.allContainer {
+  display: flex;
+  justify-content: center; /* 水平方向の中央揃え */
+}
+
+.vertical {
+  position: relative;
+  display: flex; /* Flexboxコンテナとして設定 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  margin-top: 40px;
+}
+
+.aside {
+  position: relative;
+  top: 130px;
+  z-index: 2;
+  width: 100%;
+  height: 20px;
+  background-color: #fff;
+}
+
+.aside1 {
+  position: relative;
+  top: 180px;
+  z-index: 2;
+  width: 100%;
+  height: 20px;
+  background-color: #fff;
+}
+
+.container1 {
+  position: relative;
+  top: 200px;
+  display: flex;
+  width: 900px;
+  height: 260px;
+  background-color: #fff;
+  box-shadow: rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px;
+}
+
+.required {
+  width: 30px;
+  margin-left: 14px; /* ラベルテキストとの間隔 */
+  color: white; /* 必須マークを赤色に */
+  background-color: #f00;
+}
+
+.mail2 {
+  position: relative;
+  top: -2px;
+  font-size: 11px;
+}
+
+.container2 {
+}
+
 .loginContainer {
   display: flex;
   align-items: center;
@@ -37,11 +93,14 @@
 
 .loginTitle {
   position: relative;
-  top: 160px;
-  left: 700px;
-  font-size: 30px;
+  top: 40px;
+  left: 49px;
+  width: 340px;
+  height: 40px;
+  font-size: 24px;
   font-weight: bold;
   color: #000;
+  background-color: #fff;
 }
 
 .kaninn {
@@ -75,14 +134,16 @@
 
 .mail {
   position: relative;
-  left: 100px;
-  font-size: 19px;
+  top: 30px;
+  left: 60px;
+  width: 100%; /* コンテナの幅を指定（必要に応じて） */
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  color: #303030;
 }
 
 .pick {
+  position: relative;
   display: flex;
   flex-direction: column; /* 子要素を縦に並べる */
   gap: 10px;
@@ -92,8 +153,8 @@
 
 .rankItem {
   position: relative;
-  top: 230px;
-  left: 100px;
+  top: 150px;
+  left: 60px;
   display: flex;
   gap: 5px; /* チェックボックスとラベルの間のスペース */
   align-items: center; /* チェックボックスとラベルを中央揃え */
@@ -105,17 +166,17 @@
 }
 
 .rankName {
-  font-size: 19px;
+  font-size: 16px;
   font-weight: bold;
-  color: #717171;
+  color: rgb(63 63 63);
 }
 
 .next {
   position: relative;
-  left: 100px;
+  left: 60px;
   width: 250px;
   padding: 10px 15px;
-  margin-top: 260px;
+  margin-top: 200px;
   color: white;
   cursor: pointer;
   background-color: #007bff;
@@ -179,14 +240,40 @@
 
 .as {
   position: relative;
-  top: 300px;
-  left: 410px;
-  width: 850px;
-  height: 1100px;
-  padding: 10px 15px;
+  top: 180px;
+  width: 900px;
+  height: auto;
+  padding-bottom: 40px;
   color: rgb(123 123 123);
-  cursor: pointer;
   background-color: #fff;
+  border-top: 1px solid #7b7b7b; /* 灰色のボーダーを追加 */
+  box-shadow: rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px;
+  transition: background-color 0.3s ease;
+}
+
+.as1 {
+  position: relative;
+  top: 180px;
+  width: 900px;
+  height: auto;
+  padding-bottom: 140px;
+  color: rgb(123 123 123);
+  background-color: #fff;
+  border-top: 1px solid #7b7b7b; /* 灰色のボーダーを追加 */
+  box-shadow: rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px;
+  transition: background-color 0.3s ease;
+}
+
+.as3 {
+  position: relative;
+  top: 180px;
+  width: 900px;
+  height: auto;
+  padding-bottom: 200px;
+  color: rgb(123 123 123);
+  background-color: #fff;
+  border-top: 1px solid #7b7b7b; /* 灰色のボーダーを追加 */
+  box-shadow: rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px;
   transition: background-color 0.3s ease;
 }
 
@@ -220,17 +307,17 @@
 
 .select {
   position: relative;
-  top: 30px;
-  left: 100px;
-  width: 600px;
-  padding: 10px 15px;
-  font-size: 22px;
-  color: rgb(93 93 93);
+  top: 50px;
+  left: 60px;
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  color: rgb(0 0 0);
   cursor: pointer;
   background-color: #fff;
-  border: 2px solid #bcbcbc;
+  border: 2px solid #878787;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
 .completedStepNumber {
@@ -245,106 +332,156 @@
 
 .subjectRank {
   position: relative;
-  top: 190px;
-  left: 100px;
+  top: 110px;
+  left: 60px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
+  color: #303030;
 }
 
 .myRank {
   position: relative;
-  top: 90px;
-  left: 100px;
+  top: 60px;
+  left: 60px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
-  white-space: nowrap;
+  color: #303030;
 }
 
 .select2 {
   position: relative;
-  top: 120px;
-  left: 100px;
-  width: 600px;
-  padding: 10px 15px;
-  font-size: 22px;
+  top: 80px;
+  left: 60px;
+  z-index: 100;
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
   color: rgb(0 0 0);
   cursor: pointer;
   background-color: #fff;
-  border: 2px solid #9e9e9e;
+  border: 2px solid #878787;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
 .title {
   position: relative;
+  top: 40px;
   left: 100px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
+  color: #303030;
 }
 
 .input {
   position: relative;
+  top: 50px;
   left: 100px;
   width: 600px;
   height: 55px;
   padding: 8px;
   margin-top: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #8e8e8e;
   border-radius: 4px;
+}
+
+.yoko {
+  position: relative;
+  top: 90px;
+  left: 100px;
+  display: flex; /* Flexboxを有効化 */
+}
+
+.yoko1 {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex; /* Flexboxを有効化 */
+}
+
+.yoko2 {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex; /* Flexboxを有効化 */
+}
+
+.next4 {
+  position: relative;
+  left: 40px;
+  width: 200px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .description {
   position: relative;
-  top: 50px;
+  top: 90px;
   left: 100px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
+  color: #303030;
 }
 
 .inputDescription {
   position: relative;
+  top: 50px;
   left: 100px;
   width: 600px;
   height: 355px;
   padding: 8px;
   margin-top: 58px;
-  border: 1px solid #ccc;
+  border: 1px solid #8e8e8e;
   border-radius: 4px;
 }
 
 .acheavement {
   position: relative;
-  top: 50px;
+  top: 80px;
   left: 100px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
+  color: #303030;
 }
 
 .inputAcheavement {
   position: relative;
+  top: 40px;
   left: 100px;
   width: 600px;
   height: 255px;
   padding: 8px;
   margin-top: 58px;
-  border: 1px solid #ccc;
+  border: 1px solid #8e8e8e;
   border-radius: 4px;
 }
 
 .next2 {
   position: relative;
-  top: 90px;
-  left: 100px;
+  width: 200px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #fcb46b;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.next3 {
+  position: relative;
+  top: 160px;
+  left: 60px;
   width: 250px;
   padding: 10px 15px;
   color: white;
@@ -357,22 +494,23 @@
 
 .notes {
   position: relative;
-  top: 30px;
+  top: 90px;
   left: 100px;
   width: 600px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
-  color: #717171;
+  color: #303030;
 }
 
 .inputNotes {
   position: relative;
+  top: 60px;
   left: 100px;
   width: 600px;
   height: 155px;
   padding: 8px;
   margin-top: 38px;
-  border: 1px solid #ccc;
+  border: 1px solid #8e8e8e;
   border-radius: 4px;
 }
 
@@ -385,7 +523,15 @@
   align-items: center; /* チェックボックスとラベルを中央揃え */
 }
 
-.noPick{
+.noPick {
   position: relative;
   left: 100px;
+}
+
+.customStepsContainer {
+  position: relative;
+  top: 140px;
+  right: 120px;
+  width: 900px; /* 希望する横幅に設定 */
+  font-weight: 600;
 }

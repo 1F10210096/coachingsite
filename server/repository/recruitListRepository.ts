@@ -37,41 +37,56 @@ export const recruitListRepository = {
   // eslint-disable-next-line complexity
   fetchinfo: async (params: {
     Id: number;
-    ranks?: number[]; // Changed to "ranks"
+    ranks?: number[]; // "ranks"に変更されました
     subjectRank?: number[];
     tag?: string[];
-    lessonTypes?: string[];
+    lessonWard?: string;
+    ward?: string;
   }): Promise<BosyuuListModel3[]> => {
     console.log(params.Id, 'gameId');
     console.log(params, 'param');
     console.log('recruitListRepository.fetchinfo');
-    const query: { [key: string]: any } = {};
+    const query: { AND?: any[] } = {};
+    const conditions = [];
+
     if (params.Id) {
-      query.gameId = params.Id;
+      conditions.push({ gameId: params.Id });
     }
-    const filters = [];
-    if (params.ranks) {
-      filters.push(...params.ranks.map((rank) => ({ rank: { in: [rank] } })));
+
+    if (params.ranks && params.ranks.length > 0) {
+      conditions.push({ rank: { in: params.ranks } });
     }
 
     if (params.subjectRank && params.subjectRank.length > 0) {
-      filters.push(
+      conditions.push(
         ...params.subjectRank.map((subjectRank) => ({ subjectRank: { has: subjectRank } }))
       );
     }
 
     if (params.tag && params.tag.length > 0) {
-      filters.push(...params.tag.map((tag) => ({ tag: { has: tag } })));
+      conditions.push(...params.tag.map((tag) => ({ tag: { has: tag } })));
     }
 
-    if (params.lessonTypes) {
-      filters.push(
-        ...params.lessonTypes.map((lessonType) => ({ lessonType: { has: lessonType } }))
-      );
+    if (params.lessonWard) {
+      conditions.push({
+        OR: [{ lessonType: { contains: params.lessonWard, mode: 'insensitive' } }],
+      });
     }
 
-    if (filters.length > 0) {
-      query.OR = filters;
+    if (params.ward) {
+      conditions.push({
+        OR: [
+          { title: { contains: params.ward, mode: 'insensitive' } },
+          { description: { contains: params.ward, mode: 'insensitive' } },
+          { descriptionDetail: { contains: params.ward, mode: 'insensitive' } },
+          { myProfile: { contains: params.ward, mode: 'insensitive' } },
+          { suchedule: { contains: params.ward, mode: 'insensitive' } },
+        ],
+      });
+    }
+
+    if (conditions.length > 0) {
+      query.AND = conditions;
     }
 
     try {

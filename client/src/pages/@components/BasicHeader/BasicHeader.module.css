@@ -19,7 +19,7 @@
   height: 40px;
   background: #fafafa;
   border-bottom: 1px solid #68b5fe;
-  transform: translateX(-50%); /* 要素を左に半分移動して完全に中央揃えにする */
+  transform: translateX(-50%); 
 }
 
 .button {

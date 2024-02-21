@@ -111,6 +111,7 @@ export type BosyuuListFrontModel = {
   descriptionDetail: string;
   suchedule: string;
   lessonType: string;
+  teacherId: string;
   createdAt: Date;
   updatedAt: Date;
 };

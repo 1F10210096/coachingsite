@@ -193,7 +193,10 @@ export const roomRepository = {
         },
       });
       console.log(roomsWithLatestComment, 'dadwa');
-      const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
+        (room) => room.apply.length === 0
+      );
+      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
@@ -257,7 +260,7 @@ export const roomRepository = {
   },
   fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
-      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      console.log('dddddddddddd534342343ddddddddddd');
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
           hostId: userId,
@@ -282,7 +285,13 @@ export const roomRepository = {
         },
       });
       console.log(roomsWithLatestComment, 'dadwa');
-      const roomsWithMappedComments = roomsWithLatestComment.map((room) => ({
+
+      console.log(roomsWithLatestComment, 'dadwa');
+      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
+        (room) => room.apply.length === 0
+      );
+
+      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
@@ -300,7 +309,7 @@ export const roomRepository = {
   },
   fetchDm2Coach: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
-      console.log('dddddddddddddddddddddddddddddddddddddddd');
+      console.log('ddddddddddddddlllllllllllllllllllddddddd');
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
           hostId: userId,

@@ -5,14 +5,10 @@
 
 .allContainer {
   position: relative;
-  top: 180px;
-  left: 400px;
   width: 900px;
   height: auto;
   padding-bottom: 200px;
   overflow: hidden;
-  border: 1px solid rgb(158 158 158 / 50%);
-  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
@@ -23,7 +19,7 @@
   width: 600px;
   font-size: 19px;
   font-weight: bold;
-  color: #717171;
+  color: #2b2b2b;
 }
 
 .content {
@@ -31,6 +27,8 @@
   left: 140px;
   width: 600px;
   margin-top: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000;
 }
 
 .subTitle {
@@ -39,7 +37,7 @@
   margin-top: 40px;
   font-size: 16px;
   font-weight: bold;
-  color: #717171;
+  color: #313131;
 }
 
 .subTitleContainer {
@@ -51,6 +49,18 @@
   position: relative;
   top: 150px;
   left: 150px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+}
+
+.next3 {
+  position: relative;
+  left: 50px;
+  width: 200px;
   padding: 10px 15px;
   color: white;
   cursor: pointer;

@@ -31,7 +31,8 @@ export type Methods = {
       ranks: number[];
       subjectRank: number[];
       tag: string[];
-      lessonTypes: string[];
+      lessonWard: string;
+      ward: string;
     };
     resBody: BosyuuListModel3[];
   };

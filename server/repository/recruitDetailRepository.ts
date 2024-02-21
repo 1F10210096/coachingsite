@@ -35,6 +35,7 @@ export const recruitDetailRepository = {
         suchedule: true,
         createdAt: true,
         updatedAt: true,
+        teacherId: true,
         game: true,
         teacher: {
           select: {
@@ -88,6 +89,7 @@ export const recruitDetailRepository = {
       myProfile: bosyuuDetail.myProfile,
       descriptionDetail: bosyuuDetail.descriptionDetail,
       suchedule: bosyuuDetail.suchedule,
+      teacherId: bosyuuDetail.teacherId,
       createdAt: bosyuuDetail.createdAt,
       updatedAt: bosyuuDetail.updatedAt,
     };

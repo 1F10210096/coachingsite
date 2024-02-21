@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
-import { CheckOutlined, LoadingOutlined, MailOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
+import { CheckOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Steps } from 'antd';
 import type { FieldType } from 'aws-sdk/clients/iot';
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
 import Link from 'next/link';
 import router from 'next/router';
 import type { CSSProperties, ChangeEvent } from 'react';
@@ -25,6 +25,7 @@ const Register = () => {
       const auth = createAuth(); // `createAuth` 関数を使用して `auth` オブジェクトを取得
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userId = userCredential.user.uid;
+      await sendEmailVerification(userCredential.user);
       setIsSubmitted(false);
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!userCredential || !userCredential.user) {
@@ -142,7 +143,7 @@ const Register = () => {
                 <div className={styles.loginContainer}>
                   <div className={styles.loginCon}>
                     <div className={styles.loginC}>
-                      <div className={styles.loginForm}>情報を入力してください</div>
+                      <div className={styles.loginForm}>アカウント作成</div>
                     </div>
                     <div className={styles.loginForm2}>
                       <Form
@@ -156,7 +157,7 @@ const Register = () => {
                         autoComplete="off"
                       >
                         <Form.Item
-                          label="Username"
+                          label="Eメール等"
                           name="username"
                           rules={[{ required: true, message: 'Please input your username!' }]}
                           style={{ fontSize: '18px' }}
@@ -169,7 +170,7 @@ const Register = () => {
                           {/* ここでカスタムスタイルを適用 */}
                         </Form.Item>
                         <Form.Item<FieldType>
-                          label="Password"
+                          label="パスワード"
                           name="password"
                           rules={[{ required: true, message: 'Please input your password!' }]}
                         >
@@ -181,12 +182,17 @@ const Register = () => {
                           valuePropName="checked"
                           wrapperCol={{ offset: 8, span: 16 }}
                         >
-                          <Checkbox>Remember me</Checkbox>
+                          <Checkbox className={styles.loginButton2}>Remember me</Checkbox>
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                          <Button type="primary" htmlType="submit" onClick={handleRegister}>
-                            Submit
+                          <Button
+                            className={styles.loginButton1}
+                            type="primary"
+                            htmlType="submit"
+                            onClick={handleRegister}
+                          >
+                            作成
                           </Button>
                         </Form.Item>
                       </Form>

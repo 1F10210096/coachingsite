@@ -1,9 +1,49 @@
 .searchContainer {
   position: relative;
-  left: 20px;
-  width: 300px;
+  width: 250px;
+  height: auto;
+}
+
+.searchDetailContainer {
+  position: relative;
+  top: 12px;
+  left: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(25 98 215);
+}
+
+.sea2 {
+  position: relative;
+  left: 17px;
+  width: 90%;
   height: auto;
   background-color: #fff;
+}
+
+.sea3 {
+  position: relative;
+  left: 17px;
+  width: 90%;
+  height: auto;
+  margin-bottom: 25px;
+  background-color: #fff;
+}
+
+.sea {
+  position: relative;
+  left: 17px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+}
+
+.sea1 {
+  position: relative;
+  left: 27px;
+  width: 90%;
+  height: auto;
 }
 
 .allContainer {
@@ -13,58 +53,79 @@
   justify-content: center; /* 水平方向の中央揃え */
   width: 100%;
   height: auto;
-  padding-bottom: 1000px;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='100%25' gradientTransform='rotate(146,768,347)'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23DBFFFB'/%3E%3C/linearGradient%3E%3Cpattern patternUnits='userSpaceOnUse' id='b' width='300' height='250' x='0' y='0' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.04'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect x='0' y='0' fill='url(%23b)' width='100%25' height='100%25'/%3E%3C/svg%3E");
-  background-attachment: fixed;
-  background-size: cover;
+  padding-bottom: 300px;
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
 
 .sContainer3 {
   position: relative;
-  top: 30px;
-  right: 200px;
+  top: 200px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
+  padding-bottom: 100px;
+  /* background-color: #f6f6f6; */
+  /* box-shadow: rgb(0 0 0 / 24%) 0 3px 8px; */
 }
 
 .searchNameContainer {
   position: relative;
-  top: 5px;
+  top: 3px;
   left: 20px;
   width: 300px;
   padding-bottom: 17px;
   margin-top: 20px;
-  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-size: 19px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
 }
 
 .blueTitle {
   position: absolute;
-  top: 28px;
-  left: 275px;
+  top: 20px;
+  left: 195px;
   width: 60px;
-  font-family: Arial, sans-serif; /* Use single quotes around font names */
-  font-size: 17px;
-  font-weight: 700; /* Bold font weight */
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
   color: rgb(92 92 255);
   background-color: #fff;
   transform: translateX(-50%);
 }
 
+.blueTitle::after {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 38px; /* 下線の幅を要素の幅に合わせる */
+  height: 1px; /* 下線の太さ */
+  content: '';
+  background-color: rgb(92 92 255); /* 下線の色 */
+}
+
+.blueTitle:hover {
+  color: rgb(117 149 246);
+}
+
+.sd {
+  position: relative;
+  height: auto;
+}
+
 .searchNameContainer2 {
   position: relative;
-  top: 5px;
-  left: auto;
+  top: -7px;
+  left: 17px;
+  width: 90%;
+  height: 45px;
   padding-bottom: 17px;
-  margin-top: 20px;
+  margin-bottom: -1px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(92 92 92);
-  border-bottom: 2px solid rgb(214 214 214);
+  background-color: rgb(255 255 255);
+  border-top: 1px solid rgb(188 188 188);
+  border-bottom: 1px solid rgb(188 188 188);
 }
 
 .rankContent {
@@ -81,12 +142,12 @@
 .dropdownIcon {
   /* 矢印マークのスタイリング */
   position: absolute;
-  top: 50%;
-  right: 0;
+  top: 96%;
+  right: 20px;
   display: inline-block;
   padding: 3px; /* 矢印のサイズ */
   color: rgb(255 255 255);
-  border: solid rgb(130 130 130);
+  border: solid rgb(37 125 203);
   border-width: 0 2px 2px 0; /* 線の太さを調整 */
   transition: transform 0.3s ease; /* アニメーション効果 */
   transform: translateY(-50%) rotate(45deg); /* 下向き矢印 */
@@ -97,10 +158,10 @@
 }
 
 .rankCheckboxes {
-  display: none; /* 初期状態では非表示 */
   flex-direction: column;
   gap: 3px;
-  padding: 20px 30px; /* 上下のパディング */
+  height: 300px;
+  padding: 10px 30px; /* 上下のパディング */
   font-size: 12px;
   font-weight: 500;
 }
@@ -120,29 +181,36 @@
   font-size: 17px; /* 例として14ピクセルに設定 */
 }
 
+.sell {
+  transform: scale(1.3);
+}
+
 /* チェックボックスのスタイリング */
 .rankCheckboxes input[type='checkbox'] {
   margin-right: 20px; /* チェックボックスとテキストの間隔 */
+  background-color: antiquewhite;
 }
 
 .search {
   position: relative;
-  top: 30px;
+  top: 20px;
+  left: 4px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  max-width: 260px;
+  max-width: 190px;
+  height: 35px;
   padding: 10px 25px;
   margin: 0 auto;
   font-weight: 600;
   color: #fff;
-  background-color: rgb(94 228 255);
+  background-color: rgb(76 136 255);
   border-radius: 3px;
   transition: 0.3s ease-in-out;
 }
 
 .search:hover {
-  background-color: rgb(164 243 255);
+  background-color: rgb(111 173 255);
 }
 
 .homeContainer {
@@ -193,9 +261,9 @@
 
 .sContainer {
   position: relative;
-  top: 220px;
-  left: 200px;
-  width: 350px;
+  top: 20px;
+  left: 20px;
+  width: 260px;
   height: auto;
   padding-bottom: 40px;
   overflow: hidden;
@@ -208,11 +276,11 @@
 
 .sContainer2 {
   position: relative;
-  top: 270px;
-  left: 200px;
-  width: 350px;
+  top: 50px;
+  left: 20px;
+  width: 260px;
   height: auto;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   overflow: hidden;
   background-color: rgb(255 255 255);
   box-shadow: 0 0 3px rgb(103 103 103 / 70%), /* 明るいシアンの光沢 */ 0 0 1px rgb(0 255 255 / 50%),
@@ -226,30 +294,30 @@
   top: -6px;
   left: 25px;
   display: flex; /* Flexboxを有効化 */
-  gap: 10px; /* アイコンとタイトルの間に少し隙間を作る */
   align-items: center; /* アイテムを垂直方向に中央揃え */
-  width: 300px;
+  width: 80%;
   border-bottom: 1px solid rgb(197 197 197);
 }
 
 .categoryHeader2 {
   position: relative;
   top: -6px;
+  left: 17px;
   display: flex;
-  gap: 10px;
   align-items: center;
-  width: 300px;
-  border-bottom: 2px solid rgb(142 142 142);
+  width: 90%;
+  height: 50px;
+  /* border-bottom: 1px solid rgb(142 142 142); */
 }
 
 .categoryTitle {
   position: relative;
   top: 3px;
-  left: 35px;
+  left: 20px;
   width: 300px;
   padding-bottom: 17px;
   margin-top: 20px;
-  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-size: 19px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
 }
@@ -261,15 +329,14 @@
 .gameItem {
   position: relative;
   left: 25px;
-  width: 300px;
-  height: 30px;
+  width: 80%;
+  height: 34px;
   margin-top: 10px;
   border-bottom: 1px solid rgb(197 197 197);
 }
 
 .gameItem2 {
   position: relative;
-  top: -3px;
   left: 35px;
   width: 300px;
   font-weight: 400;
@@ -283,12 +350,12 @@
 .categoryIcon {
   position: relative;
   top: 6px;
-  left: 30px;
+  left: 14px;
 }
 
 .categoryIcon2 {
   position: relative;
-  top: 6px;
+  top: 5px;
   left: 10px;
 }
 
@@ -303,6 +370,160 @@
 .categoryArrow {
   position: relative;
   top: -10px;
-  left: 270px;
+  left: 170px;
   color: rgb(19 90 189);
+}
+
+/* チェックボックスを非表示にする */
+.rankCheckboxes2 input[type='checkbox'] {
+  display: none;
+}
+
+/* ラベルのスタイリング */
+.rankCheckboxes2 label {
+  display: inline-block;
+  margin: 4px;
+  cursor: pointer;
+  background-color: #fff; /* ボタンの背景色 */
+}
+
+/* チェックされたときのラベルスタイル */
+
+/* ホバー時のスタイル */
+.rankCheckboxes2 span:hover {
+  color: #fff;
+  background-color: #2b40fc; /* ホバー時の背景色 */
+  border-radius: 20px;
+}
+
+.rankCheckboxes2 input[type='checkbox']:checked + span {
+  display: inline-block;
+  height: 24px;
+  padding: 3px 6px;
+  color: #fff; /* アクティブなボタンのテキスト色 */
+  background-color: #346bf5; /* ホバー時の背景色 */
+  border: 1px solid #2032f9; /* 青い線を追加 */
+  border-radius: 20px; /* 丸みを帯びたボーダー */
+}
+
+.ra {
+  position: relative;
+  height: 22px;
+  padding: 3px 6px;
+  margin: 3px;
+  font-size: 11px;
+  color: #2032f9; /* テキストの色 */
+  background-color: #fff; /* ホバー時の背景色 */
+  border: 1px solid #2032f9; /* 青い線を追加 */
+  border-radius: 20px; /* 丸みを帯びたボーダー */
+  transition: background-color 0.3s; /* 背景色の変化を滑らかに */
+}
+
+.rankCheckboxes2 {
+  position: relative;
+  left: 10px;
+  padding-top: 15px;
+  padding-bottom: 35px;
+}
+
+.searchInput {
+  position: relative;
+  top: 15px;
+  left: 3px;
+  width: 95%;
+  height: 40px;
+  padding-left: 3px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: rgb(77 77 77);
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.searchInput2 {
+  position: relative;
+  top: 15px;
+  left: 20px;
+  width: 80%;
+  height: 40px;
+  padding-left: 7px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: rgb(77 77 77);
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.searchI {
+  position: relative;
+}
+
+.sell {
+  /* 実際のクラス名に置き換えてください */
+  display: none;
+}
+
+/* カスタムチェックボックスのスタイル */
+.sell + span {
+  position: relative;
+  padding-left: 35px; /* テキストの前にチェックボックスを配置するスペース */
+  cursor: pointer;
+  user-select: none; /* テキストの選択を防止 */
+}
+
+/* チェックボックスの見た目（ボックス） */
+.sell + span::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px; /* ボックスのサイズ */
+  height: 20px;
+  content: '';
+  background-color: #e3e3e3; /* チェックボックスの背景色 */
+  border-radius: 4px; /* 角丸のサイズ */
+}
+
+.sell:checked + span::before {
+  background-color: #3b6cf5; /* チェックされたときの背景色 */
+}
+
+/* チェックされたときのチェックマークのスタイル */
+.sell:checked + span::after {
+  position: absolute;
+  top: 2px;
+  left: 7px;
+  width: 4px;
+  height: 10px;
+  content: '';
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* CSS */
+.button34 {
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 8px 18px;
+  font-family: Inter, Helvetica, 'Apple Color Emoji', 'Segoe UI Emoji', NotoColorEmoji,
+    'Noto Color Emoji', 'Segoe UI Symbol', 'Android Emoji', EmojiSymbols, -apple-system, system-ui,
+    'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #fff;
+  word-break: break-word;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background: #5e5df0;
+  border: 0;
+  border-radius: 999px;
+  outline: 0 solid transparent;
+  box-shadow: #5e5df0 0 10px 20px -10px;
+  opacity: 1;
 }

@@ -115,23 +115,20 @@
 
 /* メッセージ入力フィールドのスタイル */
 .messageInput {
-  position: fixed;
-  top: 620px;
-  left: 500px;
-  width: 700px;
+  position: relative;
+  width: 100%;
+  height: 40px;
   padding: 10px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
-  background-color: #fff; /* 背景色を白に */
   border: 1px solid #ccc; /* 灰色の境界線 */
   border-radius: 4px; /* 角を少し丸める */
 }
 
 /* 送信ボタンのスタイル */
-.sendButton {
-  position: fixed;
-  top: 620px;
-  left: 1200px;
+.sendButton1 {
+  position: relative;
+  height: 40px;
   padding: 10px 15px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
@@ -163,7 +160,6 @@
   max-width: 70%;
   padding: 10px;
   margin-right: 10px;
-  margin-bottom: 10px; /* 下にマージンを設定 */
   word-wrap: break-word;
   border-radius: 15px;
 }
@@ -179,7 +175,8 @@
 
 .messageContainer {
   display: flex; /* Flexboxを有効化 */
-  align-items: center; /* 要素を垂直方向の中央に配置 */
+  align-items: flex-start; /* 子要素を左寄せにする */
+  background-color: #595959;
 }
 
 .msgContent {
@@ -188,7 +185,7 @@
   width: auto;
   height: auto;
   padding: 10px;
-  margin-left: 5px;
+  margin-right: 15px;
   font-size: 15px;
   line-height: 1.4; /* Adjust line spacing, smaller values mean tighter spacing */
   text-overflow: ellipsis;
@@ -198,6 +195,27 @@
   border-radius: 15px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 9; /* Number of lines after which text will be truncated */
+}
+
+.msgContent6 {
+  display: flex;
+}
+
+.msgContent2 {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-self: flex-end; /* 右側に寄せる */
+  padding: 0;
+  background-color: #fff;
+}
+
+.msgContent3 {
+  position: relative;
+  top: -40px;
+  width: 100%; /* または具体的なサイズ */
+  margin-top: 40px;
+  background-color: rgb(13 18 24);
 }
 
 .userImage2 {
@@ -212,16 +230,15 @@
 /* チャット欄全体のスタイル */
 .messageBox {
   position: fixed;
-  top: 190px;
+  top: 210px;
   left: 370px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 子要素を左寄せにする */
-  width: 1207px;
-  height: 688px;
+  width: calc(100% - 370px); /* 画面の幅からコンテナの左端までの距離を引く */
+  height: calc(100% - 210px); /* 画面の高さからコンテナの上端までの距離を引く */
   padding: 20px; /* 内側の余白 */
-  margin-bottom: 240px;
-  overflow-y: auto; /* 長い内容に対してスクロールバーを表示 */
+  background-color: #fff;
 }
 
 .messageBox3::-webkit-scrollbar {
@@ -283,19 +300,20 @@
 .messageBox3 {
   position: relative;
   top: 10px;
+  left: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 子要素を左寄せにする */
-  width: 100%;
-  max-height: 440px; /* 最大高さを設定 */
+  width: calc(100% - 30px); /* 画面の幅からコンテナの左端までの距離を引く */
+  height: calc(90% - 30px);
   overflow-y: auto; /* 高さを超えた際にスクロールバーを表示 */
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .applayButton {
-  position: fixed;
-  top: 620px;
-  left: 1300px;
+  position: relative;
+  left: 10%;
+  width: 150px;
   height: 40px;
   padding: 10px 20px; /* ボタン内の余白 */
   font-size: 16px; /* フォントサイズ */
@@ -349,10 +367,9 @@
 .userImage {
   position: relative;
   top: 6px;
-  left: 100px;
+  left: 30px;
   width: 70px; /* Adjust the size as needed */
   height: 70px; /* Adjust the size as needed */
-  background-color: #fff;
   border-radius: 50%; /* Makes the image circular */
 }
 
@@ -488,18 +505,16 @@
 
 .parent {
   position: relative;
-  top: 160px;
-  right: 80px;
   display: flex;
   align-items: start;
-  width: 1500px;
+  width: 100%;
 }
 
 .modal {
   position: fixed; /* Stay in place */
   top: 60px;
-  left: 10px;
-  z-index: 1; /* Sit on top */
+  left: 1px;
+  z-index: 4; /* Sit on top */
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   padding-top: 100px; /* Location of the box */
@@ -509,35 +524,36 @@
 
 .modalContent {
   position: relative;
-  top: 250px;
+  top: 40%;
   left: 50%;
-  width: 500px;
-  height: 500px;
+  display: flex; /* フレックスボックスを有効化 */
+  align-items: center; /* 縦方向の中央揃え */
+  justify-content: center; /* 横方向の中央揃え */
+  width: 900px;
+  height: 550px;
   padding: 20px;
-  background-color: #fefefe;
+  background-color: #fff;
   border-radius: 15px;
   transform: translate(-50%, -50%);
 }
 
-.applyButton2 {
+.applyButton5 {
   position: relative;
   top: 20px;
-  left: 220px;
   width: 110px;
   height: 50px;
   padding: 10px 19px;
   font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: #f33d3d;
+  background-color: #ffad39;
+  border: 2px solid #ffad39;
   border-radius: 15px;
   transform: translateX(-50%);
 }
 
 .closeButton {
   position: relative;
-  top: 20px;
-  left: 90px;
   width: 90px;
   height: 50px;
   padding: 10px 19px;
@@ -561,20 +577,21 @@
 
 .modalMsgContent {
   position: relative;
-  width: 450px;
+  top: -50px;
+  width: 750px;
   height: 400px;
   padding: 10px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
-  background-color: #fff; /* 背景色を白に */
+  background-color: rgb(255 255 255); /* 背景色を白に */
   border-radius: 4px; /* 角を少し丸める */
   outline: none;
 }
 
 .modalMsg {
   position: relative;
-  top: 60px;
-  left: 240px;
+  top: 110px;
+  left: 160px;
   font-size: 15px;
   color: #000;
   transform: translateX(-50%); /* 左に50%ずらす */
@@ -582,23 +599,34 @@
 
 .dateTimePicker {
   position: relative;
-  top: 160px;
+  top: 140px;
+  left: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   background-color: #d5d5d5;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  box-shadow: 0 4px 8px rgb(178 178 178 / 20%);
+}
+
+/* 日付入力フィールドのテキストを太くする */
+.dateInput {
+  font-weight: bold;
+}
+
+/* 時間入力フィールドのテキストを太くする */
+.timeInput {
+  font-weight: bold;
 }
 
 .dateInput,
 .timeInput {
   padding: 5px 10px;
   font-size: 16px;
-  color: white;
-  background-color: #222;
-  border: 2px solid #555;
+  color: rgb(150 150 150);
+  background-color: #fff;
+  border: 2px solid #303030;
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease-in-out;
@@ -642,24 +670,20 @@
 }
 
 .containerBox {
-  position: relative;
   position: fixed;
-  top: -100px;
-  width: 450px;
-  height: 900px;
-  background-color: #fff;
+  top: 160px; /* 上端を画面の上から160pxの位置に設定 */
+  bottom: 0; /* 下端を画面の下に固定 */
+  left: 1px;
+  width: 371px;
   border-right: 2px solid #c3c3c3;
-  box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
 }
 
 .dmTitleContainer {
-  position: fixed;
-  top: 110px;
+  position: relative;
   left: 1px;
   width: 369px;
   height: 120px;
-  background-color: #fff;
-  border-right: 2px solid #c3c3c3;
+  background-color: #f5f5f5;
   border-bottom: 2px solid #c3c3c3;
   box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
 }
@@ -710,9 +734,8 @@
 
 .roomList {
   position: relative;
-  top: 330px;
   width: 100%;
-  height: 500px;
+  height: 100%;
   background-color: rgb(255 255 255);
   border: 1px solid #ccc; /* 薄いグレーのボーダー */
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
@@ -743,18 +766,17 @@
 .userContainer {
   position: relative;
   top: 15px;
-  left: 120px;
+  left: 40px;
   height: 60px;
-  background-color: rgb(255, 255, 255);
 }
 
 .chatContainer {
   position: fixed;
-  top: 110px;
+  top: 160px;
   left: 370px;
-  width: 1200px;
-  height: 80px;
-  background-color: #fff;
+  width: calc(100% - 370px); /* 画面の幅から370pxを引いた幅に設定 */
+  height: 50px;
+  background-color: #f5f5f5;
   border-right: 2px solid #c3c3c3;
   border-bottom: 2px solid #c3c3c3;
   box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
@@ -762,9 +784,167 @@
 
 .title2 {
   position: relative;
-  top: 25px;
-  left: 550px;
-  font-size: 20px; /* 文字サイズを設定 */
+  top: 12px;
+  left: 45%;
+  font-size: 18px; /* 文字サイズを設定 */
   font-weight: bold;
   color: #595959; /* 文字色を濃い灰色に */
+}
+
+.containerBox2 {
+  position: fixed;
+  top: 110px;
+  left: 1px;
+  width: 100%;
+  height: 8%;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='100%25' gradientTransform='rotate(146,768,347)'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23DBFFFB'/%3E%3C/linearGradient%3E%3Cpattern patternUnits='userSpaceOnUse' id='b' width='300' height='250' x='0' y='0' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.04'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect x='0' y='0' fill='url(%23b)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.selectedRoom {
+  background-color: rgb(231 231 231); /* 背景色を黒に設定 */
+}
+
+.mess {
+  position: relative;
+  top: 20px;
+  left: 19%;
+  display: flex;
+  width: 60%;
+}
+
+.overflow {
+  width: 60%;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.overflow::-webkit-scrollbar {
+  width: 10px; /* スクロールバーの幅 */
+}
+
+/* スクロールバーのトラック（背景部分）のスタイルを設定 */
+.overflow::-webkit-scrollbar-track {
+  background: #f1f1f1; /* トラックの背景色 */
+  border-radius: 10px;
+}
+
+/* スクロールバーのハンドル（動かす部分）のスタイルを設定 */
+.overflow::-webkit-scrollbar-thumb {
+  background: #888; /* ハンドルの背景色 */
+  border-radius: 10px;
+}
+
+/* ハンドルをホバーしたときのスタイル */
+.overflow::-webkit-scrollbar-thumb:hover {
+  background: #555; /* ホバー時の背景色 */
+  border-radius: 10px;
+}
+
+.userImageContainer {
+}
+
+.participationConditions {
+  position: relative;
+  top: 30px;
+  font-size: 13px;
+}
+
+.check {
+  position: relative;
+  top: 30px;
+  font-size: 14px;
+}
+
+.checkBox {
+  position: relative;
+  top: 40px;
+  font-size: 11px;
+}
+
+.participationConditionsTitle {
+  position: relative;
+  top: 30px;
+  left: 20px;
+  width: 90%;
+  font-size: 11px;
+}
+
+.modalTitle2 {
+  padding: 1rem 2rem;
+  background: #f4f4f4;
+  border-left: 5px solid #6cff43;
+}
+
+.modalRiyou {
+  position: relative;
+  top: 80px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.modalContent2 {
+  position: relative;
+  top: 100px;
+  left: 30px;
+  width: 300px;
+  height: 110px;
+  padding: 7px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.2;
+  background-color: #eaeaea;
+}
+
+.modalCon2 {
+  position: relative;
+  top: -20px;
+  left: 60px;
+  width: 600px;
+  height: 350px;
+  background-color: #fff;
+}
+
+.modalTitle3 {
+  position: relative;
+  top: 90px;
+}
+
+.tag {
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  width: 200px;
+  height: 32px;
+  color: #fff;
+  background: #fa4141;
+}
+
+.tagtitle {
+  position: relative;
+  top: 6px;
+  left: 12px;
+}
+
+.timeInputNote {
+  position: relative;
+  left: 10px;
+  font-size: 14px;
+}
+
+.timeInputNotetitle {
+  position: relative;
+  top: 50px;
+  font-size: 15px;
+}
+
+.timeContainer {
+  position: relative;
+  top: 80px;
+  left: 40px;
+  font-size: 13px;
 }

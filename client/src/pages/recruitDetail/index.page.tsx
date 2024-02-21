@@ -265,9 +265,12 @@ const Login = () => {
                     【スケジュール】
                     <div className={styles.suchedule}>{RecruitDetail?.suchedule}</div>
                   </p>
-                  <button className={styles.button} onClick={sendRoom}>
-                    応募する
-                  </button>
+                  {RecruitDetail &&
+                    RecruitDetail.teacherId !== user && ( // ここで投稿主が自分かどうかをチェック
+                      <button className={styles.button} onClick={sendRoom}>
+                        応募する
+                      </button>
+                    )}
                 </div>
               </div>
               <div className={styles.mainContainer}>
@@ -357,12 +360,15 @@ const Login = () => {
                       />
                     </div>
                     <h3 className={styles3.recruitDetailTitle}>{recruitList.title}</h3>
-                    <h3 className={styles3.recruitDetailLessonType}>
-                      <button key={index} className={styles3.lessonType}>
-                        {recruitList.lessonType}
-                      </button>
-                    </h3>
-                    <p className={styles3.recruitDetail}>{recruitList.descriptionDetail}</p>
+                    <div className={styles3.recruitContainer1}>
+                      {recruitList.tag.map((recruit, index) => (
+                        <button key={index} className={styles3.lessonType}>
+                          {recruit}
+                        </button>
+                      ))}
+                    </div>
+                    <div className={styles3.r6}>詳細情報</div>
+                    <p className={styles3.recruitDetail}>{recruitList.description}</p>
                   </div>
                 ))}
               </div>

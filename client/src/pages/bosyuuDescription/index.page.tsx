@@ -1,14 +1,16 @@
 /* eslint-disable max-lines */
 /* eslint-disable complexity */
+import { RubyOutlined, SendOutlined, TrophyOutlined, ZoomInOutlined } from '@ant-design/icons';
+import { Steps } from 'antd';
 import assert from 'assert';
 import { onAuthStateChanged } from 'firebase/auth';
 import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 import styles2 from './index2.module.css';
-import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
@@ -46,7 +48,7 @@ const YourComponent = () => {
     OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
   };
 
-  const stepTitles = ['ゲーム選択', 'ランク選択', '詳細情報', '注意事項'];
+  const stepTitles = ['ゲーム選択', '詳細設定', '注意事項やタグ', '募集作成'];
 
   const [user, setUser] = useState<string>('');
 
@@ -135,6 +137,15 @@ const YourComponent = () => {
     console.log(acheavement);
 
     setStep(step + 1);
+  };
+
+  const handleBackStep = () => {
+    // 次のステップに進むためのロジック
+    // 例えば、すべての選択が完了していることを確認するなど
+
+    console.log(acheavement);
+
+    setStep(step - 1);
   };
 
   const totalSteps = 4; // 総ステップ数
@@ -230,203 +241,278 @@ const YourComponent = () => {
 
   return (
     <>
-      <BasicHeader user={user} />
-      <div className={styles.loginTitle}>コーチング募集</div>
-      <div className={styles.step}>
-        {Array.from({ length: totalSteps }, (_, i) => i + 1).map((stepNumber) => (
-          <div key={stepNumber}>
-            <div className={styles.stepContainer}>
-              <div
-                className={`${styles.stepNumber} ${
-                  step >= stepNumber ? styles.completedStepNumber : ''
-                }`}
-              />
-              {stepNumber < totalSteps && (
-                <div
-                  className={`${styles.stepNumberLine} ${
-                    step > stepNumber ? styles.completedStepNumberLine : ''
-                  }`}
-                />
-              )}
-              <div className={styles.stepTitle}>{stepTitles[stepNumber - 1]}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {step === 1 && (
-        <>
-          <div className={styles.as}>
-            <label className={styles.mail}>対象ゲームを選択してください</label>
-            <select
-              id="game-select"
-              value={selectedGame}
-              onChange={handleGameChange}
-              className={styles.select}
-            >
-              <option value="" className={styles.mail}>
-                ゲームを選択してください
-              </option>
-              {Object.keys(games).map((game) => (
-                <option key={game} value={game} className={styles.mail}>
-                  {game}
-                </option>
-              ))}
-            </select>
-
-            <label className={styles.myRank}>自分のランクを選択してください</label>
-            <select
-              id="rank-select"
-              value={selectedMyRanks}
-              onChange={handleMyRankChange}
-              className={styles.select2}
-              disabled={!selectedGame}
-            >
-              <option value="">自分のランクを選択してください</option>
-              {selectedGame && Object.prototype.hasOwnProperty.call(games, selectedGame) ? (
-                games[selectedGame].map((rank) => (
-                  <option key={rank} value={rank}>
-                    {rank}
-                  </option>
-                ))
-              ) : (
-                <option value="" disabled />
-              )}
-            </select>
-
-            {selectedGame && games[selectedGame].length > 0 ? (
-              <div>
-                <label htmlFor="rank-select" className={styles.subjectRank}>
-                  対象ランクを選択してください
-                </label>
-                <div className={styles.pick}>
-                  {games[selectedGame].map((rank) => (
-                    <div key={rank} className={styles.rankItem}>
-                      <input
-                        type="checkbox"
-                        id={rank}
-                        name={rank}
-                        checked={selectedRanks.includes(rank)}
-                        onChange={() => handleRankChange(rank)}
-                        className={styles.pick}
-                      />
-                      <label htmlFor={rank} className={styles.rankName}>
-                        {rank}
-                      </label>
-                    </div>
-                  ))}
+      <div className={styles.allContainer}>
+        <BasicHeader user={user} />
+        <div className={styles.container2}>
+          <div className={styles.container1}>
+            <div className={styles.loginTitle}>コーチング募集作成</div>
+            <Steps current={step - 1} className={styles.customStepsContainer}>
+              {stepTitles
+                .map((title, index) => ({
+                  title,
+                  status: step - 1 === index ? 'process' : step - 1 > index ? 'finish' : 'wait',
+                  icon:
+                    index === 0 ? (
+                      <RubyOutlined />
+                    ) : index === 1 ? (
+                      <TrophyOutlined />
+                    ) : index === 2 ? (
+                      <ZoomInOutlined />
+                    ) : (
+                      <SendOutlined />
+                    ),
+                }))
+                .map((item) => (
+                  <Steps.Step key={item.title} {...item} />
+                ))}
+            </Steps>
+          </div>{' '}
+          <div className={styles.aside} />
+          {step === 1 && (
+            <>
+              <div className={styles.as}>
+                <div className={styles.vertical}>
+                  <label className={styles.mail}>
+                    対象ゲーム
+                    <span className={styles.required}>
+                      <span className={styles.mail2}>必須</span>
+                    </span>
+                  </label>
+                  <select
+                    id="game-select"
+                    value={selectedGame}
+                    onChange={handleGameChange}
+                    className={styles.select}
+                  >
+                    <option value="" className={styles.mail}>
+                      ゲームを選択してください
+                    </option>
+                    {Object.keys(games).map((game) => (
+                      <option key={game} value={game}>
+                        {game}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+                <div className={styles.vertical}>
+                  <label className={styles.myRank}>
+                    自分のランク
+                    <span className={styles.required}>
+                      <span className={styles.mail2}>必須</span>
+                    </span>
+                  </label>
+                  <select
+                    id="rank-select"
+                    value={selectedMyRanks}
+                    onChange={handleMyRankChange}
+                    className={styles.select2}
+                    disabled={!selectedGame}
+                  >
+                    <option value="">自分のランクを選択してください</option>
+                    {selectedGame && Object.prototype.hasOwnProperty.call(games, selectedGame) ? (
+                      games[selectedGame].map((rank) => (
+                        <option key={rank} value={rank}>
+                          {rank}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="" disabled />
+                    )}
+                  </select>
+                </div>
+
+                {selectedGame && games[selectedGame].length > 0 ? (
+                  <div>
+                    {' '}
+                    <div className={styles.vertical}>
+                      <label htmlFor="rank-select" className={styles.subjectRank}>
+                        対象ランク
+                        <span className={styles.required}>
+                          <span className={styles.mail2}>必須</span>
+                        </span>
+                      </label>
+                      <div className={styles.pick}>
+                        {games[selectedGame].map((rank) => (
+                          <div key={rank} className={styles.rankItem}>
+                            <input
+                              type="checkbox"
+                              id={rank}
+                              name={rank}
+                              checked={selectedRanks.includes(rank)}
+                              onChange={() => handleRankChange(rank)}
+                              className={styles.pick}
+                            />
+                            <label htmlFor={rank} className={styles.rankName}>
+                              {rank}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>{' '}
+                  </div>
+                ) : (
+                  <div className={styles.noPick} />
+                )}
+
+                <button onClick={handleNextStep} className={styles.next}>
+                  次へ
+                </button>
               </div>
-            ) : (
-              <div className={styles.noPick} />
-            )}
-
-            <button onClick={handleNextStep} className={styles.next}>
-              次へ
-            </button>
-          </div>
-        </>
-      )}
-
-      {step === 2 && (
-        <div className={styles.as}>
-          <div className={styles.title}>募集タイトルを入力してください</div>
-          <textarea
-            placeholder="タイトルを入力してください"
-            onChange={handleChange} // ユーザーの入力を処理する関数
-            className={styles.input} // スタイリングのためのCSSクラス
-          />
-          <div className={styles.description}>募集内容を入力してください</div>
-          <textarea
-            placeholder="募集内容を入力してください"
-            onChange={handleChangeDescription} // ユーザーの入力を処理する関数
-            className={styles.inputDescription} // スタイリングのためのCSSクラス
-          />
-          <div className={styles.description}>レッスン形式を入力してください</div>
-          <textarea
-            placeholder="レッスン形式を入力してください"
-            onChange={handleChangeLessonType} // ユーザーの入力を処理する関数
-            className={styles.inputDescription} // スタイリングのためのCSSクラス
-          />
-          <div className={styles.acheavement}>実績を入力してください</div>
-          <textarea
-            placeholder="実績を入力してください"
-            onChange={handleAcheavement} // ユーザーの入力を処理する関数
-            className={styles.inputAcheavement} // スタイリングのためのCSSクラス
-          />
-          <button onClick={handleNextStep} className={styles.next2}>
-            次へ
-          </button>
-        </div>
-      )}
-
-      {step === 3 && (
-        <div className={styles.as}>
-          <div className={styles.title}>スケジュールを入力してください</div>
-          <textarea
-            placeholder="スケジュールを入力してください"
-            onChange={handleSuchedule} // ユーザーの入力を処理する関数
-            className={styles.input} // スタイリングのためのCSSクラス
-          />
-          <div className={styles.notes}>注意事項を入力してください</div>
-          <textarea
-            placeholder="注意事項を入力してください"
-            onChange={handleNotes} // ユーザーの入力を処理する関数
-            className={styles.inputNotes} // スタイリングのためのCSSクラス
-          />
-          <div className={styles.notes}>
-            タグを設定入力してください
-            {tags.map((tag) => (
-              <div key={tag} className={styles.tagItem}>
-                <input
-                  type="checkbox"
-                  id={tag}
-                  name={tag}
-                  checked={selectedTags.includes(tag)}
-                  onChange={() => handleTagChange(tag)}
-                  className={styles.pick}
+            </>
+          )}
+          {step === 2 && (
+            <>
+              <div className={styles.aside1} />
+              <div className={styles.as1}>
+                <div className={styles.vertical}>
+                  <div className={styles.title}>
+                    募集タイトル{' '}
+                    <span className={styles.required}>
+                      <span className={styles.mail2}>必須</span>
+                    </span>
+                  </div>{' '}
+                  <textarea
+                    placeholder="タイトルを入力してください"
+                    onChange={handleChange} // ユーザーの入力を処理する関数
+                    className={styles.input} // スタイリングのためのCSSクラス
+                  />
+                </div>
+                <div className={styles.description}>
+                  募集内容{' '}
+                  <span className={styles.required}>
+                    <span className={styles.mail2}>必須</span>
+                  </span>
+                </div>
+                <textarea
+                  placeholder="募集内容を入力してください"
+                  onChange={handleChangeDescription} // ユーザーの入力を処理する関数
+                  className={styles.inputDescription} // スタイリングのためのCSSクラス
                 />
-                <label htmlFor={tag}>{tag}</label>
+                <div className={styles.description}>
+                  レッスン形式{' '}
+                  <span className={styles.required}>
+                    <span className={styles.mail2}>必須</span>
+                  </span>
+                </div>
+                <textarea
+                  placeholder="レッスン形式を入力してください"
+                  onChange={handleChangeLessonType} // ユーザーの入力を処理する関数
+                  className={styles.inputDescription} // スタイリングのためのCSSクラス
+                />
+                <div className={styles.acheavement}>
+                  実績{' '}
+                  <span className={styles.required}>
+                    <span className={styles.mail2}>必須</span>
+                  </span>
+                </div>
+                <textarea
+                  placeholder="実績を入力してください"
+                  onChange={handleAcheavement} // ユーザーの入力を処理する関数
+                  className={styles.inputAcheavement} // スタイリングのためのCSSクラス
+                />
+                <div className={styles.yoko}>
+                  <button onClick={handleBackStep} className={styles.next2}>
+                    戻る
+                  </button>
+                  <button onClick={handleNextStep} className={styles.next4}>
+                    次へ
+                  </button>
+                </div>{' '}
               </div>
-            ))}
-          </div>
-          <button onClick={handleNextStep} className={styles.next2}>
-            次へ
-          </button>
-        </div>
-      )}
-
-      {step === 4 && (
-        <div className={styles2.as}>
-          <div className={styles2.allContainer}>
-            <div className={styles2.title}>入力内容はこの通りでいいですか？</div>
-            <div className={styles2.subTitleContainer}>
-              <div className={styles2.subTitle}>ゲーム名</div>
-              <div className={styles2.content}>{selectedGame}</div>
-              <div className={styles2.subTitle}>自分のランク</div>
-              <div className={styles2.content}>{selectedMyRanks}</div>
-              <div className={styles2.subTitle}>対象ランク</div>
-              <div className={styles2.content}>{selectedRanks}</div>
-              <div className={styles2.subTitle}>募集タイトル</div>
-              <div className={styles2.content}>{title}</div>
-              <div className={styles2.subTitle}>募集内容</div>
-              <div className={styles2.content}>{description}</div>
-              <div className={styles2.subTitle}>レッスン形式</div>
-              <div className={styles2.content}>{lessonType}</div>
-              <div className={styles2.subTitle}>実績</div>
-              <div className={styles2.content}>{acheavement}</div>
-              <div className={styles2.subTitle}>スケジュール</div>
-              <div className={styles2.content}>{suchedule}</div>
-              <div className={styles2.subTitle}>注意事項</div>
-              <div className={styles2.content}>{notes}</div>
-              <div className={styles2.subTitle}>タグ</div>
-              <div className={styles2.content}>{selectedTags}</div>
+            </>
+          )}
+          {step === 3 && (
+            <div className={styles.as3}>
+              <div className={styles.title}>
+                スケジュール{' '}
+                <span className={styles.required}>
+                  <span className={styles.mail2}>必須</span>
+                </span>
+              </div>
+              <textarea
+                placeholder="スケジュールを入力してください"
+                onChange={handleSuchedule} // ユーザーの入力を処理する関数
+                className={styles.input} // スタイリングのためのCSSクラス
+              />
+              <div className={styles.notes}>
+                注意事項{' '}
+                <span className={styles.required}>
+                  <span className={styles.mail2}>必須</span>
+                </span>
+              </div>
+              <textarea
+                placeholder="注意事項を入力してください"
+                onChange={handleNotes} // ユーザーの入力を処理する関数
+                className={styles.inputNotes} // スタイリングのためのCSSクラス
+              />
+              <div className={styles.notes}>
+                タグを設定入力してください{' '}
+                <span className={styles.required}>
+                  <span className={styles.mail2}>必須</span>
+                </span>
+                {tags.map((tag) => (
+                  <div key={tag} className={styles.tagItem}>
+                    <input
+                      type="checkbox"
+                      id={tag}
+                      name={tag}
+                      checked={selectedTags.includes(tag)}
+                      onChange={() => handleTagChange(tag)}
+                      className={styles.pick}
+                    />
+                    <label htmlFor={tag}>{tag}</label>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.yoko1}>
+                <button onClick={handleBackStep} className={styles.next2}>
+                  戻る
+                </button>
+                <button onClick={handleNextStep} className={styles.next4}>
+                  次へ
+                </button>
+              </div>{' '}
             </div>
-            <button className={styles2.next2} onClick={handleSubmit}>
-              登録
-            </button>
-          </div>
-        </div>
-      )}
+          )}
+          {step === 4 && (
+            <div className={styles.as}>
+              <div className={styles2.allContainer}>
+                <div className={styles2.title}>入力内容はこの通りでいいですか？</div>
+                <div className={styles2.subTitleContainer}>
+                  <div className={styles2.subTitle}>ゲーム名</div>
+                  <div className={styles2.content}>{selectedGame}</div>
+                  <div className={styles2.subTitle}>自分のランク</div>
+                  <div className={styles2.content}>{selectedMyRanks}</div>
+                  <div className={styles2.subTitle}>対象ランク</div>
+                  <div className={styles2.content}>{selectedRanks}</div>
+                  <div className={styles2.subTitle}>募集タイトル</div>
+                  <div className={styles2.content}>{title}</div>
+                  <div className={styles2.subTitle}>募集内容</div>
+                  <div className={styles2.content}>{description}</div>
+                  <div className={styles2.subTitle}>レッスン形式</div>
+                  <div className={styles2.content}>{lessonType}</div>
+                  <div className={styles2.subTitle}>実績</div>
+                  <div className={styles2.content}>{acheavement}</div>
+                  <div className={styles2.subTitle}>スケジュール</div>
+                  <div className={styles2.content}>{suchedule}</div>
+                  <div className={styles2.subTitle}>注意事項</div>
+                  <div className={styles2.content}>{notes}</div>
+                  <div className={styles2.subTitle}>タグ</div>
+                  <div className={styles2.content}>{selectedTags}</div>
+                </div>
+                <div className={styles.yoko2}>
+                  <button onClick={handleBackStep} className={styles.next2}>
+                    戻る
+                  </button>
+                  <button className={styles2.next3} onClick={handleSubmit}>
+                    登録
+                  </button>
+                </div>{' '}
+              </div>
+            </div>
+          )}
+        </div>{' '}
+      </div>
     </>
   );
 };

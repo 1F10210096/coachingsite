@@ -2,7 +2,11 @@
 import { CheckOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Steps } from 'antd';
 import type { FieldType } from 'aws-sdk/clients/iot';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendEmailVerification,
+} from 'firebase/auth';
 import Link from 'next/link';
 import router from 'next/router';
 import type { CSSProperties, ChangeEvent } from 'react';

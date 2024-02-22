@@ -238,7 +238,15 @@ const YourComponent = () => {
       assert(error);
     }
   };
-
+  const getStatus = (index: number, currentStep: number): 'wait' | 'process' | 'finish' => {
+    if (currentStep - 1 === index) {
+      return 'process';
+    } else if (currentStep - 1 > index) {
+      return 'finish';
+    } else {
+      return 'wait';
+    }
+  };
   return (
     <>
       <div className={styles.allContainer}>
@@ -250,7 +258,7 @@ const YourComponent = () => {
               {stepTitles
                 .map((title, index) => ({
                   title,
-                  status: step - 1 === index ? 'process' : step - 1 > index ? 'finish' : 'wait',
+                  status: getStatus(index, step), // ここで関数を呼び出し
                   icon:
                     index === 0 ? (
                       <RubyOutlined />

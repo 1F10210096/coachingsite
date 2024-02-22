@@ -12,6 +12,7 @@ import type {
 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import type { SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
@@ -28,7 +29,7 @@ const Dm = () => {
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel | undefined>(undefined);
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = String(router.query.id);
 
   const fetchRecruitDetail = async () => {
     try {
@@ -422,7 +423,7 @@ const Dm = () => {
     return (
       <div className={styles.modal}>
         <div className={styles.modalContent5}>
-          <div className={styles.modalMsgContent}>
+          <div className={styles.modalMsgContent2}>
             <div className={styles.modalTitle2}>最終お申込み確認</div>
             <div className={styles.modalTitle3}>お申込み内容</div>
             <div className={styles.modalContainer4}>
@@ -454,13 +455,12 @@ const Dm = () => {
               <div className={styles.timeMsg}>時間：{time}</div>
             </div>
           </div>
-            <button className={styles.closeButton66} onClick={onFinalClose}>
-              閉じる
-            </button>
-            <button className={styles.applyButton66} onClick={onApplyFinalRecruit}>
-              申し込む
-            </button>
-
+          <button className={styles.closeButton66} onClick={onFinalClose}>
+            閉じる
+          </button>
+          <button className={styles.applyButton66} onClick={onApplyFinalRecruit}>
+            申し込む
+          </button>
         </div>
       </div>
     );
@@ -504,7 +504,7 @@ const Dm = () => {
           <button className={styles.closeButton} onClick={onFinalClose}>
             閉じる
           </button>
-          <button className={styles.applyButton2} onClick={handleUrlClick}>
+          <button className={styles.applyButton5} onClick={handleUrlClick}>
             了承する
           </button>
         </div>
@@ -515,15 +515,15 @@ const Dm = () => {
   const [selectedTitle, setSelectedTitle] = useState('dmTitle3');
 
   // タイトルを選択する関数
-  const selectTitle = (title) => {
+  const selectTitle = (title: SetStateAction<string>) => {
     setSelectedTitle(title);
     fetchRoom2(title);
   };
 
   const [rooms, setRooms] = useState<RoomWithLatestComment[]>([]);
 
-  const [roomId, setRoomId] = useState();
-  const fetchRoom2 = async (title) => {
+  const [roomId, setRoomId] = useState('');
+  const fetchRoom2 = async (title: SetStateAction<string>) => {
     try {
       console.log(selectedTitle);
       let response;
@@ -595,34 +595,29 @@ const Dm = () => {
             </div>
           </div>
           <div className={styles.roomList}>
-            {rooms.map(
-              (room) =>
-                room.latestComment && ( // この行を追加して、latestCommentがnullでないことを確認
-                  <div
-                    key={room.latestComment.id}
-                    className={`${styles.commentContainer} ${
-                      roomId === room.latestComment.roomId ? styles.selectedRoom : ''
-                    }`}
-                    onClick={() => handleCommentClick(room.latestComment.roomId)}
-                  >
-                    {room.commentUser && (
-                      <>
-                        <img
-                          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-                          src={room.commentUser.imageUrl || ''}
-                          alt="User"
-                          className={styles.userImage}
-                        />
-                        <div className={styles.userContainer}>
-                          <div className={styles.userName}>{room.commentUser.name}</div>
-                          <div className={styles.comment}>{room.latestComment.content}</div>
-                        </div>
-                        {/* コメントの内容を表示 */}
-                      </>
-                    )}
-                  </div>
-                )
-            )}
+            {rooms.map((room) => (
+              <div
+                key={room.latestComment?.id ?? 'fallback-key'}
+                onClick={() => handleCommentClick(room.latestComment?.roomId ?? '')}
+                className={`${styles.commentContainer} ${
+                  roomId === room.latestComment?.roomId ? styles.selectedRoom : ''
+                }`}
+              >
+                {room.commentUser && (
+                  <>
+                    <img
+                      src={room.commentUser.imageUrl || ''}
+                      alt="User"
+                      className={styles.userImage}
+                    />
+                    <div className={styles.userContainer}>
+                      <div className={styles.userName}>{room.commentUser.name}</div>
+                      <div className={styles.comment}>{room.latestComment?.content}</div>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.chatContainer}>

@@ -67,12 +67,14 @@ export const recruitListRepository = {
       conditions.push(...params.tag.map((tag) => ({ tag: { has: tag } })));
     }
 
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (params.lessonWard) {
       conditions.push({
         OR: [{ lessonType: { contains: params.lessonWard, mode: 'insensitive' } }],
       });
     }
 
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (params.ward) {
       conditions.push({
         OR: [

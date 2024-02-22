@@ -58,67 +58,69 @@ const AllSearch = () => {
           <Link href="/">
             <div className={styles.home}>ホーム</div>
           </Link>
-          <div className={styles.home3} />
+          <div className={styles.home3}>{'>'}</div>
           <div className={styles.home2}>ゲーム一覧</div>
-        </div>
-        <div className={styles.allSearch}>
-          <h1 className={styles.title}>全ゲーム一覧</h1>
-          <div className={styles.searchContainer}>
-            <div className={styles.smallContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="FPS"
-                  checked={categories.FPS}
-                  onChange={handleCheckboxChange}
-                />
-                FPS
-              </label>
-            </div>
-            <div className={styles.smallContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="CardGame"
-                  checked={categories.CardGame}
-                  onChange={handleCheckboxChange}
-                />
-                カードゲーム
-              </label>
-            </div>
-            <div className={styles.smallContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="RPG"
-                  checked={categories.RPG}
-                  onChange={handleCheckboxChange}
-                />
-                RPG
-              </label>
-            </div>
-            <div className={styles.smallContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="FPS"
-                  checked={categories.FightingGame}
-                  onChange={handleCheckboxChange}
-                />
-                格闘ゲーム
-              </label>
-            </div>
-            <div className={styles.smallContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="FPS"
-                  checked={categories.SmartphoneGame}
-                  onChange={handleCheckboxChange}
-                />
-                スマホゲーム
-              </label>
-            </div>
+        </div>{' '}
+        <div className={styles.allSearch1}>
+          <div className={styles.allSearch}>
+            <h1 className={styles.title}>全ゲーム一覧</h1>
+            <div className={styles.searchContainer}>
+              <div className={styles.smallContainer}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="FPS"
+                    checked={categories.FPS}
+                    onChange={handleCheckboxChange}
+                  />
+                  FPS
+                </label>
+              </div>
+              <div className={styles.smallContainer}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="CardGame"
+                    checked={categories.CardGame}
+                    onChange={handleCheckboxChange}
+                  />
+                  カードゲーム
+                </label>
+              </div>
+              <div className={styles.smallContainer}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="RPG"
+                    checked={categories.RPG}
+                    onChange={handleCheckboxChange}
+                  />
+                  RPG
+                </label>
+              </div>
+              <div className={styles.smallContainer}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="FPS"
+                    checked={categories.FightingGame}
+                    onChange={handleCheckboxChange}
+                  />
+                  格闘ゲーム
+                </label>
+              </div>
+              <div className={styles.smallContainer}>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="FPS"
+                    checked={categories.SmartphoneGame}
+                    onChange={handleCheckboxChange}
+                  />
+                  スマホゲーム
+                </label>
+              </div>
+            </div>{' '}
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
@@ -386,7 +387,7 @@ const Valorant = () => {
     return sortedList;
   };
 
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const categories = {
     FPS: ['VALORANT', 'OverWatch2', 'APEX', 'CSGO2'],
@@ -396,14 +397,14 @@ const Valorant = () => {
     格闘ゲーム: ['ストリートファイター', '鉄拳'],
     // 他のカテゴリとゲームを追加
   };
+  const games1 = categories[activeCategory as keyof typeof categories];
 
-  const handleClick2 = (category) => {
-    setActiveCategory(category === activeCategory ? null : category);
+  const handleClick2 = (category: string) => {
+    setActiveCategory((prevState) => (prevState === category ? null : category));
   };
-
   const [sortCriteria, setSortCriteria] = useState('rank'); // デフォルトは「ランク順」
 
-  const handleSortChange = (e) => {
+  const handleSortChange = (e: { target: { value: SetStateAction<string> } }) => {
     setSortCriteria(e.target.value);
     // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
     handleSortClick2();
@@ -417,22 +418,24 @@ const Valorant = () => {
       );
       setRecruitlist(sortedList);
     } else if (sortCriteria === 'update') {
-      const sortedList = [...RecruitList].sort((a, b) =>
-        sortDescending ? b.updatedAt - a.updatedAt : a.updatedAt - b.updatedAt
-      );
-      setRecruitlist(sortedList);
       // 更新順に並び替えるロジック
+      const sortedList = [...RecruitList].sort((a, b) => {
+        // Dateオブジェクトのミリ秒を比較
+        const timeA = a.updatedAt.getTime();
+        const timeB = b.updatedAt.getTime();
+        return sortDescending ? timeB - timeA : timeA - timeB;
+      });
+      setRecruitlist(sortedList);
     }
   };
 
   const [ward, setWard] = useState('');
 
   const [lessonWard, setLessonWard] = useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWard(event.target.value); // 入力された値を state にセット
   };
-
-  const handleChange2 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLessonWard(event.target.value); // 入力された値を state にセット
   };
 
@@ -615,11 +618,12 @@ const Valorant = () => {
                   </div>
                   {activeCategory === category && (
                     <div className={styles.gameList}>
-                      {categories[category].map((game, idx) => (
-                        <div key={idx} className={styles.gameItem}>
-                          <div className={styles.gameItem2}>{game}</div>
-                        </div>
-                      ))}
+                      {activeCategory &&
+                        categories[activeCategory as keyof typeof categories].map((game, idx) => (
+                          <div key={idx} className={styles.gameItem}>
+                            <div className={styles.gameItem2}>{game}</div>
+                          </div>
+                        ))}
                     </div>
                   )}
                 </div>

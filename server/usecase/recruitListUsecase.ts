@@ -9,7 +9,7 @@ export const recruitListUsecase = {
     ranks?: number[];
     subjectRank?: number[];
     tags?: string[];
-    lessonWard?:string;
+    lessonWard?: string;
     ward?: string;
   }): Promise<BosyuuListModel3[]> => {
     const recuritList = await recruitListRepository.fetchinfo(params);

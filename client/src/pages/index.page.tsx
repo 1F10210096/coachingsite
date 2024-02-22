@@ -176,9 +176,7 @@ const Home = () => {
                       </button>
                     ))}
                   </div>
-                  <div className={styles.r6}>
-                    詳細情報
-                    </div>
+                  <div className={styles.r6}>詳細情報</div>
                   <p className={styles.recruitDetail}>{recruitList.description}</p>
                 </div>
               ))}

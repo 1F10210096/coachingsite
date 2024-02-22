@@ -611,6 +611,20 @@
 
 .modalMsgContent {
   position: relative;
+  top: -40px;
+  right: 10px;
+  width: 400px;
+  height: 400px;
+  padding: 10px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  background-color: rgb(255 255 255); /* 背景色を白に */
+  border-radius: 4px; /* 角を少し丸める */
+  outline: none;
+}
+
+.modalMsgContent2 {
+  position: relative;
   right: 10px;
   width: 400px;
   height: 400px;
@@ -857,6 +871,7 @@
 }
 
 .userImageContainer {
+  position: relative;
 }
 
 .participationConditions {

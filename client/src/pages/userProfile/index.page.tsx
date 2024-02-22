@@ -195,8 +195,8 @@ const UserProfile = () => {
 
   useEffect(() => {
     console.log('Submitted:', { reviewId, rating, review });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating, review]); // 依存配列にこれらの状態を含める
-
 
   const getRankImage = (Id: number, rank: number) => {
     let directory;

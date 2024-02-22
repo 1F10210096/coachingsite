@@ -562,6 +562,7 @@
 
 .modalMsgContent {
   position: relative;
+  top: -50px;
   width: 450px;
   height: 400px;
   padding: 10px;
@@ -641,7 +642,6 @@
   color: #000;
   transform: translateX(-50%); /* 左に50%ずらす */
 }
-
 
 .mess {
   position: relative;

@@ -12,6 +12,7 @@ import type {
 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import type { SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
@@ -28,7 +29,7 @@ const Dm = () => {
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel | undefined>(undefined);
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = String(router.query.id);
 
   const fetchRecruitDetail = async () => {
     try {
@@ -417,14 +418,14 @@ const Dm = () => {
   const [selectedTitle, setSelectedTitle] = useState('dmTitle3');
 
   // タイトルを選択する関数
-  const selectTitle = (title) => {
+  const selectTitle = (title: SetStateAction<string>) => {
     setSelectedTitle(title);
     fetchRoom2(title);
   };
 
   const [rooms, setRooms] = useState<RoomWithLatestComment[]>([]);
 
-  const fetchRoom2 = async (title) => {
+  const fetchRoom2 = async (title: SetStateAction<string>) => {
     try {
       console.log(user);
       let response;
@@ -453,7 +454,7 @@ const Dm = () => {
       console.error(error); // エラーをログに記録
     }
   };
-  const [roomId, setRoomId] = useState();
+  const [roomId, setRoomId] = useState('');
 
   useEffect(() => {
     setRoomId(id);
@@ -461,6 +462,7 @@ const Dm = () => {
 
   useEffect(() => {
     fetchRoom2(selectedTitle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, selectedTitle]);
 
   const handleCommentClick = (roomId: string) => {

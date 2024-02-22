@@ -84,19 +84,21 @@ const AllSearch = () => {
           <Link href="/">
             <div className={styles.home}>ホーム</div>
           </Link>
-          {/* <div className={styles.home3}>></div> */}
+          <div className={styles.home3}>{'>'}</div>
           <div className={styles.home2}>ゲーム一覧</div>
-        </div>
-        <div className={styles.allSearch}>
-          <h1 className={styles.title}>全ゲーム一覧</h1>
-          <div className={styles.searchContainer}>
-            <div>
-              {gameList.map((game) => (
-                <div key={game.id} className={styles.smallContainer}>
-                  <div onClick={() => handleClick(game.id)}>{game.title}</div>
-                </div>
-              ))}
-              {/* Other JSX elements */}
+        </div>{' '}
+        <div className={styles.allSearch1}>
+          <div className={styles.allSearch}>
+            <h1 className={styles.title}>全ゲーム一覧</h1>
+            <div className={styles.searchContainer}>
+              <div>
+                {gameList.map((game) => (
+                  <div key={game.id} className={styles.smallContainer}>
+                    <div onClick={() => handleClick(game.id)}>{game.title}</div>
+                  </div>
+                ))}
+                {/* Other JSX elements */}
+              </div>{' '}
             </div>
           </div>
         </div>

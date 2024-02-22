@@ -12,9 +12,9 @@ export const reviewUsecase = {
   },
   createinfo: async (selectedId: string, rating: string, review: string) => {
     console.log('reviewUsecase.fetchinfo');
-    console.log(selectedId,"dawda")
-    console.log(rating,"dadwada")
-    console.log(review,"sefsfsdse")
+    console.log(selectedId, 'dawda');
+    console.log(rating, 'dadwada');
+    console.log(review, 'sefsfsdse');
     const review1 = await reviewRepository.updateReview(selectedId, rating, review);
     assert(review1 !== null, 'reviewはnullです');
   },

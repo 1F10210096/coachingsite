@@ -846,6 +846,7 @@
 }
 
 .userImageContainer {
+  position: relative;
 }
 
 .participationConditions {

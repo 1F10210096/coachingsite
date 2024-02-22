@@ -63,7 +63,9 @@
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   padding-bottom: 100px;
+
   /* background-color: #f6f6f6; */
+
   /* box-shadow: rgb(0 0 0 / 24%) 0 3px 8px; */
 }
 
@@ -181,9 +183,7 @@
   font-size: 17px; /* 例として14ピクセルに設定 */
 }
 
-.sell {
-  transform: scale(1.3);
-}
+
 
 /* チェックボックスのスタイリング */
 .rankCheckboxes input[type='checkbox'] {
@@ -307,6 +307,7 @@
   align-items: center;
   width: 90%;
   height: 50px;
+
   /* border-bottom: 1px solid rgb(142 142 142); */
 }
 
@@ -468,6 +469,7 @@
 }
 
 /* カスタムチェックボックスのスタイル */
+/* stylelint-disable-next-line no-descending-specificity */
 .sell + span {
   position: relative;
   padding-left: 35px; /* テキストの前にチェックボックスを配置するスペース */

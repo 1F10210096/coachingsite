@@ -5,7 +5,6 @@
   width: 100%;
   height: auto;
   margin: 2rem 0;
-  background-color: rgb(255 255 255);
 }
 
 .title {
@@ -16,16 +15,25 @@
   border-bottom: 2px solid rgb(99 99 99);
 }
 
+.allSearch1 {
+  position: relative;
+  top: 170px;
+  right: 100px;
+  width: 400px;
+  padding-bottom: 80px;
+  background-color: rgb(255 255 255);
+  box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
+}
+
 .homeContainer {
   position: relative;
-  top: 140px;
-  left: 200px;
+  top: -50px;
+  right: 200px;
   display: flex;
   align-items: center; /* アイテムを垂直方向の中央に配置 */
   width: 300px;
   height: 30px;
   color: rgb(82 82 82);
-  background-color: rgb(255 255 255);
 }
 
 .home {
@@ -35,7 +43,6 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
 }
 
 .home:hover {
@@ -51,7 +58,6 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
 }
 
 .home2:hover {
@@ -65,15 +71,14 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px; /* 文字の大きさを17pxに設定する */
   color: rgb(179 173 173);
-  background-color: #fff; /* 背景色を灰色に設定する */
 }
 
 .allSearch {
   position: relative;
-  top: 200px;
-  right: 100px;
+  top: 30px;
+  left: 50px;
   width: 300px;
-  height: 400px;
+  height: auto;
   color: rgb(82 82 82);
   background-color: rgb(255 255 255);
 }

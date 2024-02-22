@@ -16,17 +16,20 @@ export const AuthLoader = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(createAuth(), async (fbUser) => {
-      if (fbUser) {
-        await fbUser
-          .getIdToken()
-          .then((idToken) => apiClient.session.$post({ body: { idToken } }))
-          .catch(returnNull);
-      } else {
-        await apiClient.session.$delete();
-        setUser(null);
+      try {
+        if (fbUser) {
+          const idToken = await fbUser.getIdToken();
+          await apiClient.session.$post({ body: { idToken } });
+        } else {
+          await apiClient.session.$delete();
+          setUser(null);
+        }
+      } catch (error) {
+        console.error('An error occurred during the auth process', error);
+        // ここでエラー処理を行う
+      } finally {
+        dispatchIsInitedAuth();
       }
-
-      dispatchIsInitedAuth();
     });
 
     return unsubscribe;
@@ -36,11 +39,22 @@ export const AuthLoader = () => {
     if (!isInitedAuth) return;
 
     const redirectToHome = async () => {
-      router.pathname === pagesPath.login.$url().pathname && (await router.push(pagesPath.$url()));
+      if (router.pathname === pagesPath.login.$url().pathname) {
+        await router.push(pagesPath.$url());
+      }
     };
 
-    user && redirectToHome();
+    if (user) {
+      redirectToHome();
+    }
   }, [router, isInitedAuth, user]);
 
-  return <Loading visible={!isInitedAuth} />;
+  // 認証が初期化されていない場合のみローディングを表示
+  if (!isInitedAuth) {
+    console.log('ローディング');
+    return <Loading visible={true} />;
+  }
+
+  // 認証が完了している場合、またはエラーが発生した場合の処理をここに記述
+  // 例: return <>{user ? <AuthenticatedComponent /> : <UnauthenticatedComponent />}</>;
 };

@@ -15,7 +15,6 @@ export const recruitDetailUsecase = {
     teacherProfile: UserSummaryDetailModel;
     reviewList: reviewModel2[];
   }> => {
-    console.log('recruitDetailUsecase.fetchinfo');
     const recuritDetail = await recruitDetailRepository.fetchinfo(Id);
     assert(recuritDetail !== null, 'recuritDetailはnullです');
     return recuritDetail;

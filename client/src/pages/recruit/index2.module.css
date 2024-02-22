@@ -14,7 +14,7 @@
 .helpwanted {
   position: relative;
   top: 20px;
-  left: 20px;
+  left: 25px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
@@ -348,15 +348,16 @@
 }
 
 .container4 {
-  position: relative;
+  position: absolute;
+  right: 63%;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
 }
 
 .subContanier {
-  position: relative;
+  position: absolute;
   top: 130px;
-  left: 50px;
+  left: 37%;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   justify-content: center; /* 水平方向の中央揃え */

@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import type {
-  Name,
+  UserModel,
   UserSummaryDetailModel,
   UserSummaryModel,
 } from '$/commonTypesWithClient/models';
@@ -112,7 +112,7 @@ export const userRepository = {
       return null;
     }
   },
-  fetchMyProfile: async (userId: string): Promise<Name | null> => {
+  fetchMyProfile: async (userId: string): Promise<UserModel | null> => {
     try {
       const user = await prismaClient.user.findUnique({
         where: {
@@ -126,8 +126,7 @@ export const userRepository = {
         },
       });
       assert(user !== null, 'usersはnullです');
-
-      return user;
+      return null;
     } catch (error) {
       console.error('Error fetching users:', error);
       return null;

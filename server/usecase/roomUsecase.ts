@@ -8,7 +8,6 @@ import assert from 'assert';
 
 export const roomUsecase = {
   fetchinfo: async (Id: string, userId: string): Promise<CommentsWithImages[]> => {
-    console.log('recruitDetailUsecase.fetchinfo');
     const room = await roomRepository.fetchRoom(Id, userId);
     assert(room !== null, 'roomはnullです');
     return room;

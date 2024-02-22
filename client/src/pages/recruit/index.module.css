@@ -54,6 +54,7 @@
   width: 100%;
   height: auto;
   padding-bottom: 300px;
+  zoom: 0.9;
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
 
@@ -182,8 +183,6 @@
 .rankCheckboxes label span {
   font-size: 17px; /* 例として14ピクセルに設定 */
 }
-
-
 
 /* チェックボックスのスタイリング */
 .rankCheckboxes input[type='checkbox'] {

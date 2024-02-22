@@ -10,7 +10,6 @@ const prisma = new PrismaClient();
 
 export const roomRepository = {
   fetchRoom: async (roomId: string, userId: string): Promise<CommentsWithImages[] | null> => {
-    console.log('r ', roomId);
     // 指定されたIDでRoomを検索し、Participantが一致するか確認
     const room = await prisma.room.findFirst({
       where: {
@@ -57,10 +56,6 @@ export const roomRepository = {
         };
       })
     );
-
-    console.log('roomRepository.ts: fetchRoom: room: ', commentsWithImages);
-
-    console.log(userId);
 
     return commentsWithImages;
   },
@@ -196,7 +191,9 @@ export const roomRepository = {
       const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
         (room) => room.apply.length === 0
       );
-      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
+      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
+
+      const roomsWithMappedComments = roomsWithComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
@@ -242,7 +239,10 @@ export const roomRepository = {
       const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
         (room) => room.apply.length > 0
       );
-      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
+
+      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
+
+      const roomsWithMappedComments = roomsWithComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
@@ -291,7 +291,9 @@ export const roomRepository = {
         (room) => room.apply.length === 0
       );
 
-      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
+      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
+
+      const roomsWithMappedComments = roomsWithComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
@@ -337,7 +339,10 @@ export const roomRepository = {
       const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
         (room) => room.apply.length > 0
       );
-      const roomsWithMappedComments = roomsWithNonEmptyApplies.map((room) => ({
+
+      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
+
+      const roomsWithMappedComments = roomsWithComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報

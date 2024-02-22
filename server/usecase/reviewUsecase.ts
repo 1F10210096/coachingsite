@@ -14,7 +14,7 @@ export const reviewUsecase = {
     console.log('reviewUsecase.fetchinfo');
     console.log(selectedId, 'dawda');
     console.log(rating, 'dadwada');
-    console.log(review, 'sefsfsdse');
+    console.log('sefsfsdse');
     const review1 = await reviewRepository.updateReview(selectedId, rating, review);
     assert(review1 !== null, 'reviewはnullです');
   },

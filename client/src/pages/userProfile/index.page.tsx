@@ -181,23 +181,24 @@ const UserProfile = () => {
     assert('レビューが完了しました');
   };
 
-  const handleSubmit2 = async () => {
+  const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // フォームのデフォルトの送信を防止
     console.log('Submitted:', { selectedId, rating, review });
-    const response = await apiClient.reviewList.post({
-      body: {
-        selectedId: reviewId,
-        rating,
-        review,
-      },
-    });
-    assert('レビューが完了しました');
+
+    try {
+      const response = await apiClient.reviewList.post({
+        body: {
+          selectedId: reviewId,
+          rating,
+          review,
+        },
+      });
+      console.log('レビューが完了しました:', response);
+      // レビュー送信後の処理をここに書く（例: 状態をクリアする、通知を表示する等）
+    } catch (error) {
+      console.error('レビュー送信エラー:', error);
+    }
   };
-
-  useEffect(() => {
-    console.log('Submitted:', { reviewId, rating, review });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rating, review]); // 依存配列にこれらの状態を含める
-
   const getRankImage = (Id: number, rank: number) => {
     let directory;
     console.log(Id);
@@ -613,7 +614,7 @@ const UserProfile = () => {
                   <>
                     <div className={styles.title}>評価</div>
                     <div className={styles.line} />
-                    <form className={styles.container2}>
+                    <form className={styles.container2} onSubmit={handleSubmit2}>
                       <div className={styles.nameTitle}>評価</div>
                       <input
                         type="text"
@@ -631,11 +632,7 @@ const UserProfile = () => {
                         placeholder="感想"
                         className={styles.name2}
                       />
-                      <button
-                        className={styles.button}
-                        onClick={() => handleSubmit2()}
-                        type="submit"
-                      >
+                      <button className={styles.button} type="submit">
                         送信
                       </button>
                     </form>

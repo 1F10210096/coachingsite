@@ -147,7 +147,7 @@ const Dm = () => {
 
     if (user) {
       fetchRoom(); // コンポーネントがマウントされたときに初回で実行
-      intervalId = setInterval(fetchRoom, 10000); // その後、5秒ごとに実行
+      // intervalId = setInterval(fetchRoom, 10000); // その後、5秒ごとに実行
     }
 
     return () => {

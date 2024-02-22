@@ -28,7 +28,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
   useEffect(() => {
     const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser && firebaseUser.emailVerified) {
+      if (firebaseUser) {
         // 保存が成功したら、適切なページにリダイレクト
         setUserId(firebaseUser.uid);
       } else {

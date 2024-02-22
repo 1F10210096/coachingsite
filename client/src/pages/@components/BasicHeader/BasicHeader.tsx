@@ -29,10 +29,6 @@ export const BasicHeader = ({ user }: { user?: string }) => {
     const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser && firebaseUser.emailVerified) {
-        const response = await apiClient.createUser.post({
-          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-          body: { userId: firebaseUser.uid, userName: firebaseUser.displayName || '匿名ユーザー' },
-        });
         // 保存が成功したら、適切なページにリダイレクト
         setUserId(firebaseUser.uid);
       } else {
@@ -44,7 +40,6 @@ export const BasicHeader = ({ user }: { user?: string }) => {
 
   const fetchRecruit = async () => {
     try {
-      setIsLoading(true); // ローディング開始
       if (userId !== null) {
         const response = await apiClient.fetchMyProfile.post({
           body: { Id: userId },

@@ -149,15 +149,46 @@ export type ApexRankType = {
   プレデター: boolean;
 };
 
+export type FortNiteRankType = {
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  ダイヤモンド: boolean;
+  エリート: boolean;
+  チャンピオン: boolean;
+  アンリアル: boolean;
+};
+
+export type StreetFigherRankType = {
+  ルーキー: boolean;
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  ダイヤモンド: boolean;
+  マスター: boolean;
+};
+
 export type TagsType = {
-  初心者歓迎: boolean;
-  高ランク歓迎: boolean;
-  スパルタ指導: boolean;
+  中級者歓迎: boolean;
+  上級者向け: boolean;
+  プロ向け: boolean;
   仲良くワイワイ: boolean;
-  上級者歓迎: boolean;
+  スパルタ指導: boolean;
+  戦略: boolean;
   エイム強化: boolean;
-  メンタル強化: boolean;
-  プロ志向: boolean;
+  テクニック: boolean;
+  キャラクター解析: boolean;
+  マップ解析: boolean;
+  武器ガイド: boolean;
+  チームプレイ: boolean;
+  ソロプレイ: boolean;
+  メンタルトレーニング: boolean;
+  ゲーム理論: boolean;
+  パッチノート解説: boolean;
+  リプレイ分析: boolean;
+  'Q&Aセッション': boolean;
 };
 
 export type LessonTypesType = {
@@ -387,4 +418,9 @@ export type NewApplyData = {
   review: string | null; // String?はstring型に対応し、nullが許容されます
   bosyuu: BosyuuList; // この型は別途定義する必要があります
   student: Student; // この型は別途定義する必要があります
+};
+
+export type User = {
+  userId: string;
+  name: string;
 };

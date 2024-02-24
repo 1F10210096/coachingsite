@@ -26,10 +26,18 @@ const Register = () => {
   const handleRegister = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
+      console.log('アカウント作成開始');
       const auth = createAuth(); // `createAuth` 関数を使用して `auth` オブジェクトを取得
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('アカウント作成成功:', userCredential);
       const userId = userCredential.user.uid;
-      await sendEmailVerification(userCredential.user);
+      console.log('ユーザーID:', userId);
+      try {
+        await sendEmailVerification(userCredential.user);
+      } catch (error) {
+        console.error('メールアドレスの確認メール送信に失敗:', error);
+      }
+      console.log('メールアドレスの確認メールを送信しました');
       setIsSubmitted(false);
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!userCredential || !userCredential.user) {

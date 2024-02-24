@@ -8,10 +8,10 @@ import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import { gameList,game } from 'src/utils/gameList';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 import styles2 from './index2.module.css';
-
 const YourComponent = () => {
   const [step, setStep] = useState(1); // ステップの状態
   const [selectedGame, setSelectedGame] = useState<GameKey | undefined>();
@@ -20,33 +20,9 @@ const YourComponent = () => {
   const [selectedMyRanks, setSelectedMyRanks] = useState<string>('');
 
   type GameKey = keyof typeof games;
-  const games = {
-    VALORANT: [
-      'アイアン',
-      'ブロンズ',
-      'シルバー',
-      'ゴールド',
-      'プラチナ',
-      'ダイヤ',
-      'アセンダント',
-      'イモータル',
-      'レディアント',
-    ],
-    LOL: [
-      'アイアン',
-      'ブロンズ',
-      'シルバー',
-      'ゴールド',
-      'プラチナ',
-      'ダイヤ',
-      'マスター',
-      'グランドマスター',
-      'チャレンジャー',
-    ],
-    CSGO: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-    'COD 2': ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-    OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-  };
+  const games = gameList;
+
+  const gamer = game;
 
   const stepTitles = ['ゲーム選択', '詳細設定', '注意事項やタグ', '募集作成'];
 
@@ -74,13 +50,13 @@ const YourComponent = () => {
   const [selectedMyRankIndex, setSelectedMyRankIndex] = useState<number>(0);
   const handleGameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const gameName = event.target.value;
-    if (['VALORANT', 'LOL', 'CSGO', 'COD 2', 'OverWatch2'].includes(gameName)) {
+    if (gamer.includes(gameName)) {
       setSelectedGame(gameName as GameKey);
     }
 
     // ゲームの名前からインデックスを見つける
     const gameIndex = Object.keys(games).indexOf(gameName) + 1; // インデックスは0から始まるので、1を足す
-    if (['VALORANT', 'LOL', 'CSGO', 'COD 2', 'OverWatch2'].includes(event.target.value)) {
+    if (gamer.includes(event.target.value)) {
       setSelectedGame(event.target.value as GameKey);
     }
 
@@ -98,7 +74,7 @@ const YourComponent = () => {
     const currentGameRanks = selectedGame ? games[selectedGame] : undefined;
 
     if (currentGameRanks) {
-      const rankIndex = currentGameRanks.indexOf(selectedRank) + 1; // インデックスは0から始まるので、1を足す
+      const rankIndex = currentGameRanks.indexOf(selectedRank); // インデックスは0から始まるので、1を足す
       setSelectedMyRanks(event.target.value);
       setSelectedMyRankIndex(rankIndex);
     } else {

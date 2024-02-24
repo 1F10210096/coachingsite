@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable react/jsx-no-duplicate-props */
 import { MailOutlined } from '@ant-design/icons';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
@@ -86,7 +88,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
           <button className={styles.searchButton} onClick={handleSearch} />
         </div>
         <div className={styles.contheme2}>
-          {userId !== null ? (
+          {myProfile !== null ? (
             <div className={styles.userSection8}>
               <Link href="/selectDm">
                 <div className={styles.roomButton}>
@@ -122,7 +124,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
         <div className={styles.contheme}>
           <Link href="/">
             <button
-              className={value?.length === 0 ? styles.selectedButton : styles.button}
+              className={value === undefined ? styles.selectedButton : styles.button}
               onClick={() => handleButtonClick('おすすめ')}
             >
               おすすめ
@@ -137,16 +139,52 @@ export const BasicHeader = ({ user }: { user?: string }) => {
             </button>
           </Link>
           <Link href="/recruit?value=2">
-            <button className={styles.button}>APEX</button>
+            <button
+              className={value === '2' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('APEX')}
+            >
+              APEX
+            </button>
           </Link>
           <Link href="/recruit?value=3">
-            <button className={styles.button}>LOL</button>
+            <button
+              className={value === '3' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('LOL')}
+            >
+              LOL
+            </button>
           </Link>
-          <button className={styles.button}>CSGO</button>
-          <button className={styles.button}>COD 2</button>
-          <button className={styles.button}>OverWatch2</button>
+          <Link href="/recruit?value=4">
+            <button
+              className={value === '4' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('Fortnite')}
+            >
+              Fortnite
+            </button>{' '}
+          </Link>
+          <Link href="/recruit?value=5">
+            <button
+              className={value === '5' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('StreetFighter')}
+            >
+              StreetFighter
+            </button>{' '}
+          </Link>
+          <Link href="/recruit?value=7">
+            <button
+              className={value === '7' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('OverWatch2')}
+            >
+              OverWatch2
+            </button>{' '}
+          </Link>
           <Link href="/allSearch">
-            <button className={styles.button}>すべて見る</button>
+            <button
+              className={value === '8' ? styles.selectedButton : styles.button}
+              onClick={() => handleButtonClick('すべて見る')}
+            >
+              すべて見る
+            </button>
           </Link>
         </div>
       </div>

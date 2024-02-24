@@ -126,7 +126,6 @@
   font-size: 15px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(92 92 92);
-  background-color: rgb(255 255 255);
   border-top: 1px solid rgb(188 188 188);
   border-bottom: 1px solid rgb(188 188 188);
 }
@@ -162,9 +161,9 @@
 
 .rankCheckboxes {
   flex-direction: column;
-  gap: 3px;
-  height: 300px;
-  padding: 10px 30px; /* 上下のパディング */
+  gap: 1px;
+  height: auto;
+  padding: 32px 25px; /* 上下のパディング */
   font-size: 12px;
   font-weight: 500;
 }

@@ -63,11 +63,13 @@
 
 .rankImagesContainer {
   position: relative;
-  top: 60px;
+  top: 40px;
   left: 20px;
   display: flex; /* Use flexbox to lay out the children */
+  flex-wrap: wrap;
   align-items: center; /* Center the items vertically */
   justify-content: flex-start; /* Align the items to the start of the container */
+  width: 520px;
 }
 
 .aadw {

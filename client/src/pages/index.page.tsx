@@ -7,6 +7,7 @@ import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
+import { useRouter } from 'next/router';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
@@ -47,6 +48,7 @@ const Home = () => {
         // ユーザーがログインしている場合、ユーザー情報をセット
         console.log(firebaseUser);
         setUserUUID(firebaseUser.uid);
+        console.log(firebaseUser.uid);
       } else {
         console.log('ユーザーがログインしていません');
       }
@@ -82,6 +84,12 @@ const Home = () => {
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
+  };
+
+  const router = useRouter();
+
+  const handleClick = (id: any) => {
+    router.push(`/recruitDetail?id=${id}`);
   };
 
   return (
@@ -156,10 +164,12 @@ const Home = () => {
           </div>
           <div className={styles.recruitContainer}>
             <div className={styles.recruitListTitle}>人気の募集</div>
+            <Link href="/allSearch">
             <div className={styles.blueTitle2}>全て見る {'>'}</div>
+            </Link>
             <div className={styles.recruitList}>
               {recruitList.map((recruitList, index) => (
-                <div key={recruitList.id} className={styles.recruitSummary}>
+                <div key={recruitList.id} className={styles.recruitSummary} onClick={() => handleClick(recruitList.id)}>
                   <div className={styles.recruitListImage}>
                     <img
                       key={index}

@@ -1,9 +1,11 @@
+/* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type {
   ApexRankType,
   BosyuuListModel3,
+  FortNiteRankType,
   TagsType,
   ValoRankType,
 } from 'commonTypesWithClient/models';
@@ -15,6 +17,7 @@ import type { SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import { gameList } from 'src/utils/gameList';
 import { default as getImagePath } from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
@@ -36,33 +39,7 @@ const Valorant = () => {
     [rank: string]: boolean;
   };
   //ad
-  const games = {
-    VALORANT: [
-      'アイアン',
-      'ブロンズ',
-      'シルバー',
-      'ゴールド',
-      'プラチナ',
-      'ダイヤ',
-      'アセンダント',
-      'イモータル',
-      'レディアント',
-    ],
-    LOL: [
-      'アイアン',
-      'ブロンズ',
-      'シルバー',
-      'ゴールド',
-      'プラチナ',
-      'ダイヤ',
-      'マスター',
-      'グランドマスター',
-      'チャレンジャー',
-    ],
-    CSGO: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-    'COD 2': ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-    OverWatch2: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'クラウン', 'エース'],
-  };
+  const games = gameList;
 
   const [valoRanks, setValoRanks] = useState({
     アイアン: false,
@@ -85,6 +62,50 @@ const Valorant = () => {
     マスター: false,
     プレデター: false,
   });
+
+  const [lolRanks, setLolRanks] = useState({
+    アイアン: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+    グランドマスター: false,
+    チャレンジャー: false,
+  });
+
+  const [fortniteRanks, setFortniteRanks] = useState({
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    エリート: false,
+    チャンピオン: false,
+    アンリアル: false,
+  });
+
+  const [StreetFighterRanks, setStreetFighterRanks] = useState({
+    ルーキー: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+  });
+
+  const [yuugiouRanks, setYuugiouRanks] = useState({
+    ルーキー: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+  });
+
   const [myValoRanks, setMyValoRanks] = useState({
     アイアン: false,
     ブロンズ: false,
@@ -107,25 +128,68 @@ const Valorant = () => {
     プレデター: false,
   });
 
-  const [Tags, setTags] = useState<TagsType>({
-    初心者歓迎: false,
-    高ランク歓迎: false,
-    スパルタ指導: false,
-    仲良くワイワイ: false,
-    上級者歓迎: false,
-    エイム強化: false,
-    メンタル強化: false,
-    プロ志向: false,
+  const [myLolRanks, setMyLolRanks] = useState({
+    アイアン: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+    グランドマスター: false,
+    チャレンジャー: false,
   });
 
-  const [LessonTypes, setLessonTypes] = useState({
-    一緒にプレイ: false,
-    ビデオで学ぼう: false,
-    '1 on 1': false,
-    プレイを振り返ろう: false,
-    プレイを見てもらおう: false,
-    プレイを一緒に見よう: false,
-    ゲームを一緒に学ぼう: false,
+  const [myFortniteRanks, setMyFortniteRanks] = useState({
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    エリート: false,
+    チャンピオン: false,
+    アンリアル: false,
+  });
+
+  const [myStreetFighterRanks, setMyStreetFighterRanks] = useState({
+    ルーキー: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+  });
+
+  const [myYuugiouRanks, setMyYuugiouRanks] = useState({
+    ルーキー: false,
+    ブロンズ: false,
+    シルバー: false,
+    ゴールド: false,
+    プラチナ: false,
+    ダイヤモンド: false,
+    マスター: false,
+  });
+
+  const [Tags, setTags] = useState<TagsType>({
+    中級者歓迎: false,
+    上級者向け: false,
+    プロ向け: false,
+    仲良くワイワイ: false,
+    スパルタ指導: false,
+    戦略: false,
+    エイム強化: false,
+    テクニック: false,
+    キャラクター解析: false,
+    マップ解析: false,
+    武器ガイド: false,
+    チームプレイ: false,
+    ソロプレイ: false,
+    メンタルトレーニング: false,
+    ゲーム理論: false,
+    パッチノート解説: false,
+    リプレイ分析: false,
+    'Q&Aセッション': false,
   });
 
   const handleCheckboxChange = (rank: keyof (ValoRankType | ApexRankType)) => {
@@ -140,6 +204,26 @@ const Valorant = () => {
         ...prevRanks,
         [rank]: !prevRanks[rank],
       }));
+    } else if (Id === 3) {
+      setLolRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 4) {
+      setFortniteRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 5) {
+      setStreetFighterRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 6) {
+      setYuugiouRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
     }
   };
 
@@ -151,6 +235,26 @@ const Valorant = () => {
       }));
     } else if (Id === 2) {
       setMyApexRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 3) {
+      setMyLolRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 4) {
+      setMyFortniteRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 5) {
+      setMyStreetFighterRanks((prevRanks) => ({
+        ...prevRanks,
+        [rank]: !prevRanks[rank],
+      }));
+    } else if (Id === 6) {
+      setMyYuugiouRanks((prevRanks) => ({
         ...prevRanks,
         [rank]: !prevRanks[rank],
       }));
@@ -194,10 +298,42 @@ const Valorant = () => {
       console.log(selectedRanksIndices);
       return selectedRanksIndices;
     } else if (Id === 2) {
-      console.log(valoRanks);
-      selectedRanksIndices = Object.keys(valoRanks)
-        .map((key, index) => ({ rank: key as keyof typeof valoRanks, index }))
-        .filter((item) => valoRanks[item.rank])
+      console.log(apexRanks);
+      selectedRanksIndices = Object.keys(apexRanks)
+        .map((key, index) => ({ rank: key as keyof typeof apexRanks, index }))
+        .filter((item) => apexRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 3) {
+      console.log(lolRanks);
+      selectedRanksIndices = Object.keys(lolRanks)
+        .map((key, index) => ({ rank: key as keyof typeof lolRanks, index }))
+        .filter((item) => lolRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 4) {
+      console.log(fortniteRanks);
+      selectedRanksIndices = Object.keys(fortniteRanks)
+        .map((key, index) => ({ rank: key as keyof typeof fortniteRanks, index }))
+        .filter((item) => fortniteRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 5) {
+      console.log(StreetFighterRanks);
+      selectedRanksIndices = Object.keys(StreetFighterRanks)
+        .map((key, index) => ({ rank: key as keyof typeof StreetFighterRanks, index }))
+        .filter((item) => StreetFighterRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 6) {
+      console.log(yuugiouRanks);
+      selectedRanksIndices = Object.keys(yuugiouRanks)
+        .map((key, index) => ({ rank: key as keyof typeof yuugiouRanks, index }))
+        .filter((item) => yuugiouRanks[item.rank])
         .map((item) => item.index);
       console.log(selectedRanksIndices);
       return selectedRanksIndices;
@@ -217,6 +353,38 @@ const Valorant = () => {
       const selectedRanksIndices = Object.keys(apexRanks)
         .map((key, index) => ({ rank: key as keyof typeof myApexRanks, index }))
         .filter((item) => myApexRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 3) {
+      console.log('wdas');
+      const selectedRanksIndices = Object.keys(lolRanks)
+        .map((key, index) => ({ rank: key as keyof typeof myLolRanks, index }))
+        .filter((item) => myLolRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 4) {
+      console.log('wdas');
+      const selectedRanksIndices = Object.keys(fortniteRanks)
+        .map((key, index) => ({ rank: key as keyof typeof myFortniteRanks, index }))
+        .filter((item) => myFortniteRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 5) {
+      console.log('wdas');
+      const selectedRanksIndices = Object.keys(StreetFighterRanks)
+        .map((key, index) => ({ rank: key as keyof typeof myStreetFighterRanks, index }))
+        .filter((item) => myStreetFighterRanks[item.rank])
+        .map((item) => item.index);
+      console.log(selectedRanksIndices);
+      return selectedRanksIndices;
+    } else if (Id === 6) {
+      console.log('wdas');
+      const selectedRanksIndices = Object.keys(yuugiouRanks)
+        .map((key, index) => ({ rank: key as keyof typeof myYuugiouRanks, index }))
+        .filter((item) => myYuugiouRanks[item.rank])
         .map((item) => item.index);
       console.log(selectedRanksIndices);
       return selectedRanksIndices;
@@ -273,26 +441,131 @@ const Valorant = () => {
       });
     }
 
+    if (Id === 3) {
+      // 他のランクや条件もすべてfalseにする
+      setLolRanks({
+        アイアン: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+        グランドマスター: false,
+        チャレンジャー: false,
+      });
+
+      setMyLolRanks({
+        アイアン: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+        グランドマスター: false,
+        チャレンジャー: false,
+      });
+    }
+
+    if (Id === 4) {
+      // 他のランクや条件もすべてfalseにする
+      setFortniteRanks({
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        エリート: false,
+        チャンピオン: false,
+        アンリアル: false,
+      });
+
+      setMyFortniteRanks({
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        エリート: false,
+        チャンピオン: false,
+        アンリアル: false,
+      });
+    }
+    if (Id === 5) {
+      // 他のランクや条件もすべてfalseにする
+      setStreetFighterRanks({
+        ルーキー: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+      });
+
+      setMyStreetFighterRanks({
+        ルーキー: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+      });
+    }
+    if (Id === 6) {
+      setYuugiouRanks({
+        ルーキー: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+      });
+
+      setMyYuugiouRanks({
+        ルーキー: false,
+        ブロンズ: false,
+        シルバー: false,
+        ゴールド: false,
+        プラチナ: false,
+        ダイヤモンド: false,
+        マスター: false,
+      });
+    }
+
     setTags({
-      初心者歓迎: false,
-      高ランク歓迎: false,
-      スパルタ指導: false,
+      中級者歓迎: false,
+      上級者向け: false,
+      プロ向け: false,
       仲良くワイワイ: false,
-      上級者歓迎: false,
+      スパルタ指導: false,
+      戦略: false,
       エイム強化: false,
-      メンタル強化: false,
-      プロ志向: false,
+      テクニック: false,
+      キャラクター解析: false,
+      マップ解析: false,
+      武器ガイド: false,
+      チームプレイ: false,
+      ソロプレイ: false,
+      メンタルトレーニング: false,
+      ゲーム理論: false,
+      パッチノート解説: false,
+      リプレイ分析: false,
+      'Q&Aセッション': false,
     });
 
-    setLessonTypes({
-      一緒にプレイ: false,
-      ビデオで学ぼう: false,
-      '1 on 1': false,
-      プレイを振り返ろう: false,
-      プレイを見てもらおう: false,
-      プレイを一緒に見よう: false,
-      ゲームを一緒に学ぼう: false,
-    });
+    // setLessonTypes({
+    //   一緒にプレイ: false,
+    //   ビデオで学ぼう: false,
+    //   '1 on 1': false,
+    //   プレイを振り返ろう: false,
+    //   プレイを見てもらおう: false,
+    //   プレイを一緒に見よう: false,
+    //   ゲームを一緒に学ぼう: false,
+    // });
   };
 
   const fetchRecruitList = async () => {
@@ -304,11 +577,6 @@ const Valorant = () => {
       const selectedTags = Object.keys(Tags)
         .filter((key) => Tags[key as keyof typeof Tags])
         .map((key) => key as keyof typeof Tags);
-
-      const selectedLessonTypes = Object.keys(LessonTypes)
-        .filter((key) => LessonTypes[key as keyof typeof LessonTypes])
-        .map((key) => key as keyof typeof LessonTypes);
-
       console.log(rank);
 
       const response = await apiClient.fetchRecruit.post({
@@ -347,6 +615,18 @@ const Valorant = () => {
       directory = 'apexRanks';
     } else if (Id === 3) {
       directory = 'lolRanks'; // Adding the lolRanks condition
+    } else if (Id === 4) {
+      directory = 'FORTNITERanks'; // Adding the lolRanks condition
+    } else if (Id === 5) {
+      directory = 'StreetFighterRanks'; // Adding the lolRanks condition
+    } else if (Id === 6) {
+      directory = 'yuugiouRanks'; // Adding the lolRanks condition
+    } else if (Id === 7) {
+      directory = 'OverWatch2'; // Adding the lolRanks condition
+    } else if (Id === 8) {
+      directory = 'PUBGanks'; // Adding the lolRanks condition
+    } else if (Id === 9) {
+      directory = 'CSGO2Ranks'; // Adding the lolRanks condition
     }
     const rankImage = getImagePath(Id, rank);
     return `/${directory}/${rankImage}`;
@@ -361,8 +641,34 @@ const Valorant = () => {
       .replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3');
   }
 
-  const ranksToDisplay: RankStatus = Id === 1 ? valoRanks : Id === 2 ? apexRanks : {};
-  const myRanksToDisplay: RankStatus = Id === 1 ? myValoRanks : Id === 2 ? myApexRanks : {};
+  const ranksToDisplay: RankStatus =
+    Id === 1
+      ? valoRanks
+      : Id === 2
+      ? apexRanks
+      : Id === 3
+      ? lolRanks
+      : Id === 4
+      ? fortniteRanks
+      : Id === 5
+      ? StreetFighterRanks
+      : Id === 6
+      ? yuugiouRanks
+      : {};
+  const myRanksToDisplay: RankStatus =
+    Id === 1
+      ? myValoRanks
+      : Id === 2
+      ? myApexRanks
+      : Id === 3
+      ? myLolRanks
+      : Id === 4
+      ? myFortniteRanks
+      : Id === 5
+      ? myStreetFighterRanks
+      : Id === 6
+      ? myYuugiouRanks
+      : {};
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -389,12 +695,31 @@ const Valorant = () => {
 
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+    // リクルートページにゲーム名をパラメータとして渡す
+    const gameValueMapping = {
+      VALORANT: 1,
+      APEX: 2,
+      LOL: 3,
+      FORTNITE: 4,
+      ストリートファイター: 5,
+      '遊戯王 マスターデュエル': 6,
+      OverWatch2: 7,
+      PUBG: 8,
+      CSGO2: 9,
+    };
+
+    // ゲームアイテムがクリックされたときに実行する関数
+    const handleGameClick = (gameName: string | number) => {
+      const value = gameValueMapping[gameName] || 'unknown'; // マッピングから数値を取得、未定義の場合は'unknown'
+      // リクルートページにクエリパラメータとして数値を渡す
+      router.push(`/recruit?value=${value}`);
+    };
   const categories = {
     FPS: ['VALORANT', 'OverWatch2', 'APEX', 'CSGO2'],
-    カードゲーム: ['ハースストーン', 'シャドウバース', 'マジックザギャザリング'],
-    バトルロイヤル: ['PUBG', 'フォートナイト', 'APEX'],
-    MOBA: ['LOL', 'DOTA2'],
-    格闘ゲーム: ['ストリートファイター', '鉄拳'],
+    カードゲーム: ['遊戯王 マスターデュエル'],
+    バトルロイヤル: ['PUBG', 'FORTNITE', 'APEX'],
+    MOBA: ['LOL'],
+    格闘ゲーム: ['ストリートファイター'],
     // 他のカテゴリとゲームを追加
   };
   const games1 = categories[activeCategory as keyof typeof categories];
@@ -409,7 +734,6 @@ const Valorant = () => {
     // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
     handleSortClick2();
   };
-
   const handleSortClick2 = () => {
     if (sortCriteria === 'rank') {
       // ランク順に並び替えるロジック
@@ -420,9 +744,9 @@ const Valorant = () => {
     } else if (sortCriteria === 'update') {
       // 更新順に並び替えるロジック
       const sortedList = [...RecruitList].sort((a, b) => {
-        // Dateオブジェクトのミリ秒を比較
-        const timeA = a.updatedAt.getTime();
-        const timeB = b.updatedAt.getTime();
+        // 文字列や他の形式の日付をDateオブジェクトに変換
+        const timeA = new Date(a.updatedAt).getTime();
+        const timeB = new Date(b.updatedAt).getTime();
         return sortDescending ? timeB - timeA : timeA - timeB;
       });
       setRecruitlist(sortedList);
@@ -452,6 +776,12 @@ const Valorant = () => {
             {Id === 1 ? <div className={styles.home2}>VALORANT</div> : null}
             {Id === 2 ? <div className={styles.home2}>APEX</div> : null}
             {Id === 3 ? <div className={styles.home2}>LOL</div> : null}
+            {Id === 4 ? <div className={styles.home2}>FORTNITE</div> : null}
+            {Id === 5 ? <div className={styles.home2}>StreetFighter</div> : null}
+            {Id === 6 ? <div className={styles.home2}>遊戯王 マスターデュエル</div> : null}
+            {Id === 7 ? <div className={styles.home2}>OverWatch2</div> : null}
+            {Id === 8 ? <div className={styles.home2}>PUBG</div> : null}
+            {Id === 9 ? <div className={styles.home2}>CSGO2</div> : null}
           </div>
           <div className={styles.sContainer3}>
             <div className={styles.sContainer}>
@@ -487,7 +817,15 @@ const Valorant = () => {
                               checked={ranksToDisplay[rank]}
                               className={styles.sell}
                               onChange={() =>
-                                handleCheckboxChange(rank as keyof (ValoRankType | ApexRankType))
+                                handleCheckboxChange(
+                                  rank as keyof (
+                                    | ValoRankType
+                                    | ApexRankType
+                                    | FortNiteRankType
+                                    | StreetFighterRankType
+                                    | YuugiouRankType
+                                  )
+                                )
                               }
                             />
                             <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
@@ -519,7 +857,13 @@ const Valorant = () => {
                             checked={myRanksToDisplay[myrank]}
                             onChange={() =>
                               handleMyRankCheckboxChange(
-                                myrank as keyof (ValoRankType | ApexRankType)
+                                myrank as keyof (
+                                  | ValoRankType
+                                  | ApexRankType
+                                  | FortNiteRankType
+                                  | StreetFighterRankType
+                                  | YuugiouRankType
+                                )
                               )
                             }
                           />
@@ -620,7 +964,11 @@ const Valorant = () => {
                     <div className={styles.gameList}>
                       {activeCategory &&
                         categories[activeCategory as keyof typeof categories].map((game, idx) => (
-                          <div key={idx} className={styles.gameItem}>
+                          <div
+                            key={idx}
+                            className={styles.gameItem}
+                            onClick={() => handleGameClick(game)}
+                          >
                             <div className={styles.gameItem2}>{game}</div>
                           </div>
                         ))}
@@ -637,6 +985,12 @@ const Valorant = () => {
               {Id === 1 ? <div>VALORANT</div> : null}
               {Id === 2 ? <div>APEX</div> : null}
               {Id === 3 ? <div>LOL</div> : null}
+              {Id === 4 ? <div>FORTNITE</div> : null}
+              {Id === 5 ? <div>StreetFighter</div> : null}
+              {Id === 6 ? <div>遊戯王 マスターデュエル</div> : null}
+              {Id === 7 ? <div>OverWatch2</div> : null}
+              {Id === 8 ? <div>PUBG</div> : null}
+              {Id === 9 ? <div>CSGO2</div> : null}
             </div>
             <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
               <option value="rank">ランク順に並び替え</option>

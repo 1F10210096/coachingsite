@@ -142,7 +142,9 @@ const UserProfile = () => {
           <div className={styles.home3}>{'>'}</div>
           <div className={styles.home2}>{userDetail?.name}</div>
         </div>
-        <div className={styles.titleContainer}>コーチの情報</div>
+        <div className={styles.titleContainer}>
+          <div className={styles.home9}>コーチの情報</div>
+        </div>
         <div className={styles.profileContainer}>
           <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.userImage} />
           <div className={styles.nameContainer}>

@@ -13,13 +13,12 @@
 
 .helpwanted {
   position: relative;
-  top:-460px;
+  top: -460px;
   left: 600px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
   height: auto;
-  background-color: rgb(255 255 255);
 }
 
 .titleLine {
@@ -41,7 +40,9 @@
 
 .gameTitle {
   position: relative;
-  width: 100%;
+  top: 10px;
+  left: 10px;
+  width: 80%;
   height: auto;
   font-size: 26px;
   font-weight: bold;
@@ -313,7 +314,7 @@
   position: relative;
   top: 40px;
   left: 650px;
-  width: 200px;
+  width: 130px;
   height: auto;
   font-size: 14px;
   font-weight: bold;
@@ -334,4 +335,5 @@
   color: rgb(82 82 82);
   background-color: rgb(255 255 255);
   border-bottom: 2px solid rgb(142 142 142);
+  box-shadow: rgb(3 102 214 / 30%) 0 0 0 1px;
 }

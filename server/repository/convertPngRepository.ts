@@ -1,38 +1,39 @@
-// import AWS from 'aws-sdk';
-// import dotenv from 'dotenv';
-// import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// console.log('dwadadsas');
-// dotenv.config();
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { v4 as uuidv4 } from 'uuid';
 
-// function generateRandomFileName() {
-//   return `${uuidv4()}.jpg`; // UUIDの生成
-// }
-// const s3 = new AWS.S3();
+// 環境変数から認証情報とリージョンを読み込む
+export const s3Client = new S3Client({
+  region: 'ap-northeast-1',
+  forcePathStyle: true,
+  credentials: {
+    accessKeyId: 'AKIAXOGIPRCJK7OI32UX', // 環境変数が未設定の場合は空文字列を使用
+    secretAccessKey: 'kzzbC6UaBCODXi52MMrUAfG5aGVQr4RVBYqrM3Bk', // 環境変数が未設定の場合は空文字列を使用
+  },
+});
 
-// export async function convertPngRepository(base64String: string) {
-//   console.log('dwadadsas');
-//   console.log(process.env.AWS_REGION);
-//   console.log(process.env.AWS_ACCESS_KEY_ID);
-//   console.log(process.env.AWS_SECRET_ACCESS_KEY);
-//   const fileName = generateRandomFileName();
-//   console.log('fileName:', fileName);
-//   const contentType = 'image/jpeg'; // MIMEタイプ
-//   const buffer = Buffer.from(base64String.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-//   console.log('fileName:', fileName);
-//   const params = {
-//     Bucket: 'coach-user-profile',
-//     Key: `profile-images/${fileName}`,
-//     Body: buffer, // ファイルオブジェクトを直接セット
-//     ContentType: contentType,
-//   };
-//   console.log('fileName:', fileName);
+async function convertPngRepository(base64String: string) {
+  const fileName = `${uuidv4()}.jpg`; // UUIDでファイル名を生成
+  const buffer = Buffer.from(base64String.replace(/^data:image\/\w+;base64,/, ''), 'base64');
 
-//   try {
-//     const response = await s3.upload(params).promise();
-//     return response.Location; // アップロードされたファイルのURLを返す
-//   } catch (error) {
-//     console.error('S3アップロードエラー:', error);
-//     throw error;
-//   }
-// }
+  const params = {
+    Bucket: 'coach-user-profile', // バケット名
+    Key: `profile-images/${fileName}`, // オブジェクトのキー
+    Body: buffer, // ファイルの内容
+    ContentType: 'image/jpeg', // MIMEタイプ
+  };
+
+  try {
+    // S3へのアップロード
+    const command = new PutObjectCommand(params);
+    const response = await s3Client.send(command);
+    return `https://${params.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${params.Key}`; // アップロードされたファイルのURLを返す
+  } catch (error) {
+    console.error('S3アップロードエラー:', error);
+    throw error;
+  }
+}
+
+export { convertPngRepository };

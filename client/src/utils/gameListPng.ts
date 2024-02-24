@@ -1,10 +1,11 @@
 const gameListImageMap: { [key: number]: string } = {
   1: 'valorant.png',
-  2: 'apex.png',
+  2: 'apex.jpg',
   3: 'lol.png',
-  4: 'csgo.png',
-  5: 'overwatch2.png',
-  6: 'fortnite.png',
+  4: 'fortnite.jpg',
+  5: 'StreetFighter.png',
+  6: 'yuugiou.jpg',
+  7: 'yuugiou.jpg',
 };
 
 const getGameListImagePath = (game: number) => {

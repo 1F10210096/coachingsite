@@ -2,7 +2,6 @@
   position: relative;
 }
 
-
 .helpwanted {
   position: relative;
   top: -260px;
@@ -291,7 +290,6 @@
   top: 150px;
   width: 100%;
   height: auto;
-  background-color: #fff;
 }
 
 .titleContainer {
@@ -299,13 +297,20 @@
   top: 50px;
   left: 180px;
   width: 350px;
-  height: auto;
+  height: 70px;
   padding-bottom: 20px;
   font-size: 20px;
   font-weight: bold;
   color: rgb(114 114 114);
   background-color: #fff;
   border-bottom: 2px solid rgb(142 142 142);
+  box-shadow: rgb(3 102 214 / 30%) 0 0 0 1px;
+}
+
+.home9 {
+  position: relative;
+  top: 10px;
+  left: 10px;
 }
 
 .homeContainer {
@@ -317,7 +322,6 @@
   width: 300px;
   height: 30px;
   color: rgb(50 50 50);
-  background-color: rgb(255 255 255);
 }
 
 .home {
@@ -327,7 +331,6 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
 }
 
 .home:hover {
@@ -343,7 +346,6 @@
   color: rgb(69 69 254); /* 文字色を青色に設定 */
   text-decoration: underline; /* 下線を追加 */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
-  background-color: #fff;
 }
 
 .home2:hover {
@@ -357,5 +359,4 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 13px; /* 文字の大きさを17pxに設定する */
   color: rgb(179 173 173);
-  background-color: #fff; /* 背景色を灰色に設定する */
 }

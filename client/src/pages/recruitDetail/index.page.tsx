@@ -74,11 +74,22 @@ const Login = () => {
     let directory;
     if (gameId === 1) {
       directory = 'valoRanks';
-      console.log('valoRanks');
     } else if (gameId === 2) {
       directory = 'apexRanks';
     } else if (gameId === 3) {
       directory = 'lolRanks'; // Adding the lolRanks condition
+    } else if (gameId === 4) {
+      directory = 'FORTNITERanks'; // Adding the lolRanks condition
+    } else if (gameId === 5) {
+      directory = 'StreetFighterRanks'; // Adding the lolRanks condition
+    } else if (gameId === 6) {
+      directory = 'yuugiouRanks'; // Adding the lolRanks condition
+    } else if (gameId === 7) {
+      directory = 'OverWatch2'; // Adding the lolRanks condition
+    } else if (gameId === 8) {
+      directory = 'PUBGanks'; // Adding the lolRanks condition
+    } else if (gameId === 9) {
+      directory = 'CSGO2Ranks'; // Adding the lolRanks condition
     }
 
     console.log(rank);
@@ -157,7 +168,15 @@ const Login = () => {
             <Link href={`/recruit/?value=${RecruitDetail.gameId}`}>
               {RecruitDetail.gameId === 1 && <div className={styles.home2}>VALORANT</div>}
               {RecruitDetail.gameId === 2 && <div className={styles.home2}>APEX</div>}
-              {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}
+              {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}{' '}
+              {RecruitDetail.gameId === 4 && <div className={styles.home2}>FORTNITE</div>}
+              {RecruitDetail.gameId === 5 && <div className={styles.home2}>StreetFighter</div>}
+              {RecruitDetail.gameId === 6 && <div className={styles.home2}>OverWatch2</div>}
+              {RecruitDetail.gameId === 7 && (
+                <div className={styles.home2}>遊戯王 マスターデュエル</div>
+              )}
+              {RecruitDetail.gameId === 8 && <div className={styles.home2}>PUBG</div>}
+              {RecruitDetail.gameId === 9 && <div className={styles.home2}>CSGO2</div>}
             </Link>
           )}
 
@@ -180,13 +199,12 @@ const Login = () => {
               <div className={styles2.name}>{userDetail?.name}</div>
               <p className={styles2.title}>{RecruitDetail?.title}</p>
             </div>
-            {RecruitDetail?.gameId === 1 && (
+
               <img
                 className={styles.rank}
                 src={getRankImage(RecruitDetail?.gameId, RecruitDetail?.rank)}
                 // alt={`Rank: ${RecruitDetail?.rank}`}
               />
-            )}
           </div>
           <div className={styles2.line} />
           <div className={styles2.horizontalContainer}>

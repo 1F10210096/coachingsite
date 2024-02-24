@@ -5,7 +5,7 @@ import type {
   NewApplyData,
   UserListItem,
 } from 'commonTypesWithClient/models';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import { useRouter } from 'next/router';
 import type { ChangeEvent, SetStateAction } from 'react';
@@ -30,6 +30,8 @@ const UserProfile = () => {
   }, [router.query]);
 
   const [newName, setNewName] = useState('');
+  const [game, setGame] = useState('');
+  const [zisseki, setZisseki] = useState('');
   const [newProfile, setNewProfile] = useState('');
   const showModal = (content: SetStateAction<string>) => {
     setModalContent(content);
@@ -72,6 +74,14 @@ const UserProfile = () => {
     setNewName(e.target.value);
   };
 
+  const handleGame = (e: ChangeEvent<HTMLInputElement>) => {
+    setGame(e.target.value);
+  };
+
+  const handleZisseki = (e: ChangeEvent<HTMLInputElement>) => {
+    setZisseki(e.target.value);
+  };
+
   const handleNewProfile = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewProfile(e.target.value);
   };
@@ -99,16 +109,14 @@ const UserProfile = () => {
   // フォーム送信時の処理
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const user = getAuth().currentUser;
-
-    if (user) {
-      const userId = user.uid;
+    if (Id) {
+      const userId = Id;
       console.log(selectedFile);
 
       try {
         console.log(imageUrl);
         await apiClient.updateProfile.post({
-          body: { selectedFile },
+          body: { userId, newName, game, zisseki, selectedFile },
         });
       } catch (error) {
         console.error('プロフィール更新エラー:', error);
@@ -484,18 +492,18 @@ const UserProfile = () => {
                         <input
                           type="text"
                           name="game"
-                          value={profileRank.gameName}
-                          // onChange={handleInputChange}
-                          placeholder="ゲーム名"
+                          value={game}
+                          onChange={handleGame}
+                          placeholder="好きなゲーム名"
                           className={styles.name2}
                         />
                         <div className={styles.nameTitle}>実績</div>
                         <input
                           type="text"
                           name="rank"
-                          value={profileRank.rank}
+                          value={zisseki}
                           className={styles.name2}
-                          // onChange={handleInputChange}
+                          onChange={handleZisseki}
                           placeholder="ランク"
                         />
                         <div className={styles.nameTitle}>自己紹介</div>

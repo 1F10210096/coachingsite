@@ -209,7 +209,8 @@ const YourComponent = () => {
         },
       });
       assert('募集作成が完了しました');
-      router.push('http://localhost:3000/');
+      console.log(process.env.NEXT_PUBLIC_REDIRECT_URL);
+      router.push(process.env.NEXT_PUBLIC_REDIRECT_URL as string);
     } catch (error) {
       assert(error);
     }

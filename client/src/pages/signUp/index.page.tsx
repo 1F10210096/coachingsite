@@ -64,7 +64,7 @@ const Register = () => {
           });
           // 保存が成功したら、適切なページにリダイレクト
           alert('登録が完了しました');
-          router.push('http://localhost:3000/');
+          router.push(process.env.REACT_APP_REDIRECT_URL as string);
         } catch (error) {
           console.error('データベースへの保存に失敗:', error);
         }

@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import getGameListIcon from 'src/utils/gameListIcon';
 import getGameListImagePathMain from 'src/utils/gameListMainPng';
-import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
@@ -119,7 +119,7 @@ const Home = () => {
                     <img
                       key={index}
                       className={styles.gameIconContainer}
-                      src={`/gameLists/${getGameListImagePath(game.id)}`}
+                      src={`/gameListsIcon/${getGameListIcon(game.id)}`}
                       alt={`Rank: ${game.title}`}
                     />
                     <div className={styles.gameTitle}>{game.title}</div>

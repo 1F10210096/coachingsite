@@ -59,7 +59,7 @@ const UserProfile = () => {
       event.preventDefault();
       const userCredential = await logout();
       console.log('ログアウト成功:', userCredential);
-      router.push('http://localhost:3000/');
+      router.push(process.env.REACT_APP_REDIRECT_URL as string);
     } catch (error) {
       console.error('ログイン失敗:', error);
     }
@@ -425,7 +425,7 @@ const UserProfile = () => {
         },
       });
       assert('募集作成が完了しました');
-      router.push('http://localhost:3000/');
+      router.push(process.env.REACT_APP_REDIRECT_URL as string);
     } catch (error) {
       assert(error);
     }

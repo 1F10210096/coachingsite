@@ -6,11 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 // 環境変数から認証情報とリージョンを読み込む
 export const s3Client = new S3Client({
-  region: 'ap-northeast-1',
+  region: process.env.region ?? '',
   forcePathStyle: true,
   credentials: {
-    accessKeyId: 'AKIAXOGIPRCJK7OI32UX', // 環境変数が未設定の場合は空文字列を使用
-    secretAccessKey: 'kzzbC6UaBCODXi52MMrUAfG5aGVQr4RVBYqrM3Bk', // 環境変数が未設定の場合は空文字列を使用
+    accessKeyId: process.env.accessKeyId ?? '', // 環境変数が未設定の場合は空文字列を使用
+    secretAccessKey: process.env.secretAccessKey ?? '', // 環境変数が未設定の場合は空文字列を使用
   },
 });
 

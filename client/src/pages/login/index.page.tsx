@@ -29,15 +29,11 @@ const Login = () => {
   const loginEmail = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
-      const token = await grecaptcha.enterprise.execute(
-        '6Le4A34pAAAAAD90Qw7foI7CqRgFD5W97ApplY2z',
-        { action: 'LOGIN' }
-      );
 
       const userCredential = await loginWithEmail(email, password);
       console.log('ログイン成功:', userCredential);
       alert('ログイン成功!');
-      router.push('http://localhost:3000/');
+      router.push(process.env.REACT_APP_REDIRECT_URL as string);
     } catch (error) {
       console.error('ログイン失敗:', error);
       alert(`ログイン失敗: ${error}`);

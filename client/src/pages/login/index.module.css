@@ -1,21 +1,27 @@
 .loginContainer {
+  position: relative;
+  top: 60px;
+  left: 80px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh; /* 画面の高さに合わせる */
+  width: 400px;
+  height: 300px;
+  background-color: #ff6767;
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
   gap: 10px; /* フォーム要素間の隙間 */
+  width: 400px;
+  background-color: #fff;
 }
 
 .loginButton {
   position: relative;
-  top: -50px;
+  top: 70px;
   left: 15%;
-  width: 500px;
+  width: 300px;
   padding: 10px 15px;
   color: white;
   cursor: pointer;
@@ -37,17 +43,19 @@
 
 .loginTitle {
   position: relative;
+  top: 20px;
   left: 40%;
   width: 500px;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   color: #000;
 }
 
 .kaninn {
-  position: absolute;
-  top: 63px;
-  left: 71%;
+  position: relative;
+  top: 23px;
+  left: 470px;
+  width: 150px;
   font-size: 15px;
   color: #0141c193;
   transform: translateX(-50%); /* 左に50%ずらす */
@@ -59,10 +67,8 @@
 
 .searchmail {
   position: relative;
-  top: -110px;
-  left: 15%;
-  width: 500px;
-  height: 65px;
+  width: 380px;
+  height: 45px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -76,30 +82,24 @@
 
 .mail {
   position: relative;
-  top: -120px;
-  left: 320px;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .password {
   position: relative;
-  top: -100px;
-  left: 320px;
-  font-size: 20px;
+  top: 10px;
+  font-size: 17px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .searchpass {
   position: relative;
-  top: -100px;
-  left: 15%;
-  width: 500px;
-  height: 65px;
+  top: 10px;
+  width: 380px;
+  height: 45px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -112,12 +112,15 @@
 }
 
 .box {
-  position: absolute;
+  position: relative;
   top: 200px;
-  left: 46%;
+  left: 49%;
+  width: 550px;
+  height: 500px;
   font-size: 20px;
   font-weight: bold;
   color: #000;
   background-color: #fff;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
   transform: translateX(-50%); /* 左に50%ずらす */
 }

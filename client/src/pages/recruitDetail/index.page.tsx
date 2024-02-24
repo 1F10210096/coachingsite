@@ -22,6 +22,7 @@ import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
 import styles3 from './index3.module.css';
+import getGameListImagePathMain from 'src/utils/gameListMainPng';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
@@ -373,7 +374,7 @@ const Login = () => {
                       <img
                         key={index}
                         className={styles3.gameIconContainer2}
-                        src={`/gameLists2/${getGameListImagePath(recruitList.gameId)}`}
+                        src={`/gameLists2/${getGameListImagePathMain(recruitList.gameId)}`}
                         alt={`Rank: ${recruitList.title}`}
                       />
                     </div>

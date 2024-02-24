@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import type { GameListModel, UserSummaryModel, newBosyuu } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import { createAuth } from 'src/utils/firebase';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
 import { useRouter } from 'next/router';
+import getGameListImagePathMain from 'src/utils/gameListMainPng';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
@@ -174,7 +176,7 @@ const Home = () => {
                     <img
                       key={index}
                       className={styles.gameIconContainer2}
-                      src={`/gameLists2/${getGameListImagePath(recruitList.gameId)}`}
+                      src={`/gameLists2/${getGameListImagePathMain(recruitList.gameId)}`}
                       alt={`Rank: ${recruitList.title}`}
                     />
                   </div>

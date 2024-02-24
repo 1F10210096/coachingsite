@@ -36,6 +36,7 @@
 .recruitList {
   position: relative;
   top: 150px;
+  right: 40px;
   display: flex;
   flex-wrap: wrap; /* これにより、アイテムが折り返される */
   gap: 70px; /* 要素間の間隔 */

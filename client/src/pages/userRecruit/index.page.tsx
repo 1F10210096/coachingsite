@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import getImagePath from 'src/utils/gamePng';
@@ -117,18 +117,31 @@ const UserProfile = () => {
   };
 
   const [sortDescending, setSortDescending] = useState(true);
+  const [sortCriteria, setSortCriteria] = useState('rank'); // デフォルトは「ランク順」
 
-  const handleSortClick = (list: BosyuuListModel[]): BosyuuListModel[] => {
-    if (!Array.isArray(list)) {
-      // もし list が配列でない場合、適切な処理を行ってください
-      return list;
+
+  const handleSortChange = (e: { target: { value: SetStateAction<string> } }) => {
+    setSortCriteria(e.target.value);
+    // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
+    handleSortClick2();
+  };
+  const handleSortClick2 = () => {
+    if (sortCriteria === 'rank') {
+      // ランク順に並び替えるロジック
+      const sortedList = [...RecruitList].sort((a, b) =>
+        sortDescending ? b.rank - a.rank : a.rank - b.rank
+      );
+      setRecruitlist(sortedList);
+    } else if (sortCriteria === 'update') {
+      // 更新順に並び替えるロジック
+      const sortedList = [...RecruitList].sort((a, b) => {
+        // 文字列や他の形式の日付をDateオブジェクトに変換
+        const timeA = new Date(a.updatedAt).getTime();
+        const timeB = new Date(b.updatedAt).getTime();
+        return sortDescending ? timeB - timeA : timeA - timeB;
+      });
+      setRecruitlist(sortedList);
     }
-
-    const sortedList = [...list].sort((a, b) =>
-      sortDescending ? b.rank - a.rank : a.rank - b.rank
-    );
-    setRecruitlist(sortedList);
-    return sortedList;
   };
 
   return (
@@ -176,9 +189,11 @@ const UserProfile = () => {
         </div>
         <div className={styles2.gameTitleContainer}>
           <div className={styles2.gameTitle}>ゲーム一覧</div>
-          <div className={styles2.gameSort} onClick={() => handleSortClick(RecruitList)}>
-            ランク順に並び替え
-          </div>
+          <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
+            <option value="rank">ランク順に並び替え</option>
+            <option value="update">更新順に並び替え</option>
+            {/* 他のソートオプションがあれば追加 */}
+          </select>
         </div>
         <div className={styles2.helpwanted}>
           {currentItems.map((item) => (

@@ -6,8 +6,11 @@ import type {
   ApexRankType,
   BosyuuListModel3,
   FortNiteRankType,
+  LolRankType,
+  StreetFigherRankType,
   TagsType,
   ValoRankType,
+  YuugiouRankType,
 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
@@ -192,7 +195,16 @@ const Valorant = () => {
     'Q&Aセッション': false,
   });
 
-  const handleCheckboxChange = (rank: keyof (ValoRankType | ApexRankType)) => {
+  const handleCheckboxChange = (
+    rank: keyof (
+      | ValoRankType
+      | ApexRankType
+      | LolRankType
+      | FortNiteRankType
+      | StreetFigherRankType
+      | YuugiouRankType
+    )
+  ) => {
     if (Id === 1) {
       console.log(rank);
       setValoRanks((prevRanks) => ({
@@ -695,25 +707,36 @@ const Valorant = () => {
 
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-    // リクルートページにゲーム名をパラメータとして渡す
-    const gameValueMapping = {
-      VALORANT: 1,
-      APEX: 2,
-      LOL: 3,
-      FORTNITE: 4,
-      ストリートファイター: 5,
-      '遊戯王 マスターデュエル': 6,
-      OverWatch2: 7,
-      PUBG: 8,
-      CSGO2: 9,
-    };
+  // リクルートページにゲーム名をパラメータとして渡す
+  const gameValueMapping: {
+    [key: string]: number | 'unknown';
+    VALORANT: number;
+    APEX: number;
+    LOL: number;
+    FORTNITE: number;
+    ストリートファイター: number;
+    '遊戯王 マスターデュエル': number;
+    OverWatch2: number;
+    PUBG: number;
+    CSGO2: number;
+  } = {
+    VALORANT: 1,
+    APEX: 2,
+    LOL: 3,
+    FORTNITE: 4,
+    ストリートファイター: 5,
+    '遊戯王 マスターデュエル': 6,
+    OverWatch2: 7,
+    PUBG: 8,
+    CSGO2: 9,
+  };
 
-    // ゲームアイテムがクリックされたときに実行する関数
-    const handleGameClick = (gameName: string | number) => {
-      const value = gameValueMapping[gameName] || 'unknown'; // マッピングから数値を取得、未定義の場合は'unknown'
-      // リクルートページにクエリパラメータとして数値を渡す
-      router.push(`/recruit?value=${value}`);
-    };
+  // ゲームアイテムがクリックされたときに実行する関数
+  const handleGameClick = (gameName: string) => {
+    const value = gameValueMapping[gameName] || 'unknown'; // マッピングから数値を取得、未定義の場合は'unknown'
+    // リクルートページにクエリパラメータとして数値を渡す
+    router.push(`/recruit?value=${value}`);
+  };
   const categories = {
     FPS: ['VALORANT', 'OverWatch2', 'APEX', 'CSGO2'],
     カードゲーム: ['遊戯王 マスターデュエル'],
@@ -821,8 +844,9 @@ const Valorant = () => {
                                   rank as keyof (
                                     | ValoRankType
                                     | ApexRankType
+                                    | LolRankType
                                     | FortNiteRankType
-                                    | StreetFighterRankType
+                                    | StreetFigherRankType
                                     | YuugiouRankType
                                   )
                                 )
@@ -861,7 +885,7 @@ const Valorant = () => {
                                   | ValoRankType
                                   | ApexRankType
                                   | FortNiteRankType
-                                  | StreetFighterRankType
+                                  | StreetFigherRankType
                                   | YuugiouRankType
                                 )
                               )

@@ -14,4 +14,3 @@ const getGameListImagePath = (game: number) => {
 };
 
 export default getGameListImagePath;
-

@@ -4,7 +4,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SetStateAction, useEffect, useState } from 'react';
+import type { SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import getImagePath from 'src/utils/gamePng';
@@ -118,7 +119,6 @@ const UserProfile = () => {
 
   const [sortDescending, setSortDescending] = useState(true);
   const [sortCriteria, setSortCriteria] = useState('rank'); // デフォルトは「ランク順」
-
 
   const handleSortChange = (e: { target: { value: SetStateAction<string> } }) => {
     setSortCriteria(e.target.value);

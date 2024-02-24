@@ -29,7 +29,10 @@ const Login = () => {
   const loginEmail = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       event.preventDefault();
-      const token = await grecaptcha.enterprise.execute('6Le4A34pAAAAAD90Qw7foI7CqRgFD5W97ApplY2z', { action: 'LOGIN' });
+      const token = await grecaptcha.enterprise.execute(
+        '6Le4A34pAAAAAD90Qw7foI7CqRgFD5W97ApplY2z',
+        { action: 'LOGIN' }
+      );
 
       const userCredential = await loginWithEmail(email, password);
       console.log('ログイン成功:', userCredential);
@@ -52,44 +55,46 @@ const Login = () => {
   return (
     <>
       {' '}
-      <BasicHeader user={user} />
-      <div className={styles.box}>
-        <div className={styles.loginTitle}>ログイン</div>
-        <Link href="/signUp">
-          <div className={styles.kaninn}>会員登録はこちら</div>
-        </Link>
-        <div className={styles.loginContainer}>
-          <form className={styles.loginForm}>
-            <label htmlFor="username" className={styles.mail}>
-              メール
-            </label>
-            <input
-              type="text"
-              className={styles.searchmail}
-              placeholder="メールアドレスを入力してください"
-              value={email}
-              onChange={handleEmail}
-            />
+      <div className={styles.box1}>
+        <BasicHeader user={user} />
+        <div className={styles.box}>
+          <div className={styles.loginTitle}>ログイン</div>
+          <Link href="/signUp">
+            <div className={styles.kaninn}>会員登録はこちら</div>
+          </Link>
+          <div className={styles.loginContainer}>
+            <form className={styles.loginForm}>
+              <label htmlFor="username" className={styles.mail}>
+                メール
+              </label>
+              <input
+                type="text"
+                className={styles.searchmail}
+                placeholder="メールアドレスを入力してください"
+                value={email}
+                onChange={handleEmail}
+              />
 
-            <label htmlFor="password" className={styles.password}>
-              パスワード
-            </label>
-            <input
-              type="text"
-              className={styles.searchpass}
-              placeholder="パスワードを入力してください"
-              value={password}
-              onChange={handlePassword}
-            />
+              <label htmlFor="password" className={styles.password}>
+                パスワード
+              </label>
+              <input
+                type="text"
+                className={styles.searchpass}
+                placeholder="パスワードを入力してください"
+                value={password}
+                onChange={handlePassword}
+              />
 
-            <head>
-              <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le4A34pAAAAAD90Qw7foI7CqRgFD5W97ApplY2z" />
-            </head>
-            <button type="submit" className={styles.loginButton} onClick={loginEmail}>
-              ログイン
-            </button>
-          </form>
-        </div>
+              <head>
+                <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le4A34pAAAAAD90Qw7foI7CqRgFD5W97ApplY2z" />
+              </head>
+              <button type="submit" className={styles.loginButton} onClick={loginEmail}>
+                ログイン
+              </button>
+            </form>
+          </div>
+        </div>{' '}
       </div>
     </>
   );

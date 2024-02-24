@@ -1,6 +1,6 @@
 .loginContainer {
   position: relative;
-  top: 60px;
+  top: 90px;
   left: 80px;
   display: flex;
   justify-content: center;
@@ -19,8 +19,7 @@
 
 .loginButton {
   position: relative;
-  top: 70px;
-  left: 15%;
+  top: 50px;
   width: 300px;
   padding: 10px 15px;
   color: white;
@@ -43,7 +42,7 @@
 
 .loginTitle {
   position: relative;
-  top: 20px;
+  top: 50px;
   left: 40%;
   width: 500px;
   font-size: 25px;
@@ -53,7 +52,7 @@
 
 .kaninn {
   position: relative;
-  top: 23px;
+  top: 53px;
   left: 470px;
   width: 150px;
   font-size: 15px;
@@ -123,4 +122,9 @@
   background-color: #fff;
   box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
   transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.box1 {
+  position: relative;
+  padding-bottom: 300px;
 }

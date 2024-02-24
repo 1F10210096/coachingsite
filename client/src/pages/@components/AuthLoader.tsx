@@ -6,7 +6,6 @@ import { userAtom } from 'src/atoms/user';
 import { pagesPath } from 'src/utils/$path';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
-import { returnNull } from 'src/utils/returnNull';
 import { Loading } from '../../components/Loading/Loading';
 
 export const AuthLoader = () => {

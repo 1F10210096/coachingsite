@@ -2,14 +2,14 @@
 import type { GameListModel, UserSummaryModel, newBosyuu } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { BasicHeader } from 'src/pages/@components/BasicHeader/BasicHeader';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import getGameListImagePathMain from 'src/utils/gameListMainPng';
 import getGameListImagePath from 'src/utils/gameListPng';
 import styles from './index.module.css';
-import { useRouter } from 'next/router';
-import getGameListImagePathMain from 'src/utils/gameListMainPng';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
@@ -167,11 +167,15 @@ const Home = () => {
           <div className={styles.recruitContainer}>
             <div className={styles.recruitListTitle}>人気の募集</div>
             <Link href="/allSearch">
-            <div className={styles.blueTitle2}>全て見る {'>'}</div>
+              <div className={styles.blueTitle2}>全て見る {'>'}</div>
             </Link>
             <div className={styles.recruitList}>
               {recruitList.map((recruitList, index) => (
-                <div key={recruitList.id} className={styles.recruitSummary} onClick={() => handleClick(recruitList.id)}>
+                <div
+                  key={recruitList.id}
+                  className={styles.recruitSummary}
+                  onClick={() => handleClick(recruitList.id)}
+                >
                   <div className={styles.recruitListImage}>
                     <img
                       key={index}

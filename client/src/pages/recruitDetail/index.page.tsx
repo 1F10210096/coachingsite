@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
+import getGameListImagePathMain from 'src/utils/gameListMainPng';
 import getGameListImagePath from 'src/utils/gameListPng';
 import getImagePath from 'src/utils/gamePng';
 import getTagImagePath from 'src/utils/tagPng';
@@ -22,7 +23,6 @@ import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
 import styles3 from './index3.module.css';
-import getGameListImagePathMain from 'src/utils/gameListMainPng';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
@@ -201,11 +201,11 @@ const Login = () => {
               <p className={styles2.title}>{RecruitDetail?.title}</p>
             </div>
 
-              <img
-                className={styles.rank}
-                src={getRankImage(RecruitDetail?.gameId, RecruitDetail?.rank)}
-                // alt={`Rank: ${RecruitDetail?.rank}`}
-              />
+            <img
+              className={styles.rank}
+              src={getRankImage(RecruitDetail?.gameId ?? 0, RecruitDetail?.rank ?? 0)}
+              alt={`Rank: ${RecruitDetail?.rank}`}
+            />
           </div>
           <div className={styles2.line} />
           <div className={styles2.horizontalContainer}>

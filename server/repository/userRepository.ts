@@ -119,16 +119,15 @@ export const userRepository = {
           userId,
         },
         select: {
+          userId: true, // userIdを選択に含める
           name: true,
-          imageUrl: false,
-          myProfile: false,
-          rating: false,
+          // imageUrl, myProfile, ratingは選択から除外してもよい
         },
       });
-      assert(user !== null, 'usersはnullです');
+      assert(user !== null, 'User is null');
       return user;
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching user:', error);
       return null;
     }
   },

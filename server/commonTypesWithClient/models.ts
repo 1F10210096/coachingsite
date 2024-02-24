@@ -160,7 +160,29 @@ export type FortNiteRankType = {
   アンリアル: boolean;
 };
 
+export type LolRankType = {
+  アイアン: boolean;
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  エメラルド: boolean;
+  ダイヤモンド: boolean;
+  マスター: boolean;
+  グランドマスター: boolean;
+  チャレンジャー: boolean;
+};
 export type StreetFigherRankType = {
+  ルーキー: boolean;
+  ブロンズ: boolean;
+  シルバー: boolean;
+  ゴールド: boolean;
+  プラチナ: boolean;
+  ダイヤモンド: boolean;
+  マスター: boolean;
+};
+
+export type YuugiouRankType = {
   ルーキー: boolean;
   ブロンズ: boolean;
   シルバー: boolean;

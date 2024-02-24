@@ -8,7 +8,7 @@ import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
-import { gameList,game } from 'src/utils/gameList';
+import { game, gameList } from 'src/utils/gameList';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートのパスを適切に設定
 import styles2 from './index2.module.css';

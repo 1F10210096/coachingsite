@@ -53,7 +53,7 @@
   justify-content: center; /* 水平方向の中央揃え */
   width: 100%;
   height: auto;
-  padding-bottom: 300px;
+  padding-bottom: 500px;
   zoom: 0.9;
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
@@ -127,7 +127,6 @@
   font-weight: bold; /* 文字を太くする */
   color: rgb(92 92 92);
   border-top: 1px solid rgb(188 188 188);
-  border-bottom: 1px solid rgb(188 188 188);
 }
 
 .rankContent {
@@ -526,4 +525,31 @@
   outline: 0 solid transparent;
   box-shadow: #5e5df0 0 10px 20px -10px;
   opacity: 1;
+}
+
+.line {
+  position: relative;
+  top: -7px;
+  right: 10px;
+  border-top: 1px solid rgb(188 188 188);
+}
+
+.line2 {
+  position: relative;
+  top: -7px;
+  border-top: 1px solid rgb(188 188 188);
+}
+
+.line3 {
+  position: relative;
+  top: -7px;
+  left: 17px;
+  width: 90%;
+  border-top: 1px solid rgb(188 188 188);
+}
+
+.line4 {
+  position: relative;
+  top: 23px;
+  border-top: 1px solid rgb(188 188 188);
 }

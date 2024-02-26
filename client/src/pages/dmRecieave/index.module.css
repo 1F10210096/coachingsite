@@ -807,14 +807,21 @@
 
 .userName {
   position: relative;
+  width: 150px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
   font-size: 13px;
+  white-space: nowrap; /* テキストを1行にする */
+  background-color: #0056b3;
 }
 
 .userContainer {
   position: relative;
   top: 15px;
   left: 40px;
+  width: 234px;
   height: 60px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
+  white-space: nowrap; /* テキストを1行にする */
 }
 
 .chatContainer {

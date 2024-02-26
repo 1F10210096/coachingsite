@@ -760,7 +760,12 @@
 
 .userName {
   position: relative;
+  display: inline-block;
+  width: 400px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
   font-size: 13px;
+  white-space: nowrap; /* テキストを1行にする */
+  background-color: #0056b3;
 }
 
 .userContainer {

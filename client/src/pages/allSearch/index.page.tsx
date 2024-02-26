@@ -13,9 +13,9 @@ const AllSearch = () => {
   const [categories, setCategories] = useState({
     FPS: false,
     CardGame: false,
-    RPG: false,
+    BattleRoyale: false,
     FightingGame: false,
-    SmartphoneGame: false,
+    MOBA: false,
   });
 
   useEffect(() => {
@@ -91,18 +91,18 @@ const AllSearch = () => {
                 <label>
                   <input
                     type="checkbox"
-                    name="RPG"
-                    checked={categories.RPG}
+                    name="BattleRoyale"
+                    checked={categories.BattleRoyale}
                     onChange={handleCheckboxChange}
                   />
-                  RPG
+                  バトルロワイアル
                 </label>
               </div>
               <div className={styles.smallContainer}>
                 <label>
                   <input
                     type="checkbox"
-                    name="FPS"
+                    name="FightingGame"
                     checked={categories.FightingGame}
                     onChange={handleCheckboxChange}
                   />
@@ -113,11 +113,11 @@ const AllSearch = () => {
                 <label>
                   <input
                     type="checkbox"
-                    name="FPS"
-                    checked={categories.SmartphoneGame}
+                    name="MOBA"
+                    checked={categories.MOBA}
                     onChange={handleCheckboxChange}
                   />
-                  スマホゲーム
+                  MOBA
                 </label>
               </div>
             </div>{' '}

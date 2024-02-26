@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Pagination } from 'antd';
 import type {
   ApexRankType,
   BosyuuListModel3,
@@ -682,17 +683,13 @@ const Valorant = () => {
       ? myYuugiouRanks
       : {};
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = RecruitList.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
+  const handleChangePage = (page: SetStateAction<number>) => {
+    setCurrentPage(page);
   };
 
   const [sortDescending, setSortDescending] = useState(true);
@@ -832,30 +829,33 @@ const Valorant = () => {
                   </div>
                   <div className={styles.sea1}>
                     {showRankCheckboxes && (
-                      <div className={styles.rankCheckboxes}>
-                        {Object.keys(ranksToDisplay).map((rank) => (
-                          <label key={rank}>
-                            <input
-                              type="checkbox"
-                              checked={ranksToDisplay[rank]}
-                              className={styles.sell}
-                              onChange={() =>
-                                handleCheckboxChange(
-                                  rank as keyof (
-                                    | ValoRankType
-                                    | ApexRankType
-                                    | LolRankType
-                                    | FortNiteRankType
-                                    | StreetFigherRankType
-                                    | YuugiouRankType
+                      <>
+                        <div className={styles.line} />
+                        <div className={styles.rankCheckboxes}>
+                          {Object.keys(ranksToDisplay).map((rank) => (
+                            <label key={rank}>
+                              <input
+                                type="checkbox"
+                                checked={ranksToDisplay[rank]}
+                                className={styles.sell}
+                                onChange={() =>
+                                  handleCheckboxChange(
+                                    rank as keyof (
+                                      | ValoRankType
+                                      | ApexRankType
+                                      | LolRankType
+                                      | FortNiteRankType
+                                      | StreetFigherRankType
+                                      | YuugiouRankType
+                                    )
                                   )
-                                )
-                              }
-                            />
-                            <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
-                          </label>
-                        ))}
-                      </div>
+                                }
+                              />
+                              <span>{rank.charAt(0).toUpperCase() + rank.slice(1)}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </>
                     )}{' '}
                   </div>
                 </div>
@@ -872,29 +872,32 @@ const Valorant = () => {
                 </div>
                 <div className={styles.sea}>
                   {showMyRankCheckboxes && (
-                    <div className={styles.rankCheckboxes}>
-                      {Object.keys(myRanksToDisplay).map((myrank) => (
-                        <label key={myrank}>
-                          <input
-                            type="checkbox"
-                            className={styles.sell}
-                            checked={myRanksToDisplay[myrank]}
-                            onChange={() =>
-                              handleMyRankCheckboxChange(
-                                myrank as keyof (
-                                  | ValoRankType
-                                  | ApexRankType
-                                  | FortNiteRankType
-                                  | StreetFigherRankType
-                                  | YuugiouRankType
+                    <>
+                      <div className={styles.line2} />
+                      <div className={styles.rankCheckboxes}>
+                        {Object.keys(myRanksToDisplay).map((myrank) => (
+                          <label key={myrank}>
+                            <input
+                              type="checkbox"
+                              className={styles.sell}
+                              checked={myRanksToDisplay[myrank]}
+                              onChange={() =>
+                                handleMyRankCheckboxChange(
+                                  myrank as keyof (
+                                    | ValoRankType
+                                    | ApexRankType
+                                    | FortNiteRankType
+                                    | StreetFigherRankType
+                                    | YuugiouRankType
+                                  )
                                 )
-                              )
-                            }
-                          />
-                          <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
-                        </label>
-                      ))}
-                    </div>
+                              }
+                            />
+                            <span>{myrank.charAt(0).toUpperCase() + myrank.slice(1)}</span>{' '}
+                          </label>
+                        ))}
+                      </div>
+                    </>
                   )}
                 </div>{' '}
                 <div className={styles.searchNameContainer2}>
@@ -908,22 +911,25 @@ const Valorant = () => {
                 </div>
                 <div className={styles.sea2}>
                   {showTagCheckboxes && (
-                    <div className={styles.rankCheckboxes2}>
-                      {Object.keys(Tags).map((Tag) => (
-                        <label key={Tag} htmlFor={`tag-${Tag}`}>
-                          <input
-                            id={`tag-${Tag}`}
-                            type="checkbox"
-                            checked={Tags[Tag as keyof TagsType]}
-                            onChange={() => handleTagCheckboxChange(Tag as keyof TagsType)}
-                          />
-                          {/* spanをinputの直後に配置 */}
-                          <span className={styles.ra}>
-                            {Tag.charAt(0).toUpperCase() + Tag.slice(1)}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
+                    <>
+                      <div className={styles.line2} />
+                      <div className={styles.rankCheckboxes2}>
+                        {Object.keys(Tags).map((Tag) => (
+                          <label key={Tag} htmlFor={`tag-${Tag}`}>
+                            <input
+                              id={`tag-${Tag}`}
+                              type="checkbox"
+                              checked={Tags[Tag as keyof TagsType]}
+                              onChange={() => handleTagCheckboxChange(Tag as keyof TagsType)}
+                            />
+                            {/* spanをinputの直後に配置 */}
+                            <span className={styles.ra}>
+                              {Tag.charAt(0).toUpperCase() + Tag.slice(1)}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </>
                   )}{' '}
                 </div>
                 <div className={styles.searchNameContainer2}>
@@ -936,14 +942,17 @@ const Valorant = () => {
                   </div>{' '}
                 </div>
                 {showLessonWard && (
-                  <div className={styles.sea3}>
-                    <input
-                      type="text"
-                      className={styles.searchInput}
-                      onChange={handleChange2}
-                      placeholder="レッスンタイプを入力してください"
-                    />
-                  </div>
+                  <>
+                    <div className={styles.line3} />
+                    <div className={styles.sea3}>
+                      <input
+                        type="text"
+                        className={styles.searchInput}
+                        onChange={handleChange2}
+                        placeholder="レッスンタイプを入力してください"
+                      />
+                    </div>
+                  </>
                 )}
                 <div className={styles.searchNameContainer2}>
                   <div
@@ -953,6 +962,7 @@ const Valorant = () => {
                     <div className={styles.searchDetailContainer}>ワード検索</div>
                     <span className={styles.dropdownIcon} />
                   </div>{' '}
+                  <div className={styles.line4} />
                 </div>
                 {showWard && (
                   <div className={styles.sea2}>
@@ -1090,12 +1100,13 @@ const Valorant = () => {
                 </div>
               </div>
             ))}
-            <div className={styles2.selectPage}>
-              {currentPage > 1 && <button onClick={handlePreviousPage}>前へ</button>}
-              {RecruitList.length > indexOfLastItem && (
-                <button onClick={handleNextPage}>次へ</button>
-              )}
-            </div>
+            <Pagination
+              current={currentPage}
+              total={RecruitList.length}
+              pageSize={itemsPerPage}
+              onChange={handleChangePage}
+              className={styles2.pagenation}
+            />
           </div>
         </div>
       </div>

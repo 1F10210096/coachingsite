@@ -19,7 +19,7 @@
   height: 40px;
   background: #fafafa;
   border-bottom: 1px solid #68b5fe;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
 }
 
 .button {
@@ -195,12 +195,17 @@
 }
 
 .userName2 {
-  /* 隣接する要素との間隔を設定 */
+  position: relative;
+  top: 7px;
+  display: inline-block;
+  width: 80px;
   margin-right: 10px;
   margin-left: 10px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
   font-size: 17px;
   font-weight: bold;
   color: #555;
+  white-space: nowrap; /* テキストを1行にする */
 }
 
 .loading {

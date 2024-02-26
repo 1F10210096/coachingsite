@@ -752,16 +752,16 @@ const Valorant = () => {
   const handleSortChange = (e: { target: { value: SetStateAction<string> } }) => {
     setSortCriteria(e.target.value);
     // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
-    handleSortClick2();
+    handleSortClick2(e.target.value);
   };
-  const handleSortClick2 = () => {
-    if (sortCriteria === 'rank') {
+  const handleSortClick2 = (e: SetStateAction<string>) => {
+    if (e === 'rank') {
       // ランク順に並び替えるロジック
       const sortedList = [...RecruitList].sort((a, b) =>
         sortDescending ? b.rank - a.rank : a.rank - b.rank
       );
       setRecruitlist(sortedList);
-    } else if (sortCriteria === 'update') {
+    } else if (e === 'update') {
       // 更新順に並び替えるロジック
       const sortedList = [...RecruitList].sort((a, b) => {
         // 文字列や他の形式の日付をDateオブジェクトに変換

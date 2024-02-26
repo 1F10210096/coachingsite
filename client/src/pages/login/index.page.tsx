@@ -36,7 +36,6 @@ const Login = () => {
       router.push(process.env.REACT_APP_REDIRECT_URL as string);
     } catch (error) {
       console.error('ログイン失敗:', error);
-      alert(`ログイン失敗: ${error}`);
     }
   };
 

@@ -128,6 +128,7 @@ const UserProfile = () => {
         await apiClient.updateProfile.post({
           body: { userId, newName, game, zisseki, selectedFile },
         });
+        alert('プロフィール更新成功');
       } catch (error) {
         console.error('プロフィール更新エラー:', error);
       }

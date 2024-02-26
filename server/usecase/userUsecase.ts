@@ -1,4 +1,4 @@
-import type { Name, UserModel, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { userRepository } from '$/repository/userRepository';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';

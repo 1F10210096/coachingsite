@@ -15,6 +15,7 @@ export const s3Client = new S3Client({
 });
 
 async function convertPngRepository(base64String: string) {
+  console.log(process.env.region, 'kllllllllllllllllll');
   const fileName = `${uuidv4()}.jpg`; // UUIDでファイル名を生成
   const buffer = Buffer.from(base64String.replace(/^data:image\/\w+;base64,/, ''), 'base64');
 

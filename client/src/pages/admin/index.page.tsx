@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
-import type { gameListModel, UserModel, UserModel2 } from 'commonTypesWithClient/models';
+import type { gameListModel, UserModel2 } from 'commonTypesWithClient/models';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import styles from './index.module.css';

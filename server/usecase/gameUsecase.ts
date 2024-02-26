@@ -33,10 +33,9 @@ export const gameListUsecase = {
   },
   fetchList: async (): Promise<gameListModel[]> => {
     console.log('gameListUsecase.fetchCategories');
-      const newGame = await prismaClient.gameList.findMany();
-      console.log(newGame, 'dasdafa');
-      return newGame;
-
+    const newGame = await prismaClient.gameList.findMany();
+    console.log(newGame, 'dasdafa');
+    return newGame;
   },
   update: async (id: number, title: string, genre: string) => {
     console.log('Updating game');

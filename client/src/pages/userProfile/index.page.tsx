@@ -97,15 +97,25 @@ const UserProfile = () => {
       const fileUrl = URL.createObjectURL(file);
       setLookImage(fileUrl); // ローカルでのプレビュー用
 
-      // ファイルをBase64にエンコード
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const base64String = e.target?.result;
-        setSelectedFile(base64String as string); // Base64エンコードされた文字列を状態に設定
+      // 画像を読み込む
+      const img = new Image();
+      img.src = fileUrl;
+      img.onload = () => {
+        // canvasを使用して画像をリサイズ
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        // リサイズ後のサイズを設定
+        canvas.width = 800; // ここで希望の幅を設定
+        canvas.height = (img.height * 800) / img.width; // アスペクト比を維持
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // canvasから画像をBase64として取得
+        const base64String = canvas.toDataURL('image/jpeg', 0.7); // 第二引数は品質設定（0.7は70%の品質）
+        setSelectedFile(base64String); // Base64エンコードされた文字列を状態に設定
       };
-      reader.readAsDataURL(file);
     }
   };
+
   // フォーム送信時の処理
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

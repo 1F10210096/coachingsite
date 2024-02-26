@@ -1,5 +1,6 @@
-import type { Name, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name, UserModel, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { userRepository } from '$/repository/userRepository';
+import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
 export const userUsecase = {
   fetchListinfo: async (): Promise<UserSummaryModel[]> => {
@@ -28,5 +29,38 @@ export const userUsecase = {
     const userDetail = await userRepository.fetchMyProfile(userId);
     assert(userDetail !== null, 'userDetailはnullです');
     return userDetail;
+  },
+  fetchList: async (): Promise<UserModel2[]> => {
+    console.log('gameListUsecase.fetchCategories');
+    const newUser = await prismaClient.user.findMany();
+    console.log(newUser, 'dasdafa');
+    return newUser;
+  },
+  update: async (
+    userId: string,
+    name: string,
+    myProfile: string,
+    rating: number,
+    imageUrl: string
+  ) => {
+    console.log('gameListUsecase.fetchCategories');
+    try {
+      const updatedUser = await prismaClient.user.update({
+        where: {
+          userId, // 更新するユーザーのIDを指定
+        },
+        data: {
+          name, // 更新する名前
+          myProfile, // 更新するプロフィール
+          rating, // 更新する評価
+          imageUrl, // 更新する画像URL
+        },
+      });
+      console.log(updatedUser, 'Update successful');
+      return updatedUser;
+    } catch (error) {
+      console.error('Failed to update user:', error);
+      throw error; // エラーを呼び出し元に伝播させる
+    }
   },
 };

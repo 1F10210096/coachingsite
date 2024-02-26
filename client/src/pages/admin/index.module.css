@@ -1,8 +1,7 @@
 .loginContainer {
+  position: relative;
+  top: 80px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* 画面の高さに合わせる */
 }
 
 .loginForm {
@@ -35,13 +34,10 @@
 }
 
 .loginTitle {
-  position: absolute;
-  top: 120px;
-  left: 50%;
+  position: relative;
   font-size: 30px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .kaninn {
@@ -109,4 +105,94 @@
 
 .searchpass:focus {
   border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.gameList {
+  position: relative;
+  display: flex;
+}
+
+.gameList2 {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  background-color: #0056b3;
+}
+
+.title2 {
+  display: flex;
+  width: 400px;
+  background-color: #0056b3;
+}
+
+.gameTitle {
+  position: relative; /* Keeps original positioning context */
+  box-sizing: border-box; /* Ensures padding and border are included in width/height */
+  display: flex; /* Enables flexbox layout */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
+  width: 100px; /* Adjust width as needed */
+  height: auto; /* Adjust height as needed */
+  margin: auto; /* Centers the element within its parent */
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center; /* Ensures the text itself is centered if it wraps */
+  background-color: #bddbfc;
+  border: 1px solid #898989; /* Adds a black border, adjust color as needed */
+}
+
+.gameTitle2 {
+  position: relative; /* Keeps original positioning context */
+  display: -webkit-box; /* WebKit用のフレックスボックス表示 */
+  width: 300px; /* Adjust width as needed */
+  height: auto; /* Adjust height as needed */
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center; /* Ensures the text itself is centered if it wraps */
+  background-color: #fff;
+  border: 1px solid #898989; /* Adds a black border, adjust color as needed */
+  -webkit-box-orient: vertical; /* 子要素を垂直方向に配置 */
+  -webkit-line-clamp: 1; /* 行数を1行に制限 */
+}
+
+.genre {
+  position: relative;
+  display: flex;
+}
+
+.gameGenre {
+  position: relative;
+}
+
+.editButton {
+  position: relative;
+}
+
+.loginContainer1 {
+  position: relative;
+  top: 100px;
+  left: 200px;
+  width: 1100px;
+  height: auto;
+}
+
+.gameContainer {
+  position: relative;
+  top: 40px;
+  left: 40px;
+}
+
+.userContainer {
+  position: relative;
+  top: 300px;
+  left: 200px;
+  width: 1100px;
+  height: auto;
+}
+
+.gameTitle3 {
+  padding-bottom: 40px;
 }

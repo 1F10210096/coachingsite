@@ -1,4 +1,4 @@
-import type { GameListModel } from '$/commonTypesWithClient/models';
+import type { GameListModel, gameListModel } from '$/commonTypesWithClient/models';
 import { gameListRepository } from '$/repository/gameListRepository';
 import { prismaClient } from '$/service/prismaClient';
 
@@ -29,6 +29,27 @@ export const gameListUsecase = {
       console.log(newGame);
     } catch (error) {
       console.log(error);
+    }
+  },
+  fetchList: async (): Promise<gameListModel[]> => {
+    console.log('gameListUsecase.fetchCategories');
+      const newGame = await prismaClient.gameList.findMany();
+      console.log(newGame, 'dasdafa');
+      return newGame;
+
+  },
+  update: async (id: number, title: string, genre: string) => {
+    console.log('Updating game');
+    try {
+      const updatedGame = await prismaClient.gameList.update({
+        where: { id }, // 更新するレコードのIDを指定
+        data: { title, genre }, // 更新するデータ
+      });
+      console.log(updatedGame, 'Updated successfully');
+      return updatedGame;
+    } catch (error) {
+      console.error('Failed to update game:', error);
+      throw error; // エラーを外部に投げる
     }
   },
 };

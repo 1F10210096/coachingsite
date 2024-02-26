@@ -2,7 +2,11 @@
 import type { BosyuuList, Student } from '@prisma/client';
 import { z } from 'zod';
 import { taskIdParser } from '../service/idParsers';
-
+export type gameListModel = {
+  id: number;
+  title: string;
+  genre: string;
+};
 export type UserModel = {
   userId: string;
   name: string;
@@ -14,7 +18,14 @@ export type UserModel = {
   studentId?: string;
   teacherId?: string;
 };
-
+export type UserModel2 = {
+  userId: string;
+  name: string;
+  myProfile: string | null;
+  rating: number | null;
+  imageUrl: string | null;
+  createdAt: Date;
+};
 export type gameRankModel = {
   userId: string;
   gameName: string;

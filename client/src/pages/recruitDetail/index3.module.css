@@ -11,9 +11,14 @@
 
 .recruitContainer1 {
   position: relative;
-  top: -10px;
+  top: -14px;
   left: 17px;
   width: 200px;
+
+  /* テキストがオーバーフローした場合の振る舞いを定義 */
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
+  text-overflow: ellipsis; /* オーバーフローしたテキストの末尾を省略記号で表示 */
+  white-space: nowrap; /* テキストを1行にする */
   background-color: rgb(244 244 244);
 }
 

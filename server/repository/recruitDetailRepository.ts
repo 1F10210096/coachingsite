@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable complexity */
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
@@ -103,14 +104,16 @@ export const recruitDetailRepository = {
       hitokoto: bosyuuDetail.teacher.hitokoto,
     };
 
-    const reviewList: reviewModel2[] = bosyuuDetail.apply.map((apply) => ({
-      name: apply.student.user.name,
-      imageUrl: apply.student.user.imageUrl,
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      rating: apply.rating || 0,
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      review: apply.review || null,
-    }));
+    const reviewList: reviewModel2[] = bosyuuDetail.apply
+      .filter((apply) => apply.review !== null && apply.review.trim() !== '')
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 5)
+      .map((apply) => ({
+        name: apply.student.user.name,
+        imageUrl: apply.student.user.imageUrl,
+        rating: apply.rating || 0,
+        review: apply.review,
+      }));
 
     console.log('reviewList', reviewList);
     return {

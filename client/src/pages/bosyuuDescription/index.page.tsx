@@ -415,7 +415,7 @@ const YourComponent = () => {
                 </span>
               </div>
               <textarea
-                placeholder="スケジュールを入力してください"
+                placeholder="例 月曜日 20:00~22:00"
                 onChange={handleSuchedule} // ユーザーの入力を処理する関数
                 className={styles.input} // スタイリングのためのCSSクラス
               />

@@ -564,7 +564,7 @@ const Dm = () => {
   const handleCommentClick = (roomId: string) => {
     setRoomId(roomId);
     console.log(roomId);
-    router.push(`../dmRecieave?id=${roomId}`); // 適切なURLにリダイレクト
+    router.push(`../dmReceive?id=${roomId}&title=${selectedTitle}`);
   };
 
   return (
@@ -690,6 +690,16 @@ const Dm = () => {
               </div>
             )}
             {isModalApproveOpen && <ApproveModal isOpen={isModalApproveOpen} />}
+            {userNumber === 3 && (
+              <button disabled className={styles.appliedButton}>
+                申し込み済み
+              </button>
+            )}
+            {userNumber === 4 && (
+              <button disabled className={styles.appliedButton1}>
+                了承済み
+              </button>
+            )}
           </div>
         </div>
         {/* <div className={styles.profileContainer}>

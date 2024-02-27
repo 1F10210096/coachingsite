@@ -312,16 +312,16 @@
 
 .applayButton {
   position: relative;
-  left: 10%;
+  left: 40px;
   width: 150px;
   height: 40px;
-  padding: 10px 20px; /* ボタン内の余白 */
-  font-size: 16px; /* フォントサイズ */
-  color: white; /* テキストの色を白に設定 */
-  cursor: pointer; /* カーソルをポインターに設定 */
-  background-color: orange; /* ボタンの背景色をオレンジに設定 */
-  border: none; /* 境界線をなくす */
-  border-radius: 10px; /* ボタンの角を丸くする */
+  padding: 10px 15px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+  background-color: #ffe084; /* 背景色を薄い灰色に */
+  border: 1px solid #ccc; /* 灰色の境界線 */
+  border-radius: 4px; /* 角を少し丸める */
   transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
 }
 
@@ -330,17 +330,40 @@
 }
 
 .applayButton2 {
-  position: fixed;
-  top: 620px;
-  left: 1300px;
+  position: relative;
+  left: 40px;
+  display: flex; /* Flexboxを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  width: 156px;
   height: 40px;
-  padding: 10px 20px; /* ボタン内の余白 */
-  font-size: 16px; /* フォントサイズ */
-  color: white; /* テキストの色を白に設定 */
-  cursor: pointer; /* カーソルをポインターに設定 */
-  background-color: rgb(254 84 248); /* ボタンの背景色をオレンジに設定 */
-  border: none; /* 境界線をなくす */
-  border-radius: 10px; /* ボタンの角を丸くする */
+  padding: 10px 15px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  text-align: center; /* テキストを中央揃え（必要に応じて） */
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+  background-color: #ff84f1; /* 背景色を薄い灰色に */
+  border: 1px solid #ccc; /* 灰色の境界線 */
+  border-radius: 4px; /* 角を少し丸める */
+  transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
+}
+
+.appliedButton1 {
+  position: relative;
+  left: 40px;
+  display: flex; /* Flexboxを使用 */
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  width: 156px;
+  height: 40px;
+  padding: 10px 15px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  text-align: center; /* テキストを中央揃え（必要に応じて） */
+  cursor: pointer; /* ホバー時にカーソルをポインターに変更 */
+  background-color: #84ffab; /* 背景色を薄い灰色に */
+  border: 1px solid #ccc; /* 灰色の境界線 */
+  border-radius: 4px; /* 角を少し丸める */
   transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
 }
 
@@ -760,8 +783,7 @@
 
 .userName {
   position: relative;
-  display: inline-block;
-  width: 400px;
+  width: 150px;
   overflow: hidden; /* コンテナの外に出たテキストを隠す */
   font-size: 13px;
   white-space: nowrap; /* テキストを1行にする */
@@ -771,7 +793,10 @@
   position: relative;
   top: 15px;
   left: 40px;
+  width: 234px;
   height: 60px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
+  white-space: nowrap; /* テキストを1行にする */
 }
 
 .chatContainer {

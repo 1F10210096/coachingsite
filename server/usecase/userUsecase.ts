@@ -1,4 +1,4 @@
-import type { Name, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type { Name, User3, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
 import { userRepository } from '$/repository/userRepository';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
@@ -27,6 +27,13 @@ export const userUsecase = {
     console.log('gameListUsecase.fetchinfo');
     console.log('userId', userId);
     const userDetail = await userRepository.fetchMyProfile(userId);
+    assert(userDetail !== null, 'userDetailはnullです');
+    return userDetail;
+  },
+  fetchMyProfile2: async (userId: string): Promise<User3> => {
+    console.log('gameListUsecase.fetchinfo');
+    console.log('userId', userId);
+    const userDetail = await userRepository.fetchMyProfile2(userId);
     assert(userDetail !== null, 'userDetailはnullです');
     return userDetail;
   },

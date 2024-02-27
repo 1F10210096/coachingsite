@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines */
 import type {
   CommentsWithImages,
@@ -100,6 +101,25 @@ export const roomRepository = {
 
       console.log(userId);
       console.log(room);
+
+      // 申し込みが存在するかどうかを確認
+      const application = await prisma.apply.findFirst({
+        where: {
+          roomId,
+          studentId: userId,
+        },
+      });
+
+      // 申し込みが存在し、状態が「wait」の場合は3を返す
+      if (application && application.status === 'wait') {
+        return 3;
+      }
+
+      // 申し込みが存在し、状態が「応募済み」（またはそれに相当する状態）の場合は4を返す
+      // ここでは「応募済み」の状態をどのように表すかに依存します（例: 'applied', 'accepted'など）
+      if (application && application.status === '応募済み') {
+        return 4;
+      }
 
       // userIdがparticipantIdと一致する場合は1を返す
       if (userId === room.participantId) {
@@ -260,7 +280,7 @@ export const roomRepository = {
   },
   fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
-      console.log('dddddddddddd534342343ddddddddddd');
+      console.log('Fetching DMs for coach');
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
           hostId: userId,
@@ -280,28 +300,28 @@ export const roomRepository = {
               },
             },
           },
-          apply: true,
+          apply: {
+            where: {
+              status: 'wait', // ここでstatusが"wait"のapplyだけを取得
+            },
+          },
           // 他に必要なフィールドがあれば、ここに追加
         },
       });
-      console.log(roomsWithLatestComment, 'dadwa');
 
-      console.log(roomsWithLatestComment, 'dadwa');
-      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
-        (room) => room.apply.length === 0
+      console.log(roomsWithLatestComment, 'Filtered rooms with latest comment');
+
+      // applyが空ではない、かつ最新のコメントが存在する部屋だけをフィルタリング
+      const roomsWithValidAppliesAndComments = roomsWithLatestComment.filter(
+        (room) => room.apply.length > 0 && room.Comment.length > 0
       );
 
-      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
-
-      const roomsWithMappedComments = roomsWithComments.map((room) => ({
+      // 最新のコメントとそのユーザー情報をマッピング
+      const roomsWithMappedComments = roomsWithValidAppliesAndComments.map((room) => ({
         ...room,
-        latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
-        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+        latestComment: room.Comment[0], // 最新のコメント
+        commentUser: room.Comment[0].user, // コメント投稿者の情報
       }));
-
-      if (roomsWithMappedComments.length === 0) {
-        return [];
-      }
 
       return roomsWithMappedComments;
     } catch (error) {
@@ -311,7 +331,6 @@ export const roomRepository = {
   },
   fetchDm2Coach: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
-      console.log('ddddddddddddddlllllllllllllllllllddddddd');
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
           hostId: userId,
@@ -331,26 +350,26 @@ export const roomRepository = {
               },
             },
           },
-          apply: true,
+          apply: {
+            where: {
+              status: '応募済み', // ここでstatusが"応募済み"のものだけを取得
+            },
+          },
           // 他に必要なフィールドがあれば、ここに追加
         },
       });
-      console.log(roomsWithLatestComment, 'dadwa');
-      const roomsWithNonEmptyApplies = roomsWithLatestComment.filter(
-        (room) => room.apply.length > 0
+
+      // 応募が存在し、最新のコメントがある部屋だけをフィルタリング
+      const roomsWithValidAppliesAndComments = roomsWithLatestComment.filter(
+        (room) => room.apply.length > 0 && room.Comment.length > 0
       );
 
-      const roomsWithComments = roomsWithNonEmptyApplies.filter((room) => room.Comment.length > 0);
-
-      const roomsWithMappedComments = roomsWithComments.map((room) => ({
+      // 最新のコメントとそのユーザー情報をマッピング
+      const roomsWithMappedComments = roomsWithValidAppliesAndComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
         commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
       }));
-
-      if (roomsWithMappedComments.length === 0) {
-        return [];
-      }
 
       return roomsWithMappedComments;
     } catch (error) {

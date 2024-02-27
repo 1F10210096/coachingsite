@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import assert from 'assert';
 import type {
@@ -32,9 +33,14 @@ const UserProfile = () => {
   const [newName, setNewName] = useState('');
   const [game, setGame] = useState('');
   const [zisseki, setZisseki] = useState('');
-  const [newProfile, setNewProfile] = useState('');
-  const showModal = (content: SetStateAction<string>) => {
+  const [newProfile, setNewProfile] = useState<string | null>('');
+  const showModal = async (content: SetStateAction<string>) => {
     setModalContent(content);
+    const response = await apiClient.fetchAllMyProfile.post({ body: { Id } });
+    console.log(response.body);
+    setNewName(response.body.name);
+    setNewProfile(response.body.myProfile);
+    setLookImage(response.body.imageUrl);
   };
   const [Id, setUserUUID] = useState('');
   useEffect(() => {
@@ -71,7 +77,9 @@ const UserProfile = () => {
   });
 
   const handleNewName = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewName(e.target.value);
+    if (e.target.value.length <= 8) {
+      setNewName(e.target.value);
+    }
   };
 
   const handleGame = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +94,7 @@ const UserProfile = () => {
     setNewProfile(e.target.value);
   };
 
-  const [lookImage, setLookImage] = useState('');
+  const [lookImage, setLookImage] = useState<string | null>('');
 
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [selectedFile, setSelectedFile] = useState('');
@@ -520,7 +528,7 @@ const UserProfile = () => {
                         <div className={styles.nameTitle}>自己紹介</div>
                         <textarea
                           name="bio"
-                          value={newProfile}
+                          value={newProfile || ''}
                           onChange={handleNewProfile}
                           placeholder="自己紹介"
                           className={styles.name2}

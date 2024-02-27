@@ -429,6 +429,7 @@ const Dm = () => {
     try {
       console.log(user);
       let response;
+      setSelectedTitle(title);
       if (title === 'dmTitle3') {
         // 'dmTitle3'が選択された場合のAPIエンドポイントを呼び出す
         response = await apiClient.fetchDmCoach.post({
@@ -598,12 +599,23 @@ const Dm = () => {
             )}
             {isModalOpen && <Modal isOpen={isModalOpen} />}
             {isModalFinalOpen && <FinalModal isOpen={isModalFinalOpen} />}
-            {waitApprove && userNumber === 2 && (
-              <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
-                {'受諾ボタン'}
-              </div>
+            {userNumber === 2 && (
+              <>
+                {waitApprove ? (
+                  <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
+                    受諾ボタン
+                  </div>
+                ) : (
+                  <div className={styles.appliedButton1}>了承済み</div>
+                )}
+              </>
             )}
             {isModalApproveOpen && <ApproveModal isOpen={isModalApproveOpen} />}
+            {userNumber === 4 && (
+              <button disabled className={styles.appliedButton1}>
+                了承済み
+              </button>
+            )}
           </div>
         </div>
         {/* <div className={styles.profileContainer}>

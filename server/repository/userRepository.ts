@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable complexity */
 import type {
+  Favarite,
   User,
   User3,
   UserSummaryDetailModel,
   UserSummaryModel,
-  Favarite
 } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';

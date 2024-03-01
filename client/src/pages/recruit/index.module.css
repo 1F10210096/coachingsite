@@ -427,10 +427,10 @@
 .searchInput {
   position: relative;
   top: 15px;
-  left: 3px;
-  width: 95%;
+  left: 20px;
+  width: 80%;
   height: 40px;
-  padding-left: 3px;
+  padding-left: 20px;
   margin-bottom: 15px;
   font-size: 13px;
   color: rgb(77 77 77);

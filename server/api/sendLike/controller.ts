@@ -1,4 +1,3 @@
-import { commentUsecase } from '$/usecase/commentUsecase';
 import { userUsecase } from '$/usecase/userUsecase';
 import { defineController } from './$relay';
 

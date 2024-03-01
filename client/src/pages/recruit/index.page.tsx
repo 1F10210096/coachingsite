@@ -806,8 +806,7 @@ const Valorant = () => {
         const likedIds = response.body.map((item) => item.bosyuuListId);
         console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
         setLikedRecruits(likedIds);
-    }
-
+      }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
@@ -983,7 +982,7 @@ const Valorant = () => {
                         type="text"
                         className={styles.searchInput}
                         onChange={handleChange2}
-                        placeholder="レッスンタイプを入力してください"
+                        placeholder="レッスンタイプを入力"
                       />
                     </div>
                   </>

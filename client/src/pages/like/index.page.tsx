@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import { Pagination } from 'antd';
-import type { BosyuuListModel3, Favarite } from 'commonTypesWithClient/models';
+import type { BosyuuListModel3 } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
@@ -71,7 +71,7 @@ const Dm = () => {
       console.log(bosyuuLists, 'bosyuuLists');
       console.log(response.body, 'bosyuuListId');
       setRecruitlist(bosyuuLists);
-      const likedIds = response.body.map((item:any) => item.bosyuuListId);
+      const likedIds = response.body.map((item: any) => item.bosyuuListId);
       console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
       setLikedRecruits(likedIds);
     } catch (error) {

@@ -63,7 +63,7 @@ const UserProfile = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
-  
+
   useEffect(() => {
     // Firebaseの認証状態を監視するロジック
     // ...

@@ -125,7 +125,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
                 <button className={styles.loginButton}>会員登録</button>
               </Link>
               <Link href="/signUp">
-                <button className={styles.redButton}>コーチ登録</button>
+                <button className={styles.redButton2}>コーチ登録</button>
               </Link>
             </>
           )}

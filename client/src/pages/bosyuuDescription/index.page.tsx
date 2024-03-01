@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 /* eslint-disable complexity */
 import { RubyOutlined, SendOutlined, TrophyOutlined, ZoomInOutlined } from '@ant-design/icons';
@@ -106,19 +107,52 @@ const YourComponent = () => {
     }
   };
 
+  const [showWarning, setShowWarning] = useState(false);
+  const [showWarning2, setShowWarning2] = useState(false);
+  const [showWarning3, setShowWarning3] = useState(false);
   const handleNextStep = () => {
-    // 次のステップに進むためのロジック
-    // 例えば、すべての選択が完了していることを確認するなど
+    // 必須フィールドが適切に入力されているかチェック
+    if (!selectedGame || !selectedMyRanks || (selectedRanks && selectedRanks.length === 0)) {
+      // 必須フィールドのいずれかが未入力の場合、警告メッセージを表示
+      setShowWarning(true);
+      console.error('すべての必須フィールドを入力してください。');
+      return; // ここで処理を中断
+    }
+
+    setShowWarning(false);
 
     console.log(acheavement);
+    setStep(step + 1);
+  };
 
+  const handleNextStep2 = () => {
+    // 必須フィールドが適切に入力されているかチェック
+    if (!title || !description || !lessonType || !acheavement) {
+      // いずれかの必須フィールドが未入力の場合、警告メッセージを表示
+      setShowWarning2(true); // 警告メッセージの状態を更新
+      return; // 処理を中断し、ユーザーに警告メッセージを表示
+    }
+
+    setShowWarning2(false);
+
+    console.log(acheavement);
+    setStep(step + 1);
+  };
+
+  const handleNextStep3 = () => {
+    // 必須フィールドの検証
+    if (!suchedule.trim() || !notes.trim() || selectedTags.length === 0) {
+      // すべての必須フィールドが適切に入力されていない場合、警告を表示
+      setShowWarning3(true); // 警告メッセージを表示するための状態を更新
+      return; // 処理を中断
+    }
+
+    // すべての必須フィールドが適切に入力されている場合、次のステップに進む
+    setShowWarning3(false); // 警告メッセージを非表示にする
     setStep(step + 1);
   };
 
   const handleBackStep = () => {
-    // 次のステップに進むためのロジック
-    // 例えば、すべての選択が完了していることを確認するなど
-
     console.log(acheavement);
 
     setStep(step - 1);
@@ -338,6 +372,11 @@ const YourComponent = () => {
                 ) : (
                   <div className={styles.noPick} />
                 )}
+                {showWarning && (
+                  <div className={styles.warning}>
+                    *入力していないフィールドがあります。入力してください。
+                  </div>
+                )}
 
                 <button onClick={handleNextStep} className={styles.next}>
                   次へ
@@ -360,6 +399,7 @@ const YourComponent = () => {
                     placeholder="タイトルを入力してください"
                     onChange={handleChange} // ユーザーの入力を処理する関数
                     className={styles.input} // スタイリングのためのCSSクラス
+                    value={title}
                   />
                 </div>
                 <div className={styles.description}>
@@ -372,6 +412,7 @@ const YourComponent = () => {
                   placeholder="募集内容を入力してください"
                   onChange={handleChangeDescription} // ユーザーの入力を処理する関数
                   className={styles.inputDescription} // スタイリングのためのCSSクラス
+                  value={description}
                 />
                 <div className={styles.description}>
                   レッスン形式{' '}
@@ -383,6 +424,7 @@ const YourComponent = () => {
                   placeholder="レッスン形式を入力してください"
                   onChange={handleChangeLessonType} // ユーザーの入力を処理する関数
                   className={styles.inputDescription} // スタイリングのためのCSSクラス
+                  value={lessonType}
                 />
                 <div className={styles.acheavement}>
                   実績{' '}
@@ -394,12 +436,18 @@ const YourComponent = () => {
                   placeholder="実績を入力してください"
                   onChange={handleAcheavement} // ユーザーの入力を処理する関数
                   className={styles.inputAcheavement} // スタイリングのためのCSSクラス
+                  value={acheavement}
                 />
+                {showWarning2 && (
+                  <div className={styles.warning2}>
+                    *入力していないフィールドがあります。入力してください。
+                  </div>
+                )}
                 <div className={styles.yoko}>
                   <button onClick={handleBackStep} className={styles.next2}>
                     戻る
                   </button>
-                  <button onClick={handleNextStep} className={styles.next4}>
+                  <button onClick={handleNextStep2} className={styles.next4}>
                     次へ
                   </button>
                 </div>{' '}
@@ -418,6 +466,7 @@ const YourComponent = () => {
                 placeholder="例 月曜日 20:00~22:00"
                 onChange={handleSuchedule} // ユーザーの入力を処理する関数
                 className={styles.input} // スタイリングのためのCSSクラス
+                value={suchedule}
               />
               <div className={styles.notes}>
                 注意事項{' '}
@@ -429,6 +478,7 @@ const YourComponent = () => {
                 placeholder="注意事項を入力してください"
                 onChange={handleNotes} // ユーザーの入力を処理する関数
                 className={styles.inputNotes} // スタイリングのためのCSSクラス
+                value={notes}
               />
               <div className={styles.notes}>
                 タグを設定入力してください{' '}
@@ -449,11 +499,16 @@ const YourComponent = () => {
                   </div>
                 ))}
               </div>
+              {showWarning3 && (
+                <div className={styles.warning3}>
+                  *入力していないフィールドがあります。入力してください。
+                </div>
+              )}
               <div className={styles.yoko1}>
                 <button onClick={handleBackStep} className={styles.next2}>
                   戻る
                 </button>
-                <button onClick={handleNextStep} className={styles.next4}>
+                <button onClick={handleNextStep3} className={styles.next4}>
                   次へ
                 </button>
               </div>{' '}

@@ -1,4 +1,3 @@
-import { roomUsecase } from '$/usecase/roomUsecase';
 import { userUsecase } from '$/usecase/userUsecase';
 import { defineController } from './$relay';
 

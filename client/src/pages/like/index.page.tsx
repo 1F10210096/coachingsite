@@ -148,6 +148,7 @@ const Dm = () => {
     // ここで選択されたソート基準に基づいてリストを並び替える処理を実行
     handleSortClick2();
   };
+
   const handleSortClick2 = () => {
     if (sortCriteria === 'rank') {
       // ランク順に並び替えるロジック

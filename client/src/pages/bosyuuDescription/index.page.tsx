@@ -285,7 +285,15 @@ const YourComponent = () => {
                   <Steps.Step key={item.title} {...item} />
                 ))}
             </Steps>
-          </div>{' '}
+          </div>
+          <div className={styles.tyuui}>
+            <div>
+              ※当コーチングは、特定のランクや経験レベルを持つプレイヤーを対象としています。ご自身が条件を満たしていることを確認の上、応募してください。
+            </div>
+            <div className={styles.tyuui2}>
+              ※コーチングセッションには、適切な機材（PC、コンソール、良好なインターネット接続など）が必要です。セッション日程の24時間前までに、参加の準備が整っていることを確認してください。
+            </div>
+          </div>
           <div className={styles.aside} />
           {step === 1 && (
             <>
@@ -386,7 +394,6 @@ const YourComponent = () => {
           )}
           {step === 2 && (
             <>
-              <div className={styles.aside1} />
               <div className={styles.as1}>
                 <div className={styles.vertical}>
                   <div className={styles.title}>

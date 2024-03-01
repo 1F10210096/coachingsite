@@ -242,7 +242,7 @@
 
 .as {
   position: relative;
-  top: 180px;
+  top: 130px;
   width: 900px;
   height: auto;
   padding-bottom: 40px;
@@ -255,7 +255,7 @@
 
 .as1 {
   position: relative;
-  top: 180px;
+  top: 140px;
   width: 900px;
   height: auto;
   padding-bottom: 140px;
@@ -268,7 +268,7 @@
 
 .as3 {
   position: relative;
-  top: 180px;
+  top: 140px;
   width: 900px;
   height: auto;
   padding-bottom: 200px;
@@ -532,8 +532,8 @@
 
 .customStepsContainer {
   position: relative;
-  top: 140px;
-  right: 120px;
+  top: 120px;
+  right: 170px;
   width: 900px; /* 希望する横幅に設定 */
   font-weight: 600;
 }
@@ -560,4 +560,20 @@
   left: 100px;
   font-size: 13px;
   color: #ff3535;
+}
+
+.tyuui {
+  position: relative;
+  top: 130px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  font-size: 9px;
+  color: #f00;
+}
+
+.tyuui2 {
+  position: relative;
+  top:3px;
 }

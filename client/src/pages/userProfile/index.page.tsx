@@ -124,6 +124,7 @@ const UserProfile = () => {
 
       try {
         console.log(imageUrl);
+        console.log(zisseki);
         await apiClient.updateProfile.post({
           body: { userId, like, newName, game, zisseki, selectedFile },
         });
@@ -148,7 +149,7 @@ const UserProfile = () => {
       setNewName(response1.body.name);
       setNewProfile(response1.body.myProfile);
       setLookImage(response1.body.imageUrl);
-
+      setImageUrl(response1.body.imageUrl || '');
       const response = await apiClient.fetchMyRecruitList.post({ body: { Id } });
       console.log(response.body);
       setMyRecruitlist(response.body.user);

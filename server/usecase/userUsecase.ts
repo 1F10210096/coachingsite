@@ -75,6 +75,7 @@ export const userUsecase = {
   ) => {
     console.log('gameListUsecase.fetchCategories');
     try {
+      console.log(myProfile);
       const updatedUser = await prismaClient.user.update({
         where: {
           userId, // 更新するユーザーのIDを指定

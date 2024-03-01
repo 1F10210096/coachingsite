@@ -5,6 +5,7 @@ export default defineController(() => ({
     status: 201,
     body: await updateUserUsecase.fetchinfo(
       body.userId,
+      body.like,
       body.newName,
       body.game,
       body.zisseki,

@@ -4,6 +4,7 @@ import { prismaClient } from '$/service/prismaClient';
 export const updateUserUsecase = {
   fetchinfo: async (
     userId: string,
+    like: string,
     newName: string,
     game: string,
     zisseki: string,

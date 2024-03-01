@@ -31,16 +31,12 @@ const UserProfile = () => {
   }, [router.query]);
 
   const [newName, setNewName] = useState('');
+  const [like, setLike] = useState('');
   const [game, setGame] = useState('');
   const [zisseki, setZisseki] = useState('');
   const [newProfile, setNewProfile] = useState<string | null>('');
   const showModal = async (content: SetStateAction<string>) => {
     setModalContent(content);
-    const response = await apiClient.fetchAllMyProfile.post({ body: { Id } });
-    console.log(response.body);
-    setNewName(response.body.name);
-    setNewProfile(response.body.myProfile);
-    setLookImage(response.body.imageUrl);
   };
   const [Id, setUserUUID] = useState('');
   useEffect(() => {
@@ -70,11 +66,6 @@ const UserProfile = () => {
       console.error('ログイン失敗:', error);
     }
   };
-
-  const [profileRank, setProfileRank] = useState({
-    gameName: '',
-    rank: '',
-  });
 
   const handleNewName = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 8) {
@@ -134,7 +125,7 @@ const UserProfile = () => {
       try {
         console.log(imageUrl);
         await apiClient.updateProfile.post({
-          body: { userId, newName, game, zisseki, selectedFile },
+          body: { userId, like, newName, game, zisseki, selectedFile },
         });
         alert('プロフィール更新成功');
       } catch (error) {
@@ -147,14 +138,17 @@ const UserProfile = () => {
 
   const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
   const [user2, setUser2] = useState<NewApplyData[]>([]);
-  type UserType = {
-    id: number;
-    name: string;
-    // その他のプロパティ...
-  };
+
   const fetchMyRecruitList = async () => {
     try {
       console.log(Id);
+      const response1 = await apiClient.fetchAllMyProfile.post({ body: { Id } });
+      console.log(response1.body);
+      console.log(myProfile);
+      setNewName(response1.body.name);
+      setNewProfile(response1.body.myProfile);
+      setLookImage(response1.body.imageUrl);
+
       const response = await apiClient.fetchMyRecruitList.post({ body: { Id } });
       console.log(response.body);
       setMyRecruitlist(response.body.user);

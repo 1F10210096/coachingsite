@@ -12,6 +12,5 @@ export type Methods = {
       Id: string;
       myId: string;
     };
-    resBody: newComment;
   };
 };

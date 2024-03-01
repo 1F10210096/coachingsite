@@ -6,6 +6,7 @@ import type {
   User3,
   UserSummaryDetailModel,
   UserSummaryModel,
+  Favarite
 } from '$/commonTypesWithClient/models';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
@@ -170,7 +171,7 @@ export const userRepository = {
       console.log('いいねを削除しました');
     }
   },
-  fetchAllLike: async (Id: string): Promise<User | null> => {
+  fetchAllLike: async (Id: string): Promise<Favarite[] | null> => {
     try {
       console.log(Id, 'ppppppp');
       const user = await prismaClient.favorite.findMany({

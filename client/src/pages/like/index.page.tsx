@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import { Pagination } from 'antd';
-import type { BosyuuListModel3 } from 'commonTypesWithClient/models';
+import type { BosyuuListModel3, Favarite } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import type { DateTimeFormatOptions } from 'intl';
 import Link from 'next/link';
@@ -20,7 +20,7 @@ import styles from './index.module.css';
 const Dm = () => {
   const [user, setUser] = useState('');
   const [RecruitList, setRecruitlist] = useState<BosyuuListModel3[]>([]);
-  const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
+  const [userDetail, setUserDetail] = useState<any>();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -67,11 +67,11 @@ const Dm = () => {
           Id: user,
         },
       });
-      const bosyuuLists = response.body.map((item) => item.bosyuuList);
+      const bosyuuLists = response.body.map((item: any) => item.bosyuuList);
       console.log(bosyuuLists, 'bosyuuLists');
       console.log(response.body, 'bosyuuListId');
       setRecruitlist(bosyuuLists);
-      const likedIds = response.body.map((item) => item.bosyuuListId);
+      const likedIds = response.body.map((item:any) => item.bosyuuListId);
       console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
       setLikedRecruits(likedIds);
     } catch (error) {
@@ -283,7 +283,7 @@ const Dm = () => {
                 </div>
                 <div className={styles.line2} />
                 <div className={styles.horizontalLayout}>
-                <button
+                  <button
                     className={
                       likedRecruits.includes(item.id) ? styles.applyButton2 : styles.applyButton
                     }

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable complexity */
 /* eslint-disable react/jsx-no-duplicate-props */
 import { HeartOutlined, MailOutlined } from '@ant-design/icons';

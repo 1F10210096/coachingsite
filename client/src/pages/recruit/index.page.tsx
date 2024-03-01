@@ -802,11 +802,12 @@ const Valorant = () => {
           Id: user,
         },
       });
-      console.log(response.body.bosyuuListId, 'bosyuuListId');
-      console.log(response.body, 'bosyuuListId');
-      const likedIds = response.body.map((item) => item.bosyuuListId);
-      console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
-      setLikedRecruits(likedIds);
+      if (response.body !== null) {
+        const likedIds = response.body.map((item) => item.bosyuuListId);
+        console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
+        setLikedRecruits(likedIds);
+    }
+
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }

@@ -1,4 +1,10 @@
-import type { Name, User3, UserModel2, UserSummaryModel } from '$/commonTypesWithClient/models';
+import type {
+  Favarite,
+  Name,
+  User3,
+  UserModel2,
+  UserSummaryModel,
+} from '$/commonTypesWithClient/models';
 import { userRepository } from '$/repository/userRepository';
 import { prismaClient } from '$/service/prismaClient';
 import assert from 'assert';
@@ -43,13 +49,12 @@ export const userUsecase = {
     console.log(newUser, 'dasdafa');
     return newUser;
   },
-  sendLike: async (Id: string, myId: string): Promise<UserModel2[]> => {
+  sendLike: async (Id: string, myId: string) => {
     console.log('gameListUsecase.fetchCategories');
-    const userLike = await userRepository.sendLike(Id,myId);
+    const userLike = await userRepository.sendLike(Id, myId);
     console.log(userLike, 'dasdafa');
-    return userLike;
   },
-  fetchAllLike: async (Id: string): Promise<UserModel2[]> => {
+  fetchAllLike: async (Id: string): Promise<Favarite[] | null> => {
     console.log('gameListUsecase.fetchCategories');
     const userLike = await userRepository.fetchAllLike(Id);
     console.log(userLike, 'dasdafa');

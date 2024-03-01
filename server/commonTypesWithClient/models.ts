@@ -100,6 +100,13 @@ export type UserSummaryDetailModel = {
   hitokoto: string; // ユーザーの一言
 };
 
+export type Favarite = {
+  id: string;
+  studentId: string;
+  bosyuuListId: string;
+  createdAt: Date;
+};
+
 export type reviewModel = {
   name: string; // ユーザーの名前
   imageUrl: string; // ユーザーのイメージプロフィールのURL

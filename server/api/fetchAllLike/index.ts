@@ -1,25 +1,14 @@
-export type UserListItem = {
+export type Favarite = {
   id: string;
-  gameId: number;
-  title: string;
-  rank: number;
-  subjectRank: number[];
-  tag: string[];
-  lessonType: string;
-  description: string;
-  notes: string;
-  myProfile: string;
-  descriptionDetail: string;
-  suchedule: string;
-  teacherId: string;
+  studentId: string;
+  bosyuuListId: string;
   createdAt: Date;
-  updatedAt: Date;
 };
 export type Methods = {
   post: {
     reqBody: {
       Id: string;
     };
-    resBody: UserListItem;
+    resBody: Favarite[] | null;
   };
 };

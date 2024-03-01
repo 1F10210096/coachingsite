@@ -20,6 +20,6 @@ export type Methods = {
     reqBody: {
       Id: string;
     };
-    resBody: UserListItem;
+    resBody: any;
   };
 };

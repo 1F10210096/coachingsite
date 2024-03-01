@@ -43,6 +43,24 @@ export const userUsecase = {
     console.log(newUser, 'dasdafa');
     return newUser;
   },
+  sendLike: async (Id: string, myId: string): Promise<UserModel2[]> => {
+    console.log('gameListUsecase.fetchCategories');
+    const userLike = await userRepository.sendLike(Id,myId);
+    console.log(userLike, 'dasdafa');
+    return userLike;
+  },
+  fetchAllLike: async (Id: string): Promise<UserModel2[]> => {
+    console.log('gameListUsecase.fetchCategories');
+    const userLike = await userRepository.fetchAllLike(Id);
+    console.log(userLike, 'dasdafa');
+    return userLike;
+  },
+  fetchAllLikes: async (Id: string): Promise<UserModel2[]> => {
+    console.log('gameListUsecase.fetchCategories');
+    const userLike = await userRepository.fetchAllLikes(Id);
+    console.log(userLike, 'dasdafa');
+    return userLike;
+  },
   update: async (
     userId: string,
     name: string,

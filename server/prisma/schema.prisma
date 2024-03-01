@@ -37,10 +37,11 @@ model userGameRank {
 }
 
 model Student {
-  userId String  @id @unique
-  user   User    @relation(fields: [userId], references: [userId]) // 必須の関連付け
-  apply  apply[]
-  Room   Room[]
+  userId    String     @id @unique
+  user      User       @relation(fields: [userId], references: [userId]) // 必須の関連付け
+  apply     apply[]
+  Room      Room[]
+  favorites Favorite[]
 }
 
 model Teacher {
@@ -53,7 +54,7 @@ model Teacher {
 }
 
 model BosyuuList {
-  id                String   @id @default(uuid())
+  id                String     @id @default(uuid())
   gameId            Int // この募集に対応するゲームのID
   title             String // 募集のタイトル
   rank              Int
@@ -66,12 +67,22 @@ model BosyuuList {
   descriptionDetail String // 募集の詳細説明
   suchedule         String // 募集の予定notes       String // 募集の注意事項
   teacherId         String // この募集を出した教師のID
-  createdAt         DateTime @default(now()) // 募集の作成日時
-  updatedAt         DateTime @updatedAt // 募集の最終更新日時
-  teacher           Teacher  @relation(fields: [teacherId], references: [userId])
-  game              GameList @relation(fields: [gameId], references: [id])
+  createdAt         DateTime   @default(now()) // 募集の作成日時
+  updatedAt         DateTime   @updatedAt // 募集の最終更新日時
+  teacher           Teacher    @relation(fields: [teacherId], references: [userId])
+  game              GameList   @relation(fields: [gameId], references: [id])
   apply             apply[]
   rooms             Room[]
+  Favorite          Favorite[]
+}
+
+model Favorite {
+  id           String     @id @default(uuid())
+  studentId    String // いいねをした生徒のID
+  bosyuuListId String // いいねされた募集リストのID
+  student      Student    @relation(fields: [studentId], references: [userId])
+  bosyuuList   BosyuuList @relation(fields: [bosyuuListId], references: [id])
+  createdAt    DateTime   @default(now()) // いいねの日時
 }
 
 model apply {

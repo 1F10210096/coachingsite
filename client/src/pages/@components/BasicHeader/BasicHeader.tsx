@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable react/jsx-no-duplicate-props */
-import { MailOutlined } from '@ant-design/icons';
+import { HeartOutlined, MailOutlined } from '@ant-design/icons';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -90,6 +90,14 @@ export const BasicHeader = ({ user }: { user?: string }) => {
         <div className={styles.contheme2}>
           {myProfile !== null ? (
             <div className={styles.userSection8}>
+              <Link href="/like">
+                <div className={styles.roomButton2}>
+                  <HeartOutlined
+                    style={{ fontSize: '26px', color: '#000000', marginRight: '18px' }}
+                  />
+                </div>
+              </Link>
+
               <Link href="/selectDm">
                 <div className={styles.roomButton}>
                   <MailOutlined

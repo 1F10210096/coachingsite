@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-depth */
 /* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
@@ -30,7 +31,7 @@ const Dm = () => {
 
   const router = useRouter();
   const id = String(router.query.id);
-
+  const title = String(router.query.title);
   const fetchRecruitDetail = async () => {
     try {
       console.log(user);
@@ -63,6 +64,16 @@ const Dm = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+
+  useEffect(() => {
+    // URLからtitleクエリパラメータを取得
+    const title = String(router.query.title);
+
+    // titleがundefinedまたはnullでない場合のみ、setSelectedTitleを実行
+    if (title) {
+      setSelectedTitle(title);
+    }
+  }, []);
 
   const calculateRateWidth = (rating: number): number => {
     console.log(rating * 30);
@@ -564,7 +575,7 @@ const Dm = () => {
   const handleCommentClick = (roomId: string) => {
     setRoomId(roomId);
     console.log(roomId);
-    router.push(`../dmReceive?id=${roomId}&title=${selectedTitle}`);
+    router.push(`../dmRecieave?id=${roomId}&title=${selectedTitle}`); // 適切なURLにリダイレクト
   };
 
   return (

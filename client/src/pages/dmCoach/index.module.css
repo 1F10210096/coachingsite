@@ -348,6 +348,22 @@
   transition: background-color 0.3s; /* 背景色の変更にアニメーションを適用 */
 }
 
+.title54 {
+  position: relative; /* Keeps original positioning context */
+  box-sizing: border-box; /* Ensures padding and border are included in width/height */
+  display: flex; /* Enables flexbox layout */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
+  width: 100px; /* Adjust width as needed */
+  height: auto; /* Adjust height as needed */
+  margin: auto; /* Centers the element within its parent */
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center; /* Ensures the text itself is centered if it wraps */
+  background-color: #bddbfc;
+  border: 1px solid #898989; /* Adds a black border, adjust color as needed */
+}
+
 .appliedButton1 {
   position: relative;
   left: 40px;
@@ -555,7 +571,7 @@
   width: 900px;
   height: 550px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #dfa4a4;
   border-radius: 15px;
   transform: translate(-50%, -50%);
 }
@@ -563,6 +579,22 @@
 .applyButton5 {
   position: relative;
   top: 20px;
+  width: 110px;
+  height: 50px;
+  padding: 10px 19px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  background-color: #ffad39;
+  border: 2px solid #ffad39;
+  border-radius: 15px;
+  transform: translateX(-50%);
+}
+
+.applyButton6 {
+  position: relative;
+  top: 130px;
+  left: 170px;
   width: 110px;
   height: 50px;
   padding: 10px 19px;
@@ -588,27 +620,88 @@
   transform: translateX(-50%);
 }
 
-.modalTitle {
+.closeButton1 {
   position: relative;
-  top: 10px;
-  left: 50%;
-  font-size: 20px;
+  top: 130px;
+  left: 70px;
+  width: 90px;
+  height: 50px;
+  padding: 10px 19px;
+  font-size: 13px;
   font-weight: bold;
-  color: #ed3030;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  color: white;
+  background-color: #333;
+  border-radius: 15px;
+}
+
+.modalTitle {
+  width: 400px;
+  padding: 1rem 2rem;
+  background: #f4f4f4;
+  border-left: 5px solid #6cff43;
 }
 
 .modalMsgContent {
   position: relative;
-  top: -50px;
-  width: 750px;
+  width: 100%;
   height: 400px;
   padding: 10px;
   font-size: 16px; /* 文字サイズを設定 */
   color: #333; /* 文字色を濃い灰色に */
-  background-color: rgb(255 255 255); /* 背景色を白に */
   border-radius: 4px; /* 角を少し丸める */
   outline: none;
+}
+
+.modalMsgContent2 {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  font-size: 16px; /* 文字サイズを設定 */
+  color: #333; /* 文字色を濃い灰色に */
+  border-radius: 4px; /* 角を少し丸める */
+  outline: none;
+}
+
+.modalContainer4 {
+  position: relative;
+  top: 40px;
+  right: 10px;
+  width: 450px;
+  height: auto;
+  background: rgb(255 255 255);
+}
+
+.title4 {
+  position: relative;
+  top: 60px;
+}
+
+.title3 {
+  position: relative;
+  top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.modalTf {
+  display: flex;
+}
+
+.title34 {
+  position: relative; /* Keeps original positioning context */
+  right: 30px;
+  display: -webkit-box; /* WebKit用のフレックスボックス表示 */
+  width: 300px; /* Adjust width as needed */
+  height: auto; /* Adjust height as needed */
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 12px;
+  font-weight: 300;
+  text-align: center; /* Ensures the text itself is centered if it wraps */
+  background-color: #fff;
+  border: 1px solid #898989; /* Adds a black border, adjust color as needed */
+  -webkit-box-orient: vertical; /* 子要素を垂直方向に配置 */
+  -webkit-line-clamp: 1; /* 行数を1行に制限 */
 }
 
 .modalMsg {
@@ -667,20 +760,18 @@
 
 .dateMsg {
   position: relative;
-  top: 160px;
-  left: 240px;
+  top: 40px;
+  left: 40px;
   font-size: 15px;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .timeMsg {
   position: relative;
-  top: 160px;
-  left: 240px;
+  top: 50px;
+  left: 40px;
   font-size: 15px;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
 }
 
 .title {
@@ -941,7 +1032,10 @@
 
 .modalTitle3 {
   position: relative;
-  top: 90px;
+  top: 20px;
+  left: 15px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .tag {
@@ -977,4 +1071,23 @@
   top: 80px;
   left: 40px;
   font-size: 13px;
+}
+
+.modalContent5 {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  display: flex; /* フレックスボックスを有効化 */
+  align-items: center; /* 縦方向の中央揃え */
+  justify-content: center; /* 横方向の中央揃え */
+  width: 900px;
+  height: 450px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+}
+
+.modalContent6 {
+  font-size: 11px;
 }

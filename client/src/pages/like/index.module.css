@@ -361,3 +361,376 @@
   color: rgb(179 173 173);
 }
 
+.container2 {
+  width: 94%;
+  height: auto;
+  padding-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  background: rgb(255 255 255);
+  border: 1px solid #b5b5b5; /* General border for all sides */
+  border-top: 3px solid #71d3f7; /* Light blue top border */
+  box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
+}
+
+.helpwanted2 {
+  position: relative;
+  top: -460px;
+  left: 600px;
+  display: flex; /* フレックスコンテナとして設定 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  width: 800px;
+  height: auto;
+}
+
+.titleLine {
+  position: relative;
+  top: 80px;
+  left: 580px;
+  width: 800px; /* 幅を親要素に合わせる */
+  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.flexContainer {
+  position: relative;
+  top: 20px;
+  display: flex;
+  align-items: center; /* 要素を垂直方向の中央に配置 */
+  height: 70px;
+  background-color: rgb(255 255 255);
+}
+
+.gameTitle {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  width: 80%;
+  height: auto;
+  font-size: 26px;
+  font-weight: bold;
+  color: rgb(100 100 100);
+  background-color: rgb(255 255 255);
+}
+
+.title {
+  position: relative;
+  right: 130px;
+
+  /* 3行省略のスタイル */
+  display: -webkit-box;
+  width: 470px;
+  overflow: hidden;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgb(255 255 255);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.wrapper {
+  position: relative;
+  top: 10px;
+  left: 30px;
+  width: 80%;
+  height: auto;
+
+  /* 例えばパディング、マージン、ボーダーなどのスタイルを適用 */
+
+  background-color: rgb(255 255 255);
+
+  /* 必要に応じて他のスタイルを追加 */
+}
+
+.descriptionTitle2 {
+  position: relative;
+  display: flex;
+  align-items: center; /* This aligns children vertically in the center */
+  justify-content: center; /* Optionally, to center horizontally as well */
+  width: 130px;
+  height: auto;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(55 55 55);
+  background-color: rgb(180 227 254);
+  border-right: #e6e6e6 2px solid;
+}
+
+.description {
+  position: relative;
+  width: 330px;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  line-height: 1.2; /* Adjust this value as needed */
+  letter-spacing: -0.1px;
+  background-color: rgb(255 255 255);
+}
+
+.descriptionContainer {
+  display: flex;
+  gap: 20px; /* 画像間のスペースを20pxに設定 */
+  width: 650px;
+  margin-left: 30px;
+  border: #d7d7d7 1px solid;
+}
+
+.rank {
+  position: relative;
+  top: -6px;
+  right: 70px;
+  display: flex;
+  align-items: center; /* 中央揃え */
+  width: 19px;
+  height: auto;
+  font-size: 15px;
+  background-color: rgb(255 255 255);
+}
+
+.subjectRank {
+  display: flex;
+  gap: 20px; /* 画像間のスペースを20pxに設定 */
+  width: 650px;
+  margin-left: 30px;
+  border: #d7d7d7 1px solid;
+}
+
+.subjectRankTitle {
+  position: relative;
+  display: flex;
+  align-items: center; /* This aligns children vertically in the center */
+  justify-content: center; /* Optionally, to center horizontally as well */
+  width: 130px;
+  height: auto;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(55 55 55);
+  background-color: rgb(180 227 254);
+  border-right: #e6e6e6 1px solid;
+}
+
+.rankImage {
+  position: relative;
+  top: 5px;
+  width: 70px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}
+
+.subjectRankImage {
+  width: 30px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}
+
+.subjectRankContainer {
+  display: flex;
+  gap: 10px; /* 画像間のスペースを20pxに設定 */
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.tag {
+  position: relative;
+  gap: 40px;
+  align-items: center;
+  width: 90%;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: 13px;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.tagText {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0 0.1em 0.6em 0;
+  line-height: 1;
+  color: rgb(0 111 238);
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgb(0 131 238);
+  border-radius: 2em;
+}
+
+.tagText::before {
+  content: '#';
+}
+
+.lessonType {
+  position: relative;
+  display: flex;
+  gap: 40px;
+  align-items: center; /* 中央揃え */
+  width: 90%;
+  height: auto;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 30px;
+  font-size: 13px;
+  background-color: rgb(255 255 255);
+}
+
+.lessonTypeContainer {
+  display: flex;
+  flex-wrap: wrap; /* 要素が折り返すように設定 */
+  gap: 13px;
+}
+
+.lessonTypeText {
+  display: inline-block;
+  padding: 0.4em;
+  margin: 0 0.1em 0.6em 0;
+  line-height: 1;
+  color: rgb(0 238 159);
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgb(0 238 143);
+  border-radius: 2em;
+}
+
+.userImageDetail {
+  position: relative;
+  right: 60px;
+  width: 80px; /* Adjust the size as needed */
+  height: 80px; /* Adjust the size as needed */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.line {
+  width: 100%; /* 幅を親要素に合わせる */
+  margin-top: 40px; /* 上部の余白 */
+  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.line2 {
+  width: 100%; /* 幅を親要素に合わせる */
+  margin-top: 40px; /* 上部の余白 */
+  border-top: 1px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+}
+
+.applyButton {
+  position: relative;
+  top: 25px;
+  left: 270px;
+  width: 150px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #007bff; /* Blue text */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #fff; /* White background */
+  border: 1px solid #7b81ff; /* Blue border */
+  border-radius: 5px; /* Rounded borders */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+  transition: box-shadow 0.6s; /* Smooth transition for shadow */
+}
+
+.applyButton .starIcon {
+  margin-right: 5px; /* Space between star and text */
+  color: #ffd700; /* Gold color for the star */
+}
+
+.applyButton:hover {
+  box-shadow: 0 0 10px rgb(0 123 255 / 50%); /* Blue shadow on hover */
+}
+
+.date {
+  position: relative;
+  top: 20px;
+  left: 380px;
+  width: 180px;
+  height: auto;
+  font-size: 13px;
+  color: rgb(55 55 55);
+  background-color: rgb(255 255 255);
+}
+
+.horizontalLayout {
+  display: flex; /* Establishes a flex container */
+  gap: 20px; /* Adjusts the gap between items */
+  align-items: center; /* Centers items vertically */
+}
+
+.selectPage {
+  position: relative;
+  top: 120px;
+  left: 30px;
+  width: 100%;
+  height: auto;
+  font-size: 13px;
+  color: rgb(255 5 5);
+  background-color: rgb(255 255 255);
+}
+
+.gameSort {
+  position: relative;
+  top: 25px;
+  left: 630px;
+  width: 150px;
+  height: auto;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(255 5 5);
+  background-color: rgb(255 255 255);
+}
+
+.gameTitleContainer {
+  position: relative;
+  top: -490px;
+  left: 600px;
+  width: 800px;
+  height: 110px;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+  background-color: rgb(255 255 255);
+  border-bottom: 2px solid rgb(142 142 142);
+  box-shadow: rgb(3 102 214 / 30%) 0 0 0 1px;
+}
+
+.pagenation {
+  position: relative;
+  top: 50px;
+  left: 30px;
+  display: flex;
+  justify-content: center; /* 水平方向中央揃え */
+  width: 750px;
+  height: 30px;
+  padding-bottom: 100px;
+}
+
+.applyButton2 {
+  position: relative;
+  top: 25px;
+  left: 270px;
+  width: 150px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff; /* Blue text */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #3094ff; /* White background */
+  border: 1px solid #7b81ff; /* Blue border */
+  border-radius: 5px; /* Rounded borders */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+  transition: box-shadow 0.6s; /* Smooth transition for shadow */
+}
+
+.applyButton2 .starIcon {
+  margin-right: 5px; /* Space between star and text */
+  color: #ffd700; /* Gold color for the star */
+}

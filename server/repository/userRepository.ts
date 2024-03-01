@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable complexity */
 import type {
   User,
@@ -140,5 +142,74 @@ export const userRepository = {
     });
     assert(user !== null, 'User is null');
     return user;
+  },
+  sendLike: async (Id: string, myId: string): Promise<void> => {
+    const existingLike = await prismaClient.favorite.findFirst({
+      where: {
+        bosyuuListId: Id,
+        studentId: myId,
+      },
+    });
+
+    if (!existingLike) {
+      // いいねが存在しない場合は、新しくいいねを追加
+      await prismaClient.favorite.create({
+        data: {
+          bosyuuListId: Id,
+          studentId: myId,
+        },
+      });
+      console.log('いいねを追加しました');
+    } else {
+      // 既にいいねが存在する場合は、そのいいねを削除
+      await prismaClient.favorite.delete({
+        where: {
+          id: existingLike.id, // 既存のいいねのIDを指定して削除
+        },
+      });
+      console.log('いいねを削除しました');
+    }
+  },
+  fetchAllLike: async (Id: string): Promise<User | null> => {
+    try {
+      console.log(Id, 'ppppppp');
+      const user = await prismaClient.favorite.findMany({
+        where: {
+          studentId: Id,
+        },
+      });
+      assert(user !== null, 'User is null');
+      return user;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null;
+    }
+  },
+  fetchAllLikes: async (Id: string): Promise<any | null> => {
+    try {
+      console.log(Id, 'ppppppp');
+      const favoritesWithBosyuuList = await prismaClient.favorite.findMany({
+        where: {
+          studentId: Id,
+        },
+        include: {
+          bosyuuList: {
+            include: {
+              teacher: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      console.log(favoritesWithBosyuuList, 'favorites with bosyuuList and imageUrl');
+      assert(favoritesWithBosyuuList !== null, 'Favorites with BosyuuList are null');
+      return favoritesWithBosyuuList;
+    } catch (error) {
+      console.error('Error fetching favorites with bosyuuList and imageUrl:', error);
+      return null;
+    }
   },
 };

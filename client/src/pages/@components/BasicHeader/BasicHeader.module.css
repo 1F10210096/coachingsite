@@ -90,7 +90,7 @@
 
 .redButton {
   position: relative;
-  top: -2px;
+  top: -18px;
   left: 50px;
   width: 100px;
   height: 40px;
@@ -189,6 +189,8 @@
 }
 
 .userName {
+  position: relative;
+  top: -18px;
   font-size: 14px;
   font-weight: bold;
   color: #555;
@@ -260,7 +262,14 @@
 
 .roomButton {
   position: relative;
-  top: 35px;
+  top: 20px;
   right: 60px;
+  width: 50px;
+}
+
+.roomButton2 {
+  position: relative;
+  top: 50px;
+  right: 130px;
   width: 50px;
 }

@@ -783,6 +783,39 @@ const Valorant = () => {
     setLessonWard(event.target.value); // 入力された値を state にセット
   };
 
+  const handleLikeClick = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const response = await apiClient.sendLike.post({
+      body: {
+        Id: id,
+        myId: user,
+      },
+    });
+    fetchLike();
+    fetchRecruitList();
+  };
+  const [likedRecruits, setLikedRecruits] = useState<string[]>([]);
+  const fetchLike = async () => {
+    try {
+      const response = await apiClient.fetchAllLike.post({
+        body: {
+          Id: user,
+        },
+      });
+      console.log(response.body.bosyuuListId, 'bosyuuListId');
+      console.log(response.body, 'bosyuuListId');
+      const likedIds = response.body.map((item) => item.bosyuuListId);
+      console.log(likedIds, 'likedIds'); // デバッグ用に抽出したidを確認
+      setLikedRecruits(likedIds);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLike();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   return (
     <>
       <BasicHeader user={user} />
@@ -1090,8 +1123,17 @@ const Valorant = () => {
                 </div>
                 <div className={styles2.line2} />
                 <div className={styles2.horizontalLayout}>
-                  <button className={styles2.applyButton}>
-                    <span className={styles2.starIcon}>★</span> いいねする
+                  <button
+                    className={
+                      likedRecruits.includes(item.id) ? styles2.applyButton2 : styles2.applyButton
+                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLikeClick(item.id, e);
+                    }}
+                  >
+                    <span className={styles2.starIcon}>★</span>{' '}
+                    {likedRecruits.includes(item.id) ? 'いいね済み' : 'いいね'}
                   </button>
                   <div>
                     <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>

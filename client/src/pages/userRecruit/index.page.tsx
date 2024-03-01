@@ -54,6 +54,7 @@ const UserProfile = () => {
         models: BosyuuListModel[];
         user: UserSummaryDetailModel;
       };
+
       setRecruitlist(responseBody.models);
       setUserDetail(responseBody.user);
       console.log(response.body);
@@ -62,10 +63,10 @@ const UserProfile = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+  
   useEffect(() => {
     // Firebaseの認証状態を監視するロジック
     // ...
-
     // ルータークエリの値が更新されたときにfetchRecruitを呼び出す
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (name && rating && profile) {

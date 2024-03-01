@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-depth */
 /* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
@@ -30,7 +31,7 @@ const Dm = () => {
 
   const router = useRouter();
   const id = String(router.query.id);
-
+  const title = String(router.query.title);
   const fetchRecruitDetail = async () => {
     try {
       console.log(user);
@@ -67,6 +68,15 @@ const Dm = () => {
     console.log(rating * 30);
     return rating * 30;
   };
+  useEffect(() => {
+    // URLからtitleクエリパラメータを取得
+    const title = String(router.query.title);
+
+    // titleがundefinedまたはnullでない場合のみ、setSelectedTitleを実行
+    if (title) {
+      setSelectedTitle(title);
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -346,7 +356,7 @@ const Dm = () => {
 
     return (
       <div className={styles.modal}>
-        <div className={styles.modalContent}>
+        <div className={styles.modalContent5}>
           <div className={styles.modalMsgContent}>
             <div className={styles.modalTitle}>最終お申込み確認</div>
             <p className={styles.title}>{RecruitDetail?.title}</p>
@@ -391,25 +401,79 @@ const Dm = () => {
     console.log(RecruitDetail?.gameId);
     return (
       <div className={styles.modal}>
-        <div className={styles.modalContent}>
+        <div className={styles.modalContent5}>
+          <div className={styles.modalMsgContent2}>
+            <div className={styles.modalTitle}>最終受諾確認</div>
+            <div className={styles.modalTitle3}>利用規約</div>
+            <div className={styles.modalContent6}>
+              サービス利用規約：本サービスの利用には、当社の利用規約に同意する必要があります。利用規約は当社のウェブサイトに掲載されています。利用開始前に必ずご確認ください。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              キャンセルポリシー：コーチングセッションのキャンセルは、セッション開始24時間前までにお知らせください。それ以降のキャンセルは、キャンセル料が発生する場合があります。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              技術要件：オンラインコーチングには、安定したインターネット接続、マイクとスピーカー（またはヘッドセット）、ウェブカメラが必要です。セッション前にシステムの互換性と機能をテストしてください。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              プライバシーと機密性：コーチングセッション中の会話や資料は機密として扱われます。セッションの内容を第三者と共有することは禁止されています。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              コーチングの範囲：コーチングは教育および自己改善の目的で提供されます。専門的な医療、法律、またはその他の専門的アドバイスの代わりになるものではありません。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              準備と参加：コーチングセッションには、予定された時間に遅れずに参加してください。準備が必要な場合は、事前に指示された資料をレビューし、準備を整えておいてください。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              変更と更新：サービス提供者は、必要に応じてこれらの注意事項を更新する権利を保持します。変更がある場合は、事前に通知されます。
+            </div>{' '}
+            <div className={styles.modalContent6}>
+              {' '}
+              問い合わせ：不明点や問題が発生した場合は、直ちにサービス提供者に連絡してください。
+            </div>{' '}
+          </div>
           <div className={styles.modalMsgContent}>
             <div className={styles.modalTitle}>最終受諾確認</div>
-            <p className={styles.title}>{RecruitDetail?.title}</p>
-            <p className={styles.title}>
-              {RecruitDetail !== null &&
-                RecruitDetail?.gameId !== null &&
-                getGameName(RecruitDetail.gameId)}
-            </p>
-            <div className={styles.dateMsg}>日時：{date}</div>
-            <div className={styles.timeMsg}>時間：{time}</div>
-            <div>本当に了承しますか？</div>
+            <div className={styles.modalTitle3}>お申込み内容</div>
+            <div className={styles.modalContainer4}>
+              <div className={styles.modalTf}>
+                <div className={styles.title54}>ゲームタイトル</div>
+                <p className={styles.title34}>
+                  {RecruitDetail !== null &&
+                    RecruitDetail?.gameId !== null &&
+                    getGameName(RecruitDetail.gameId)}
+                </p>
+              </div>
+              <div className={styles.modalTf}>
+                <div className={styles.title54}>タイトル</div>
+                <p className={styles.title34}>{RecruitDetail?.title}</p>
+              </div>
+              <div className={styles.modalTf}>
+                <div className={styles.title54}>詳細情報</div>
+                <p className={styles.title34}>{RecruitDetail?.description}</p>
+              </div>
+
+              <div className={styles.modalTf}>
+                <div className={styles.title54}>スケジュール</div>
+                <p className={styles.title34}>{RecruitDetail?.suchedule}</p>
+              </div>
+            </div>{' '}
+            <div className={styles.title4}>
+              <div className={styles.title3}> 時間を確認してください</div>
+              <div className={styles.dateMsg}>日付：{date}</div>
+              <div className={styles.timeMsg}>時間：{time}</div>
+            </div>
+            <button className={styles.closeButton1} onClick={onFinalClose}>
+              閉じる
+            </button>
+            <button className={styles.applyButton6} onClick={handleUrlClick}>
+              了承する
+            </button>
           </div>
-          <button className={styles.closeButton} onClick={onFinalClose}>
-            閉じる
-          </button>
-          <button className={styles.applyButton5} onClick={handleUrlClick}>
-            了承する
-          </button>
         </div>
       </div>
     );
@@ -468,7 +532,7 @@ const Dm = () => {
 
   const handleCommentClick = (roomId: string) => {
     setRoomId(roomId);
-    router.push(`../dmCoach?id=${roomId}`); // 適切なURLにリダイレクト
+    router.push(`../dmCoach?id=${roomId}&?title=${selectedTitle}`);
   };
 
   return (

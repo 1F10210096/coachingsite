@@ -11,6 +11,45 @@
   background-color: rgb(241 241 241);
 }
 
+.container4 {
+  position: absolute;
+  top: 140px;
+  right: 63%;
+  display: flex; /* フレックスコンテナとして設定 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+}
+
+.sContainer3 {
+  position: relative;
+  top: 100px;
+  display: flex; /* フレックスコンテナとして設定 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  padding-bottom: 100px;
+
+  /* background-color: #f6f6f6; */
+
+  /* box-shadow: rgb(0 0 0 / 24%) 0 3px 8px; */
+}
+
+.subContanier {
+  position: absolute;
+  top: 150px;
+  left: 38%;
+  display: flex; /* フレックスコンテナとして設定 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  justify-content: center; /* 水平方向の中央揃え */
+  width: 840px;
+  height: auto;
+  padding-bottom: 17px;
+  margin-top: 20px;
+  font-size: 20px; /* 文字の大きさを20pxに設定する */
+  font-weight: bold; /* 文字を太くする */
+  color: rgb(82 82 82);
+
+  /* background-color: #f4f4f4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+
 .searchNameContainer {
   position: relative;
   top: 5px;
@@ -132,8 +171,8 @@
 
 .profileContainer {
   position: relative;
-  top: 100px;
-  left: 200px;
+  top: 60px;
+  left: 25px;
   display: inline-block;
   flex-direction: column;
   width: 300px;
@@ -286,16 +325,20 @@
 }
 
 .allContainer {
-  position: relative;
-  top: 150px;
+  position: absolute; /* 絶対位置指定 */
+  left: 50%; /* 水平方向の中央 */
+  display: flex;
+  justify-content: center; /* 水平方向の中央揃え */
   width: 100%;
   height: auto;
+  padding-bottom: 500px;
+  zoom: 0.9;
+  transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
+
 
 .titleContainer {
   position: relative;
-  top: 50px;
-  left: 180px;
   width: 350px;
   height: 70px;
   padding-bottom: 20px;
@@ -315,8 +358,7 @@
 
 .homeContainer {
   position: relative;
-  top: 10px;
-  left: 180px;
+  top: 40px;
   display: flex;
   align-items: center; /* アイテムを垂直方向の中央に配置 */
   width: 300px;
@@ -360,4 +402,3 @@
   font-size: 13px; /* 文字の大きさを17pxに設定する */
   color: rgb(179 173 173);
 }
-

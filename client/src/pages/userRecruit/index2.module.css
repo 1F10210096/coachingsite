@@ -11,14 +11,13 @@
   box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
 }
 
-.helpwanted {
+.helpwanted2 {
   position: relative;
-  top: -460px;
-  left: 600px;
+  top: 20px;
+  left: 25px;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   width: 800px;
-  height: auto;
 }
 
 .titleLine {
@@ -324,16 +323,15 @@
 
 .gameTitleContainer {
   position: relative;
-  top: -490px;
-  left: 600px;
+  left: 20px;
   width: 800px;
-  height: 110px;
+  height: 140px;
   padding-bottom: 17px;
   margin-top: 20px;
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-  background-color: rgb(255 255 255);
+  background-color: #fff;
   border-bottom: 2px solid rgb(142 142 142);
   box-shadow: rgb(3 102 214 / 30%) 0 0 0 1px;
 }

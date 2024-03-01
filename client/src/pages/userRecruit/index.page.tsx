@@ -149,134 +149,142 @@ const UserProfile = () => {
     <div>
       <BasicHeader user={user} />
       <div className={styles.allContainer}>
-        <div className={styles.homeContainer}>
-          <Link href="/">
-            <div className={styles.home}>ホーム</div>
-          </Link>
-          <div className={styles.home3}>{'>'}</div>
-          <div className={styles.home2}>{userDetail?.name}</div>
-        </div>
-        <div className={styles.titleContainer}>
-          <div className={styles.home9}>コーチの情報</div>
-        </div>
-        <div className={styles.profileContainer}>
-          <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.userImage} />
-          <div className={styles.nameContainer}>
-            <div className={styles.name}>{userDetail?.name}</div>
-          </div>
-          <div className={styles.ratingContainer}>
-            <span className={styles.rate}>
-              ★★★★★
-              <span
-                className={styles.rateInner}
-                style={{
-                  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-                  width: `${userDetail ? calculateRateWidth(userDetail?.rating ?? 0) : 0}px`,
-                }}
-              >
-                ★★★★★
-              </span>
-            </span>
-          </div>
-          <div className={styles.rating}>{userDetail?.rating}</div>
-          <div className={styles.achievementsContainer}>
-            <div className={styles.achievementsTitle}>【実績】</div>
-            <div className={styles.achievements}>{userDetail?.Achievements}</div>
-          </div>
-          <div className={styles.descriptionDetailContainer}>
-            <div className={styles.descriptionTitle}>【自己紹介】</div>
-            <div className={styles.descriptions}>{userDetail?.hitokoto}</div>
-          </div>
-        </div>
-        <div className={styles2.gameTitleContainer}>
-          <div className={styles2.gameTitle}>ゲーム一覧</div>
-          <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
-            <option value="rank">ランク順に並び替え</option>
-            <option value="update">更新順に並び替え</option>
-            {/* 他のソートオプションがあれば追加 */}
-          </select>
-        </div>
-        <div className={styles2.helpwanted}>
-          {currentItems.map((item) => (
-            <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>
-              <div className={styles2.flexContainer}>
-                <img
-                  src={
-                    item.teacher.user.imageUrl !== null &&
-                    item.teacher.user.imageUrl !== undefined &&
-                    item.teacher.user.imageUrl !== ''
-                      ? item.teacher.user.imageUrl
-                      : 'default-image-url.jpg'
-                  }
-                  alt="User"
-                  className={styles2.userImageDetail}
-                />
-
-                <p className={styles2.title}>{item.title}</p>
-                <div className={styles2.rank}>
-                  <img
-                    src={getRankImage(item.gameId, item.rank)}
-                    className={styles2.rankImage}
-                    alt={`Rank: ${item.rank}`}
-                  />
-                </div>
-              </div>
-              <div className={styles2.line} />
-
-              <div className={styles2.wrapper}>
-                <div className={styles2.tag}>
-                  <div className={styles2.tagContainer}>
-                    {item.tag.map((tag, index) => (
-                      <p key={index} className={styles2.tagText}>
-                        {tag}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-                <div className={styles2.lessonType}>
-                  <div className={styles2.lessonTypeContainer}>{item.lessonType}</div>
-                </div>
-                <div className={styles2.subjectRank}>
-                  <p className={styles2.subjectRankTitle}>対象のランク:</p>
-                  <div className={styles2.subjectRankContainer}>
-                    {item.subjectRank.map((rank, index) => (
-                      <img
-                        key={index}
-                        src={getRankImage(item.gameId, rank)}
-                        className={styles2.subjectRankImage}
-                        alt={`Rank: ${rank}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className={styles2.descriptionContainer}>
-                  <p className={styles2.descriptionTitle}>募集詳細:</p>
-                  <p className={styles2.description}>{item.description}</p>
-                </div>
-                <div className={styles2.descriptionContainer}>
-                  <p className={styles2.descriptionTitle}>実績:</p>
-                  <p className={styles2.description}>{item.myProfile}</p>
-                </div>
-              </div>
-              <div className={styles2.line2} />
-              <div className={styles2.horizontalLayout}>
-                <button className={styles2.applyButton}>
-                  <span className={styles2.starIcon}>★</span> いいねする
-                </button>
-                <div>
-                  <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>
-                  <p className={styles2.date}>情報更新日： {formatDate(item.updatedAt)}</p>
-                </div>
-              </div>
+        <div className={styles.container4}>
+          <div className={styles.homeContainer}>
+            <Link href="/">
+              <div className={styles.home}>ホーム</div>
+            </Link>
+            <div className={styles.home3}>{'>'}</div>
+            <div className={styles.home2}>{userDetail?.name}</div>
+          </div>{' '}
+          <div className={styles.sContainer3}>
+            <div className={styles.titleContainer}>
+              <div className={styles.home9}>コーチの情報</div>
             </div>
-          ))}
-          <div className={styles2.selectPage}>
-            {currentPage > 1 && <button onClick={handlePreviousPage}>前へ</button>}
-            {RecruitList.length > indexOfLastItem && <button onClick={handleNextPage}>次へ</button>}
-          </div>
+            <div className={styles.profileContainer}>
+              <img src={userDetail?.imageUrl} alt={userDetail?.name} className={styles.userImage} />
+              <div className={styles.nameContainer}>
+                <div className={styles.name}>{userDetail?.name}</div>
+              </div>
+              <div className={styles.ratingContainer}>
+                <span className={styles.rate}>
+                  ★★★★★
+                  <span
+                    className={styles.rateInner}
+                    style={{
+                      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                      width: `${userDetail ? calculateRateWidth(userDetail?.rating ?? 0) : 0}px`,
+                    }}
+                  >
+                    ★★★★★
+                  </span>
+                </span>
+              </div>
+              <div className={styles.rating}>{userDetail?.rating}</div>
+              <div className={styles.achievementsContainer}>
+                <div className={styles.achievementsTitle}>【実績】</div>
+                <div className={styles.achievements}>{userDetail?.Achievements}</div>
+              </div>
+              <div className={styles.descriptionDetailContainer}>
+                <div className={styles.descriptionTitle}>【自己紹介】</div>
+                <div className={styles.descriptions}>{userDetail?.hitokoto}</div>
+              </div>
+            </div>{' '}
+          </div>{' '}
         </div>
-        {/* その他のユーザー情報の表示 */}
-      </div>
+        <div className={styles.subContanier}>
+          <div className={styles2.gameTitleContainer}>
+            <div className={styles2.gameTitle}>ゲーム一覧</div>
+            <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
+              <option value="rank">ランク順に並び替え</option>
+              <option value="update">更新順に並び替え</option>
+              {/* 他のソートオプションがあれば追加 */}
+            </select>
+          </div>
+          <div className={styles2.helpwanted2}>
+            {currentItems.map((item) => (
+              <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>
+                <div className={styles2.flexContainer}>
+                  <img
+                    src={
+                      item.teacher.user.imageUrl !== null &&
+                      item.teacher.user.imageUrl !== undefined &&
+                      item.teacher.user.imageUrl !== ''
+                        ? item.teacher.user.imageUrl
+                        : 'default-image-url.jpg'
+                    }
+                    alt="User"
+                    className={styles2.userImageDetail}
+                  />
+
+                  <p className={styles2.title}>{item.title}</p>
+                  <div className={styles2.rank}>
+                    <img
+                      src={getRankImage(item.gameId, item.rank)}
+                      className={styles2.rankImage}
+                      alt={`Rank: ${item.rank}`}
+                    />
+                  </div>
+                </div>
+                <div className={styles2.line} />
+
+                <div className={styles2.wrapper}>
+                  <div className={styles2.tag}>
+                    <div className={styles2.tagContainer}>
+                      {item.tag.map((tag, index) => (
+                        <p key={index} className={styles2.tagText}>
+                          {tag}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles2.lessonType}>
+                    <div className={styles2.lessonTypeContainer}>{item.lessonType}</div>
+                  </div>
+                  <div className={styles2.subjectRank}>
+                    <p className={styles2.subjectRankTitle}>対象のランク:</p>
+                    <div className={styles2.subjectRankContainer}>
+                      {item.subjectRank.map((rank, index) => (
+                        <img
+                          key={index}
+                          src={getRankImage(item.gameId, rank)}
+                          className={styles2.subjectRankImage}
+                          alt={`Rank: ${rank}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles2.descriptionContainer}>
+                    <p className={styles2.descriptionTitle}>募集詳細:</p>
+                    <p className={styles2.description}>{item.description}</p>
+                  </div>
+                  <div className={styles2.descriptionContainer}>
+                    <p className={styles2.descriptionTitle}>実績:</p>
+                    <p className={styles2.description}>{item.myProfile}</p>
+                  </div>
+                </div>
+                <div className={styles2.line2} />
+                <div className={styles2.horizontalLayout}>
+                  <button className={styles2.applyButton}>
+                    <span className={styles2.starIcon}>★</span> いいねする
+                  </button>
+                  <div>
+                    <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>
+                    <p className={styles2.date}>情報更新日： {formatDate(item.updatedAt)}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className={styles2.selectPage}>
+              {currentPage > 1 && <button onClick={handlePreviousPage}>前へ</button>}
+              {RecruitList.length > indexOfLastItem && (
+                <button onClick={handleNextPage}>次へ</button>
+              )}
+            </div>
+          </div>
+          {/* その他のユーザー情報の表示 */}
+        </div>
+      </div>{' '}
     </div>
   );
 };

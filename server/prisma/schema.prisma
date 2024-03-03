@@ -26,6 +26,7 @@ model User {
   student   Student? // ユーザーと生徒は任意の関連付け
   teacher   Teacher? // ユーザーと教師は任意の関連付け
   Comment   Comment[]
+  form      Form[]
 }
 
 model userGameRank {
@@ -140,4 +141,12 @@ model Comment {
 
   room Room @relation(fields: [roomId], references: [id]) // ルームとの関連付け
   user User @relation(fields: [userId], references: [userId]) // ユーザーとの関連付け
+}
+
+model Form {
+  id        String   @id @default(uuid())
+  userId    String
+  comment   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [userId])
 }

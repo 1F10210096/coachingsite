@@ -94,4 +94,18 @@ export const userUsecase = {
       throw error; // エラーを呼び出し元に伝播させる
     }
   },
+  createForm: async (Id: string, message: string) => {
+    console.log('gameListUsecase.fetchCategories');
+    try {
+      const newGame = await prismaClient.form.create({
+        data: {
+          userId: Id,
+          comment: message,
+        },
+      });
+      console.log(newGame);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

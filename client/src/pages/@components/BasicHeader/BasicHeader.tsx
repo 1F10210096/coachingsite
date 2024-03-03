@@ -106,7 +106,7 @@ export const BasicHeader = ({ user }: { user?: string }) => {
                   />
                 </div>
               </Link>
-              <Link href="/userProfile">
+              <Link href="/userProfileAll">
                 <span className={styles.userName}>
                   ようこそ,
                   <span className={styles.userName2}>{myProfile}</span>さん

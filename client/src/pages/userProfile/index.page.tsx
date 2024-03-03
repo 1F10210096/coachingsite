@@ -83,6 +83,7 @@ const UserProfile = () => {
 
   const handleNewProfile = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewProfile(e.target.value);
+    console.log(newProfile);
   };
 
   const [lookImage, setLookImage] = useState<string | null>('');
@@ -140,29 +141,7 @@ const UserProfile = () => {
   const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
   const [user2, setUser2] = useState<NewApplyData[]>([]);
 
-  const fetchMyRecruitList = async () => {
-    try {
-      console.log(Id);
-      const response1 = await apiClient.fetchAllMyProfile.post({ body: { Id } });
-      console.log(response1.body);
-      console.log(myProfile);
-      setNewName(response1.body.name);
-      setNewProfile(response1.body.myProfile);
-      setLookImage(response1.body.imageUrl);
-      setImageUrl(response1.body.imageUrl || '');
-      const response = await apiClient.fetchMyRecruitList.post({ body: { Id } });
-      console.log(response.body);
-      setMyRecruitlist(response.body.user);
-      setUser2(response.body.user2);
-    } catch (error) {
-      console.error('ゲームの取得に失敗しました:', error);
-    }
-  };
 
-  useEffect(() => {
-    fetchMyRecruitList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Id]);
 
   type RoomType = {
     id: string; // または number など、id の実際の型に応じて変更
@@ -188,6 +167,7 @@ const UserProfile = () => {
       console.error('ゲームの取得に失敗しました:', error);
     }
   };
+
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const [rating, setRating] = useState('');
@@ -445,6 +425,10 @@ const UserProfile = () => {
     }
   };
 
+  const showModal5 = async () => {
+    router.push(`/userProfileUser`);
+  };
+
   return (
     <>
       <div className={styles.allContainer}>
@@ -452,7 +436,7 @@ const UserProfile = () => {
         <div className={styles.searchContainer}>
           <div className={styles.searchNameContainer}>設定画面</div>
           <div className={styles.searchNameContainer2}>
-            <div className={`${styles.rankDropdown}`} onClick={() => showModal('profile')}>
+            <div className={`${styles.rankDropdown}`} onClick={showModal5}>
               プロフィール
               <span className={styles.dropdownIcon} />
             </div>

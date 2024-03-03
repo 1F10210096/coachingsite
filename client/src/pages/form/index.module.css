@@ -1,0 +1,443 @@
+.formContainer {
+  position: relative;
+  top: 150px;
+  left: 520px;
+  display: flex;
+  flex-direction: column; /* 子要素を縦に並べる */
+  width: 800px;
+  height: 550px;
+  padding-bottom: 50px;
+  background-color: #fcfcfc;
+  box-shadow: rgb(0 0 0 / 16%) 0 3px 6px, rgb(0 0 0 / 23%) 0 3px 6px;
+}
+
+.boxCon {
+  position: relative;
+  top: -6%;
+  left: 20%;
+  display: flex; /* フレックスボックスレイアウトを適用 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  align-items: center; /* 子要素を水平方向の中央に配置 */
+  width: 80%;
+  height: 80%;
+}
+
+.boxTitle {
+  position: relative;
+  top: 10px;
+  width: 80%;
+  height: 45px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #737373;
+  border-bottom: 2px solid #b8b8b8;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* フォーム要素間の隙間 */
+  width: 400px;
+  background-color: #fff;
+}
+
+.loginButton {
+  position: relative;
+  top: 50px;
+  width: 300px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+
+.loginTitle {
+  position: relative;
+  top: 50px;
+  left: 40%;
+  width: 500px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+.kaninn {
+  position: relative;
+  top: 53px;
+  left: 470px;
+  width: 150px;
+  font-size: 15px;
+  color: #0141c193;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.kaninn:hover {
+  color: #93c6fd;
+}
+
+.searchmail {
+  position: relative;
+  width: 380px;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.mail {
+  position: relative;
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+}
+
+.password {
+  position: relative;
+  top: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+}
+
+.searchpass {
+  position: relative;
+  top: 10px;
+  width: 380px;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchpass:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.box {
+  position: fixed;
+  top: 110px;
+  width: 350px;
+  height: 100%;
+  padding-bottom: 60px;
+  overflow-y: auto;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  border-right: 2px solid #b8b8b8; /* 境界線の設定：太さ、スタイル、色 */
+}
+
+.box1 {
+  position: relative;
+  padding-bottom: 300px;
+}
+
+.profileImage {
+  position: relative;
+  top: 60px;
+  width: 110px; /* 画像のサイズを設定 */
+  height: 110px; /* 画像のサイズを設定 */
+  border-radius: 50%; /* 画像を円形にする */
+  object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
+}
+
+.name {
+  position: relative;
+  top: 80px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.container {
+  position: relative;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平方向の中央揃え */
+  width: 500px;
+  height: 500px;
+}
+
+.nameContainer {
+  display: flex; /* フレックスボックスを有効化 */
+}
+
+.name2 {
+  position: relative;
+  top: 80px;
+  margin-left: 10px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: flex-start; /* Aligns items to the start of the container horizontally */
+}
+
+.rate {
+  position: relative;
+  display: inline-block;
+  width: 100px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 20px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.rating {
+  position: relative;
+  width: 140px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 25px;
+  color: #454444; /* 背景の灰色の星 */
+}
+
+.ratingNum {
+  position: relative;
+  top: 7px;
+  left: 10px;
+  font-size: 19px;
+  color: #3647ff;
+}
+
+.ratingAllContainer {
+  position: relative;
+  top: 85px;
+  right: 49px;
+  display: flex; /* フレックスボックスを有効化 */
+}
+
+.menuContainer {
+  position: relative;
+  top: 140px;
+  display: flex; /* フレックスコンテナとして設定 */
+  align-items: center; /* 子要素を縦方向の中央に配置 */
+  justify-content: center; /* 子要素を横方向の中央に配置 */
+  width: 600px;
+  height: 120px;
+}
+
+.squareContainer {
+  width: 150px; /* 四角形の幅 */
+  height: 100px; /* 四角形の高さ */
+  margin: 0 10px; /* 周りの要素との間隔 */
+  background-color: rgb(255 255 255); /* 四角形の背景色 */
+  border: 2px solid #b8b8b8; /* 境界線の設定：太さ、スタイル、色 */
+  border-radius: 10px; /* 角の丸み */
+}
+
+.heartContainer {
+  position: relative;
+  top: 16px;
+  left: 46px;
+  color: #a3a3a3;
+}
+
+.ok {
+  position: relative;
+  top: 28px;
+  left: 22px;
+  font-size: 13px;
+}
+
+.ok2 {
+  position: relative;
+  top: 28px;
+  left: 16px;
+  font-size: 13px;
+}
+
+.ok3 {
+  position: relative;
+  top: 28px;
+  left: 39px;
+  font-size: 13px;
+}
+
+.ok4 {
+  position: relative;
+  top: 28px;
+  left: 16px;
+  font-size: 13px;
+}
+
+.profileContainer {
+  position: relative;
+  top: 120px;
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: rgb(60 64 67 / 30%) 0 1px 2px 0, rgb(60 64 67 / 15%) 0 1px 3px 1px;
+}
+
+.profile {
+  position: relative;
+  top: -10px;
+  font-size: 13px;
+}
+
+.profile2 {
+  position: relative;
+  left: 20px;
+}
+
+.boxCon2 {
+  position: relative;
+  top: 30px;
+  left: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  color: #5c5c5c;
+}
+
+.smallBox {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.boxCon3 {
+  position: relative;
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 100;
+  color: #5c5c5c;
+}
+
+.termsCon {
+  position: relative;
+  top: 40px;
+  left: 50px;
+  width: 700px;
+  padding-bottom: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #4f4f4f;
+  border-bottom: 2px solid #b8b8b8;
+}
+
+.termsmess {
+  position: relative;
+  top: 80px;
+  left: 60px;
+}
+
+.logoutButton {
+  position: relative;
+  top: 120px;
+  left: 310px;
+  width: 150px;
+  height: 50px;
+  padding: 10px 20px;
+  font-size: 16px; /* フォントサイズ */
+  font-weight: bold; /* フォントを太く */
+  color: white; /* テキスト色を白に */
+  cursor: pointer; /* マウスカーソルをポインターに */
+  background-color: #ff4b2b; /* 赤い背景色 */
+  border: none;
+  border-radius: 20px; /* ボタンの角を丸くする */
+  box-shadow: 0 4px 8px rgb(255 75 43 / 40%); /* 赤い色の影を付ける */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズなトランジション効果 */
+}
+
+.logoutButton:hover {
+  background-color: #ff6b4a; /* ホバー時の背景色を少し明るく */
+  box-shadow: 0 6px 12px rgb(255 75 43 / 60%); /* ホバー時の影を大きく */
+  transform: translateY(-2px); /* ホバー時に少し上に持ち上げる */
+}
+
+.form {
+  position: relative;
+}
+
+.formTitle {
+  position: relative;
+  top: 40px;
+  left: 50px;
+  width: 700px;
+  padding-bottom: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #4f4f4f;
+  border-bottom: 2px solid #b8b8b8;
+}
+
+.formTitle2 {
+  position: relative;
+  top: 70px;
+  left: 50px;
+  width: 700px;
+  font-size: 13px;
+  color: #000;
+}
+
+.form2 {
+  position: relative;
+  top: 100px;
+  left: 50px;
+}
+
+.form3 {
+  position: relative;
+  top: 130px;
+  left: 50px;
+  width: 500px;
+  height: 200px;
+}
+
+.formContainer2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.form4 {
+  position: relative;
+  top: 170px;
+  left: 430px;
+  width: 120px;
+  height: 40px;
+  padding: 10px 20px;
+  font-size: 16px; /* フォントサイズ */
+  font-weight: bold; /* フォントを太く */
+  color: white; /* テキスト色を白に */
+  cursor: pointer; /* マウスカーソルをポインターに */
+  background-color: #2b64ff; /* 赤い背景色 */
+  border: none;
+  border-radius: 12px; /* ボタンの角を丸くする */
+  box-shadow: 0 4px 8px rgb(43 110 255 / 40%); /* 赤い色の影を付ける */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.form4:hover {
+  background-color: #4a92ff; /* ホバー時の背景色を少し明るく */
+  box-shadow: 0 6px 12px rgb(43 142 255 / 60%); /* ホバー時の影を大きく */
+  transform: translateY(-2px); /* ホバー時に少し上に持ち上げる */
+}

@@ -1,0 +1,421 @@
+.loginContainer {
+  position: relative;
+  top: 150px;
+  left: 520px;
+  display: flex;
+  flex-direction: column; /* 子要素を縦に並べる */
+  width: 800px;
+  height: 1410px;
+  padding-bottom: 50px;
+  background-color: #fcfcfc;
+  box-shadow: rgb(0 0 0 / 16%) 0 3px 6px, rgb(0 0 0 / 23%) 0 3px 6px;
+}
+
+.boxCon {
+  position: relative;
+  top: -6%;
+  left: 20%;
+  display: flex; /* フレックスボックスレイアウトを適用 */
+  flex-direction: column; /* 子要素を縦方向に並べる */
+  align-items: center; /* 子要素を水平方向の中央に配置 */
+  width: 80%;
+  height: 80%;
+}
+
+.boxTitle {
+  position: relative;
+  top: 10px;
+  width: 80%;
+  height: 45px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #737373;
+  border-bottom: 2px solid #b8b8b8;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* フォーム要素間の隙間 */
+  width: 400px;
+  background-color: #fff;
+}
+
+.loginButton {
+  position: relative;
+  top: 50px;
+  width: 300px;
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+
+.loginTitle {
+  position: relative;
+  top: 50px;
+  left: 40%;
+  width: 500px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+.kaninn {
+  position: relative;
+  top: 53px;
+  left: 470px;
+  width: 150px;
+  font-size: 15px;
+  color: #0141c193;
+  transform: translateX(-50%); /* 左に50%ずらす */
+}
+
+.kaninn:hover {
+  color: #93c6fd;
+}
+
+.searchmail {
+  position: relative;
+  width: 380px;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.mail {
+  position: relative;
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+}
+
+.password {
+  position: relative;
+  top: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #000;
+}
+
+.searchpass {
+  position: relative;
+  top: 10px;
+  width: 380px;
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchpass:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.box {
+  position: fixed;
+  top: 110px;
+  width: 350px;
+  height: 100%;
+  padding-bottom: 60px;
+  overflow-y: auto;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  border-right: 2px solid #b8b8b8; /* 境界線の設定：太さ、スタイル、色 */
+}
+
+.box1 {
+  position: relative;
+  padding-bottom: 300px;
+}
+
+.profileImage {
+  position: relative;
+  top: 60px;
+  width: 110px; /* 画像のサイズを設定 */
+  height: 110px; /* 画像のサイズを設定 */
+  border-radius: 50%; /* 画像を円形にする */
+  object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
+}
+
+.name {
+  position: relative;
+  top: 80px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.container {
+  position: relative;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平方向の中央揃え */
+  width: 500px;
+  height: 500px;
+}
+
+.nameContainer {
+  display: flex; /* フレックスボックスを有効化 */
+}
+
+.name2 {
+  position: relative;
+  top: 80px;
+  margin-left: 10px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: flex-start; /* Aligns items to the start of the container horizontally */
+}
+
+.rate {
+  position: relative;
+  display: inline-block;
+  width: 100px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 20px;
+  color: #c4c4c4; /* 背景の灰色の星 */
+}
+
+.rateInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #ffb906; /* 前景の黄色い星 */
+  white-space: nowrap; /* 星が折り返さないようにする */
+}
+
+.rating {
+  position: relative;
+  width: 140px; /* 最大の星の幅 */
+  height: 20px;
+  font-size: 25px;
+  color: #454444; /* 背景の灰色の星 */
+}
+
+.ratingNum {
+  position: relative;
+  top: 7px;
+  left: 10px;
+  font-size: 19px;
+  color: #3647ff;
+}
+
+.ratingAllContainer {
+  position: relative;
+  top: 85px;
+  right: 49px;
+  display: flex; /* フレックスボックスを有効化 */
+}
+
+.menuContainer {
+  position: relative;
+  top: 140px;
+  display: flex; /* フレックスコンテナとして設定 */
+  align-items: center; /* 子要素を縦方向の中央に配置 */
+  justify-content: center; /* 子要素を横方向の中央に配置 */
+  width: 600px;
+  height: 120px;
+}
+
+.squareContainer {
+  width: 150px; /* 四角形の幅 */
+  height: 100px; /* 四角形の高さ */
+  margin: 0 10px; /* 周りの要素との間隔 */
+  background-color: rgb(255 255 255); /* 四角形の背景色 */
+  border: 2px solid #b8b8b8; /* 境界線の設定：太さ、スタイル、色 */
+  border-radius: 10px; /* 角の丸み */
+}
+
+.heartContainer {
+  position: relative;
+  top: 16px;
+  left: 46px;
+  color: #a3a3a3;
+}
+
+.ok {
+  position: relative;
+  top: 28px;
+  left: 22px;
+  font-size: 13px;
+}
+
+.ok2 {
+  position: relative;
+  top: 28px;
+  left: 16px;
+  font-size: 13px;
+}
+
+.ok3 {
+  position: relative;
+  top: 28px;
+  left: 39px;
+  font-size: 13px;
+}
+
+.ok4 {
+  position: relative;
+  top: 28px;
+  left: 16px;
+  font-size: 13px;
+}
+
+.profileContainer {
+  position: relative;
+  top: 120px;
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: rgb(60 64 67 / 30%) 0 1px 2px 0, rgb(60 64 67 / 15%) 0 1px 3px 1px;
+}
+
+.profile {
+  position: relative;
+  top: -10px;
+  font-size: 13px;
+}
+
+.profile2 {
+  position: relative;
+  left: 20px;
+}
+
+.boxCon2 {
+  position: relative;
+  top: 30px;
+  left: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  color: #5c5c5c;
+}
+
+.smallBox {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.boxCon3 {
+  position: relative;
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 100;
+  color: #5c5c5c;
+}
+
+.title {
+  position: relative;
+  top: 50px;
+  left: 280px;
+  width: 300px;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.termsCon {
+  background-color: #fff;
+}
+
+.terms {
+  position: relative;
+  top: 80px;
+  left: 10%;
+  width: 80%;
+}
+
+.smallTitle {
+  position: relative;
+  top: 110px;
+  left: 80px;
+  width: 600px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.smallTitle2 {
+  position: relative;
+  top: 110px;
+  left: 80px;
+  width: 600px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.smallTitle2 {
+  position: relative;
+  top: 110px;
+  left: 80px;
+  width: 600px;
+  padding-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.terms2 {
+  position: relative;
+  top: 130px;
+  left: 10%;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.terms3 {
+  position: relative;
+  width: 650px;
+  margin-top: 2px;
+}
+
+.terms4 {
+  position: relative;
+  top: 110px;
+  left: 90px;
+  padding-top: 30px;
+}
+
+.smallTitle3 {
+  position: relative;
+  top: 110px;
+  left: 80px;
+  width: 600px;
+  padding-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.terms7 {
+  position: relative;
+  top: 130px;
+  left: 10%;
+  width: 80%;
+  margin-bottom: 20px;
+}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
-import type { gameListModel, UserModel2 } from 'commonTypesWithClient/models';
+import type { gameListModel, newBosyuu, UserModel2 } from 'commonTypesWithClient/models';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import styles from './index.module.css';
@@ -123,6 +123,34 @@ const Admin = () => {
     }
   };
 
+  const [recruitList, setRecruitlist] = useState<newBosyuu[]>([]);
+
+  const fetchRecruit = async () => {
+    try {
+      const response = await apiClient.fetchRecruitListAll.post();
+      setRecruitlist(response.body);
+      console.log(response.body);
+    } catch (error) {
+      console.error('ゲームの取得に失敗しました:', error);
+    }
+  };
+  useEffect(() => {
+    fetchRecruit();
+  }, []);
+
+  const handleDeleteClick = async (id: string) => {
+    try {
+      console.log(id);
+      const response = await apiClient.deleteBosyuu.post({
+        body: {
+          Id: id,
+        },
+      });
+      fetchRecruit(); // ゲームリストを再読み込み
+    } catch (error) {
+      console.error('Failed to update game:', error);
+    }
+  };
   return (
     <>
       <div className={styles.container}>
@@ -255,6 +283,36 @@ const Admin = () => {
                     <button onClick={() => handleEditClick(user)}>編集</button>
                   </div>
                 )}
+                <div className={styles.gameTitle3} />
+                {/* 必要に応じてgame, student, teacher, Commentの情報を追加 */}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.userContainer}>
+          <div className={styles.loginTitle}>募集一覧</div>
+          <div className={styles.gameContainer}>
+            {recruitList.map((user) => (
+              <div key={user.id} className={styles.gameList2}>
+                <div>
+                  <p className={styles.title2}>
+                    <span className={styles.gameTitle}>Name: </span>
+                    <span className={styles.gameTitle2}>{user.id}</span>
+                  </p>
+                  <p className={styles.title2}>
+                    <span className={styles.gameTitle}>Profile: </span>
+                    <span className={styles.gameTitle2}>{user.myProfile}</span>
+                  </p>
+                  <p className={styles.title2}>
+                    <span className={styles.gameTitle}>Rating: </span>
+                    <span className={styles.gameTitle2}>{user.rating}</span>
+                  </p>
+                  <p className={styles.title2}>
+                    <span className={styles.gameTitle}>Image: </span>
+                    <span className={styles.gameTitle2}>{user.imageUrl}</span>
+                  </p>
+                  <button onClick={() => handleDeleteClick(user.id)}>削除</button>
+                </div>
                 <div className={styles.gameTitle3} />
                 {/* 必要に応じてgame, student, teacher, Commentの情報を追加 */}
               </div>

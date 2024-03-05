@@ -23,4 +23,8 @@ export const popRecruitListRepository = {
     console.log(top25BosyuuLists);
     return top25BosyuuLists;
   },
+  fetchAllinfo: async (): Promise<newBosyuu[] | null> => {
+    const allApplies = await prismaClient.bosyuuList.findMany({});
+    return allApplies;
+  },
 };

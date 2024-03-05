@@ -9,4 +9,10 @@ export const popRecruitListUsecase = {
     assert(popRecruitList !== null, 'popRecruitListはnullです');
     return popRecruitList;
   },
+  fetchAllinfo: async (): Promise<newBosyuu[]> => {
+    console.log('gameListUsecase.fetchinfo');
+    const popRecruitList = await popRecruitListRepository.fetchAllinfo();
+    assert(popRecruitList !== null, 'popRecruitListはnullです');
+    return popRecruitList;
+  },
 };

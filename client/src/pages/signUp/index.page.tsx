@@ -55,6 +55,7 @@ const Register = () => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user && user.emailVerified) {
         // メールが検証されたことを確認
+        console.log('メールが検証されました');
 
         // データベースにユーザー情報を保存する処理
         try {

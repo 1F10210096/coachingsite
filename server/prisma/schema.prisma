@@ -21,6 +21,7 @@ model User {
   myProfile String?
   rating    Float? // 評価フィールド（5段階評価、小数点第1位まで）
   imageUrl  String?
+  games     String
   createdAt DateTime      @default(now())
   game      userGameRank? // ユーザーと生徒は任意の関連付け
   student   Student? // ユーザーと生徒は任意の関連付け

@@ -18,6 +18,7 @@ export const createUserRepository = async (
       userId, // Assuming 'userId' is a unique identifier for the User
       name: userName, // Set the 'name' field to the provided userName
       myProfile: '皆さんよろしくお願いします!', // Set the 'myProfile' field to null
+      games: 'ゲーム全般',
       rating: 3.0, // Set the 'rating' field to 0
       imageUrl:
         'https://coach-user-profile.s3.ap-northeast-1.amazonaws.com/profile-images/kkrn_icon_user_1.png', // Set the 'imageUrl' field to null

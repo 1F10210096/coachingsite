@@ -21,14 +21,33 @@
   position: relative;
   top: 10px;
   left: 60px;
-  width: 1400px;
+  width: 1300px;
+  height: auto;
   margin: 20px auto 0;
+}
+
+.container2 {
+  position: relative;
+  top: 60px;
+  left: 80px;
+  width: 1300px;
+  margin: 20px auto 0;
+}
+
+.container5 {
+  position: relative;
+  top: 70px;
+  width: 100%;
+  height: 500px;
+  margin: 20px auto 0;
+  background-color: rgb(255 255 255);
 }
 
 .gameTitle {
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
+  color: #6e6e6e;
   text-align: center; /* テキストを中央に配置 */
 }
 
@@ -43,6 +62,16 @@
 }
 
 .coachTitle2 {
+  position: relative;
+  top: 40px;
+  right: 500px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(103 103 103);
+  text-align: center;
+}
+
+.coachTitle6 {
   position: relative;
   top: 40px;
   right: 500px;
@@ -68,9 +97,12 @@
 .gameList {
   position: relative;
   top: 60px;
+  left: 50px;
   display: flex; /* Flexboxを使用して要素を横に並べる */
-  gap: 60px; /* 要素間の間隔 */
-  justify-content: center; /* 中央寄せ */
+  gap: 60px;
+  width: 1000px;
+  margin-left: 60px; /* 要素間の間隔 */
+  overflow-x: auto; /* 横にはみ出したらスクロールバーを表示 */
 }
 
 .gameItem {
@@ -78,7 +110,6 @@
   flex-direction: column; /* 縦方向に並べる */
   align-items: center; /* アイテムを縦方向中央に配置 */
   margin-bottom: 20px; /* 下部の余白を設定 */
-  text-align: center; /* テキストを中央に配置 */
 }
 
 .gameTitle2 {
@@ -118,65 +149,131 @@
 }
 
 .userSummary {
-  width: 170px; /* Sets the width of the container */
-  height: 200px; /* Sets the height of the container */
-  text-align: center; /* Centers the content */
+  width: 240px; /* Sets the width of the container */
+  height: 340px; /* Sets the height of the container */
+  background-color: rgb(255 255 255);
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0, rgb(27 31 35 / 15%) 0 0 0 1px;
+}
+
+.userSummary2 {
+  width: 240px; /* Sets the width of the container */
+  height: 390px; /* Sets the height of the container */
+  background-color: rgb(255 255 255);
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0, rgb(27 31 35 / 15%) 0 0 0 1px;
 }
 
 .userImage {
   position: relative;
-  top: 30px;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  margin: 0 auto; /* Centers the image */
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+  width: 240px; /* 必要に応じてサイズを調整 */
+  height: 240px; /* 必要に応じてサイズを調整 */
+  overflow: hidden; /* 枠を超える内容（画像など）を非表示に */
+  border-radius: 15px 15px 0 0; /* 上部にのみ丸みを適用 */
+}
+
+.userImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.userImageContainer:hover {
+  transform: scale(1.25);
+}
+
+.userImage::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none; /* この要素の上のクリック等を無視 */
+  content: '';
+  border-radius: 15px 15px 0 0;
+  box-shadow: inset 1px -61px 41px -31px rgb(96 96 96 / 50%);
 }
 
 .userName {
-  margin-top: 60px; /* Adjust space between name and image */
-  font-size: 17px;
+  position: relative;
+  top: -9px;
+  left: 10px;
+  display: -webkit-box;
+  width: 200px;
+  height: auto;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
   font-weight: bold;
+  text-overflow: ellipsis; /* 末尾に省略記号を表示 */
+  white-space: normal; /* 複数行のテキストに変更 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* 2行まで表示 */
 }
 
 .myProfile {
   position: relative;
-  top: 10px;
-  right: 15px;
+  top: -22px;
+  left: 10px;
+  z-index: 100;
   width: 200px;
   overflow: hidden; /* 余分なテキストを隠す */
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
   text-overflow: ellipsis;
+  text-shadow: 2px 2px 14px rgb(80 80 80 / 50%);
   white-space: nowrap; /* テキストを1行に保つ */
-  background-color: rgb(255 255 255);
+}
+
+.myProfile2 {
+  position: relative;
+  top: -2px;
+  left: 10px;
+  z-index: 100;
+  width: 200px;
+  overflow: hidden; /* 余分なテキストを隠す */
+  font-size: 13px;
+  color: #53578d;
+  text-overflow: ellipsis;
+  text-shadow: 2px 2px 4px rgb(214 214 214 / 50%);
+  white-space: nowrap; /* テキストを1行に保つ */
 }
 
 .userList {
   position: relative;
-  top: 40px;
+  top: 80px;
+  left: 50%;
   display: flex; /* Flexboxを使用して要素を横に並べる */
-  gap: 70px; /* 要素間の間隔 */
+  flex-wrap: wrap; /* 要素がコンテナの幅を超えると折り返す */
+  gap: 20px; /* 要素間の間隔 */
   justify-content: center; /* 中央寄せ */
+  width: 1200px;
+  height: auto; /* 高さをautoに設定して、内容に応じて自動調整させる */
+  transform: translate(-50%);
 }
 
 .allContainer {
   position: relative;
-  top: 150px;
-  left: 45%;
-  width: 110%;
+  top: 110px;
+  left: 50%;
+  width: 100%;
   height: auto;
   transform: translate(-50%);
 }
 
 .rate {
   position: relative;
-  top: 40px;
-  right: 10px;
+  top: -13px;
+  left: 7px;
   display: inline-block;
-  width: 140px; /* 最大の星の幅 */
-  height: 30px;
-  font-size: 30px;
+  width: 100px; /* 最大の星の幅 */
+  height: 25px;
+  font-size: 20px;
   color: #c4c4c4; /* 背景の灰色の星 */
+  letter-spacing: -2px;
 }
 
 .rateInner {
@@ -185,24 +282,23 @@
   left: 0;
   height: 100%;
   overflow: hidden;
-  color: #ffb906; /* 前景の黄色い星 */
+  font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+  color: #f55; /* 前景の黄色い星 */
   white-space: nowrap; /* 星が折り返さないようにする */
 }
 
 .coachContainer {
   position: relative;
-  top: 70px;
-  left: 60px;
+  top: 52px;
   width: 100%;
-  height: 380px;
+  height: 880px;
   margin: 20px auto 0;
   margin-bottom: 90px;
-  background-color: rgb(255 255 255);
+  background-color: #f4fcfc;
 }
 
 .recruitContainer {
   position: relative;
-  top: 120px;
   left: 60px;
   width: 1500px;
   margin: 20px auto 0;
@@ -220,20 +316,24 @@
 
 .recruitList {
   position: relative;
-  top: 90px;
-  left: 190px;
-  display: flex;
-  flex-wrap: wrap; /* これにより、アイテムが折り返される */
-  gap: 70px; /* 要素間の間隔 */
-  width: 1240px;
+  top: 80px;
+  left: 50%;
+  display: flex; /* Flexboxを使用して要素を横に並べる */
+  flex-wrap: wrap; /* 要素がコンテナの幅を超えると折り返す */
+  gap: 20px; /* 要素間の間隔 */
+  justify-content: center; /* 中央寄せ */
+  width: 1200px;
+  height: 870px; /* 高さをautoに設定して、内容に応じて自動調整させる */
+  transform: translate(-50%);
 }
 
 .recruitSummary {
-  width: calc((100% / 4) - 80px); /* 一行に4つのアイテムが収まるように調整 */
-  height: 390px;
-  margin-bottom: 20px; /* 下部の余白を設定 */
-  background-color: rgb(244 244 244);
-  box-shadow: rgb(0 0 0 / 16%) 0 10px 36px 0, rgb(0 0 0 / 6%) 0 0 0 1px;
+  position: relative;
+  right: 50px;
+  width: 240px; /* Sets the width of the container */
+  height: 340px; /* Sets the height of the container */
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0, rgb(27 31 35 / 15%) 0 0 0 1px;
 }
 
 .recruitListImage {
@@ -289,17 +389,17 @@
 
 .recruitDetail {
   position: relative;
+  left: 11px;
   display: -webkit-box;
+  width: 217px;
   padding: 3px;
-  margin-right: 18px;
-  margin-left: 18px;
   overflow: hidden; /* 余分なテキストを隠す */
   font-size: 12px;
   text-overflow: ellipsis; /* 末尾に省略記号を表示 */
   letter-spacing: -0.5px; /* 文字の間隔を狭める */
   white-space: normal; /* 複数行のテキストに変更 */
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* 2行まで表示 */
+  -webkit-line-clamp: 3; /* 2行まで表示 */
 }
 
 .recruitDetailLessonType {
@@ -318,13 +418,14 @@
 
 .lessonType {
   position: relative;
+  top: -3px;
   padding: 1px 4px; /* 内側の余白 */
   margin-right: 8px; /* ボタン間の余白 */
+  background-color: rgb(254, 254, 254);
   font-size: 9px; /* フォントサイズ */
   font-weight: bold;
   color: rgb(32 106 252); /* テキストの色 */
   cursor: pointer; /* カーソルを指の形に */
-  background-color: #fff; /* ボタンの背景色 */
   border: 1px solid rgb(32 106 252); /* 枠線を青色に */
   border-radius: 20px; /* 角丸の半径 */
 }
@@ -332,7 +433,7 @@
 .blueTitle {
   position: absolute;
   top: 20px;
-  left: 1250px;
+  left: 1100px;
   font-size: 15px;
   font-weight: bold;
   color: #0141c193;
@@ -359,15 +460,14 @@
 
 .recruitContainer1 {
   position: relative;
-  top: -14px;
-  left: 17px;
+  top: -7px;
+  left: 9px;
   width: 200px;
+  overflow: hidden;
 
   /* テキストがオーバーフローした場合の振る舞いを定義 */
-  overflow: hidden; /* コンテナの外に出たテキストを隠す */
   text-overflow: ellipsis; /* オーバーフローしたテキストの末尾を省略記号で表示 */
   white-space: nowrap; /* テキストを1行にする */
-  background-color: rgb(244 244 244);
 }
 
 .allContainer1 {
@@ -382,8 +482,112 @@
 
 .r6 {
   position: relative;
-  left: 20px;
+  top: -3px;
+  left: 11px;
   font-size: 12px;
   font-weight: 600;
   color: #6e6e6e;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+/* スクロールバー全体のスタイル */
+.gameList::-webkit-scrollbar {
+  width: 5px; /* スクロールバーの幅 */
+  height: 5px; /* 垂直スクロールバーの高さ、水平スクロールバーにも適用される */
+  border-radius: 10px; /* スクロールバーの角を丸くする */
+}
+
+/* スクロールバーのトラック（背景部分）のスタイル */
+.gameList::-webkit-scrollbar-track {
+  border-radius: 100px;
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
+
+/* スクロールバーのサム（スクロール可能な部分）のスタイル */
+.gameList::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0af, #06c); /* 明るい色のグラデーション */
+  border-radius: 10px; /* サムの角を丸くする */
+}
+
+/* ホバー時のスクロールバーのサムのスタイル */
+.gameList::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0bf, #08d); /* ホバー時に色を変える */
+}
+
+.yoko {
+  position: relative;
+  display: flex;
+}
+
+.rating {
+  position: relative;
+  top: -9px;
+  left: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 200;
+}
+
+.count {
+  position: relative;
+  top: -7px;
+  left: 9px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.userListContainer {
+  position: relative;
+  top: 60px;
+  left: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* アイテム間の隙間 */
+  justify-content: space-between; /* アイテム間のスペースを均等に配分 */
+  width: 1000px;
+  height: 370px;
+  transform: translate(-50%);
+}
+
+/* 各ユーザーアイテムのスタイル */
+.userItem {
+  position: relative;
+  top: 30px;
+  left: 80px;
+  display: flex;
+  flex-direction: column; /* 写真と名前を縦に並べる */
+  align-items: center; /* 中央揃え */
+  width: calc(100% / 7 - 10px); /* 8個を横に並べるための幅（gapを考慮） */
+}
+
+/* ユーザー写真のスタイル */
+.userImage2 {
+  width: 120px;
+  height: 120px;
+  background-color: rgb(255 255 255);
+  border: 3px solid rgb(255 150 224);
+  border-radius: 50%;
+}
+
+/* ユーザー名のスタイル */
+.userName2 {
+  width: 130px;
+  margin-top: 7px; /* 写真と名前の間のスペース */
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #727272;
+  text-align: center;
+}
+
+.container2 {
+  position: relative;
+  top: 20px;
+  left: 60px;
+  width: 1300px;
+  margin: 20px auto 0;
 }

@@ -14,18 +14,42 @@ import assert from 'assert';
 export const userRepository = {
   fetchListinfo: async (): Promise<UserSummaryModel[] | null> => {
     try {
+      // ユーザーを取得
       const users = await prismaClient.user.findMany({
         orderBy: {
           rating: 'desc',
         },
-        take: 5,
+        take: 8,
         select: {
+          userId: true,
           name: true,
           imageUrl: true,
           myProfile: true,
           rating: true,
+          games: true,
+          // teacher: { ... }  // ここではteacher関連の情報は省略
         },
       });
+
+      // 各ユーザーに対して関連するapplyの数を集計
+      const usersWithApplyCount = await Promise.all(
+        users.map(async (user) => {
+          const applyCount = await prismaClient.apply.count({
+            where: {
+              // ここで `apply` がユーザーに関連する条件を指定
+              bosyuu: {
+                teacherId: user.userId,
+              },
+            },
+          });
+
+          // applyの数を含むユーザー情報を返す
+          return {
+            ...user,
+            applyCount,
+          };
+        })
+      );
       assert(users !== null, 'usersはnullです');
       const userSummaries: UserSummaryModel[] = users.map((user) => ({
         name: user.name,
@@ -33,10 +57,45 @@ export const userRepository = {
         myProfile: user.myProfile !== null ? user.myProfile : '',
         rating: user.rating !== null ? user.rating : 0,
       }));
-
-      return userSummaries;
+      return usersWithApplyCount;
     } catch (error) {
       console.error('Error fetching users:', error);
+      return null;
+    }
+  },
+  fetchListinfo2: async (): Promise<UserSummaryModel[] | null> => {
+    try {
+      const recentBosyuuLists = await prismaClient.bosyuuList.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 32, // ユニーク性を確保するため多めに取得
+        include: {
+          teacher: {
+            include: {
+              user: true, // 教師に関連するユーザー情報を含める
+            },
+          },
+        },
+      });
+
+      // 教師（および関連するユーザー情報）を抽出し、userIdで重複排除
+      const uniqueTeachersMap = new Map();
+      recentBosyuuLists.forEach(({ teacher }) => {
+        if (teacher && teacher.user && !uniqueTeachersMap.has(teacher.userId)) {
+          uniqueTeachersMap.set(teacher.userId, {
+            ...teacher.user,
+            teacherId: teacher.userId, // 教師IDも含める場合
+          });
+        }
+      });
+
+      // Mapからユニークな教師のリストを生成
+      const uniqueTeachers = Array.from(uniqueTeachersMap.values());
+
+      console.log(uniqueTeachers);
+      // 必要に応じて最初の16名を選択
+      return uniqueTeachers.slice(0, 16);
+    } catch (error) {
+      console.error('Error fetching recent unique teachers with user info:', error);
       return null;
     }
   },

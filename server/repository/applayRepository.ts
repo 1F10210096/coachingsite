@@ -1,4 +1,4 @@
-import type { Application } from '$/commonTypesWithClient/models'; // 適切なパス修正してください
+import type { Application } from '$/commonTypesWithClient/models'; // 適切なス修正してください
 import { prismaClient } from '$/service/prismaClient';
 
 

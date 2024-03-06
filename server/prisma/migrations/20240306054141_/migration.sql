@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "User" ADD COLUMN     "games" TEXT NOT NULL;
+ALTER TABLE "User" ADD COLUMN "games" TEXT NOT NULL DEFAULT '';

@@ -1,5 +1,6 @@
-import type { Application } from '$/commonTypesWithClient/models'; // 適切なパスに修正してください
+import type { Application } from '$/commonTypesWithClient/models'; // 適切なパス修正してください
 import { prismaClient } from '$/service/prismaClient';
+
 
 export const applayRepository = async (
   bosyuuId: string,

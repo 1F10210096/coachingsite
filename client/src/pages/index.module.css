@@ -421,11 +421,11 @@
   top: -3px;
   padding: 1px 4px; /* 内側の余白 */
   margin-right: 8px; /* ボタン間の余白 */
-  background-color: rgb(254, 254, 254);
   font-size: 9px; /* フォントサイズ */
   font-weight: bold;
   color: rgb(32 106 252); /* テキストの色 */
   cursor: pointer; /* カーソルを指の形に */
+  background-color: rgb(254 254 254);
   border: 1px solid rgb(32 106 252); /* 枠線を青色に */
   border-radius: 20px; /* 角丸の半径 */
 }

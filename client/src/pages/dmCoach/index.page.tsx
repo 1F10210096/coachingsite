@@ -30,8 +30,11 @@ const Dm = () => {
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel | undefined>(undefined);
 
   const router = useRouter();
+  const [userOk, setUserOk] = useState(0);
   const id = String(router.query.id);
   const title = String(router.query.title);
+  console.log(id);
+  console.log(router.query.userOk);
   const fetchRecruitDetail = async () => {
     try {
       console.log(user);
@@ -71,11 +74,14 @@ const Dm = () => {
   useEffect(() => {
     // URLからtitleクエリパラメータを取得
     const title = String(router.query.title);
+    const userOk1 = Number(router.query.userOk);
 
     // titleがundefinedまたはnullでない場合のみ、setSelectedTitleを実行
     if (title) {
       setSelectedTitle(title);
+      setUserOk(userOk1);
     }
+    console.log(userOk);
   }, []);
 
   useEffect(() => {
@@ -84,6 +90,7 @@ const Dm = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]); // idAsString に依存
+
 
   useEffect(() => {
     const auth = createAuth();
@@ -504,6 +511,7 @@ const Dm = () => {
         setRooms(response.body);
         console.log(response.body);
       } else if (title === 'dmTitle4') {
+        console.log(';l;l;');
         // 'dmTitle4'が選択された場合のAPIエンドポイントを呼び出す
         response = await apiClient.fetchDm2Coach.post({
           // fetchDm2post が正しい関数名か確認してください
@@ -520,7 +528,6 @@ const Dm = () => {
     }
   };
   const [roomId, setRoomId] = useState('');
-
   useEffect(() => {
     setRoomId(id);
   }, [id]);
@@ -530,9 +537,9 @@ const Dm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, selectedTitle]);
 
-  const handleCommentClick = (roomId: string) => {
+  const handleCommentClick = (roomId: string, userOk: number) => {
     setRoomId(roomId);
-    router.push(`../dmCoach?id=${roomId}&?title=${selectedTitle}`);
+    router.push(`../dmCoach?id=${roomId}&?title=${selectedTitle}&userOk=${userOk}`);
   };
 
   return (
@@ -552,7 +559,7 @@ const Dm = () => {
                 }`}
                 onClick={() => selectTitle('dmTitle3')}
               >
-                未了承
+                未申込
               </div>
               <div
                 className={`${styles.dmTitle4} ${
@@ -560,7 +567,7 @@ const Dm = () => {
                 }`}
                 onClick={() => selectTitle('dmTitle4')}
               >
-                了承済み
+                申し込み済み
               </div>
             </div>
           </div>
@@ -575,7 +582,8 @@ const Dm = () => {
                     }`}
                     onClick={() =>
                       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-                      room.latestComment?.id && handleCommentClick(room.latestComment.roomId)
+                      room.latestComment?.id &&
+                      handleCommentClick(room.latestComment.roomId, room.userOk)
                     }
                     // ここでも同様
                   >
@@ -663,19 +671,19 @@ const Dm = () => {
             )}
             {isModalOpen && <Modal isOpen={isModalOpen} />}
             {isModalFinalOpen && <FinalModal isOpen={isModalFinalOpen} />}
-            {userNumber === 2 && (
+            {userNumber === 2 && userOk === undefined && (
               <>
                 {waitApprove ? (
                   <div onClick={handleButtonApproveClick} className={styles.applayButton2}>
-                    受諾ボタン
+                    受諾ボタン 
                   </div>
                 ) : (
-                  <div className={styles.appliedButton1}>了承済み</div>
+                  <div className={styles.appliedButton1}>未申込</div>
                 )}
               </>
             )}
             {isModalApproveOpen && <ApproveModal isOpen={isModalApproveOpen} />}
-            {userNumber === 4 && (
+            {userOk === 3 && (
               <button disabled className={styles.appliedButton1}>
                 了承済み
               </button>

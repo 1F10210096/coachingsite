@@ -281,6 +281,7 @@ export const roomRepository = {
   fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
     try {
       console.log('Fetching DMs for coach');
+      console.log(userId, 'fasdfafafs');
       const roomsWithLatestComment = await prisma.room.findMany({
         where: {
           hostId: userId,
@@ -300,11 +301,7 @@ export const roomRepository = {
               },
             },
           },
-          apply: {
-            where: {
-              status: 'wait', // ここでstatusが"wait"のapplyだけを取得
-            },
-          },
+          apply: true,
           // 他に必要なフィールドがあれば、ここに追加
         },
       });
@@ -313,8 +310,9 @@ export const roomRepository = {
 
       // applyが空ではない、かつ最新のコメントが存在する部屋だけをフィルタリング
       const roomsWithValidAppliesAndComments = roomsWithLatestComment.filter(
-        (room) => room.apply.length > 0 && room.Comment.length > 0
+        (room) => room.apply.length === 0 && room.Comment.length > 0
       );
+      console.log(roomsWithValidAppliesAndComments, 'gddgdg');
 
       // 最新のコメントとそのユーザー情報をマッピング
       const roomsWithMappedComments = roomsWithValidAppliesAndComments.map((room) => ({
@@ -322,6 +320,7 @@ export const roomRepository = {
         latestComment: room.Comment[0], // 最新のコメント
         commentUser: room.Comment[0].user, // コメント投稿者の情報
       }));
+      console.log(roomsWithMappedComments, '[[[[');
 
       return roomsWithMappedComments;
     } catch (error) {
@@ -350,27 +349,26 @@ export const roomRepository = {
               },
             },
           },
-          apply: {
-            where: {
-              status: '応募済み', // ここでstatusが"応募済み"のものだけを取得
-            },
-          },
+          apply: true,
           // 他に必要なフィールドがあれば、ここに追加
         },
       });
 
+      console.log(roomsWithLatestComment, 'afasfasfsa');
       // 応募が存在し、最新のコメントがある部屋だけをフィルタリング
       const roomsWithValidAppliesAndComments = roomsWithLatestComment.filter(
         (room) => room.apply.length > 0 && room.Comment.length > 0
       );
-
+      console.log(roomsWithValidAppliesAndComments, 'gsfgsgsd');
       // 最新のコメントとそのユーザー情報をマッピング
       const roomsWithMappedComments = roomsWithValidAppliesAndComments.map((room) => ({
         ...room,
         latestComment: room.Comment.length > 0 ? room.Comment[0] : null,
-        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null, // コメント投稿者の情報
+        commentUser: room.Comment.length > 0 ? room.Comment[0].user : null,
+        userOk: room.apply.some(apply => apply.status === '応募済み') ? 3 : room.userOk, // コメント投稿者の情報
       }));
 
+      console.log(roomsWithMappedComments, 'agdsg');
       return roomsWithMappedComments;
     } catch (error) {
       console.error('Error fetching rooms with latest comment and user:', error);

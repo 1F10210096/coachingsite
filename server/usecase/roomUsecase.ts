@@ -32,6 +32,7 @@ export const roomUsecase = {
   },
   fetchDm: async (userId: string): Promise<RoomWithLatestComment[]> => {
     console.log('recruitDetailUsecase.fetchinfo');
+    console.log(userId, ';l;;l;;l');
     const room = await roomRepository.fetchDm(userId);
     assert(room !== null, 'roomはnullです');
     return room;
@@ -43,6 +44,7 @@ export const roomUsecase = {
     return room;
   },
   fetchDmCoach: async (userId: string): Promise<RoomWithLatestComment[]> => {
+    console.log(userId,"fffsfsdfsfsfsdfsfsfsfs")
     console.log('recruitDetailUsecase.fetchinfo');
     const room = await roomRepository.fetchDmCoach(userId);
     assert(room !== null, 'roomはnullです');

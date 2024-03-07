@@ -204,7 +204,6 @@ const Dm = () => {
 
     console.log('承諾用URLを送信しました:', approvalUrl);
 
-    // approvalUrlを使用する処理
 
     // WebSocketを通じてURLを送信するメッセージを作成
   };

@@ -35,6 +35,7 @@ const Dm = () => {
   const title = String(router.query.title);
   console.log(id);
   console.log(router.query.userOk);
+  console.log(userOk);
   const fetchRecruitDetail = async () => {
     try {
       console.log(user);
@@ -671,7 +672,7 @@ const Dm = () => {
             )}
             {isModalOpen && <Modal isOpen={isModalOpen} />}
             {isModalFinalOpen && <FinalModal isOpen={isModalFinalOpen} />}
-            {userNumber === 2 && userOk === undefined && (
+            {userNumber === 2 && isNaN(userOk) && (
               <>
                 {waitApprove ? (
                   <div onClick={handleButtonApproveClick} className={styles.applayButton2}>

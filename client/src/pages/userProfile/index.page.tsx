@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable max-lines */
 import assert from 'assert';
@@ -141,8 +142,6 @@ const UserProfile = () => {
   const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
   const [user2, setUser2] = useState<NewApplyData[]>([]);
 
-
-
   type RoomType = {
     id: string; // または number など、id の実際の型に応じて変更
     // 他のプロパティがあればここに追加
@@ -211,8 +210,19 @@ const UserProfile = () => {
       directory = 'apexRanks';
     } else if (Id === 3) {
       directory = 'lolRanks'; // Adding the lolRanks condition
+    } else if (Id === 4) {
+      directory = 'FORTNITERanks'; // Adding the lolRanks condition
+    } else if (Id === 5) {
+      directory = 'StreetFighterRanks'; // Adding the lolRanks condition
+    } else if (Id === 6) {
+      directory = 'yuugiouRanks'; // Adding the lolRanks condition
+    } else if (Id === 7) {
+      directory = 'OverWatch2'; // Adding the lolRanks condition
+    } else if (Id === 8) {
+      directory = 'PUBGanks'; // Adding the lolRanks condition
+    } else if (Id === 9) {
+      directory = 'CSGO2Ranks'; // Adding the lolRanks condition
     }
-
     console.log(rank);
     console.log(directory);
     const rankImage = getImagePath(Id, rank);

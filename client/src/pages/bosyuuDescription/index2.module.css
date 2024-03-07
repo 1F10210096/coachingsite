@@ -12,6 +12,15 @@
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
+.rankImage {
+  position: relative;
+  top: 5px;
+  width: 70px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}
+
 .title {
   position: relative;
   top: 60px;

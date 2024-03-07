@@ -901,7 +901,7 @@ const Valorant = () => {
                   >
                     <div className={styles.searchDetailContainer}>対象のランク</div>
                     <span className={styles.dropdownIcon} />
-                  </div>{' '}
+                  </div>
                 </div>
                 <div className={styles.sea}>
                   {showMyRankCheckboxes && (
@@ -963,7 +963,7 @@ const Valorant = () => {
                         ))}
                       </div>
                     </>
-                  )}{' '}
+                  )}
                 </div>
                 <div className={styles.searchNameContainer2}>
                   <div
@@ -972,7 +972,7 @@ const Valorant = () => {
                   >
                     <div className={styles.searchDetailContainer}>レッスン形式検索</div>
                     <span className={styles.dropdownIcon} onChange={handleChange} />
-                  </div>{' '}
+                  </div>
                 </div>
                 {showLessonWard && (
                   <>

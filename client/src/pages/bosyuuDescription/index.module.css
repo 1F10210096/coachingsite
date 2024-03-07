@@ -577,3 +577,12 @@
   position: relative;
   top:3px;
 }
+
+.rankImage {
+  position: relative;
+  top: 5px;
+  width: 70px; /* 画像の幅 */
+  height: auto; /* 画像の高さは自動調整 */
+
+  /* その他のスタイル（必要に応じて） */
+}

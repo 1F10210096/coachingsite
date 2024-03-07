@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines */
 import type { BosyuuListModel, UserSummaryDetailModel } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -84,6 +85,18 @@ const UserProfile = () => {
       directory = 'apexRanks';
     } else if (Id === 3) {
       directory = 'lolRanks'; // Adding the lolRanks condition
+    } else if (Id === 4) {
+      directory = 'FORTNITERanks'; // Adding the lolRanks condition
+    } else if (Id === 5) {
+      directory = 'StreetFighterRanks'; // Adding the lolRanks condition
+    } else if (Id === 6) {
+      directory = 'yuugiouRanks'; // Adding the lolRanks condition
+    } else if (Id === 7) {
+      directory = 'OverWatch2'; // Adding the lolRanks condition
+    } else if (Id === 8) {
+      directory = 'PUBGanks'; // Adding the lolRanks condition
+    } else if (Id === 9) {
+      directory = 'CSGO2Ranks'; // Adding the lolRanks condition
     }
 
     console.log(rank);

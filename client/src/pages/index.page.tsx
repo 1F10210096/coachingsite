@@ -10,6 +10,7 @@ import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import getGameListIcon from 'src/utils/gameListIcon';
 import styles from './index.module.css';
+import { BasicUnder } from './@components/BasicUnder/BasicUnder';
 const Home = () => {
   const [userUUID, setUserUUID] = useState('');
   const [gameList, setGamelist] = useState<GameListModel[]>([]);
@@ -270,6 +271,7 @@ const Home = () => {
               ))}
             </div>
           </div>
+          <BasicUnder />
         </div>
       </div>
     </>

@@ -1,27 +1,23 @@
 .container {
-  width: 94%;
+  width: 93%;
   height: auto;
   padding-bottom: 50px;
-  margin-top: 20px;
+  margin-top: 26px;
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-left: 26px;
   background: rgb(255 255 255);
-  border: 1px solid #b5b5b5; /* General border for all sides */
   border-top: 3px solid #71d3f7; /* Light blue top border */
-  box-shadow: 2px 2px 3px rgb(199 199 199 / 50%); /* Shadow effect */
+  border-radius: 15px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .helpwanted {
   position: relative;
   top: 20px;
-  left: 25px;
-  display: flex; /* フレックスコンテナとして設定 */
-  flex-direction: column; /* 子要素を縦方向に並べる */
-  width: 800px;
-
-  /* background-color: #f5f5f5; */
-
-  /* box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px; */
+  left: 23px;
+  display: flex;
+  flex-direction: column;
+  width: 796px;
 }
 
 .flexContainer {
@@ -30,7 +26,6 @@
   display: flex;
   align-items: center; /* 要素を垂直方向の中央に配置 */
   height: 70px;
-  background-color: rgb(255 255 255);
 }
 
 .gameTitle {
@@ -95,21 +90,34 @@
   margin-top: 15px;
   margin-bottom: 15px;
   overflow: hidden;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-family: 100;
   font-size: 13px;
-  line-height: 1.2; /* Adjust this value as needed */
-  letter-spacing: -0.1px;
+  line-height: 1.3; /* Adjust this value as needed */
+  letter-spacing: 0.8px;
   background-color: rgb(255 255 255);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
 
 .descriptionContainer {
+  position: relative;
+  top: 8px;
   display: flex;
   gap: 20px; /* 画像間のスペースを20pxに設定 */
   width: 650px;
   margin-left: 30px;
-  border: #d7d7d7 1px solid;
+  border: #d7d7d7 2px solid;
+}
+
+.descriptionContainer2 {
+  position: relative;
+  top: 6px;
+  display: flex;
+  gap: 20px; /* 画像間のスペースを20pxに設定 */
+  width: 650px;
+  margin-left: 30px;
+  border: #d7d7d7 2px solid;
 }
 
 .rank {
@@ -125,11 +133,13 @@
 }
 
 .subjectRank {
+  position: relative;
+  top: 10px;
   display: flex;
   gap: 20px; /* 画像間のスペースを20pxに設定 */
   width: 650px;
   margin-left: 30px;
-  border: #d7d7d7 1px solid;
+  border: #d7d7d7 2px solid;
 }
 
 .subjectRankTitle {
@@ -366,8 +376,8 @@
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
   background-color: #fff;
-  border-bottom: 2px solid rgb(142 142 142);
-  box-shadow: rgb(3 102 214 / 30%) 0 0 0 1px;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0, rgb(27 31 35 / 15%) 0 0 0 1px;
 }
 
 .container4 {

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { createAuth, loginWithEmail } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
+import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -89,6 +90,7 @@ const Login = () => {
             </form>
           </div>
         </div>{' '}
+        <BasicUnder />
       </div>
     </>
   );

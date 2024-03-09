@@ -48,6 +48,7 @@ export const recruitDetailRepository = {
                 name: true,
                 myProfile: true,
                 rating: true,
+                games: true,
                 imageUrl: true,
               },
             },
@@ -60,6 +61,7 @@ export const recruitDetailRepository = {
             studentId: false,
             rating: true,
             review: true,
+            date:true,
             student: {
               select: {
                 user: {
@@ -107,12 +109,12 @@ export const recruitDetailRepository = {
     const reviewList: reviewModel2[] = bosyuuDetail.apply
       .filter((apply) => apply.review !== null && apply.review.trim() !== '')
       .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      .slice(0, 5)
       .map((apply) => ({
         name: apply.student.user.name,
         imageUrl: apply.student.user.imageUrl,
         rating: apply.rating || 0,
         review: apply.review,
+        date: apply.date,
       }));
 
     console.log('reviewList', reviewList);

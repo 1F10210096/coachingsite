@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createAuth } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
+import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 const Login = () => {
   const [Id, setUserUUID] = useState('');
   useEffect(() => {
@@ -158,6 +159,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <BasicUnder />
       </div>
     </>
   );

@@ -15,6 +15,7 @@ import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css'; // スタイルシートは適宜調整してください
+import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
@@ -240,6 +241,7 @@ const Register = () => {
             )}
           </div>
         </div>{' '}
+        <BasicUnder />
       </div>
     </>
   );

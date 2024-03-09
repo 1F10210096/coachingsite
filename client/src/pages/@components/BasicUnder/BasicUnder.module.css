@@ -1,0 +1,320 @@
+.container {
+  position: absolute;
+  bottom: 0;
+  z-index: 1000; /* 他の要素より上に表示されるようにする */
+  width: 100%; /* 幅を画面全体に拡張 */
+  height: 260px;
+  background-color: #8f31ff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ff747d'/%3E%3Cstop offset='1' stop-color='%23ff747d' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d984ff'/%3E%3Cstop offset='1' stop-color='%23d984ff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffd1c8'/%3E%3Cstop offset='1' stop-color='%23ffd1c8' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%238F31FF'/%3E%3Cstop offset='1' stop-color='%238F31FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23E1FFB7'/%3E%3Cstop offset='1' stop-color='%23E1FFB7' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FCD8FF'/%3E%3Cstop offset='1' stop-color='%23FCD8FF' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.contheme {
+  position: absolute;
+  top: 70px;
+  left: 50%; /* 左端を画面の中央に設定 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 990px;
+  height: 40px;
+  background: #fafafa;
+  border-bottom: 1px solid #68b5fe;
+  transform: translateX(-50%);
+}
+
+.button {
+  box-sizing: border-box;
+  display: flex; /* Flexbox を使用 */
+  align-items: center; /* テキストを垂直中央に揃える */
+  justify-content: center; /* テキストを水平中央に揃える */
+  height: 40px;
+  padding: 15px 29px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 30px; /* テキストの行の高さを設定 */
+  color: rgb(103 103 103);
+  cursor: pointer;
+  background: #fafafa;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #eae9e9; /* ホバー時の背景色を濃くする */
+}
+
+.contheme2 {
+  position: absolute;
+  top: 10px;
+  left: 1090px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 500px;
+  height: 50px;
+  margin: 0 auto;
+  background: #fafafa;
+}
+
+.kaninButton {
+  height: 35px;
+  padding: 1px 14px; /* ボタンの内側の余白を設定 */
+  margin: 0; /* ボタン間の余白をなくす */
+  font-size: 14px; /* テキストのサイズを設定 */
+  color: rgb(77 77 77); /* テキストの色を設定 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background: #fafafa;
+  border: none; /* 枠線を消去 */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.kaninButton:hover {
+  background-color: #e9e7e7; /* ホバー時の背景色を濃くする */
+}
+
+.loginButton {
+  height: 35px;
+  padding: 1px 12px; /* ボタンの内側の余白を設定 */
+  margin: 10px; /* ボタン間の余白をなくす */
+  font-size: 14px; /* テキストのサイズを設定 */
+  color: rgb(77 77 77); /* テキストの色を設定 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background: #fafafa;
+  border: none; /* 枠線を消去 */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.loginButton:hover {
+  background-color: #e9e7e7; /* ホバー時の背景色を濃くする */
+}
+
+.redButton {
+  position: relative;
+  top: -18px;
+  left: 50px;
+  width: 100px;
+  height: 40px;
+  padding: 12px 14px; /* ボタンの内側の余白 */
+  font-size: 13px; /* テキストのサイズ */
+  font-weight: bold;
+  color: white; /* テキストの色 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background-color: red; /* ボタンの背景色 */
+  border: none; /* 枠線なし */
+  border-radius: 6px; /* 端を丸くする */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.redButton2 {
+  position: relative;
+  top: -1px;
+  left: 50px;
+  width: 100px;
+  height: 40px;
+  padding: 12px 14px; /* ボタンの内側の余白 */
+  font-size: 13px; /* テキストのサイズ */
+  font-weight: bold;
+  color: white; /* テキストの色 */
+  cursor: pointer; /* ホバー時にカーソルをポインターにする */
+  background-color: red; /* ボタンの背景色 */
+  border: none; /* 枠線なし */
+  border-radius: 6px; /* 端を丸くする */
+  transition: background-color 0.3s ease; /* 背景色の変化を滑らかにする */
+}
+
+.redButton:hover {
+  background-color: rgb(250 96 96); /* ホバー時の背景色を暗くする */
+}
+
+.searchContainer {
+  position: absolute;
+  top: -5px;
+  left: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.searchInput {
+  width: 400px;
+  height: 35px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+}
+
+.searchButton {
+  width: 40px;
+  height: 35px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  background: #d7d6d6 url('/images/megane.png') no-repeat right 8px center; /* 背景色と虫眼鏡アイコンを追加 */
+  background-size: 24px;
+  border: none;
+  border-radius: 0 4px 4px 0; /* 右側の角を丸くする */
+}
+
+.searchButton:hover {
+  background-color: #b1b1b1;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  height: 10%;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+.userBtn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.userBtn:hover {
+  background: white;
+  border-color: #eee;
+}
+
+.userIcon {
+  border-radius: 50%;
+}
+
+.userContainer {
+  display: flex;
+  flex-wrap: nowrap; /* 子要素が折り返さないように設定 */
+  align-items: center;
+  justify-content: flex-start;
+  width: 200px; /* 必要に応じて幅を調整 */
+  background-color: #63b5e5;
+}
+
+.userName {
+  position: relative;
+  top: -18px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+}
+
+.userName2 {
+  position: relative;
+  top: 7px;
+  display: inline-block;
+  width: 100px;
+  margin-right: 10px;
+  margin-left: 10px;
+  overflow: hidden; /* コンテナの外に出たテキストを隠す */
+  font-size: 17px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap; /* テキストを1行にする */
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* ビューポートの高さに合わせる */
+}
+
+.loading::after {
+  width: 50px;
+  height: 50px;
+  content: '';
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.selectedButton {
+  box-sizing: border-box;
+  display: flex; /* Flexbox を使用 */
+  align-items: center; /* テキストを垂直中央に揃える */
+  justify-content: center; /* テキストを水平中央に揃える */
+  height: 40px;
+  padding: 15px 29px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 30px; /* テキストの行の高さを設定 */
+  color: rgb(0 132 255);
+  cursor: pointer;
+  background: #fafafa;
+  border: none;
+  border-bottom: 3px solid rgb(0 132 255);
+  transition: background-color 0.3s ease;
+}
+
+.userSection8 {
+  position: relative;
+  top: -10px;
+  right: 10px;
+}
+
+.iconblack {
+  position: relative;
+  top: 18px;
+  width: 40px;
+  padding: 10px; /* アイコンの周りに余白を設定 */
+  color: black; /* アイコンの色 */
+  background-color: white; /* 背景色 */
+}
+
+.roomButton {
+  position: relative;
+  top: 20px;
+  right: 60px;
+  width: 50px;
+}
+
+.roomButton2 {
+  position: relative;
+  top: 50px;
+  right: 130px;
+  width: 50px;
+}
+
+.con {
+  position: relative;
+  top: 50px;
+  left:110px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.con2 {
+  position: relative;
+  left: 30px;
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+}
+
+.con3 {
+  position: relative;
+  top: 70px;
+  left: 80px;
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+}

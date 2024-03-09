@@ -24,6 +24,7 @@ import { createAuth } from 'src/utils/firebase';
 import { gameList } from 'src/utils/gameList';
 import { default as getImagePath } from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
+import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
 // eslint-disable-next-line complexity
@@ -816,6 +817,23 @@ const Valorant = () => {
     fetchLike();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const handlePrivacyClick = () => {
+    if (user) {
+      router.push('/privacy'); // ログインしている場合は privacy へリダイレクト
+    } else {
+      router.push('/login'); // ログインしていない場合は login へリダイレクト
+    }
+  };
+
+  const handlePrivacyTerms = () => {
+    if (user) {
+      router.push('/terms'); // ログインしている場合は privacy へリダイレクト
+    } else {
+      router.push('/login'); // ログインしていない場合は login へリダイレクト
+    }
+  };
+
   return (
     <>
       <BasicHeader user={user} />
@@ -1116,7 +1134,7 @@ const Valorant = () => {
                     <p className={styles2.descriptionTitle}>募集詳細:</p>
                     <p className={styles2.description}>{item.description}</p>
                   </div>
-                  <div className={styles2.descriptionContainer}>
+                  <div className={styles2.descriptionContainer2}>
                     <p className={styles2.descriptionTitle}>実績:</p>
                     <p className={styles2.description}>{item.myProfile}</p>
                   </div>

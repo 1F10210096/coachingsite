@@ -2,6 +2,7 @@
 /* eslint-disable complexity */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-lines */
+import { MenuOutlined } from '@ant-design/icons';
 import type {
   BosyuuListFrontModel,
   UserSummaryDetailModel,
@@ -15,18 +16,17 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
-import getGameListImagePathMain from 'src/utils/gameListMainPng';
-import getGameListImagePath from 'src/utils/gameListPng';
 import getImagePath from 'src/utils/gamePng';
-import getTagImagePath from 'src/utils/tagPng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
+import { BasicUnder } from '../@components/BasicUnder/BasicUnder';
 import styles from './index.module.css';
 import styles2 from './index2.module.css';
-import styles3 from './index3.module.css';
 const Login = () => {
   const [RecruitDetail, setRecruitDetail] = useState<BosyuuListFrontModel | null>(null);
   const [userDetail, setUserDetail] = useState<UserSummaryDetailModel>();
   const [reviews, setReviews] = useState<reviewModel2[]>([]);
+  const [reviewCount, setReviewCount] = useState<number>(0);
+  const [averageRating, setAverageRating] = useState<string>('0');
   const [user, setUser] = useState('');
   const router = useRouter();
   const id = router.query.id;
@@ -60,6 +60,32 @@ const Login = () => {
       setUserDetail(response.body.teacherProfile);
 
       setReviews(response.body.reviewList);
+      const reviewCount = response.body.reviewList.length;
+      console.log(reviewCount);
+      setReviewCount(reviewCount);
+      console.log('レビューの数:', reviewCount);
+      if (response.body.reviewList && response.body.reviewList.length > 0) {
+        // 各レビューの評価を合計
+        const totalRating = response.body.reviewList.reduce(
+          (acc, review) => acc + review.rating,
+          0
+        );
+        // 評価の合計をレビューの数で割って平均を求める
+        console.log(totalRating);
+        const averageRating = totalRating / response.body.reviewList.length;
+        // 少数第一位までの平均評価をフォーマット
+        const formattedAverageRating = averageRating.toFixed(1);
+
+        console.log('レビューの平均評価 (少数第一位まで):', formattedAverageRating);
+
+        // 文字列としてフォーマットされた平均評価を状態に保存
+        // 注意: setAverageRatingは数値ではなく文字列を受け取るようになります
+        setAverageRating(formattedAverageRating);
+      } else {
+        console.log('レビューがありません。');
+        // 平均評価を0または適切な値に設定するか、状態の更新をスキップ
+        setAverageRating('0');
+      }
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);
     }
@@ -93,8 +119,6 @@ const Login = () => {
       directory = 'CSGO2Ranks'; // Adding the lolRanks condition
     }
 
-    console.log(rank);
-    console.log(directory);
     const rankImage = getImagePath(gameId, rank);
     return `/${directory}/${rankImage}`;
   };
@@ -155,41 +179,214 @@ const Login = () => {
     fetchRecruit();
   }, []);
 
+  const copyUrlToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('URLがクリップボードにコピーされました。');
+    } catch (err) {
+      console.error('クリップボードにコピーできませんでした。', err);
+    }
+  };
+  const handleClick = (id: any) => {
+    router.push(`/recruitDetail?id=${id}`);
+  };
+
   return (
     <>
       <BasicHeader user={user} />
       <div className={styles2.allContainer}>
-        <div className={styles.homeContainer}>
-          <Link href="/">
-            <div className={styles.home}>ホーム</div>
-          </Link>
-          <div className={styles.home3}>{'>'}</div>
+        <div className={styles2.allCon4}>
+          <div className={styles2.allCon5}>
+            <div className={styles2.tate}>
+              <div className={styles.homeContainer}>
+                <Link href="/">
+                  <div className={styles.home}>ホーム</div>
+                </Link>
+                <div className={styles.home3}>{'>'}</div>
 
-          {RecruitDetail?.gameId !== null && RecruitDetail?.gameId !== undefined && (
-            <Link href={`/recruit/?value=${RecruitDetail.gameId}`}>
-              {RecruitDetail.gameId === 1 && <div className={styles.home2}>VALORANT</div>}
-              {RecruitDetail.gameId === 2 && <div className={styles.home2}>APEX</div>}
-              {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}{' '}
-              {RecruitDetail.gameId === 4 && <div className={styles.home2}>FORTNITE</div>}
-              {RecruitDetail.gameId === 5 && <div className={styles.home2}>StreetFighter</div>}
-              {RecruitDetail.gameId === 6 && <div className={styles.home2}>OverWatch2</div>}
-              {RecruitDetail.gameId === 7 && (
-                <div className={styles.home2}>遊戯王 マスターデュエル</div>
-              )}
-              {RecruitDetail.gameId === 8 && <div className={styles.home2}>PUBG</div>}
-              {RecruitDetail.gameId === 9 && <div className={styles.home2}>CSGO2</div>}
+                {RecruitDetail?.gameId !== null && RecruitDetail?.gameId !== undefined && (
+                  <Link href={`/recruit/?value=${RecruitDetail.gameId}`}>
+                    {RecruitDetail.gameId === 1 && <div className={styles.home2}>VALORANT</div>}
+                    {RecruitDetail.gameId === 2 && <div className={styles.home2}>APEX</div>}
+                    {RecruitDetail.gameId === 3 && <div className={styles.home2}>LOL</div>}{' '}
+                    {RecruitDetail.gameId === 4 && <div className={styles.home2}>FORTNITE</div>}
+                    {RecruitDetail.gameId === 5 && (
+                      <div className={styles.home2}>StreetFighter</div>
+                    )}
+                    {RecruitDetail.gameId === 6 && <div className={styles.home2}>OverWatch2</div>}
+                    {RecruitDetail.gameId === 7 && (
+                      <div className={styles.home2}>遊戯王 マスターデュエル</div>
+                    )}
+                    {RecruitDetail.gameId === 8 && <div className={styles.home2}>PUBG</div>}
+                    {RecruitDetail.gameId === 9 && <div className={styles.home2}>CSGO2</div>}
+                  </Link>
+                )}
+
+                <div className={styles.home3}>{'>'}</div>
+
+                <div className={styles.home4}>{RecruitDetail?.title}</div>
+              </div>
+              <div className={styles2.tateContainer}>
+                <div className={styles2.titleContainer}>
+                  <div className={styles2.titleContainer2}>
+                    <div className={styles.userImage1}>
+                      <img src={userDetail?.imageUrl} className={styles.userImageContainer} />
+                    </div>
+                    <div className={styles2.name2}>{userDetail?.name}</div>
+                    <div className={styles2.titleContainer3}>
+                      <MenuOutlined style={{ fontSize: '24px' }} onClick={copyUrlToClipboard} />
+                    </div>
+                  </div>
+                  <div className={styles.userImage3}>
+                    <img src={userDetail?.imageUrl} className={styles.userImageContainer2} />
+                  </div>
+                  <img src={userDetail?.imageUrl} className={styles.userImageContainer3} />
+                </div>
+                <div className={styles2.titleContainer5}>
+                  <div className={styles2.titleContainer}>
+                    <div className={styles2.titleContainer2}>
+                      <img src={`/heart.png`} className={styles.img} />
+                      <div className={styles2.title2}>
+                        ユーザー評価<div className={styles.count2}>({reviewCount})</div>
+                        <div className={styles2.ratingContainer2}>
+                          <div className={styles2.ratingBig}>{averageRating}</div>
+                          <div>/</div>
+                          <div>平均</div>
+                        </div>
+                      </div>
+                    </div>
+                    {reviews.length === 0 ? ( // Check if the reviews array is empty
+                      <div className={styles.noReviewsMessage}>まだレビューはありません。</div> // Display message if no reviews
+                    ) : (
+                      <div className={styles.reviewA}>
+                        {reviews.map((review, index) => (
+                          <div key={index} className={styles.review}>
+                            <div className={styles.reviewHeader}>
+                              <img
+                                src={review.imageUrl ? review.imageUrl : undefined}
+                                alt={review.imageUrl ? review.imageUrl : 'Default Alt Text'}
+                                className={styles.reviewImage}
+                              />
+                              <div className={styles.tate}>
+                                <div className={styles.reviewName}>{review.name}</div>
+                                <div className={styles.subtitle}>skillSeed/{review.date}</div>
+                              </div>
+                              <div className={styles.ratingContainer2}>
+                                <span className={styles.rate2}>
+                                  ★★★★★
+                                  <span
+                                    className={styles.rateInner2}
+                                    style={{ width: `${calculateRateWidth2(review.rating)}px` }}
+                                  >
+                                    ★★★★★
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                            <div className={styles.reviewDescription}>{review.review}</div>
+                            <div className={styles.line2} />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles2.allCon3}>
+              <div className={styles2.container7}>
+                <div className={styles2.titleContainer13}>{RecruitDetail?.title}</div>
+                <div className={styles2.titleContainer9}>
+                  <div className={styles2.titleContainer11}>800</div>
+                  <div className={styles2.titleContainer12}>円</div>
+                  <div className={styles2.titleContainer10}>/1時間</div>
+                </div>
+                {RecruitDetail &&
+                  RecruitDetail.teacherId !== user && ( // ここで投稿主が自分かどうかをチェック
+                    <button className={styles.button} onClick={sendRoom}>
+                      チャットを開始して、コーチング日程を立てる
+                    </button>
+                  )}
+                <div className={styles.line5} />
+              </div>
+              <div className={styles2.descriptionContainer}>
+                <div className={styles2.descriptionContainer2}>
+                  <div className={styles2.tate2}>
+                    <img src={`/pro.png`} className={styles.imgUser} />
+                    <div className={styles2.descriptionTitle}>募集詳細</div>
+                  </div>
+                  <div className={styles.description}>{RecruitDetail?.description}</div>
+                  <div className={styles2.tate3}>
+                    <img src={`/lesson.png`} className={styles.imgUser} />
+                    <div className={styles2.descriptionTitle}>コーチング方法</div>
+                  </div>
+                  <div className={styles.description2}>{RecruitDetail?.lessonType}</div>
+                  <div className={styles2.tate4}>
+                    <img src={`/taisyou.png`} className={styles.imgUser} />
+                    <div className={styles2.descriptionTitle}>コーチング対象者</div>
+                  </div>
+                  <div className={styles.rankImagesContainer}>
+                    {RecruitDetail?.subjectRank &&
+                      Array.isArray(RecruitDetail.subjectRank) &&
+                      RecruitDetail.subjectRank.map((rank, index) => (
+                        <div key={index} className={styles.aadw}>
+                          <img
+                            className={styles.subjectRank}
+                            src={getRankImage(RecruitDetail?.gameId, rank)}
+                            alt={`Rank: ${rank}`}
+                          />
+                        </div>
+                      ))}
+                  </div>
+                  <div className={styles2.tate5}>
+                    <img src={`/taisyou.png`} className={styles.imgUser} />
+                    <div className={styles2.descriptionTitle}>注意事項</div>
+                  </div>
+                  <div className={styles.description3}>{RecruitDetail?.notes}</div>
+                  <div className={styles2.tate6}>
+                    <img src={`/taisyou.png`} className={styles.imgUser} />
+                    <div className={styles2.descriptionTitle}>スケジュール</div>
+                  </div>
+                  <div className={styles.description4}>{RecruitDetail?.suchedule}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.recruitContainer}>
+            <div className={styles.recruitListTitle}>人気の募集</div>
+            <Link href="/allSearch">
+              <div className={styles.blueTitle2}>全て見る {'>'}</div>
             </Link>
-          )}
+            <div className={styles.recruitList}>
+              {recruitList.map((recruitList, index) => (
+                <div
+                  key={recruitList.id}
+                  className={styles.recruitSummary}
+                  onClick={() => handleClick(recruitList.id)}
+                >
+                  <div key={index} className={styles.userSummary2}>
+                    <div className={styles.userImage2}>
+                      <img src={recruitList.user.imageUrl} className={styles.userImageContainer} />
+                    </div>
+                    <div className={styles.myProfile}>{recruitList.user.myProfile}</div>
+                    <div className={styles.userName}>{recruitList.title}</div>
+                    <div className={styles.recruitContainer1}>
+                      {recruitList.tag.map((recruit, index) => (
+                        <button key={index} className={styles.lessonType2}>
+                          {recruit}
+                        </button>
+                      ))}
+                    </div>
 
-          <div className={styles.home3}>{'>'}</div>
-
-          <div className={styles.home4}>{RecruitDetail?.title}</div>
+                    <div className={styles.r6}>詳細情報</div>
+                    <p className={styles.recruitDetail}>{recruitList.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className={styles2.titleContainer1}>
-          <div className={styles2.title1}>募集詳細情報</div>
-        </div>
-        <div className={styles2.titleContainer}>
-          <div className={styles2.titleContainer2}>
+        {/* <div className={styles2.titleContainer2}> 
             <img
               className={styles2.userImageDetail}
               src={`/gameLists/${getGameListImagePath(RecruitDetail?.gameId ?? 0)}`}
@@ -206,11 +403,9 @@ const Login = () => {
               src={getRankImage(RecruitDetail?.gameId ?? 0, RecruitDetail?.rank ?? 0)}
               alt={`Rank: ${RecruitDetail?.rank}`}
             />
-          </div>
-          <div className={styles2.line} />
-          <div className={styles2.horizontalContainer}>
-            {' '}
-            {/* Parent container with flex */}
+          </div> */}
+        {/* <div className={styles2.line} /> */}
+        {/* <div className={styles2.horizontalContainer}>
             <p className={styles2.tagContainer}>
               【タグ】
               {RecruitDetail &&
@@ -230,16 +425,15 @@ const Login = () => {
                 情報更新日： {RecruitDetail?.updatedAt ? formatDate(RecruitDetail.updatedAt) : ''}
               </p>
             </div>
-          </div>
-        </div>
-        <div className={styles2.headerContainer}>
+          </div> */}
+        {/* <div className={styles2.headerContainer}>
           <div className={styles2.titleSection}>
             <div className={styles2.titleBox}>
               <span className={styles2.titleText}>募集詳細</span>
             </div>
           </div>
-        </div>
-        <div className={styles2.allparent}>
+        </div> */}
+        {/* <div className={styles2.allparent}>
           <div className={styles2.parent2}>
             <div className={styles.parent}>
               <div className={styles.container}>
@@ -293,40 +487,28 @@ const Login = () => {
                 </div>
               </div>
               <div className={styles.mainContainer}>
-                <div className={styles.profileContainer}>
-                  <img
-                    src={userDetail?.imageUrl}
-                    alt={userDetail?.name}
-                    className={styles.userImage}
-                  />
-                  <div className={styles.nameContainer}>
-                    <div className={styles.name}>{userDetail?.name}</div>
+                <div className={styles.userSummary}>
+                  <div className={styles.userImage2}>
+                    <img src={userDetail?.imageUrl} className={styles.userImageContainer} />
                   </div>
-                  <div className={styles.ratingContainer}>
+                  <div className={styles.myProfile}>{userDetail?.hitokoto}</div>
+                  <div className={styles.userName}>{userDetail?.name}</div>
+                  <div className={styles.yoko}>
                     <span className={styles.rate}>
                       ★★★★★
                       <span
                         className={styles.rateInner}
-                        style={{
-                          width: `${
-                            userDetail ? calculateRateWidth(userDetail?.rating ?? 0) : 0
-                          }px`,
-                        }}
+                        style={{ width: `${calculateRateWidth(userDetail?.rating)}px` }}
                       >
                         ★★★★★
                       </span>
                     </span>
+                    <div className={styles.rating}>{userDetail?.rating}</div>
+                    <div className={styles.count}>( {user.applyCount} )</div>
                   </div>
-                  <div className={styles.rating}>{userDetail?.rating}</div>
-                  <div className={styles.achievementsContainer}>
-                    <div className={styles.achievementsTitle}>【実績】</div>
-                    <div className={styles.achievements}>{userDetail?.Achievements}</div>
-                  </div>
-                  <div className={styles.descriptionDetailContainer}>
-                    <div className={styles.descriptionTitle}>【自己紹介】</div>
-                    <div className={styles.descriptions}>{userDetail?.hitokoto}</div>
-                  </div>
+                  <div className={styles.myProfile2}>{userDetail?.Achievements}</div>
                 </div>
+
                 <div className={styles.reviewContainer}>
                   <div className={styles.reviewTitle}>レビュー</div>
                   <div className={styles.line} />
@@ -393,7 +575,7 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </div>{' '}
+        </div> */}
       </div>
     </>
   );

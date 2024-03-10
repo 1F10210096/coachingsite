@@ -129,8 +129,7 @@ const Login = () => {
   };
 
   const calculateRateWidth2 = (rating: number): number => {
-    console.log(rating * 20);
-    return rating * 20;
+    return rating * 18;
   };
 
   const sendRoom = async () => {

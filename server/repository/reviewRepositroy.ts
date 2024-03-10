@@ -48,7 +48,7 @@ export const reviewRepository = {
           review,
         },
       });
-      console.log('dsgrgrgfgdgrgd');
+      console.log(updatedApplication,'dsgrgrgfgdgrgd');
       const updatedApplication2 = await prismaClient.apply.findFirst({
         where: {
           id: selectedId,

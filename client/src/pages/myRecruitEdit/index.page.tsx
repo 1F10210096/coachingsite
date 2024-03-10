@@ -3,16 +3,19 @@
 import type { NewApplyData, UserListItem } from 'commonTypesWithClient/models';
 import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { apiClient } from 'src/utils/apiClient';
 import { createAuth } from 'src/utils/firebase';
-import getGameListImagePath from 'src/utils/gameListPng';
 import getImagePath from 'src/utils/gamePng';
 import { BasicHeader } from '../@components/BasicHeader/BasicHeader';
 import styles from './index.module.css';
 const Login = () => {
   const [Id, setUserUUID] = useState('');
+
+  const router = useRouter();
+  const id = router.query.id;
+
   useEffect(() => {
     const auth = createAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,7 +36,7 @@ const Login = () => {
   const [lookImage, setLookImage] = useState<string | null>('');
   const [newName, setNewName] = useState('');
   const [newProfile, setNewProfile] = useState<string | null>('');
-  const [rating, setRating] = useState<number | null>(0);
+  const [rating, setRating] = useState("");
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [recruitList, setMyRecruitlist] = useState<UserListItem[]>([]);
   const fetchMyRecruitList = async () => {
@@ -88,10 +91,29 @@ const Login = () => {
     return `/${directory}/${rankImage}`;
   };
 
-  const handleClick = (id: string) => {
-    router.push(`../myRecruitEdit?id=${id}`);
+  function showModal4(arg0: string, id: string): void {
+    throw new Error('Function not implemented.');
+  }
+  const [review, setReview] = useState('');
+  const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // フォームのデフォルトの送信を防止
+    console.log(id);
+    console.log(rating);
+    console.log(review);
+    try {
+      const response = await apiClient.reviewList.post({
+        body: {
+          selectedId: id,
+          rating,
+          review,
+        },
+      });
+      console.log('レビューが完了しました:', response);
+      // レビュー送信後の処理をここに書く（例: 状態をクリアする、通知を表示する等）
+    } catch (error) {
+      console.error('レビュー送信エラー:', error);
+    }
   };
-
   return (
     <>
       <div className={styles.box1}>
@@ -155,81 +177,28 @@ const Login = () => {
           <div className={styles.termsCon}>応募一覧</div>
           <>
             <ul className={styles.box4}>
-              {user2.map((recruit, index) => (
-                <div
-                  key={index}
-                  // onClick={() => fetchMyRoomList(recruit.id)}
-                  className={styles.box2}
-                >
-                  <div className={styles.titleContainer}>
-                    <div className={styles.rank}>
-                      <img
-                        key={index}
-                        className={styles.rankImage}
-                        src={`/gameLists2/${getGameListImagePath(recruit.bosyuu.gameId)}`}
-                        alt={`Rank: ${recruit.bosyuu.title}`}
-                      />
-                    </div>
-                    <div className={styles.title2}>{recruit.bosyuu.title}</div>
-                    <div className={styles.rank2}>
-                      <img
-                        src={getRankImage(recruit.bosyuu.gameId, recruit.bosyuu.rank)}
-                        className={styles.rankImage}
-                        alt={`Rank: ${recruit.bosyuu.rank}`}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.line2} />
-
-                  <div className={styles.wrapper}>
-                    <div className={styles.tag}>
-                      <div className={styles.tagContainer}>
-                        {recruit.bosyuu.tag.map((tag, index) => (
-                          <p key={index} className={styles.tagText}>
-                            {tag}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                    <div className={styles.lessonType}>
-                      <div className={styles.lessonTypeContainer}>{recruit.bosyuu.lessonType}</div>
-                    </div>
-                    <div className={styles.subjectRank}>
-                      <p className={styles.subjectRankTitle}>対象のランク:</p>
-                      <div className={styles.subjectRankContainer}>
-                        {recruit.bosyuu.subjectRank.map((rank, index) => (
-                          <img
-                            key={index}
-                            src={getRankImage(recruit.bosyuu.gameId, rank)}
-                            className={styles.subjectRankImage}
-                            alt={`Rank: ${rank}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div className={styles.descriptionContainer}>
-                      <p className={styles.descriptionTitle}>募集詳細:</p>
-                      <p className={styles.description}>{recruit.bosyuu.description}</p>
-                    </div>
-                    <div className={styles.descriptionContainer}>
-                      <p className={styles.descriptionTitle}>実績:</p>
-                      <p className={styles.description}>{recruit.bosyuu.myProfile}</p>
-                    </div>
-                  </div>
-                  <div className={styles.line3} />
-                  <div className={styles.horizontalLayout}>
-                    <button
-                      className={styles.applyButton}
-                      onClick={() => handleClick(recruit.id)}
-                    >
-                      <span className={styles.starIcon}>★</span>
-                      評価する
-                    </button>
-                  </div>
-                  <div />
-                  {/* <p>{recruit.description}</p> */}
-                </div>
-              ))}
+              <form className={styles.container2} onSubmit={handleSubmit2}>
+                <div className={styles.nameTitle}>評価</div>
+                <input
+                  type="text"
+                  name="rating"
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                  placeholder="評価"
+                  className={styles.name}
+                />
+                <div className={styles.nameTitle}>感想</div>
+                <textarea
+                  name="review"
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                  placeholder="感想"
+                  className={styles.name2}
+                />
+                <button className={styles.button} type="submit">
+                  送信
+                </button>
+              </form>
             </ul>
             {/* <button onClick={fetchMyRecruitList}>コーチング応募履歴</button> */}
           </>

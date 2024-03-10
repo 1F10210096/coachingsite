@@ -301,6 +301,8 @@
   position: relative;
   left: 60px;
   width: 1500px;
+  height: auto;
+  padding-bottom: 400px;
   margin: 20px auto 0;
 }
 
@@ -323,7 +325,7 @@
   gap: 20px; /* 要素間の間隔 */
   justify-content: center; /* 中央寄せ */
   width: 1200px;
-  height: 870px; /* 高さをautoに設定して、内容に応じて自動調整させる */
+  height: auto; /* 高さをautoに設定して、内容に応じて自動調整させる */
   transform: translate(-50%);
 }
 
@@ -331,7 +333,8 @@
   position: relative;
   right: 50px;
   width: 240px; /* Sets the width of the container */
-  height: 340px; /* Sets the height of the container */
+  height: auto; /* Sets the height of the container */
+  margin-bottom: 30px;
   border-radius: 15px;
   box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0, rgb(27 31 35 / 15%) 0 0 0 1px;
 }

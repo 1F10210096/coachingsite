@@ -272,8 +272,9 @@
   justify-content: center; /* 水平方向の中央揃え */
   width: 100%;
   height: auto;
+  padding-bottom: 450px;
   zoom: 0.9;
-  background-color: #F4FCFC;
+  background-color: #f4fcfc;
   transform: translate(-50%); /* X軸とY軸の両方で中央揃え */
 }
 

@@ -8,7 +8,7 @@
   background: rgb(255 255 255);
   border-top: 3px solid #71d3f7; /* Light blue top border */
   border-radius: 15px;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgb(9 30 66 / 25%) 0 4px 8px -2px, rgb(9 30 66 / 8%) 0 0 0 1px;
 }
 
 .helpwanted {
@@ -397,6 +397,7 @@
   width: 840px;
   height: auto;
   padding-bottom: 17px;
+  padding-bottom: 300px;
   margin-top: 20px;
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
@@ -415,4 +416,11 @@
   width: 750px;
   height: 30px;
   padding-bottom: 100px;
+}
+
+.subAllContanier {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #3094ff;
 }

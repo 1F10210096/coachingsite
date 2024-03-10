@@ -605,14 +605,13 @@ const Valorant = () => {
       });
 
       console.log(response);
-      const sortedList = [...response].sort((a, b) => {
+      const sortedList = [...response.body].sort((a, b) => {
         // 文字列や他の形式の日付をDateオブジェクトに変換
         const timeA = new Date(a.updatedAt).getTime();
         const timeB = new Date(b.updatedAt).getTime();
         return sortDescending ? timeB - timeA : timeA - timeB;
       });
       setRecruitlist(sortedList);
-      setRecruitlist(response.body);
       console.log(RecruitList);
     } catch (error) {
       console.error('ゲームの取得に失敗しました:', error);

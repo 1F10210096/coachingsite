@@ -354,7 +354,8 @@
 .container7 {
   position: relative;
   width: 750px;
-  height: 250px;
+  height: auto;
+  padding-bottom: 60px;
   background-color: #fff;
   border-radius: 9px;
   box-shadow: rgb(0 0 0 / 18%) 0 2px 4px;

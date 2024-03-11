@@ -93,7 +93,7 @@ export const userRepository = {
 
       console.log(uniqueTeachers);
       // 必要に応じて最初の16名を選択
-      return uniqueTeachers.slice(0, 16);
+      return uniqueTeachers.slice(0, 14);
     } catch (error) {
       console.error('Error fetching recent unique teachers with user info:', error);
       return null;

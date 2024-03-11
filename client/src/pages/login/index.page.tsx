@@ -90,7 +90,6 @@ const Login = () => {
             </form>
           </div>
         </div>{' '}
-        <BasicUnder />
       </div>
     </>
   );

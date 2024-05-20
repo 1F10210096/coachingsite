@@ -3,7 +3,7 @@
   top: 150px;
   left: 520px;
   display: flex;
-  flex-direction: column; /* 子要素を縦に並べる */
+  flex-direction: column;
   width: 800px;
   height: 1850px;
   padding-bottom: 50px;
@@ -15,9 +15,9 @@
   position: relative;
   top: -6%;
   left: 20%;
-  display: flex; /* フレックスボックスレイアウトを適用 */
-  flex-direction: column; /* 子要素を縦方向に並べる */
-  align-items: center; /* 子要素を水平方向の中央に配置 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
   height: 80%;
 }
@@ -36,7 +36,7 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* フォーム要素間の隙間 */
+  gap: 10px;
   width: 400px;
   background-color: #fff;
 }
@@ -75,7 +75,7 @@
   width: 150px;
   font-size: 15px;
   color: #0141c193;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  transform: translateX(-50%);
 }
 
 .kaninn:hover {
@@ -89,12 +89,12 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  border-radius: 4px 0 0 4px;
   outline: none;
 }
 
 .searchInput:focus {
-  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+  border-color: #b4b4b4;
 }
 
 .mail {
@@ -120,12 +120,12 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  border-radius: 4px 0 0 4px;
   outline: none;
 }
 
 .searchpass:focus {
-  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+  border-color: #b4b4b4;
 }
 
 .box {

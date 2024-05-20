@@ -1,7 +1,7 @@
 .background {
-  position: absolute; /* 必要に応じて position: fixed; でも可 */
+  position: absolute;
   display: flex;
-  justify-content: center; /* 水平方向の中央揃え */
+  justify-content: center;
   width: 100%;
   height: 1100px;
   background-color: #fff;
@@ -18,8 +18,8 @@
 .customStepsContainer {
   position: relative;
   top: 30px;
-  width: 75%; /* 希望する横幅に設定 */
-  margin: auto; /* センタリング */
+  width: 75%;
+  margin: auto;
   font-weight: 600;
 }
 
@@ -73,7 +73,7 @@
   font-size: 24px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  transform: translateX(-50%);
 }
 
 .png {
@@ -129,7 +129,7 @@
   font-size: 15px;
   font-weight: 700;
   color: #003db693;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  transform: translateX(-50%);
 }
 
 .kaninn:hover {
@@ -145,12 +145,12 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  border-radius: 4px 0 0 4px;
   outline: none;
 }
 
 .searchInput:focus {
-  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+  border-color: #b4b4b4;
 }
 
 .mail {
@@ -160,7 +160,7 @@
   font-size: 17px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  transform: translateX(-50%);
 }
 
 .password {
@@ -170,7 +170,7 @@
   font-size: 20px;
   font-weight: bold;
   color: #000;
-  transform: translateX(-50%); /* 左に50%ずらす */
+  transform: translateX(-50%);
 }
 
 .searchpass {
@@ -182,12 +182,12 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px; /* 左側の角を丸くする */
+  border-radius: 4px 0 0 4px;
   outline: none;
 }
 
 .searchpass:focus {
-  border-color: #b4b4b4; /* フォーカス時のボーダーカラーを変更 */
+  border-color: #b4b4b4;
 }
 
 .loginContainer2 {

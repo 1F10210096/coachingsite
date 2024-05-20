@@ -139,7 +139,7 @@
   font-weight: bold;
   color: #000;
   background-color: #fff;
-  border-right: 2px solid #b8b8b8; /* 境界線の設定：太さ、スタイル、色 */
+  border-right: 2px solid #b8b8b8;
 }
 
 .box1 {
@@ -150,10 +150,10 @@
 .profileImage {
   position: relative;
   top: 60px;
-  width: 110px; /* 画像のサイズを設定 */
-  height: 110px; /* 画像のサイズを設定 */
-  border-radius: 50%; /* 画像を円形にする */
-  object-fit: cover; /* 画像が枠に合わせて表示されるようにする */
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .name {

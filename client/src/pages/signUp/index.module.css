@@ -254,9 +254,9 @@
   left: 30px;
   width: 480px;
   height: 330px;
-  background-color: #fff; /* 青色のボーダーを追加 */
-  border-right: 1px solid #b7b7b7; /* 青色のボーダーを追加 */
-  border-left: 1px solid #b7b7b7; /* 青色のボーダーを追加 */
+  background-color: #fff;
+  border-right: 1px solid #b7b7b7;
+  border-left: 1px solid #b7b7b7;
   box-shadow: 10px 0 15px -5px rgb(0 0 0 / 10%), /* 右側の影 */ -10px 0 15px -5px rgb(0 0 0 / 10%); /* 左側の影 */
 }
 

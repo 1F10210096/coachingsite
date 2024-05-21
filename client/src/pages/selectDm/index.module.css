@@ -7,9 +7,9 @@
 }
 
 .background {
-  position: absolute; /* 必要に応じて position: fixed; でも可 */
+  position: absolute;
   display: flex;
-  justify-content: center; /* 水平方向の中央揃え */
+  justify-content: center;
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -21,8 +21,8 @@
 .title {
   position: relative;
   left: 200px;
-  font-size: 24px; /* 文字の大きさを24pxに設定 */
-  font-weight: bold; /* 文字を太くする */
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .roomList {
@@ -30,9 +30,9 @@
   top: 30px;
   width: 100%;
   height: auto;
-  border: 1px solid #ccc; /* 薄いグレーのボーダー */
-  border-radius: 8px; /* 角を丸くする */
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .commentContainer {
@@ -41,10 +41,10 @@
   display: flex;
   flex-wrap: wrap;
   width: 90%;
-  padding: 16px; /* 内側のパディング */
-  margin: 16px 0; /* 上下のマージン */
-  border: 1px solid #ccc; /* 薄いグレーのボーダー */
-  border-radius: 8px; /* 角を丸くする */
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
 }
 

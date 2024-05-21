@@ -45,7 +45,7 @@
   margin: 16px 0;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); /* 軽い影 */
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%); 
 }
 
 .userImage {
@@ -134,9 +134,9 @@
 }
 
 .font {
-  margin-bottom: 20px; /* 下の要素（ボタンなど）との間隔 */
-  font-size: 18px; /* タイトルのフォントサイズ */
-  font-weight: bold; /* フォントの太さ */
-  color: #333; /* タイトルの色 */
-  text-align: center; /* テキストを中央揃えに */
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
 }

@@ -153,49 +153,42 @@
 .titleText {
   position: relative;
   left: 5px;
-  font-size: 14px; /* Adjust as needed */
+  font-size: 14px; 
   font-weight: bold;
-  color: #fff; /* White text color */
+  color: #fff;
 }
 
 .line2 {
   position: absolute;
-  top: 50%; /* Center the line vertically */
+  top: 50%;
   left: 0;
-  width: 100%; /* Line width to extend to the edge of the container */
-  height: 5px; /* Thickness of the line */
-  background-color: #00aeef; /* The color of the line */
-  transform: translateY(-50%); /* Ensure the line is exactly centered */
+  width: 100%;
+  height: 5px;
+  background-color: #00aeef;
+  transform: translateY(-50%);
 }
 
-/* This will ensure the line starts after the titleSection */
+
 .titleSection + .line {
-  margin-left: calc(100% - 800px); /* Adjust this value based on your design */
+  margin-left: calc(100% - 800px);
 }
 
 .titleContainer1 {
   position: relative;
   top: 190px;
   left: 50%;
-  display: flex; /* Add flex display */
-  align-items: center; /* Vertically center children */
-  justify-content: flex-start; /* Align children to the start horizontally */
-  width: 800px; /* This should match the left value of .title1 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 800px;
   margin-bottom: 90px;
   transform: translateX(-50%);
 }
 
 .title1 {
-  /* Remove position, top, and left properties if .title1 is a child */
-
-  /* position: relative; */
-
-  /* left: 10%; */
   width: 140px;
   height: 30px;
-
-  /* Add margin-top if you want to lower .title1 within the container */
-  margin-top: auto; /* Adjust this as needed */
+  margin-top: auto;
   font-size: 21px;
   font-weight: 700;
   color: #585858;
@@ -214,8 +207,8 @@
 
 .horizontalContainer {
   display: flex;
-  align-items: center; /* This will vertically center the items if they have different heights */
-  justify-content: space-between; /* This will add space between the two child elements */
+  align-items: center;
+  justify-content: space-between;
 }
 
 .applyButton {
@@ -224,29 +217,29 @@
   left: 330px;
   padding: 10px 20px;
   font-size: 16px;
-  color: #007bff; /* Blue text */
-  cursor: pointer; /* Pointer cursor on hover */
-  background-color: #fff; /* White background */
-  border: 1px solid #7b81ff; /* Blue border */
-  border-radius: 5px; /* Rounded borders */
-  outline: none; /* Remove default focus outline */
+  color: #007bff;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #7b81ff;
+  border-radius: 5px;
+  outline: none;
   box-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
-  transition: box-shadow 0.6s; /* Smooth transition for shadow */
+  transition: box-shadow 0.6s;
 }
 
 .applyButton .starIcon {
-  margin-right: 5px; /* Space between star and text */
-  color: #ffd700; /* Gold color for the star */
+  margin-right: 5px;
+  color: #ffd700;
 }
 
 .applyButton:hover {
-  box-shadow: 0 0 10px rgb(0 123 255 / 50%); /* Blue shadow on hover */
+  box-shadow: 0 0 10px rgb(0 123 255 / 50%);
 }
 
 .horizontalLayout {
-  display: flex; /* Establishes a flex container */
-  gap: 20px; /* Adjusts the gap between items */
-  align-items: center; /* Centers items vertically */
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .allparent {

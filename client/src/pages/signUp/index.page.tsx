@@ -92,7 +92,6 @@ const Register = () => {
 
   const formStyle: CSSProperties = {
     display: 'flex',
-
     position: 'relative',
     flexDirection: 'column',
     right: '10px',
@@ -101,11 +100,6 @@ const Register = () => {
     margin: '0 auto',
   };
   const [currentStep, setCurrentStep] = useState(0);
-  // Form.Itemのスタイルを調整するオブジェクト
-  const formItemLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
   return (
     <>
       <BasicHeader user={user} />

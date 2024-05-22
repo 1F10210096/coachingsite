@@ -18,23 +18,24 @@
 .userImageDetail {
   position: relative;
   right: 40px;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  margin: 0 auto; /* Centers the image */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  object-fit: cover;
 }
 
 .line {
   position: relative;
   width: 800px;
-  border-top: 2px solid rgb(204 204 204); /* 上部に1ピクセルの黒線を引く */
+  border-top: 2px solid rgb(204 204 204);
 }
 
+/* stylelint-disable-next-line no-duplicate-selectors */
 .titleContainer2 {
   position: relative;
   top: 30px;
   left: 30px;
-  display: flex; /* フレックスボックスを有効にする */
+  display: flex;
   width: 400px;
   height: auto;
 }
@@ -43,7 +44,7 @@
   position: relative;
   top: 1px;
   left: 110px;
-  display: flex; /* フレックスボックスを有効にする */
+  display: flex;
   width: 50px;
   height: 50px;
   font-size: 16px;
@@ -98,29 +99,29 @@
   left: 50px;
   display: flex;
   flex-direction: row;
-  align-items: center; /* 子要素を垂直方向の中央に配置 */
+  align-items: center;
   width: 60%;
   font-size: 17px;
   font-weight: 700;
-  color: rgb(95 94 94); /* 文字色を灰色に設定 */
-  letter-spacing: -1px; /* 文字の間隔を狭める */
+  color: rgb(95 94 94);
+  letter-spacing: -1px;
   background: rgb(255 255 255);
 }
 
 .tag {
   position: relative;
   left: 60px;
-  display: flex; /* Flexboxを使う */
-  align-items: center; /* 子要素を垂直方向の中央に配置 */
-  justify-content: center; /* 水平方向の中央に配置 */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
   font-size: 19px;
   background: rgb(255 255 255);
 }
 
 .tagImage {
   width: 50px;
-  height: auto; /* 親コンテナの幅に合わせる */
-  margin-right: 10px; /* 右の間隔を設定 */
+  height: auto; 
+  margin-right: 10px; 
 }
 
 .headerContainer {
@@ -143,10 +144,10 @@
 
 .titleBox {
   position: relative;
-  width: 90px; /* Adjust the width as needed */
+  width: 90px;
   padding: 10px;
-  margin-right: 10px; /* Adjust the space between the title box and the subtitle */
-  background-color: #469efc; /* The blue background color for the title box */
+  margin-right: 10px;
+  background-color: #469efc; 
 }
 
 .titleText {

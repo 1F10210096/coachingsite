@@ -25,7 +25,7 @@ const Register = () => {
     event.preventDefault();
     try {
       console.log('アカウント作成開始');
-      const auth = createAuth(); // `createAuth` 関数を使用して `auth` オブジェクトを取得
+      const auth = createAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('アカウント作成成功:', userCredential);
       const userId = userCredential.user.uid;

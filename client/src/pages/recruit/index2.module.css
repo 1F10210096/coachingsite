@@ -385,12 +385,13 @@
   right: 63%;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
+
 }
 
 .subContanier {
   position: absolute;
   top: 130px;
-  left: 37%;
+  left: 39%;
   display: flex; /* フレックスコンテナとして設定 */
   flex-direction: column; /* 子要素を縦方向に並べる */
   justify-content: center; /* 水平方向の中央揃え */
@@ -402,9 +403,6 @@
   font-size: 20px; /* 文字の大きさを20pxに設定する */
   font-weight: bold; /* 文字を太くする */
   color: rgb(82 82 82);
-
-  /* background-color: #f4f4f4;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
 
 .pagenation {
@@ -419,8 +417,8 @@
 }
 
 .subAllContanier {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  width: 79%;
   height: auto;
-  background-color: #3094ff;
+  background-color: #ff2e2e;
 }

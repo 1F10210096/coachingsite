@@ -1070,117 +1070,113 @@ const Valorant = () => {
             </div>
           </div>
         </div>
-        <div className={styles2.subAllContanier}>
-          <div className={styles2.subContanier}>
-            <div className={styles2.gameTitleContainer}>
-              <div className={styles2.gameTitle}>
-                {Id === 1 ? <div>VALORANT</div> : null}
-                {Id === 2 ? <div>APEX</div> : null}
-                {Id === 3 ? <div>LOL</div> : null}
-                {Id === 4 ? <div>FORTNITE</div> : null}
-                {Id === 5 ? <div>StreetFighter</div> : null}
-                {Id === 6 ? <div>遊戯王 マスターデュエル</div> : null}
-                {Id === 7 ? <div>OverWatch2</div> : null}
-                {Id === 8 ? <div>PUBG</div> : null}
-                {Id === 9 ? <div>CSGO2</div> : null}
-              </div>
-              <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
-                <option value="rank">ランク順に並び替え</option>
-                <option value="update">更新順に並び替え</option>
-                {/* 他のソートオプションがあれば追加 */}
-              </select>
+
+        <div className={styles2.subContanier}>
+          <div className={styles2.gameTitleContainer}>
+            <div className={styles2.gameTitle}>
+              {Id === 1 ? <div>VALORANT</div> : null}
+              {Id === 2 ? <div>APEX</div> : null}
+              {Id === 3 ? <div>LOL</div> : null}
+              {Id === 4 ? <div>FORTNITE</div> : null}
+              {Id === 5 ? <div>StreetFighter</div> : null}
+              {Id === 6 ? <div>遊戯王 マスターデュエル</div> : null}
+              {Id === 7 ? <div>OverWatch2</div> : null}
+              {Id === 8 ? <div>PUBG</div> : null}
+              {Id === 9 ? <div>CSGO2</div> : null}
             </div>
-            <div className={styles2.helpwanted}>
-              {currentItems.map((item) => (
-                <div
-                  key={item.id}
-                  className={styles2.container}
-                  onClick={() => handleClick(item.id)}
-                >
-                  <div className={styles2.flexContainer}>
+            <select className={styles2.gameSort} onChange={handleSortChange} value={sortCriteria}>
+              <option value="rank">ランク順に並び替え</option>
+              <option value="update">更新順に並び替え</option>
+              {/* 他のソートオプションがあれば追加 */}
+            </select>
+          </div>
+          <div className={styles2.helpwanted}>
+            {currentItems.map((item) => (
+              <div key={item.id} className={styles2.container} onClick={() => handleClick(item.id)}>
+                <div className={styles2.flexContainer}>
+                  <img
+                    src={item.teacher.user.imageUrl ?? 'placeholder-image-url.jpg'}
+                    alt="User"
+                    className={styles2.userImageDetail}
+                  />
+
+                  <p className={styles2.title}>{item.title}</p>
+                  <div className={styles2.rank}>
                     <img
-                      src={item.teacher.user.imageUrl ?? 'placeholder-image-url.jpg'}
-                      alt="User"
-                      className={styles2.userImageDetail}
+                      src={getRankImage(Id, item.rank)}
+                      className={styles2.rankImage}
+                      alt={`Rank: ${item.rank}`}
                     />
-
-                    <p className={styles2.title}>{item.title}</p>
-                    <div className={styles2.rank}>
-                      <img
-                        src={getRankImage(Id, item.rank)}
-                        className={styles2.rankImage}
-                        alt={`Rank: ${item.rank}`}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles2.line} />
-
-                  <div className={styles2.wrapper}>
-                    <div className={styles2.tag}>
-                      <div className={styles2.tagContainer}>
-                        {item.tag.map((tag, index) => (
-                          <p key={index} className={styles2.tagText}>
-                            {tag}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                    <div className={styles2.lessonType}>
-                      <div className={styles2.lessonTypeContainer}>{item.lessonType}</div>
-                    </div>
-                    <div className={styles2.subjectRank}>
-                      <p className={styles2.subjectRankTitle}>対象のランク:</p>
-                      <div className={styles2.subjectRankContainer}>
-                        {item.subjectRank.map((rank, index) => (
-                          <img
-                            key={index}
-                            src={getRankImage(Id, rank)}
-                            className={styles2.subjectRankImage}
-                            alt={`Rank: ${rank}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div className={styles2.descriptionContainer}>
-                      <p className={styles2.descriptionTitle}>募集詳細:</p>
-                      <p className={styles2.description}>{item.description}</p>
-                    </div>
-                    <div className={styles2.descriptionContainer2}>
-                      <p className={styles2.descriptionTitle}>実績:</p>
-                      <p className={styles2.description}>{item.myProfile}</p>
-                    </div>
-                  </div>
-                  <div className={styles2.line2} />
-                  <div className={styles2.horizontalLayout}>
-                    <button
-                      className={
-                        likedRecruits.includes(item.id) ? styles2.applyButton2 : styles2.applyButton
-                      }
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleLikeClick(item.id, e);
-                      }}
-                    >
-                      <span className={styles2.starIcon}>★</span>{' '}
-                      {likedRecruits.includes(item.id) ? 'いいね済み' : 'いいね'}
-                    </button>
-                    <div>
-                      <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>
-                      <p className={styles2.date}>情報更新日： {formatDate(item.updatedAt)}</p>
-                    </div>
                   </div>
                 </div>
-              ))}
-              <Pagination
-                current={currentPage}
-                total={RecruitList.length}
-                pageSize={itemsPerPage}
-                onChange={handleChangePage}
-                className={styles2.pagenation}
-              />
-            </div>
+                <div className={styles2.line} />
+
+                <div className={styles2.wrapper}>
+                  <div className={styles2.tag}>
+                    <div className={styles2.tagContainer}>
+                      {item.tag.map((tag, index) => (
+                        <p key={index} className={styles2.tagText}>
+                          {tag}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles2.lessonType}>
+                    <div className={styles2.lessonTypeContainer}>{item.lessonType}</div>
+                  </div>
+                  <div className={styles2.subjectRank}>
+                    <p className={styles2.subjectRankTitle}>対象のランク:</p>
+                    <div className={styles2.subjectRankContainer}>
+                      {item.subjectRank.map((rank, index) => (
+                        <img
+                          key={index}
+                          src={getRankImage(Id, rank)}
+                          className={styles2.subjectRankImage}
+                          alt={`Rank: ${rank}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles2.descriptionContainer}>
+                    <p className={styles2.descriptionTitle}>募集詳細:</p>
+                    <p className={styles2.description}>{item.description}</p>
+                  </div>
+                  <div className={styles2.descriptionContainer2}>
+                    <p className={styles2.descriptionTitle}>実績:</p>
+                    <p className={styles2.description}>{item.myProfile}</p>
+                  </div>
+                </div>
+                <div className={styles2.line2} />
+                <div className={styles2.horizontalLayout}>
+                  <button
+                    className={
+                      likedRecruits.includes(item.id) ? styles2.applyButton2 : styles2.applyButton
+                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLikeClick(item.id, e);
+                    }}
+                  >
+                    <span className={styles2.starIcon}>★</span>{' '}
+                    {likedRecruits.includes(item.id) ? 'いいね済み' : 'いいね'}
+                  </button>
+                  <div>
+                    <p className={styles2.date}>掲載開始日： {formatDate(item.createdAt)}</p>
+                    <p className={styles2.date}>情報更新日： {formatDate(item.updatedAt)}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <Pagination
+              current={currentPage}
+              total={RecruitList.length}
+              pageSize={itemsPerPage}
+              onChange={handleChangePage}
+              className={styles2.pagenation}
+            />
           </div>
         </div>
+
         <BasicUnder />
       </div>
     </>
